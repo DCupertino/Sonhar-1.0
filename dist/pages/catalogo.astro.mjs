@@ -1,0 +1,439 @@
+import { c as createComponent, r as renderTemplate, a as renderComponent, m as maybeRenderHead } from '../chunks/astro/server_BHHhKoYs.mjs';
+import 'piccolore';
+import 'html-escaper';
+import { $ as $$BaseLayout } from '../chunks/BaseLayout_CHxqYNf2.mjs';
+import { $ as $$TopNavBar, a as $$Footer } from '../chunks/Footer_q2TVv_Zs.mjs';
+import { $ as $$FAB } from '../chunks/FAB_BZYQ1pnM.mjs';
+export { renderers } from '../renderers.mjs';
+
+var __freeze = Object.freeze;
+var __defProp = Object.defineProperty;
+var __template = (cooked, raw) => __freeze(__defProp(cooked, "raw", { value: __freeze(raw || cooked.slice()) }));
+var _a;
+const $$Catalogo = createComponent(async ($$result, $$props, $$slots) => {
+  return renderTemplate(_a || (_a = __template(["", ` <script>
+  // Armazena a lista completa de produtos vinda do DB
+  let rawProducts = [];
+
+  // Filtros ativos
+  let activeCategory = 'Todos';
+  let searchQuery = '';
+  let maxPrice = 50;
+  let sortBy = 'default';
+
+  async function initCatalog() {
+    try {
+      const data = await window.SonharteDB.getProducts();
+      rawProducts = data.filter(p => p.ativo !== false);
+    } catch (err) {
+      console.error("Falha ao carregar produtos:", err);
+      rawProducts = [];
+    }
+
+    // Processar filtros da URL ap\xF3s carregar os produtos
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    const urlBusca = urlParams.get('busca');
+    if (urlBusca) {
+      const searchInput = document.getElementById('search-input');
+      if (searchInput) searchInput.value = urlBusca;
+      searchQuery = urlBusca;
+    }
+
+    const urlCat = urlParams.get('categoria');
+    if (urlCat) {
+      const categoryContainer = document.getElementById('category-filters-container');
+      if (categoryContainer) {
+        const buttons = categoryContainer.querySelectorAll('.category-filter-btn');
+        buttons.forEach(b => {
+          if (b.getAttribute('data-category') === urlCat) {
+            b.className = "category-filter-btn text-left px-3 py-2 rounded-lg font-label-bold text-sm bg-secondary-fixed text-on-secondary-fixed border-2 border-on-surface shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all";
+            activeCategory = urlCat;
+          } else {
+            b.className = "category-filter-btn text-left px-3 py-2 rounded-lg font-label-bold text-sm bg-white text-on-surface-variant border-2 border-transparent hover:bg-surface-container transition-colors";
+          }
+        });
+      }
+    }
+
+    applyFiltersAndSort();
+  }
+
+  function applyFiltersAndSort() {
+    let filtered = [...rawProducts];
+
+    // 1. Filtrar por Categoria
+    if (activeCategory !== 'Todos') {
+      filtered = filtered.filter(p => p.categoria === activeCategory);
+    }
+
+    // 2. Filtrar por Termo de Busca (Nome ou Descri\xE7\xE3o)
+    if (searchQuery.trim() !== '') {
+      const q = searchQuery.toLowerCase();
+      filtered = filtered.filter(p => 
+        p.titulo.toLowerCase().includes(q) || 
+        p.descricao.toLowerCase().includes(q)
+      );
+    }
+
+    // 3. Filtrar por Pre\xE7o
+    filtered = filtered.filter(p => p.preco <= maxPrice);
+
+    // 4. Ordenar
+    if (sortBy === 'price-asc') {
+      filtered.sort((a, b) => a.preco - b.preco);
+    } else if (sortBy === 'price-desc') {
+      filtered.sort((a, b) => b.preco - a.preco);
+    } else if (sortBy === 'name-asc') {
+      filtered.sort((a, b) => a.titulo.localeCompare(b.titulo));
+    }
+
+    renderProductsGrid(filtered);
+  }
+
+  function renderProductsGrid(products) {
+    const grid = document.getElementById('products-grid');
+    const alertEl = document.getElementById('no-products-alert');
+    const countEl = document.getElementById('product-results-count');
+    if (!grid || !alertEl || !countEl) return;
+
+    countEl.textContent = \`Mostrando \${products.length} \${products.length === 1 ? 'produto' : 'produtos'}\`;
+
+    if (products.length === 0) {
+      grid.innerHTML = '';
+      alertEl.classList.remove('hidden');
+      return;
+    }
+
+    alertEl.classList.add('hidden');
+    let html = '';
+    
+    products.forEach((product, idx) => {
+      // Cores de rota\xE7\xE3o neobrutalistas para os cards
+      const rotationClasses = ['-rotate-1', 'rotate-1', 'rotate-2', '-rotate-2'];
+      const rot = rotationClasses[idx % rotationClasses.length];
+      const shadowClasses = ['cartoon-shadow-primary', 'cartoon-shadow-secondary', 'cartoon-shadow-tertiary'];
+      const shadow = shadowClasses[idx % shadowClasses.length];
+
+      html += \`
+        <div class="group">
+          <div class="h-full border-4 border-on-surface rounded-2xl bg-white overflow-hidden flex flex-col hover:-translate-y-1 hover:rotate-0 transition-all duration-300 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+            <a href="/produto?id=\${product.id}" class="block aspect-square bg-surface-variant border-b-4 border-on-surface overflow-hidden relative">
+              <img src="\${product.imagem}" alt="\${product.titulo}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              <span class="absolute top-2 left-2 bg-secondary-fixed text-on-secondary-fixed text-[11px] font-label-bold px-3 py-1 border-2 border-black rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                \${product.categoria}
+              </span>
+              \${product.destaque ? \`
+                <span class="absolute top-2 right-2 bg-tertiary-fixed text-on-tertiary-fixed text-[11px] font-label-bold px-3 py-1 border-2 border-black rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] z-10">
+                  \${product.destaque}
+                </span>
+              \` : ''}
+            </a>
+            <div class="p-4 flex-grow flex flex-col justify-between gap-2.5 bg-white">
+              <div>
+                <a href="/produto?id=\${product.id}">
+                  <h4 class="font-headline-md text-base text-on-surface hover:text-primary transition-colors mb-1" title="\${product.titulo}">\${product.titulo}</h4>
+                </a>
+              </div>
+              <div class="flex justify-between items-center mt-2">
+                <span class="text-lg font-bold text-primary font-headline-md">R$ \${product.preco.toFixed(2)}</span>
+                <button 
+                  class="add-to-cart-btn bg-primary text-white px-4 py-2 border-2 border-black rounded-lg font-label-bold text-xs active-press hover:bg-tertiary hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+                  data-id="\${product.id}"
+                  data-titulo="\${product.titulo}"
+                  data-preco="\${product.preco}"
+                  data-imagem="\${product.imagem}"
+                >
+                  Adicionar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      \`;
+    });
+
+    grid.innerHTML = html;
+  }
+
+  // Configurar eventos no DOM
+  document.addEventListener('DOMContentLoaded', () => {
+    // 1. Ouvir input de busca
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        applyFiltersAndSort();
+      });
+    }
+
+    // 2. Ouvir range de pre\xE7o
+    const priceRange = document.getElementById('price-range');
+    const priceValue = document.getElementById('price-value');
+    if (priceRange && priceValue) {
+      priceRange.addEventListener('input', (e) => {
+        maxPrice = parseFloat(e.target.value);
+        priceValue.textContent = \`R$ \${maxPrice.toFixed(2)}\`;
+        applyFiltersAndSort();
+      });
+    }
+
+    // 3. Ouvir bot\xF5es de Categoria
+    const categoryContainer = document.getElementById('category-filters-container');
+    if (categoryContainer) {
+      const buttons = categoryContainer.querySelectorAll('.category-filter-btn');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Desativar anterior
+          buttons.forEach(b => {
+            b.className = "category-filter-btn text-left px-3 py-2 rounded-lg font-label-bold text-sm bg-white text-on-surface-variant border-2 border-transparent hover:bg-surface-container transition-colors";
+          });
+          // Ativar clicado
+          btn.className = "category-filter-btn text-left px-3 py-2 rounded-lg font-label-bold text-sm bg-secondary-fixed text-on-secondary-fixed border-2 border-on-surface shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all";
+          
+          activeCategory = btn.getAttribute('data-category');
+          applyFiltersAndSort();
+        });
+      });
+    }
+
+    // 4. Ouvir ordena\xE7\xE3o
+    const sortSelect = document.getElementById('sort-select');
+    if (sortSelect) {
+      sortSelect.addEventListener('change', (e) => {
+        sortBy = e.target.value;
+        applyFiltersAndSort();
+      });
+    }
+
+    // Executar primeira renderiza\xE7\xE3o buscando dados din\xE2micos
+    initCatalog();
+  });
+<\/script>`], ["", ` <script>
+  // Armazena a lista completa de produtos vinda do DB
+  let rawProducts = [];
+
+  // Filtros ativos
+  let activeCategory = 'Todos';
+  let searchQuery = '';
+  let maxPrice = 50;
+  let sortBy = 'default';
+
+  async function initCatalog() {
+    try {
+      const data = await window.SonharteDB.getProducts();
+      rawProducts = data.filter(p => p.ativo !== false);
+    } catch (err) {
+      console.error("Falha ao carregar produtos:", err);
+      rawProducts = [];
+    }
+
+    // Processar filtros da URL ap\xF3s carregar os produtos
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    const urlBusca = urlParams.get('busca');
+    if (urlBusca) {
+      const searchInput = document.getElementById('search-input');
+      if (searchInput) searchInput.value = urlBusca;
+      searchQuery = urlBusca;
+    }
+
+    const urlCat = urlParams.get('categoria');
+    if (urlCat) {
+      const categoryContainer = document.getElementById('category-filters-container');
+      if (categoryContainer) {
+        const buttons = categoryContainer.querySelectorAll('.category-filter-btn');
+        buttons.forEach(b => {
+          if (b.getAttribute('data-category') === urlCat) {
+            b.className = "category-filter-btn text-left px-3 py-2 rounded-lg font-label-bold text-sm bg-secondary-fixed text-on-secondary-fixed border-2 border-on-surface shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all";
+            activeCategory = urlCat;
+          } else {
+            b.className = "category-filter-btn text-left px-3 py-2 rounded-lg font-label-bold text-sm bg-white text-on-surface-variant border-2 border-transparent hover:bg-surface-container transition-colors";
+          }
+        });
+      }
+    }
+
+    applyFiltersAndSort();
+  }
+
+  function applyFiltersAndSort() {
+    let filtered = [...rawProducts];
+
+    // 1. Filtrar por Categoria
+    if (activeCategory !== 'Todos') {
+      filtered = filtered.filter(p => p.categoria === activeCategory);
+    }
+
+    // 2. Filtrar por Termo de Busca (Nome ou Descri\xE7\xE3o)
+    if (searchQuery.trim() !== '') {
+      const q = searchQuery.toLowerCase();
+      filtered = filtered.filter(p => 
+        p.titulo.toLowerCase().includes(q) || 
+        p.descricao.toLowerCase().includes(q)
+      );
+    }
+
+    // 3. Filtrar por Pre\xE7o
+    filtered = filtered.filter(p => p.preco <= maxPrice);
+
+    // 4. Ordenar
+    if (sortBy === 'price-asc') {
+      filtered.sort((a, b) => a.preco - b.preco);
+    } else if (sortBy === 'price-desc') {
+      filtered.sort((a, b) => b.preco - a.preco);
+    } else if (sortBy === 'name-asc') {
+      filtered.sort((a, b) => a.titulo.localeCompare(b.titulo));
+    }
+
+    renderProductsGrid(filtered);
+  }
+
+  function renderProductsGrid(products) {
+    const grid = document.getElementById('products-grid');
+    const alertEl = document.getElementById('no-products-alert');
+    const countEl = document.getElementById('product-results-count');
+    if (!grid || !alertEl || !countEl) return;
+
+    countEl.textContent = \\\`Mostrando \\\${products.length} \\\${products.length === 1 ? 'produto' : 'produtos'}\\\`;
+
+    if (products.length === 0) {
+      grid.innerHTML = '';
+      alertEl.classList.remove('hidden');
+      return;
+    }
+
+    alertEl.classList.add('hidden');
+    let html = '';
+    
+    products.forEach((product, idx) => {
+      // Cores de rota\xE7\xE3o neobrutalistas para os cards
+      const rotationClasses = ['-rotate-1', 'rotate-1', 'rotate-2', '-rotate-2'];
+      const rot = rotationClasses[idx % rotationClasses.length];
+      const shadowClasses = ['cartoon-shadow-primary', 'cartoon-shadow-secondary', 'cartoon-shadow-tertiary'];
+      const shadow = shadowClasses[idx % shadowClasses.length];
+
+      html += \\\`
+        <div class="group">
+          <div class="h-full border-4 border-on-surface rounded-2xl bg-white overflow-hidden flex flex-col hover:-translate-y-1 hover:rotate-0 transition-all duration-300 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+            <a href="/produto?id=\\\${product.id}" class="block aspect-square bg-surface-variant border-b-4 border-on-surface overflow-hidden relative">
+              <img src="\\\${product.imagem}" alt="\\\${product.titulo}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              <span class="absolute top-2 left-2 bg-secondary-fixed text-on-secondary-fixed text-[11px] font-label-bold px-3 py-1 border-2 border-black rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                \\\${product.categoria}
+              </span>
+              \\\${product.destaque ? \\\`
+                <span class="absolute top-2 right-2 bg-tertiary-fixed text-on-tertiary-fixed text-[11px] font-label-bold px-3 py-1 border-2 border-black rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] z-10">
+                  \\\${product.destaque}
+                </span>
+              \\\` : ''}
+            </a>
+            <div class="p-4 flex-grow flex flex-col justify-between gap-2.5 bg-white">
+              <div>
+                <a href="/produto?id=\\\${product.id}">
+                  <h4 class="font-headline-md text-base text-on-surface hover:text-primary transition-colors mb-1" title="\\\${product.titulo}">\\\${product.titulo}</h4>
+                </a>
+              </div>
+              <div class="flex justify-between items-center mt-2">
+                <span class="text-lg font-bold text-primary font-headline-md">R$ \\\${product.preco.toFixed(2)}</span>
+                <button 
+                  class="add-to-cart-btn bg-primary text-white px-4 py-2 border-2 border-black rounded-lg font-label-bold text-xs active-press hover:bg-tertiary hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+                  data-id="\\\${product.id}"
+                  data-titulo="\\\${product.titulo}"
+                  data-preco="\\\${product.preco}"
+                  data-imagem="\\\${product.imagem}"
+                >
+                  Adicionar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      \\\`;
+    });
+
+    grid.innerHTML = html;
+  }
+
+  // Configurar eventos no DOM
+  document.addEventListener('DOMContentLoaded', () => {
+    // 1. Ouvir input de busca
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        applyFiltersAndSort();
+      });
+    }
+
+    // 2. Ouvir range de pre\xE7o
+    const priceRange = document.getElementById('price-range');
+    const priceValue = document.getElementById('price-value');
+    if (priceRange && priceValue) {
+      priceRange.addEventListener('input', (e) => {
+        maxPrice = parseFloat(e.target.value);
+        priceValue.textContent = \\\`R$ \\\${maxPrice.toFixed(2)}\\\`;
+        applyFiltersAndSort();
+      });
+    }
+
+    // 3. Ouvir bot\xF5es de Categoria
+    const categoryContainer = document.getElementById('category-filters-container');
+    if (categoryContainer) {
+      const buttons = categoryContainer.querySelectorAll('.category-filter-btn');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Desativar anterior
+          buttons.forEach(b => {
+            b.className = "category-filter-btn text-left px-3 py-2 rounded-lg font-label-bold text-sm bg-white text-on-surface-variant border-2 border-transparent hover:bg-surface-container transition-colors";
+          });
+          // Ativar clicado
+          btn.className = "category-filter-btn text-left px-3 py-2 rounded-lg font-label-bold text-sm bg-secondary-fixed text-on-secondary-fixed border-2 border-on-surface shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all";
+          
+          activeCategory = btn.getAttribute('data-category');
+          applyFiltersAndSort();
+        });
+      });
+    }
+
+    // 4. Ouvir ordena\xE7\xE3o
+    const sortSelect = document.getElementById('sort-select');
+    if (sortSelect) {
+      sortSelect.addEventListener('change', (e) => {
+        sortBy = e.target.value;
+        applyFiltersAndSort();
+      });
+    }
+
+    // Executar primeira renderiza\xE7\xE3o buscando dados din\xE2micos
+    initCatalog();
+  });
+<\/script>`])), renderComponent($$result, "BaseLayout", $$BaseLayout, { "title": "Sonharte | Nosso Universo de Mimos" }, { "default": async ($$result2) => renderTemplate` ${renderComponent($$result2, "TopNavBar", $$TopNavBar, {})} ${maybeRenderHead()}<main class="max-w-container-max mx-auto px-gutter py-12 flex flex-col gap-8 min-h-screen"> <!-- Header da Página --> <div class="border-b-4 border-dashed border-primary-container pb-6"> <h1 class="font-headline-lg text-4xl text-primary mb-2">Nosso Universo de Mimos</h1> <p class="font-body-md text-on-surface-variant">Explore nossos produtos, monte sua sacola e nos envie pelo WhatsApp para combinarmos!</p> </div> <!-- Layout de Duas Colunas (Filtros + Grade) --> <div class="grid grid-cols-1 md:grid-cols-4 gap-8"> <!-- Coluna da Esquerda: Filtros e Pesquisa --> <aside class="flex flex-col gap-6 md:col-span-1"> <!-- Caixa de Busca --> <div class="bg-white p-5 border-4 border-on-surface rounded-2xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col gap-3"> <h3 class="font-label-bold text-lg text-primary">Buscar Produto</h3> <div class="relative"> <input type="text" id="search-input" placeholder="Digite o nome..." class="w-full px-4 py-2 border-2 border-on-surface rounded-xl focus:outline-none focus:border-primary transition-colors text-sm"> <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span> </div> </div> <!-- Filtro de Categorias --> <div class="bg-white p-5 border-4 border-on-surface rounded-2xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col gap-3"> <h3 class="font-label-bold text-lg text-primary">Categorias</h3> <div class="flex flex-col gap-2" id="category-filters-container"> <button class="category-filter-btn text-left px-3 py-2 rounded-lg font-label-bold text-sm bg-secondary-fixed text-on-secondary-fixed border-2 border-on-surface shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all" data-category="Todos">
+Todos
+</button> <button class="category-filter-btn text-left px-3 py-2 rounded-lg font-label-bold text-sm bg-white text-on-surface-variant border-2 border-transparent hover:bg-surface-container transition-colors" data-category="Lápis de Cor & Desenho">
+Lápis de Cor & Desenho
+</button> <button class="category-filter-btn text-left px-3 py-2 rounded-lg font-label-bold text-sm bg-white text-on-surface-variant border-2 border-transparent hover:bg-surface-container transition-colors" data-category="Cadernos & Papéis">
+Cadernos & Papéis
+</button> <button class="category-filter-btn text-left px-3 py-2 rounded-lg font-label-bold text-sm bg-white text-on-surface-variant border-2 border-transparent hover:bg-surface-container transition-colors" data-category="Canetas & Escrita">
+Canetas & Escrita
+</button> <button class="category-filter-btn text-left px-3 py-2 rounded-lg font-label-bold text-sm bg-white text-on-surface-variant border-2 border-transparent hover:bg-surface-container transition-colors" data-category="Artes & Utilidades">
+Artes & Utilidades
+</button> <button class="category-filter-btn text-left px-3 py-2 rounded-lg font-label-bold text-sm bg-white text-on-surface-variant border-2 border-transparent hover:bg-surface-container transition-colors" data-category="Organização & Escritório">
+Organização & Escritório
+</button> </div> </div> <!-- Filtro de Preço --> <div class="bg-white p-5 border-4 border-on-surface rounded-2xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col gap-3"> <h3 class="font-label-bold text-lg text-primary">Preço Máximo</h3> <div class="flex flex-col gap-2"> <input type="range" id="price-range" min="0" max="50" step="1" value="50" class="w-full accent-primary"> <div class="flex justify-between items-center text-sm font-label-bold text-on-surface-variant mt-1"> <span>R$ 0,00</span> <span id="price-value" class="bg-primary-container text-white px-2 py-0.5 rounded border border-black">R$ 50,00</span> </div> </div> </div> </aside> <!-- Coluna da Direita: Catálogo/Grade de Produtos --> <section class="flex flex-col gap-6 md:col-span-3"> <!-- Barra de Ordenação e Resumo --> <div class="bg-white px-6 py-4 border-4 border-on-surface rounded-2xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex justify-between items-center"> <span class="text-sm font-label-bold text-on-surface-variant" id="product-results-count">
+Mostrando 0 produtos
+</span> <div class="flex items-center gap-3"> <span class="text-sm font-label-bold text-on-surface-variant">Ordenar por:</span> <select id="sort-select" class="px-3 py-1.5 border-2 border-on-surface rounded-xl focus:outline-none focus:border-primary text-sm font-label-bold"> <option value="default">Relevância</option> <option value="price-asc">Preço: Menor para Maior</option> <option value="price-desc">Preço: Maior para Menor</option> <option value="name-asc">Nome: A-Z</option> </select> </div> </div> <!-- Grade de Produtos --> <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="products-grid"> <!-- Os cards dos produtos serão injetados dinamicamente via JS client-side --> </div> <!-- Alerta se nenhum produto for encontrado --> <div id="no-products-alert" class="hidden flex flex-col items-center justify-center py-20 text-center bg-white border-4 border-dashed border-outline-variant rounded-2xl"> <span class="material-symbols-outlined text-6xl text-on-surface-variant/40 mb-4">search_off</span> <h3 class="font-label-bold text-lg text-on-surface">Nenhum produto encontrado</h3> <p class="text-sm text-on-surface-variant mt-1">Tente ajustar suas palavras-chave ou filtros de pesquisa!</p> </div> </section> </div> </main> ${renderComponent($$result2, "Footer", $$Footer, {})} ${renderComponent($$result2, "FAB", $$FAB, {})} ` }));
+}, "C:/Users/david/OneDrive/Projetos/Myllena/Sonhar 1.0/src/pages/catalogo.astro", void 0);
+
+const $$file = "C:/Users/david/OneDrive/Projetos/Myllena/Sonhar 1.0/src/pages/catalogo.astro";
+const $$url = "/catalogo";
+
+const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+  __proto__: null,
+  default: $$Catalogo,
+  file: $$file,
+  url: $$url
+}, Symbol.toStringTag, { value: 'Module' }));
+
+const page = () => _page;
+
+export { page };

@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TopNavBar from '../components/desktop/TopNavBar.astro';
+import Footer from '../components/desktop/Footer.astro';
+import FAB from '../components/desktop/FAB.astro';
+---
+
+<BaseLayout title="Sonharte | Nossos Serviços">
+  <TopNavBar />
+  
+  <main class="max-w-container-max mx-auto px-gutter py-16 flex flex-col gap-12 min-h-screen relative overflow-hidden">
+    <!-- Decorações de Fundo -->
+    <div class="absolute bottom-10 left-10 w-96 h-96 rounded-full watercolor-blob" style="background: radial-gradient(circle, rgba(230,222,255,0.4) 0%, rgba(252,248,249,0) 70%);"></div>
+
+    <!-- Seção de Cabeçalho -->
+    <div class="text-center flex flex-col items-center gap-4 relative z-10">
+      <span class="bg-tertiary-fixed text-on-tertiary-fixed text-xs font-label-bold px-4 py-1.5 border-2 border-black rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rotate-1 animate-float">
+        Impressões de Alta Qualidade 🖨️
+      </span>
+      <h1 class="font-headline-xl text-5xl text-primary mt-2">Impressões & Cópias</h1>
+      <div class="w-32 h-2 bg-primary mt-2 cartoon-border rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"></div>
+    </div>
+
+    <!-- Conteúdo Duas Colunas (Tabela de Preços + Como Funciona) -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 relative z-10 mt-6">
+      
+      <!-- Tabela de Preços (Colunas 1 e 2) -->
+      <div class="lg:col-span-2 flex flex-col gap-6">
+        <div class="bg-white p-8 border-4 border-on-surface rounded-3xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+          <h2 class="font-headline-md text-2xl text-primary mb-6 flex items-center gap-2">
+            <span class="material-symbols-outlined text-2xl">receipt_long</span> Tabela de Preços
+          </h2>
+          
+          <div class="overflow-x-auto">
+            <table class="w-full text-left font-body-md border-collapse border-4 border-on-surface rounded-2xl overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+              <thead>
+                <tr class="bg-primary text-white border-b-4 border-on-surface">
+                  <th class="p-4 font-headline-md text-md border-r-2 border-on-surface">Serviço/Formato</th>
+                  <th class="p-4 font-headline-md text-md border-r-2 border-on-surface">Tipo de Papel</th>
+                  <th class="p-4 font-headline-md text-md">Preço Unitário</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y-2 divide-on-surface" id="services-tbody">
+                <tr>
+                  <td colspan="3" class="p-8 text-center text-on-surface-variant font-label-bold text-sm bg-white animate-pulse">
+                    Carregando tabela de preços... 🌸
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Como Funciona (Coluna 3) -->
+      <div class="flex flex-col gap-6">
+        
+        <!-- Bloco Passo a Passo -->
+        <div class="bg-white p-6 border-4 border-on-surface rounded-3xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] -rotate-1">
+          <h3 class="font-headline-md text-xl text-primary mb-4 flex items-center gap-2">
+            <span class="material-symbols-outlined">question_mark</span> Como Solicitar?
+          </h3>
+          <div class="flex flex-col gap-4">
+            
+            <!-- Passo 1 -->
+            <div class="flex gap-3">
+              <div class="w-8 h-8 rounded-full bg-primary text-white border-2 border-black flex items-center justify-center font-headline-md text-sm shrink-0">1</div>
+              <p class="font-body-md text-xs text-on-surface-variant">Envie os arquivos em formato PDF ou Imagem pelo nosso WhatsApp.</p>
+            </div>
+
+            <!-- Passo 2 -->
+            <div class="flex gap-3">
+              <div class="w-8 h-8 rounded-full bg-secondary-fixed text-on-secondary-fixed border-2 border-black flex items-center justify-center font-headline-md text-sm shrink-0">2</div>
+              <p class="font-body-md text-xs text-on-surface-variant">Nós avaliamos o formato, tiramos dúvidas e enviamos o orçamento final.</p>
+            </div>
+
+            <!-- Passo 3 -->
+            <div class="flex gap-3">
+              <div class="w-8 h-8 rounded-full bg-tertiary-fixed text-on-tertiary-fixed border-2 border-black flex items-center justify-center font-headline-md text-sm shrink-0">3</div>
+              <p class="font-body-md text-xs text-on-surface-variant">Após aprovação e confirmação do pagamento (Pix), iniciamos a produção.</p>
+            </div>
+
+            <!-- Passo 4 -->
+            <div class="flex gap-3">
+              <div class="w-8 h-8 rounded-full bg-green-100 text-green-700 border-2 border-black flex items-center justify-center font-headline-md text-sm shrink-0">
+                <span class="material-symbols-outlined text-sm">check</span>
+              </div>
+              <p class="font-body-md text-xs text-on-surface-variant">Você retira em nosso ponto físico ou combinamos a entrega.</p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Botão WhatsApp Impressão -->
+        <a 
+          href="https://wa.me/5531972122639?text=Olá!%20Gostaria%20de%20enviar%20arquivos%20para%20impressão/cópia." 
+          target="_blank"
+          class="bg-primary text-white border-4 border-on-surface rounded-2xl p-6 text-center flex flex-col items-center gap-3 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:rotate-1 active:translate-x-1 active:translate-y-1 active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"
+        >
+          <span class="material-symbols-outlined text-4xl">print</span>
+          <h4 class="font-headline-md text-lg">Enviar Arquivos Agora</h4>
+          <p class="font-body-md text-primary-fixed text-xs">Abra o WhatsApp e fale diretamente conosco</p>
+        </a>
+
+      </div>
+
+    </div>
+  </main>
+
+  <Footer />
+  <FAB />
+</BaseLayout>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const tbody = document.getElementById('services-tbody');
+    if (!tbody || !window.SonharteDB) return;
+
+    try {
+      const services = await window.SonharteDB.getServices();
+      if (services.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="3" class="p-8 text-center text-on-surface-variant font-label-bold text-sm bg-white">
+              Nenhum serviço disponível no momento... 🌸
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = services.map((s, idx) => {
+        const bgClass = idx % 2 === 1 ? 'bg-surface-container-lowest' : '';
+        return `
+          <tr class="hover:bg-surface-container-low transition-colors ${bgClass}">
+            <td class="p-4 border-r-2 border-on-surface font-label-bold">${s.titulo}</td>
+            <td class="p-4 border-r-2 border-on-surface text-on-surface-variant">${s.descricao}</td>
+            <td class="p-4 font-label-bold text-primary">R$ ${parseFloat(s.preco).toFixed(2).replace('.', ',')}</td>
+          </tr>
+        `;
+      }).join('');
+    } catch (e) {
+      console.error("Erro ao carregar serviços:", e);
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="3" class="p-8 text-center text-red-700 font-label-bold text-sm bg-white">
+            Erro ao carregar a tabela de preços...
+          </td>
+        </tr>
+      `;
+    }
+  });
+</script>

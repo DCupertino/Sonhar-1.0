@@ -1,0 +1,265 @@
+<!-- Top AppBar -->
+<header id="mobile-header" class="w-full top-0 sticky z-50 transition-transform duration-300 ease-in-out flex justify-between items-center px-4 py-3 bg-surface border-b-4 border-on-background">
+  <button class="p-2 active:scale-90 transition-transform" onclick="toggleDrawer()">
+    <span class="material-symbols-outlined text-primary text-3xl">menu</span>
+  </button>
+  <a href="/mobile" class="flex items-center gap-2 hover:opacity-90 transition-opacity">
+    <img alt="Sonharte Logo" class="h-20 w-20 object-contain" src="/assets/logo_clean.png" />
+  </a>
+  <div class="flex items-center gap-3">
+    <button id="mobile-search-trigger" class="material-symbols-outlined text-primary p-1 active:scale-90 transition-transform">search</button>
+    <button id="mobile-cart-btn" class="material-symbols-outlined text-primary p-1 relative">
+      shopping_cart
+      <span id="mobile-cart-badge" class="absolute -top-1 -right-1 bg-tertiary text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center border border-black hidden">0</span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile Search Overlay (Barra de Busca Expansível Premium) -->
+<div id="mobile-search-overlay" class="fixed inset-x-0 top-0 bg-surface border-b-4 border-on-background z-[80] shadow-[0_8px_0_0_rgba(0,0,0,0.15)] -translate-y-full transition-all duration-300 ease-out flex flex-col p-4 gap-4 pointer-events-none opacity-0">
+  <div class="flex items-center gap-3">
+    <!-- Input Container -->
+    <div class="flex-1 relative">
+      <input 
+        type="search" 
+        id="mobile-search-input" 
+        placeholder="O que você está procurando? 🌸" 
+        class="w-full px-4 py-2.5 pr-10 bg-white text-on-surface font-body-md border-3 border-on-surface rounded-xl focus:outline-none focus:border-primary text-sm shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] placeholder:text-on-surface-variant/50" 
+        autocomplete="off"
+      />
+      <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-primary text-xl">search</span>
+    </div>
+    <!-- Close Button -->
+    <button id="mobile-search-close" class="p-1.5 border-2 border-black bg-secondary-fixed text-on-secondary-fixed rounded-xl shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:scale-95 transition-transform flex items-center justify-center">
+      <span class="material-symbols-outlined text-lg">close</span>
+    </button>
+  </div>
+
+  <!-- Suggestions Panel -->
+  <div id="mobile-search-suggestions" class="max-h-[60vh] overflow-y-auto flex flex-col bg-white border-3 border-on-surface rounded-xl shadow-[3px_3px_0px_0px_rgba(75,37,187,1)] hidden divide-y divide-slate-100">
+  </div>
+</div>
+
+<!-- Navigation Drawer (Hidden by default) -->
+<div class="fixed inset-0 bg-black/50 z-[60] hidden backdrop-blur-sm transition-opacity opacity-0" id="drawer-overlay" onclick="toggleDrawer()"></div>
+<aside class="fixed inset-y-0 left-0 z-[70] w-72 bg-surface-container border-r-4 border-on-background -translate-x-full transition-transform duration-300 ease-out flex flex-col" id="drawer">
+  <div class="p-6 bg-primary-container text-on-primary-container border-b-4 border-on-background">
+    <h2 class="font-headline-md text-headline-md">Categorias</h2>
+  </div>
+  <nav class="flex-1 overflow-y-auto py-4">
+    <a class="bg-secondary-container text-on-secondary-container border-2 border-on-background rounded-lg m-2 p-4 flex items-center gap-3 font-label-bold font-body-md" href="/mobile">
+      <span class="material-symbols-outlined">home</span> Início
+    </a>
+    <!-- Workshops em Primeiro Lugar e Destacado -->
+    <a class="text-primary font-bold bg-primary/5 border-l-4 border-primary p-4 flex items-center gap-3 font-label-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors" href="/mobile/workshops">
+      <span class="material-symbols-outlined text-pink-600 animate-pulse">auto_awesome</span> Workshops ✨
+    </a>
+    <a class="text-on-surface p-4 flex items-center gap-3 font-label-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors" href="/mobile/catalogo">
+      <span class="material-symbols-outlined">shopping_bag</span> Todos os produtos
+    </a>
+    <a class="text-on-surface p-4 flex items-center gap-3 font-label-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors border-b border-outline-variant/40" href="/mobile/catalogo?categoria=Lápis de Cor">
+      <span class="material-symbols-outlined">edit</span> Lápis de Cor
+    </a>
+    <a class="text-on-surface p-4 flex items-center gap-3 font-label-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors border-b border-outline-variant/40" href="/mobile/catalogo?categoria=Cadernos">
+      <span class="material-symbols-outlined">book</span> Cadernos
+    </a>
+    <a class="text-on-surface p-4 flex items-center gap-3 font-label-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors border-b border-outline-variant/40" href="/mobile/catalogo?categoria=Canetas">
+      <span class="material-symbols-outlined">draw</span> Canetas
+    </a>
+    <a class="text-on-surface p-4 flex items-center gap-3 font-label-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors border-b-2 border-on-background" href="/mobile/catalogo?categoria=Materiais">
+      <span class="material-symbols-outlined">architecture</span> Materiais
+    </a>
+    <a class="text-on-surface p-4 flex items-center gap-3 font-label-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors" href="/mobile/servicos">
+      <span class="material-symbols-outlined">design_services</span> Serviços
+    </a>
+    <a class="text-on-surface p-4 flex items-center gap-3 font-label-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors" href="/mobile/sobre">
+      <span class="material-symbols-outlined">info</span> Sobre Nós
+    </a>
+    <a class="text-on-surface p-4 flex items-center gap-3 font-label-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors" href="/mobile/contato">
+      <span class="material-symbols-outlined">mail</span> Contato
+    </a>
+  </nav>
+</aside>
+
+<script is:inline>
+  function toggleDrawer() {
+      const drawer = document.getElementById('drawer');
+      const overlay = document.getElementById('drawer-overlay');
+      const isHidden = drawer.classList.contains('-translate-x-full');
+
+      if (isHidden) {
+          drawer.classList.remove('-translate-x-full');
+          overlay.classList.remove('hidden');
+          setTimeout(() => overlay.classList.add('opacity-100'), 10);
+          document.body.classList.add('overflow-hidden');
+      } else {
+          drawer.classList.add('-translate-x-full');
+          overlay.classList.remove('opacity-100');
+          setTimeout(() => overlay.classList.add('hidden'), 300);
+          document.body.classList.remove('overflow-hidden');
+      }
+  }
+
+  function updateMobileCartBadge() {
+    const badge = document.getElementById('mobile-cart-badge');
+    if (!badge || !window.SonharteCart) return;
+    const count = window.SonharteCart.count();
+    if (count > 0) {
+      badge.textContent = count;
+      badge.classList.remove('hidden');
+    } else {
+      badge.classList.add('hidden');
+    }
+  }
+
+  // Atualiza no carregamento e escuta eventos de alteração
+  window.addEventListener('load', updateMobileCartBadge);
+  window.addEventListener('cart-updated', updateMobileCartBadge);
+  // Escuta imediata caso o DOM já esteja carregado
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    updateMobileCartBadge();
+  }
+
+  // Lógica do Autocomplete de Sugestões de Pesquisa (Mobile)
+  document.addEventListener('DOMContentLoaded', () => {
+    const trigger = document.getElementById('mobile-search-trigger');
+    const overlay = document.getElementById('mobile-search-overlay');
+    const closeBtn = document.getElementById('mobile-search-close');
+    const input = document.getElementById('mobile-search-input');
+    const suggestions = document.getElementById('mobile-search-suggestions');
+
+    if (!trigger || !overlay || !closeBtn || !input || !suggestions) return;
+
+    let products = [];
+
+    // Abrir overlay
+    trigger.addEventListener('click', async () => {
+      overlay.classList.remove('-translate-y-full', 'pointer-events-none', 'opacity-0');
+      overlay.classList.add('translate-y-0', 'pointer-events-auto', 'opacity-100');
+      input.focus();
+
+      // Carrega os produtos se ainda não tiver carregado
+      if (products.length === 0 && window.SonharteDB) {
+        try {
+          const raw = await window.SonharteDB.getProducts();
+          products = raw.filter(p => p.ativo !== false);
+        } catch (e) {
+          console.error("Erro ao carregar produtos para sugestões mobile:", e);
+        }
+      }
+    });
+
+    // Fechar overlay
+    closeBtn.addEventListener('click', () => {
+      overlay.classList.add('-translate-y-full', 'pointer-events-none', 'opacity-0');
+      overlay.classList.remove('translate-y-0', 'pointer-events-auto', 'opacity-100');
+      input.value = '';
+      suggestions.innerHTML = '';
+      suggestions.classList.add('hidden');
+    });
+
+    // Buscar no input
+    input.addEventListener('input', () => {
+      if (input.value === 'adminM') {
+        window.location.href = '/mobile/admin';
+        return;
+      }
+      const query = input.value.trim().toLowerCase();
+      if (!query) {
+        suggestions.innerHTML = '';
+        suggestions.classList.add('hidden');
+        return;
+      }
+
+      // Filtra produtos
+      const filtered = products.filter(p => 
+        p.titulo.toLowerCase().includes(query) || 
+        (p.descricao && p.descricao.toLowerCase().includes(query))
+      ).slice(0, 5);
+
+      if (filtered.length === 0) {
+        suggestions.innerHTML = `
+          <div class="p-4 text-center text-on-surface-variant font-body-md flex flex-col items-center justify-center gap-1 bg-white">
+            <span class="material-symbols-outlined text-pink-500 text-2xl">sentiment_dissatisfied</span>
+            <span class="text-[11px] font-label-bold">Nenhum mimo encontrado... 🌸</span>
+          </div>
+        `;
+        suggestions.classList.remove('hidden');
+        return;
+      }
+
+      // Paleta de cores pastel para tags de categoria
+      const catColors = {
+        'Lápis de Cor': 'bg-pink-100 text-pink-700',
+        'Cadernos': 'bg-yellow-100 text-yellow-700',
+        'Canetas': 'bg-purple-100 text-purple-700',
+        'Presentes Criativos': 'bg-blue-100 text-blue-700',
+        'Materiais': 'bg-green-100 text-green-700'
+      };
+
+      suggestions.innerHTML = filtered.map((p, idx) => {
+        const tagClass = catColors[p.categoria] || 'bg-slate-100 text-slate-700';
+        
+        // Cores suaves de fundo para hover rotativo neobrutalista
+        const hovers = ['hover:bg-yellow-50/50', 'hover:bg-pink-50/50', 'hover:bg-purple-50/50', 'hover:bg-blue-50/50', 'hover:bg-green-50/50'];
+        const hoverClass = hovers[idx % hovers.length];
+
+        return `
+          <a 
+            href="/mobile/catalogo?busca=${encodeURIComponent(p.titulo)}" 
+            class="flex items-center gap-3 p-3 ${hoverClass} transition-colors cursor-pointer text-left decoration-none"
+          >
+            <img src="${p.imagem}" alt="${p.titulo}" class="w-10 h-10 object-cover rounded-lg border-2 border-black shrink-0 shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]" />
+            <div class="flex-1 min-w-0">
+              <h4 class="font-label-bold text-[11px] text-on-surface">${p.titulo}</h4>
+              <div class="flex items-center gap-1.5 mt-0.5">
+                <span class="px-2 py-0.5 text-[8px] font-label-bold rounded-full border border-black/10 ${tagClass}">${p.categoria}</span>
+              </div>
+            </div>
+            <div class="shrink-0 font-label-bold text-[10px] text-primary bg-primary/5 border border-primary/20 px-2 py-0.5 rounded-md">
+              R$ ${parseFloat(p.preco).toFixed(2).replace('.', ',')}
+            </div>
+          </a>
+        `;
+      }).join('');
+      suggestions.classList.remove('hidden');
+    });
+
+    // Se apertar enter no input, ir para o catálogo geral
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        const query = input.value.trim();
+        if (query === 'adminM') {
+          e.preventDefault();
+          window.location.href = '/mobile/admin';
+          return;
+        }
+        if (query) {
+          window.location.href = `/mobile/catalogo?busca=${encodeURIComponent(query)}`;
+        }
+      }
+    });
+  });
+
+  // Lógica do Smart Header (Esconde ao rolar para baixo, aparece ao rolar para cima)
+  document.addEventListener('DOMContentLoaded', () => {
+    const header = document.getElementById('mobile-header');
+    if (!header) return;
+
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      
+      // Esconde se rolar para baixo e passar de 100px
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        header.style.transform = 'translateY(-110%)';
+      } else {
+        // Mostra se rolar para cima
+        header.style.transform = 'translateY(0)';
+      }
+      
+      lastScrollY = currentScrollY;
+    }, { passive: true });
+  });
+</script>

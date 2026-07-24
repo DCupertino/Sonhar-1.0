@@ -1,0 +1,357 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/mobile/Header.astro';
+import HorizontalNav from '../../components/mobile/HorizontalNav.astro';
+import Footer from '../../components/mobile/Footer.astro';
+---
+
+<BaseLayout title="Sonharte | Detalhe do Produto">
+  <Header />
+  <HorizontalNav />
+  
+  <main class="flex flex-col gap-6 py-6 px-4 min-h-screen relative overflow-hidden">
+    <!-- Decorações de Fundo -->
+    <div class="absolute top-20 -right-20 w-72 h-72 rounded-full watercolor-blob" style="background: radial-gradient(circle, rgba(230,222,255,0.3) 0%, rgba(252,248,249,0) 70%); z-index: -1;"></div>
+
+    <!-- Breadcrumb de Navegação -->
+    <nav class="flex items-center gap-1.5 text-[10px] font-label-bold text-on-surface-variant bg-white/80 backdrop-blur-sm px-3 py-2 border-2 border-black rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] w-fit" aria-label="Breadcrumb">
+      <a href="/mobile" class="hover:text-primary transition-colors flex items-center gap-0.5">
+        <span class="material-symbols-outlined text-[10px]">home</span> Início
+      </a>
+      <span class="text-on-surface-variant/40">/</span>
+      <a href="/mobile/catalogo" class="hover:text-primary transition-colors">Catálogo</a>
+      <span class="text-on-surface-variant/40">/</span>
+      <span id="breadcrumb-current-mobile" class="text-primary truncate max-w-[120px]">Carregando...</span>
+    </nav>
+
+    <!-- Estado de Carregamento (Skeleton) -->
+    <div id="product-loading-mobile" class="flex flex-col gap-6 animate-pulse">
+      <div class="w-full aspect-square bg-surface-container border-4 border-on-surface rounded-2xl"></div>
+      <div class="flex flex-col gap-4">
+        <div class="h-4 w-24 bg-surface-container rounded-full"></div>
+        <div class="h-8 w-11/12 bg-surface-container rounded-lg"></div>
+        <div class="h-10 w-32 bg-surface-container rounded-lg"></div>
+        <div class="h-24 w-full bg-surface-container rounded-xl"></div>
+      </div>
+    </div>
+
+    <!-- Alerta de Erro se produto não encontrado -->
+    <div id="product-error-mobile" class="hidden flex flex-col items-center justify-center py-16 text-center bg-white border-4 border-dashed border-red-700 rounded-2xl px-4">
+      <span class="material-symbols-outlined text-5xl text-red-600 mb-3 animate-bounce">error</span>
+      <h3 class="font-label-bold text-lg text-red-700">Mimo não encontrado!</h3>
+      <p class="text-xs text-on-surface-variant mt-2">O produto pode ter sido removido ou o link está incorreto. Volte ao catálogo para ver todos os nossos mimos.</p>
+      <a href="/mobile/catalogo" class="mt-5 px-5 py-2.5 bg-primary text-white border-2 border-black rounded-lg font-label-bold text-xs shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all">
+        Voltar ao Catálogo 🛍️
+      </a>
+    </div>
+
+    <!-- Conteúdo do Produto -->
+    <div id="product-details-mobile" class="hidden flex flex-col gap-6">
+      <!-- Imagem do Produto -->
+      <div class="w-full">
+        <div class="aspect-square bg-white border-4 border-on-surface rounded-2xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden relative">
+          <img id="detail-image-mobile" src="" alt="Imagem do Produto" class="w-full h-full object-contain p-4" />
+          
+          <!-- Badges flutuantes -->
+          <span id="detail-category-badge-mobile" class="absolute top-3 left-3 bg-secondary-fixed text-on-secondary-fixed text-[10px] font-label-bold px-3 py-1 border-2 border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] -rotate-1">
+            Categoria
+          </span>
+          <span id="detail-destaque-badge-mobile" class="hidden absolute top-3 right-3 bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-label-bold px-3 py-1 border-2 border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] rotate-2">
+            Destaque
+          </span>
+        </div>
+      </div>
+
+      <!-- Informações do Produto -->
+      <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-1">
+          <span id="detail-category-mobile" class="text-[10px] font-label-bold text-primary tracking-widest uppercase">Categoria</span>
+          <h1 id="detail-title-mobile" class="font-headline-md text-2xl text-on-surface leading-tight">Título do Produto</h1>
+        </div>
+
+        <!-- Preço e Estoque -->
+        <div class="flex items-center gap-3">
+          <div class="bg-primary-container text-white border-2 border-black px-4 py-2 rounded-xl shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] font-headline-md text-xl font-bold">
+            <span id="detail-price-mobile">R$ 0,00</span>
+          </div>
+          <div class="flex flex-col text-[10px] font-label-bold text-on-surface-variant">
+            <span class="flex items-center gap-1 text-green-700">
+              <span class="w-2 h-2 rounded-full bg-green-500 border border-black animate-pulse"></span> Em estoque
+            </span>
+            <span class="text-on-surface-variant/70">Pronto para envio/retirada</span>
+          </div>
+        </div>
+
+        <!-- Descrição -->
+        <div class="bg-surface-container-low border-2 border-black p-4 rounded-xl relative shadow-[2px_2px_0px_0px_rgba(0,0,0,0.05)] mt-1">
+          <div class="absolute -top-2.5 left-3 bg-white px-2 border-2 border-black rounded font-label-bold text-[8px] uppercase text-primary tracking-wider shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+            Detalhes do Mimo ✨
+          </div>
+          <p id="detail-desc-mobile" class="font-body-md text-xs text-on-surface leading-relaxed mt-1 whitespace-pre-line">
+            Descrição detalhada do produto...
+          </p>
+        </div>
+
+        <!-- Quantidade e Botões de Ação -->
+        <div class="flex flex-col gap-3 mt-1">
+          <div class="flex items-center gap-3">
+            <label class="font-label-bold text-[10px] text-on-surface uppercase tracking-wider">Quantidade:</label>
+            <div class="flex items-center border-2 border-black rounded-lg bg-white shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
+              <button id="qty-minus-mobile" class="px-2.5 py-1.5 font-bold text-xs bg-surface-container-high hover:bg-surface-dim active:scale-90 transition-all border-r-2 border-black flex items-center justify-center select-none">-</button>
+              <input type="number" id="qty-input-mobile" value="1" min="1" max="99" class="w-10 text-center text-xs font-label-bold outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
+              <button id="qty-plus-mobile" class="px-2.5 py-1.5 font-bold text-xs bg-surface-container-high hover:bg-surface-dim active:scale-90 transition-all border-l-2 border-black flex items-center justify-center select-none">+</button>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-3.5 mt-1">
+            <!-- Adicionar à Sacola -->
+            <button 
+              id="add-to-cart-btn-mobile"
+              class="w-full bg-primary text-white py-3.5 border-2 border-black rounded-xl font-label-bold text-xs shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all flex items-center justify-center gap-2 hover:bg-tertiary"
+            >
+              <span class="material-symbols-outlined text-base">add_shopping_cart</span>
+              Adicionar à Sacola
+            </button>
+
+            <!-- Comprar via WhatsApp -->
+            <a 
+              id="whatsapp-buy-btn-mobile"
+              href="#"
+              target="_blank"
+              class="w-full bg-green-500 text-white py-3.5 border-2 border-black rounded-xl font-label-bold text-xs shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all flex items-center justify-center gap-2 hover:bg-green-600 text-center"
+            >
+              <span class="material-symbols-outlined text-base">chat</span>
+              Comprar no WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- Informativo de compra -->
+        <div class="bg-secondary-fixed-dim/15 border-2 border-black p-3 rounded-lg flex items-start gap-2.5 mt-1">
+          <span class="material-symbols-outlined text-primary text-lg mt-0.5">info</span>
+          <p class="text-[10px] text-on-surface-variant font-body-md leading-relaxed">
+            Adicione os mimos na sacola e nos envie no WhatsApp para finalizar seu pedido com atendimento personalizado! 💖
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divisor de Seção -->
+    <hr class="border-2 border-on-surface my-8" />
+
+    <!-- Produtos Relacionados Mobile -->
+    <section id="related-products-section-mobile" class="hidden">
+      <h2 class="font-headline-lg text-lg text-primary mb-4">Você também vai amar... 🥰</h2>
+      
+      <!-- Listagem horizontal scrollable no mobile -->
+      <div class="flex gap-4 overflow-x-auto pb-4 no-scrollbar -mx-4 px-4 snap-x snap-mandatory" id="related-products-scroll-mobile">
+        <!-- Injetado dinamicamente -->
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Pegar ID do produto nos parâmetros da URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id');
+
+    if (!productId) {
+      showErrorMobile();
+      return;
+    }
+
+    let currentProduct = null;
+    let productsList = [];
+
+    async function loadProductDetailsMobile() {
+      try {
+        productsList = await window.SonharteDB.getProducts();
+        currentProduct = productsList.find(p => p.id === productId && p.ativo !== false);
+
+        if (!currentProduct) {
+          showErrorMobile();
+          return;
+        }
+
+        // Preencher detalhes
+        document.getElementById('breadcrumb-current-mobile').textContent = currentProduct.titulo;
+        document.getElementById('detail-title-mobile').textContent = currentProduct.titulo;
+        document.getElementById('detail-category-mobile').textContent = currentProduct.categoria;
+        document.getElementById('detail-category-badge-mobile').textContent = currentProduct.categoria;
+        document.getElementById('detail-price-mobile').textContent = `R$ ${currentProduct.preco.toFixed(2).replace('.', ',')}`;
+        document.getElementById('detail-desc-mobile').textContent = currentProduct.descricao || "Nenhuma descrição disponível para este mimo.";
+        
+        const imgEl = document.getElementById('detail-image-mobile');
+        imgEl.src = currentProduct.imagem;
+        imgEl.alt = currentProduct.titulo;
+
+        // Destaque Badge
+        const destaqueBadge = document.getElementById('detail-destaque-badge-mobile');
+        if (currentProduct.destaque) {
+          destaqueBadge.textContent = currentProduct.destaque;
+          destaqueBadge.classList.remove('hidden');
+        } else {
+          destaqueBadge.classList.add('hidden');
+        }
+
+        // Configurar botão de comprar via WhatsApp
+        updateWhatsAppLinkMobile(1);
+
+        // Ocultar skeleton e exibir detalhes
+        document.getElementById('product-loading-mobile').classList.add('hidden');
+        document.getElementById('product-details-mobile').classList.remove('hidden');
+
+        // Carregar produtos relacionados
+        loadRelatedProductsMobile(currentProduct);
+
+      } catch (err) {
+        console.error("Erro ao carregar detalhes do produto:", err);
+        showErrorMobile();
+      }
+    }
+
+    function showErrorMobile() {
+      document.getElementById('product-loading-mobile').classList.add('hidden');
+      document.getElementById('product-error-mobile').classList.remove('hidden');
+    }
+
+    // Gerenciar quantidade
+    const qtyInput = document.getElementById('qty-input-mobile');
+    const qtyMinus = document.getElementById('qty-minus-mobile');
+    const qtyPlus = document.getElementById('qty-plus-mobile');
+
+    qtyMinus.addEventListener('click', () => {
+      let val = parseInt(qtyInput.value);
+      if (val > 1) {
+        qtyInput.value = val - 1;
+        updateWhatsAppLinkMobile(val - 1);
+      }
+    });
+
+    qtyPlus.addEventListener('click', () => {
+      let val = parseInt(qtyInput.value);
+      qtyInput.value = val + 1;
+      updateWhatsAppLinkMobile(val + 1);
+    });
+
+    qtyInput.addEventListener('change', () => {
+      let val = parseInt(qtyInput.value);
+      if (isNaN(val) || val < 1) {
+        qtyInput.value = 1;
+        val = 1;
+      }
+      updateWhatsAppLinkMobile(val);
+    });
+
+    // Atualiza o link do WhatsApp para compra direta deste produto
+    function updateWhatsAppLinkMobile(quantidade) {
+      if (!currentProduct) return;
+      const WHATSAPP_PHONE = '5531972122639';
+      const precoTotal = (currentProduct.preco * quantidade).toFixed(2).replace('.', ',');
+      const text = `Olá! Tenho interesse no mimo: *${currentProduct.titulo}*\nPreço unitário: R$ ${currentProduct.preco.toFixed(2).replace('.', ',')}\nQuantidade: *${quantidade}x*\nValor total: R$ ${precoTotal}\n\nGostaria de verificar a disponibilidade e combinar a entrega!`;
+      const encoded = encodeURIComponent(text);
+      document.getElementById('whatsapp-buy-btn-mobile').href = `https://wa.me/${WHATSAPP_PHONE}?text=${encoded}`;
+    }
+
+    // Configurar adicionar ao carrinho
+    const addToCartBtn = document.getElementById('add-to-cart-btn-mobile');
+    addToCartBtn.addEventListener('click', () => {
+      if (!currentProduct) return;
+      const qty = parseInt(qtyInput.value) || 1;
+
+      // Chama add com quantidade
+      window.SonharteCart.add(currentProduct.id, currentProduct.titulo, currentProduct.preco, currentProduct.imagem);
+      
+      // Se for maior que 1, atualiza a quantidade total
+      if (qty > 1) {
+        const cart = window.SonharteCart.get();
+        const existing = cart.find(item => item.id === currentProduct.id);
+        if (existing) {
+          window.SonharteCart.update(currentProduct.id, existing.quantidade - 1 + qty);
+        }
+      }
+
+      // Feedback visual e abre o carrinho
+      if (typeof window.toggleCartDrawer === 'function') {
+        window.toggleCartDrawer();
+      }
+    });
+
+    // Carregar mimos relacionados da mesma categoria (Mobile)
+    function loadRelatedProductsMobile(product) {
+      const relatedScroll = document.getElementById('related-products-scroll-mobile');
+      const relatedSection = document.getElementById('related-products-section-mobile');
+      if (!relatedScroll || !relatedSection) return;
+
+      const related = productsList
+        .filter(p => p.categoria === product.categoria && p.id !== product.id && p.ativo !== false)
+        .slice(0, 5);
+
+      if (related.length === 0) {
+        relatedSection.classList.add('hidden');
+        return;
+      }
+
+      let html = '';
+      const shadows = ['block-shadow-primary', 'block-shadow-tertiary', 'block-shadow-secondary'];
+
+      related.forEach((p, idx) => {
+        const shadow = shadows[idx % shadows.length];
+        html += `
+          <div class="snap-start shrink-0 w-36 thick-border rounded-2xl bg-white p-2.5 relative flex flex-col justify-between ${shadow}">
+            <div>
+              <a href="/mobile/produto?id=${p.id}" class="block relative w-full aspect-square mb-2">
+                <img src="${p.imagem}" alt="${p.titulo}" class="w-full h-full object-cover rounded-xl thin-border" />
+                <span class="absolute top-1 left-1 bg-white text-on-surface text-[6px] font-label-bold px-1.5 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+                  ${p.categoria}
+                </span>
+              </a>
+              <a href="/mobile/produto?id=${p.id}">
+                <h3 class="font-headline-md text-xs hover:text-primary transition-colors line-clamp-2" title="${p.titulo}">${p.titulo}</h3>
+              </a>
+            </div>
+            <div class="flex items-center justify-between mt-2 gap-1.5">
+              <span class="font-headline-md text-xs text-primary font-bold">R$ ${p.preco.toFixed(2).replace('.', ',')}</span>
+              <button 
+                class="add-to-cart-quick-btn-mobile thin-border bg-primary text-white p-1.5 rounded-lg block-shadow-primary active:translate-x-0.5 active:translate-y-0.5 active:shadow-none shrink-0 flex items-center justify-center"
+                data-id="${p.id}"
+                data-titulo="${p.titulo}"
+                data-preco="${p.preco}"
+                data-imagem="${p.imagem}"
+              >
+                <span class="material-symbols-outlined text-[10px]">add_shopping_cart</span>
+              </button>
+            </div>
+          </div>
+        `;
+      });
+
+      relatedScroll.innerHTML = html;
+      relatedSection.classList.remove('hidden');
+
+      // Hook rápido nos botões de adicionar ao carrinho mobile
+      const quickBtns = relatedScroll.querySelectorAll('.add-to-cart-quick-btn-mobile');
+      quickBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const id = btn.getAttribute('data-id');
+          const title = btn.getAttribute('data-titulo');
+          const price = parseFloat(btn.getAttribute('data-preco'));
+          const image = btn.getAttribute('data-imagem');
+          
+          window.SonharteCart.add(id, title, price, image);
+          
+          if (typeof window.toggleCartDrawer === 'function') {
+            window.toggleCartDrawer();
+          }
+        });
+      });
+    }
+
+    loadProductDetailsMobile();
+  });
+</script>

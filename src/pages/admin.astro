@@ -1,0 +1,720 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TopNavBar from '../components/desktop/TopNavBar.astro';
+import Footer from '../components/desktop/Footer.astro';
+---
+
+<BaseLayout title="Sonharte | Painel do Administrador">
+  <TopNavBar />
+  
+  <main class="max-w-container-max mx-auto px-gutter py-16 min-h-screen relative overflow-hidden">
+    <!-- Decorações de Fundo -->
+    <div class="absolute top-20 -right-20 w-96 h-96 rounded-full watercolor-blob" style="background: radial-gradient(circle, rgba(230,222,255,0.3) 0%, rgba(252,248,249,0) 70%);"></div>
+
+    <!-- TELA DE LOGIN (Mostrada por padrão se não logado) -->
+    <div id="login-container" class="max-w-md mx-auto relative z-10 my-12">
+      <form id="login-form" class="bg-white p-8 border-4 border-on-surface rounded-3xl shadow-[6px_6px_0px_0px_rgba(75,37,187,1)] flex flex-col gap-6">
+        <div class="text-center flex flex-col items-center">
+          <span class="bg-secondary-fixed text-on-secondary-fixed text-xs font-label-bold px-3 py-1 border-2 border-black rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] -rotate-1">
+            Área Restrita 🔐
+          </span>
+          <h2 class="font-headline-md text-2xl text-primary mt-3">Acesso de Administrador</h2>
+        </div>
+
+        <div id="login-error" class="hidden bg-red-100 text-red-700 p-3 border-2 border-red-700 rounded-xl font-body-md text-xs">
+          Erro ao fazer login. Verifique suas credenciais.
+        </div>
+
+        <div class="flex flex-col gap-1.5">
+          <label for="login-email" class="font-label-bold text-sm text-on-surface">E-mail</label>
+          <input 
+            type="email" 
+            id="login-email" 
+            required
+            placeholder="admin@sonharte.com" 
+            class="w-full px-4 py-3 border-2 border-on-surface rounded-xl focus:outline-none focus:border-primary text-sm font-body-md bg-background"
+          />
+        </div>
+
+        <div class="flex flex-col gap-1.5">
+          <label for="login-password" class="font-label-bold text-sm text-on-surface">Senha</label>
+          <input 
+            type="password" 
+            id="login-password" 
+            required
+            placeholder="••••••••" 
+            class="w-full px-4 py-3 border-2 border-on-surface rounded-xl focus:outline-none focus:border-primary text-sm font-body-md bg-background"
+          />
+        </div>
+
+        <button 
+          type="submit" 
+          class="w-full bg-primary text-white py-4 border-2 border-black rounded-xl font-label-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active-press hover:bg-tertiary transition-colors text-sm"
+        >
+          Entrar no Painel 🚀
+        </button>
+      </form>
+    </div>
+
+    <!-- PAINEL OPERACIONAL (Escondido por padrão) -->
+    <div id="admin-dashboard" class="hidden flex flex-col gap-8 relative z-10">
+      
+      <!-- Cabeçalho do Admin -->
+      <div class="bg-white p-6 border-4 border-on-surface rounded-3xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] flex justify-between items-center">
+        <div>
+          <span class="text-xs text-on-surface-variant font-label-bold">Painel Administrativo</span>
+          <h2 class="font-headline-md text-2xl text-primary" id="admin-welcome">Olá, Myllena! 🌸</h2>
+        </div>
+        <button 
+          id="logout-btn" 
+          class="bg-red-100 text-red-700 px-4 py-2 border-2 border-red-700 rounded-xl font-label-bold text-xs hover:bg-red-200 transition-colors shadow-[2px_2px_0px_0px_rgba(186,26,26,1)] active-press"
+        >
+          Sair do Painel
+        </button>
+      </div>
+
+      <!-- Abas e Navegação Operacional -->
+      <div class="flex gap-4 border-b-4 border-on-surface pb-1">
+        <button id="tab-products-btn" class="px-6 py-2.5 font-label-bold text-sm bg-white border-x-4 border-t-4 border-on-surface rounded-t-xl translate-y-[8px] z-10 shadow-[0px_-4px_0px_0px_rgba(0,0,0,1)] transition-all">
+          Gerenciar Produtos
+        </button>
+        <button id="tab-services-btn" class="px-6 py-2.5 font-label-bold text-sm text-on-surface-variant hover:text-primary transition-all">
+          Gerenciar Serviços
+        </button>
+        <button id="tab-feedbacks-btn" class="px-6 py-2.5 font-label-bold text-sm text-on-surface-variant hover:text-primary transition-all">
+          Moderar Depoimentos
+        </button>
+      </div>
+
+      <!-- CONTEÚDO 1: GERENCIAR PRODUTOS -->
+      <div id="section-products" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Formulário de Produto (Esquerda) -->
+        <div class="lg:col-span-1">
+          <form id="product-form" class="bg-white p-6 border-4 border-on-surface rounded-3xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] flex flex-col gap-4">
+            <h3 class="font-headline-md text-xl text-primary border-b-2 border-dashed border-primary-container pb-2" id="form-title">Adicionar Novo Produto</h3>
+            <input type="hidden" id="prod-id" />
+
+            <div class="flex flex-col gap-1.5">
+              <label for="prod-titulo" class="font-label-bold text-xs text-on-surface">Título do Produto</label>
+              <input type="text" id="prod-titulo" required class="w-full px-3 py-2 border-2 border-on-surface rounded-xl text-xs font-body-md bg-background" placeholder="Ex: Planner Bloom 2025" />
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label for="prod-preco" class="font-label-bold text-xs text-on-surface">Preço (R$)</label>
+              <input type="number" step="0.01" id="prod-preco" required class="w-full px-3 py-2 border-2 border-on-surface rounded-xl text-xs font-body-md bg-background" placeholder="Ex: 89.90" />
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label for="prod-categoria" class="font-label-bold text-xs text-on-surface">Categoria</label>
+              <select id="prod-categoria" required class="w-full px-3 py-2 border-2 border-on-surface rounded-xl text-xs font-body-md bg-background">
+                <option value="Lápis de Cor">Lápis de Cor</option>
+                <option value="Cadernos">Cadernos</option>
+                <option value="Canetas">Canetas</option>
+                <option value="Presentes Criativos">Presentes Criativos</option>
+                <option value="Materiais">Materiais</option>
+              </select>
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label for="prod-destaque" class="font-label-bold text-xs text-on-surface">Selo de Destaque</label>
+              <select id="prod-destaque" class="w-full px-3 py-2 border-2 border-on-surface rounded-xl text-xs font-body-md bg-background">
+                <option value="">Nenhum</option>
+                <option value="Lançamento">Lançamento 🚀</option>
+                <option value="Mais Vendido">Mais Vendido 🔥</option>
+                <option value="Destaque">Destaque ✨</option>
+              </select>
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label for="prod-imagem-file" class="font-label-bold text-xs text-on-surface">Imagem do Produto (Anexo)</label>
+              <input type="file" id="prod-imagem-file" accept="image/*" class="w-full px-3 py-2 border-2 border-on-surface rounded-xl text-xs font-body-md bg-background cursor-pointer" />
+              <input type="hidden" id="prod-imagem" required />
+              <div id="prod-imagem-preview-container" class="hidden mt-2 border-2 border-dashed border-on-surface rounded-xl p-2 flex items-center justify-center bg-surface-container-low">
+                <img id="prod-imagem-preview" src="" alt="Preview" class="max-h-32 object-contain rounded-lg border border-black shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]" />
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label for="prod-descricao" class="font-label-bold text-xs text-on-surface">Descrição Curta</label>
+              <textarea id="prod-descricao" required rows="3" class="w-full px-3 py-2 border-2 border-on-surface rounded-xl text-xs font-body-md bg-background resize-none" placeholder="Escreva os detalhes..."></textarea>
+            </div>
+
+            <div class="flex items-center gap-2 py-2">
+              <input type="checkbox" id="prod-ativo" checked class="w-4 h-4 accent-primary" />
+              <label for="prod-ativo" class="font-label-bold text-xs text-on-surface">Produto ativo para venda</label>
+            </div>
+
+            <div class="flex gap-2">
+              <button type="submit" class="flex-1 bg-primary text-white py-3 border-2 border-black rounded-xl font-label-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active-press hover:bg-tertiary transition-colors text-xs">
+                Salvar Produto 💾
+              </button>
+              <button type="button" id="cancel-edit-btn" class="hidden px-4 bg-surface-container border-2 border-black rounded-xl font-label-bold text-xs hover:bg-surface-dim transition-colors active-press">
+                Cancelar
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Lista de Produtos (Direita) -->
+        <div class="lg:col-span-2 flex flex-col gap-4">
+          <div class="bg-white p-6 border-4 border-on-surface rounded-3xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] min-h-[400px]">
+            <h3 class="font-headline-md text-xl text-on-surface mb-4 flex items-center justify-between">
+              Produtos Cadastrados
+              <span class="text-xs bg-primary-fixed text-on-primary-fixed border border-black px-2 py-0.5 rounded" id="products-count-badge">0 itens</span>
+            </h3>
+
+            <div class="flex flex-col gap-3" id="products-list-container">
+              <!-- Injetado dinamicamente -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTEÚDO 3: GERENCIAR SERVIÇOS (Escondido por padrão) -->
+      <div id="section-services" class="hidden grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Formulário de Serviço (Esquerda) -->
+        <div class="lg:col-span-1">
+          <form id="service-form" class="bg-white p-6 border-4 border-on-surface rounded-3xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] flex flex-col gap-4">
+            <h3 class="font-headline-md text-xl text-primary border-b-2 border-dashed border-primary-container pb-2" id="serv-form-title">Adicionar Novo Serviço</h3>
+            <input type="hidden" id="serv-id" />
+
+            <div class="flex flex-col gap-1.5">
+              <label for="serv-titulo" class="font-label-bold text-xs text-on-surface">Título do Serviço</label>
+              <input type="text" id="serv-titulo" required class="w-full px-3 py-2 border-2 border-on-surface rounded-xl text-xs font-body-md bg-background" placeholder="Ex: A4 Colorido (Impressão)" />
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label for="serv-descricao" class="font-label-bold text-xs text-on-surface">Descrição / Tipo de Papel</label>
+              <input type="text" id="serv-descricao" required class="w-full px-3 py-2 border-2 border-on-surface rounded-xl text-xs font-body-md bg-background" placeholder="Ex: Papel Sulfite 75g" />
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label for="serv-preco" class="font-label-bold text-xs text-on-surface">Preço Unitário (R$)</label>
+              <input type="number" step="0.01" id="serv-preco" required class="w-full px-3 py-2 border-2 border-on-surface rounded-xl text-xs font-body-md bg-background" placeholder="Ex: 2.00" />
+            </div>
+
+            <div class="flex gap-2 mt-2">
+              <button type="submit" class="flex-1 bg-primary text-white py-3 border-2 border-black rounded-xl font-label-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active-press hover:bg-tertiary transition-colors text-xs">
+                Salvar Serviço 💾
+              </button>
+              <button type="button" id="cancel-serv-edit-btn" class="hidden px-4 bg-surface-container border-2 border-black rounded-xl font-label-bold text-xs hover:bg-surface-dim transition-colors active-press">
+                Cancelar
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Lista de Serviços (Direita) -->
+        <div class="lg:col-span-2 flex flex-col gap-4">
+          <div class="bg-white p-6 border-4 border-on-surface rounded-3xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] min-h-[400px]">
+            <h3 class="font-headline-md text-xl text-on-surface mb-4 flex items-center justify-between">
+              Serviços & Preços Cadastrados
+              <span class="text-xs bg-primary-fixed text-on-primary-fixed border border-black px-2 py-0.5 rounded" id="services-count-badge">0 itens</span>
+            </h3>
+
+            <div class="flex flex-col gap-3" id="admin-services-list-container">
+              <!-- Injetado dinamicamente -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- CONTEÚDO 2: MODERAR DEPOIMENTOS (Escondido por padrão) -->
+      <div id="section-feedbacks" class="hidden bg-white p-8 border-4 border-on-surface rounded-3xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] min-h-[400px]">
+        <h3 class="font-headline-md text-xl text-on-surface mb-6 flex justify-between items-center">
+          Moderação de Depoimentos
+          <span class="text-xs bg-tertiary-fixed text-on-tertiary-fixed border border-black px-2 py-0.5 rounded" id="feedbacks-count-badge">0 itens</span>
+        </h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="feedbacks-list-container">
+          <!-- Injetado dinamicamente -->
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+  
+  <Footer />
+</BaseLayout>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Referências do DOM
+    const loginContainer = document.getElementById('login-container');
+    const dashboard = document.getElementById('admin-dashboard');
+    const loginForm = document.getElementById('login-form');
+    const loginError = document.getElementById('login-error');
+    const logoutBtn = document.getElementById('logout-btn');
+
+    const tabProducts = document.getElementById('tab-products-btn');
+    const tabServices = document.getElementById('tab-services-btn');
+    const tabFeedbacks = document.getElementById('tab-feedbacks-btn');
+    const sectionProducts = document.getElementById('section-products');
+    const sectionServices = document.getElementById('section-services');
+    const sectionFeedbacks = document.getElementById('section-feedbacks');
+
+    const productForm = document.getElementById('product-form');
+    const formTitle = document.getElementById('form-title');
+    const cancelEditBtn = document.getElementById('cancel-edit-btn');
+
+    const serviceForm = document.getElementById('service-form');
+    const servFormTitle = document.getElementById('serv-form-title');
+    const cancelServEditBtn = document.getElementById('cancel-serv-edit-btn');
+
+    // Inputs do form de serviços
+    const servId = document.getElementById('serv-id');
+    const servTitulo = document.getElementById('serv-titulo');
+    const servDescricao = document.getElementById('serv-descricao');
+    const servPreco = document.getElementById('serv-preco');
+    
+    // Inputs do form
+    const prodId = document.getElementById('prod-id');
+    const prodTitulo = document.getElementById('prod-titulo');
+    const prodPreco = document.getElementById('prod-preco');
+    const prodCategoria = document.getElementById('prod-categoria');
+    const prodDestaque = document.getElementById('prod-destaque');
+    const prodImagem = document.getElementById('prod-imagem');
+    const prodDescricao = document.getElementById('prod-descricao');
+    const prodAtivo = document.getElementById('prod-ativo');
+
+    // Inputs adicionais para anexo de imagem
+    const prodImagemFile = document.getElementById('prod-imagem-file');
+    const previewContainer = document.getElementById('prod-imagem-preview-container');
+    const previewImage = document.getElementById('prod-imagem-preview');
+
+    if (prodImagemFile) {
+      prodImagemFile.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            prodImagem.value = event.target.result;
+            if (previewImage) previewImage.src = event.target.result;
+            if (previewContainer) previewContainer.classList.remove('hidden');
+          };
+          reader.readAsDataURL(file);
+        } else {
+          if (!prodId.value) {
+            prodImagem.value = '';
+            if (previewContainer) previewContainer.classList.add('hidden');
+            if (previewImage) previewImage.src = '';
+          }
+        }
+      });
+    }
+
+    // Inicializador
+    checkAuth();
+
+    // 1. Verificação de Autenticação
+    async function checkAuth() {
+      const user = await window.SonharteDB.getCurrentUser();
+      if (user) {
+        loginContainer.classList.add('hidden');
+        dashboard.classList.remove('hidden');
+        loadProducts();
+        loadServices();
+        loadFeedbacks();
+      } else {
+        dashboard.classList.add('hidden');
+        loginContainer.classList.remove('hidden');
+      }
+    }
+
+    // Formulário de Login
+    if (loginForm) {
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        loginError.classList.add('hidden');
+        const email = document.getElementById('login-email').value;
+        const pass = document.getElementById('login-password').value;
+
+        try {
+          await window.SonharteDB.login(email, pass);
+          checkAuth();
+        } catch (err) {
+          loginError.textContent = err.message || 'Erro ao realizar login.';
+          loginError.classList.remove('hidden');
+        }
+      });
+    }
+
+    // Logout
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', () => {
+        window.SonharteDB.logout();
+        checkAuth();
+      });
+    }
+
+    // 2. Abas do Dashboard
+    if (tabProducts && tabServices && tabFeedbacks) {
+      tabProducts.addEventListener('click', () => {
+        tabProducts.className = "px-6 py-2.5 font-label-bold text-sm bg-white border-x-4 border-t-4 border-on-surface rounded-t-xl translate-y-[8px] z-10 shadow-[0px_-4px_0px_0px_rgba(0,0,0,1)] transition-all";
+        tabServices.className = "px-6 py-2.5 font-label-bold text-sm text-on-surface-variant hover:text-primary transition-all";
+        tabFeedbacks.className = "px-6 py-2.5 font-label-bold text-sm text-on-surface-variant hover:text-primary transition-all";
+        sectionProducts.classList.remove('hidden');
+        sectionServices.classList.add('hidden');
+        sectionFeedbacks.classList.add('hidden');
+        resetProductForm();
+      });
+
+      tabServices.addEventListener('click', () => {
+        tabServices.className = "px-6 py-2.5 font-label-bold text-sm bg-white border-x-4 border-t-4 border-on-surface rounded-t-xl translate-y-[8px] z-10 shadow-[0px_-4px_0px_0px_rgba(0,0,0,1)] transition-all";
+        tabProducts.className = "px-6 py-2.5 font-label-bold text-sm text-on-surface-variant hover:text-primary transition-all";
+        tabFeedbacks.className = "px-6 py-2.5 font-label-bold text-sm text-on-surface-variant hover:text-primary transition-all";
+        sectionServices.classList.remove('hidden');
+        sectionProducts.classList.add('hidden');
+        sectionFeedbacks.classList.add('hidden');
+        resetServiceForm();
+      });
+
+      tabFeedbacks.addEventListener('click', () => {
+        tabFeedbacks.className = "px-6 py-2.5 font-label-bold text-sm bg-white border-x-4 border-t-4 border-on-surface rounded-t-xl translate-y-[8px] z-10 shadow-[0px_-4px_0px_0px_rgba(0,0,0,1)] transition-all";
+        tabProducts.className = "px-6 py-2.5 font-label-bold text-sm text-on-surface-variant hover:text-primary transition-all";
+        tabServices.className = "px-6 py-2.5 font-label-bold text-sm text-on-surface-variant hover:text-primary transition-all";
+        sectionFeedbacks.classList.remove('hidden');
+        sectionProducts.classList.add('hidden');
+        sectionServices.classList.add('hidden');
+      });
+    }
+
+    // 3. Gerenciamento de Produtos (CRUD)
+    let productsList = [];
+
+    async function loadProducts() {
+      const listContainer = document.getElementById('products-list-container');
+      const badge = document.getElementById('products-count-badge');
+      if (!listContainer) return;
+
+      try {
+        productsList = await window.SonharteDB.getProducts();
+        badge.textContent = `${productsList.length} ${productsList.length === 1 ? 'item' : 'itens'}`;
+
+        if (productsList.length === 0) {
+          listContainer.innerHTML = '<p class="text-sm text-on-surface-variant text-center py-8">Nenhum produto cadastrado.</p>';
+          return;
+        }
+
+        let html = '';
+        productsList.forEach(p => {
+          html += `
+            <div class="flex items-center justify-between p-3 border-2 border-black rounded-xl bg-surface-container-low hover:bg-white transition-colors gap-4">
+              <div class="flex items-center gap-3">
+                <img src="${p.imagem}" alt="${p.titulo}" class="w-12 h-12 object-cover border-2 border-black rounded-lg bg-surface-variant shrink-0" />
+                <div>
+                  <h4 class="font-label-bold text-sm text-on-surface truncate max-w-[200px]" title="${p.titulo}">${p.titulo}</h4>
+                  <p class="font-body-md text-[10px] text-on-surface-variant">${p.categoria} • R$ ${p.preco.toFixed(2)} ${p.destaque ? `• Selo: ${p.destaque}` : ''}</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 shrink-0">
+                <span class="text-[10px] font-label-bold border px-2 py-0.5 rounded ${p.ativo ? 'bg-green-100 text-green-700 border-green-700' : 'bg-red-100 text-red-700 border-red-700'}">
+                  ${p.ativo ? 'Ativo' : 'Pausado'}
+                </span>
+                <button 
+                  class="edit-prod-btn material-symbols-outlined text-sm p-1.5 bg-secondary-fixed text-on-secondary-fixed border-2 border-black rounded-lg shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] active-press"
+                  data-id="${p.id}"
+                >
+                  edit
+                </button>
+                <button 
+                  class="delete-prod-btn material-symbols-outlined text-sm p-1.5 bg-red-100 text-red-700 border-2 border-red-700 rounded-lg shadow-[1px_1px_0px_0px_rgba(186,26,26,1)] active-press"
+                  data-id="${p.id}"
+                >
+                  delete
+                </button>
+              </div>
+            </div>
+          `;
+        });
+        listContainer.innerHTML = html;
+        setupProductListEvents();
+      } catch (err) {
+        listContainer.innerHTML = '<p class="text-sm text-red-700 text-center py-8">Erro ao carregar lista de produtos.</p>';
+      }
+    }
+
+    function setupProductListEvents() {
+      // Clique no botão editar
+      const editBtns = document.querySelectorAll('.edit-prod-btn');
+      editBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-id');
+          const product = productsList.find(p => p.id === id);
+          if (product) {
+            prodId.value = product.id;
+            prodTitulo.value = product.titulo;
+            prodPreco.value = product.preco;
+            prodCategoria.value = product.categoria;
+            if (prodDestaque) prodDestaque.value = product.destaque || '';
+            prodImagem.value = product.imagem;
+            prodDescricao.value = product.descricao;
+            prodAtivo.checked = product.ativo !== false;
+
+            if (previewContainer && previewImage) {
+              previewImage.src = product.imagem;
+              previewContainer.classList.remove('hidden');
+            }
+
+            formTitle.textContent = "Editar Produto";
+            cancelEditBtn.classList.remove('hidden');
+            productForm.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+
+      // Clique no botão excluir
+      const deleteBtns = document.querySelectorAll('.delete-prod-btn');
+      deleteBtns.forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const id = btn.getAttribute('data-id');
+          if (confirm('Tem certeza de que deseja deletar este produto?')) {
+            try {
+              await window.SonharteDB.deleteProduct(id);
+              loadProducts();
+            } catch (err) {
+              alert('Erro ao excluir produto: ' + err.message);
+            }
+          }
+        });
+      });
+    }
+
+    // Cancelar edição
+    if (cancelEditBtn) {
+      cancelEditBtn.addEventListener('click', () => {
+        resetProductForm();
+      });
+    }
+
+    function resetProductForm() {
+      productForm.reset();
+      prodId.value = '';
+      prodImagem.value = '';
+      if (prodDestaque) prodDestaque.value = '';
+      if (previewContainer && previewImage) {
+        previewContainer.classList.add('hidden');
+        previewImage.src = '';
+      }
+      formTitle.textContent = "Adicionar Novo Produto";
+      cancelEditBtn.classList.add('hidden');
+    }
+
+    // Submit de Produto
+    if (productForm) {
+      productForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const payload = {
+          titulo: prodTitulo.value,
+          preco: parseFloat(prodPreco.value),
+          categoria: prodCategoria.value,
+          destaque: prodDestaque ? prodDestaque.value : '',
+          imagem: prodImagem.value,
+          descricao: prodDescricao.value,
+          ativo: prodAtivo.checked
+        };
+
+        if (prodId.value) {
+          payload.id = prodId.value;
+        }
+
+        try {
+          await window.SonharteDB.saveProduct(payload);
+          resetProductForm();
+          loadProducts();
+        } catch (err) {
+          alert('Erro ao salvar produto: ' + err.message);
+        }
+      });
+    }
+
+    // 5. Gerenciamento de Serviços (CRUD)
+    let servicesList = [];
+
+    async function loadServices() {
+      const listContainer = document.getElementById('admin-services-list-container');
+      const badge = document.getElementById('services-count-badge');
+      if (!listContainer) return;
+
+      try {
+        servicesList = await window.SonharteDB.getServices();
+        badge.textContent = `${servicesList.length} ${servicesList.length === 1 ? 'item' : 'itens'}`;
+
+        if (servicesList.length === 0) {
+          listContainer.innerHTML = '<p class="text-sm text-on-surface-variant text-center py-8">Nenhum serviço cadastrado.</p>';
+          return;
+        }
+
+        let html = '';
+        servicesList.forEach(s => {
+          html += `
+            <div class="flex items-center justify-between p-3 border-2 border-black rounded-xl bg-surface-container-low hover:bg-white transition-colors gap-4">
+              <div>
+                <h4 class="font-label-bold text-sm text-on-surface truncate max-w-[280px]" title="${s.titulo}">${s.titulo}</h4>
+                <p class="font-body-md text-[10px] text-on-surface-variant">${s.descricao} • R$ ${parseFloat(s.preco).toFixed(2).replace('.', ',')}</p>
+              </div>
+              <div class="flex items-center gap-3 shrink-0">
+                <button 
+                  class="edit-serv-btn material-symbols-outlined text-sm p-1.5 bg-secondary-fixed text-on-secondary-fixed border-2 border-black rounded-lg shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] active-press"
+                  data-id="${s.id}"
+                >
+                  edit
+                </button>
+                <button 
+                  class="delete-serv-btn material-symbols-outlined text-sm p-1.5 bg-red-100 text-red-700 border-2 border-red-700 rounded-lg shadow-[1px_1px_0px_0px_rgba(186,26,26,1)] active-press"
+                  data-id="${s.id}"
+                >
+                  delete
+                </button>
+              </div>
+            </div>
+          `;
+        });
+        listContainer.innerHTML = html;
+        setupServiceListEvents();
+      } catch (err) {
+        listContainer.innerHTML = '<p class="text-sm text-red-700 text-center py-8">Erro ao carregar lista de serviços.</p>';
+      }
+    }
+
+    function setupServiceListEvents() {
+      const editBtns = document.querySelectorAll('.edit-serv-btn');
+      editBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-id');
+          const service = servicesList.find(s => s.id === id);
+          if (service) {
+            servId.value = service.id;
+            servTitulo.value = service.titulo;
+            servDescricao.value = service.descricao;
+            servPreco.value = service.preco;
+
+            servFormTitle.textContent = "Editar Serviço";
+            cancelServEditBtn.classList.remove('hidden');
+            serviceForm.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+
+      const deleteBtns = document.querySelectorAll('.delete-serv-btn');
+      deleteBtns.forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const id = btn.getAttribute('data-id');
+          if (confirm('Tem certeza de que deseja deletar este serviço?')) {
+            try {
+              await window.SonharteDB.deleteService(id);
+              loadServices();
+            } catch (err) {
+              alert('Erro ao excluir serviço: ' + err.message);
+            }
+          }
+        });
+      });
+    }
+
+    if (cancelServEditBtn) {
+      cancelServEditBtn.addEventListener('click', () => {
+        resetServiceForm();
+      });
+    }
+
+    function resetServiceForm() {
+      serviceForm.reset();
+      servId.value = '';
+      servFormTitle.textContent = "Adicionar Novo Serviço";
+      cancelServEditBtn.classList.add('hidden');
+    }
+
+    if (serviceForm) {
+      serviceForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const payload = {
+          titulo: servTitulo.value,
+          descricao: servDescricao.value,
+          preco: parseFloat(servPreco.value)
+        };
+
+        if (servId.value) {
+          payload.id = servId.value;
+        }
+
+        try {
+          await window.SonharteDB.saveService(payload);
+          resetServiceForm();
+          loadServices();
+        } catch (err) {
+          alert('Erro ao salvar serviço: ' + err.message);
+        }
+      });
+    }
+
+    // 4. Moderação de Depoimentos
+    async function loadFeedbacks() {
+      const listContainer = document.getElementById('feedbacks-list-container');
+      const badge = document.getElementById('feedbacks-count-badge');
+      if (!listContainer) return;
+
+      try {
+        const feedbacksList = await window.SonharteDB.getFeedbacks();
+        badge.textContent = `${feedbacksList.length} ${feedbacksList.length === 1 ? 'item' : 'itens'}`;
+
+        if (feedbacksList.length === 0) {
+          listContainer.innerHTML = '<p class="text-sm text-on-surface-variant text-center py-8 col-span-2">Nenhum depoimento cadastrado.</p>';
+          return;
+        }
+
+        let html = '';
+        feedbacksList.forEach(f => {
+          html += `
+            <div class="bg-surface-container-low p-4 border-2 border-black rounded-xl flex flex-col justify-between gap-3 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+              <div>
+                <div class="flex justify-between items-center mb-2">
+                  <h4 class="font-label-bold text-sm text-on-surface">${f.nome}</h4>
+                  <span class="text-[10px] text-on-surface-variant font-label-bold">${f.data || 'Recente'}</span>
+                </div>
+                <p class="font-body-md text-xs text-on-surface-variant leading-relaxed">"${f.texto}"</p>
+                <div class="flex text-amber-500 mt-2">
+                  ${Array(f.estrelas).fill('<span class="material-symbols-outlined text-sm">star</span>').join('')}
+                </div>
+              </div>
+              <button 
+                class="delete-feedback-btn w-full bg-red-100 text-red-700 py-2 border-2 border-red-700 rounded-lg font-label-bold text-[10px] shadow-[1px_1px_0px_0px_rgba(186,26,26,1)] active-press flex items-center justify-center gap-1 mt-2"
+                data-id="${f.id}"
+              >
+                <span class="material-symbols-outlined text-xs">delete</span> Remover Depoimento
+              </button>
+            </div>
+          `;
+        });
+        listContainer.innerHTML = html;
+        setupFeedbackListEvents();
+      } catch (err) {
+        listContainer.innerHTML = '<p class="text-sm text-red-700 text-center py-8 col-span-2">Erro ao carregar lista de depoimentos.</p>';
+      }
+    }
+
+    function setupFeedbackListEvents() {
+      const deleteBtns = document.querySelectorAll('.delete-feedback-btn');
+      deleteBtns.forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const id = btn.getAttribute('data-id');
+          if (confirm('Deseja realmente remover este depoimento do site?')) {
+            try {
+              await window.SonharteDB.deleteFeedback(id);
+              loadFeedbacks();
+            } catch (err) {
+              alert('Erro ao excluir depoimento: ' + err.message);
+            }
+          }
+        });
+      });
+    }
+
+  });
+</script>

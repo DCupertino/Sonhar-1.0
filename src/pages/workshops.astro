@@ -1,0 +1,353 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TopNavBar from '../components/desktop/TopNavBar.astro';
+import Footer from '../components/desktop/Footer.astro';
+import FAB from '../components/desktop/FAB.astro';
+---
+
+<BaseLayout title="Sonharte | Workshops & Personalizados">
+  <TopNavBar />
+  
+  <main class="max-w-container-max mx-auto px-gutter py-16 flex flex-col gap-12 min-h-screen relative overflow-hidden">
+    <!-- Decorações de Fundo -->
+    <div class="absolute top-10 right-10 w-96 h-96 rounded-full watercolor-blob" style="background: radial-gradient(circle, rgba(255,218,228,0.4) 0%, rgba(252,248,249,0) 70%); font-family: var(--font-headline-xl);"></div>
+    <div class="absolute bottom-10 left-10 w-96 h-96 rounded-full watercolor-blob" style="background: radial-gradient(circle, rgba(230,222,255,0.4) 0%, rgba(252,248,249,0) 70%);"></div>
+
+    <!-- Seção de Cabeçalho -->
+    <div class="text-center flex flex-col items-center gap-4 relative z-10">
+      <span class="bg-secondary-fixed text-on-secondary-fixed text-xs font-label-bold px-4 py-1.5 border-2 border-black rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] -rotate-1 animate-float">
+        Tornando momentos inesquecíveis ✨
+      </span>
+      <h1 class="font-headline-xl text-5xl text-primary mt-2">Workshops & Serviços Extras</h1>
+      <div class="w-32 h-2 bg-primary mt-2 cartoon-border rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"></div>
+      <p class="font-body-md text-on-surface-variant max-w-2xl mt-4 leading-relaxed">
+        Além da papelaria criativa pronta, nós damos vida aos seus sonhos através de mimos reais e personalizados sob medida para sua festa, evento ou comemoração. Conheça um pouco do que fazemos com tanto amor!
+      </p>
+    </div>
+
+    <!-- Grid de Serviços -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10 mt-6">
+      
+      <!-- Serviço 1: Caixinhas Personalizadas -->
+      <div class="animate-antigravity-1 h-full">
+        <div class="bg-white border-4 border-on-surface rounded-3xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover-lift flex flex-col h-full">
+          <div class="aspect-video w-full border-b-4 border-on-surface overflow-hidden relative bg-tertiary-fixed/20">
+            <img 
+              src="/assets/caixinhas_personalizadas.png" 
+              alt="Caixinhas Personalizadas" 
+              class="w-full h-full object-cover" 
+              onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23ffd9e4%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22>Caixinhas 🌸</text></svg>'"
+            />
+          </div>
+          <div class="p-6 flex flex-col flex-grow gap-3">
+            <span class="text-xs font-label-bold text-tertiary uppercase tracking-wider">Papelaria e Lembrancinhas</span>
+            <h3 class="font-headline-md text-xl text-on-surface">Caixinhas Personalizadas</h3>
+            <p class="font-body-md text-sm text-on-surface-variant leading-relaxed flex-grow">
+              Caixinhas de papelaria fofas perfeitas para lembrancinhas de festas infantis, casamentos, batizados e eventos corporativos. Feitas sob medida com papéis especiais de alta gramatura e apliques charmosos em camadas.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Serviço 2: Topper de Bolo -->
+      <div class="animate-antigravity-2 h-full">
+        <div class="bg-white border-4 border-on-surface rounded-3xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(75,37,187,1)] hover-lift flex flex-col h-full rotate-1">
+          <div class="aspect-video w-full border-b-4 border-on-surface overflow-hidden relative bg-primary-fixed/20">
+            <img 
+              src="/assets/topper_bolo.png" 
+              alt="Topper de Bolo" 
+              class="w-full h-full object-cover"
+              onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e6deff%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22>Topper de Bolo 🎂</text></svg>'"
+            />
+          </div>
+          <div class="p-6 flex flex-col flex-grow gap-3">
+            <span class="text-xs font-label-bold text-primary uppercase tracking-wider">Topo de Bolo Festivo</span>
+            <h3 class="font-headline-md text-xl text-on-surface">Toppers de Bolo</h3>
+            <p class="font-body-md text-sm text-on-surface-variant leading-relaxed flex-grow">
+              Toppers de bolo tridimensionais (paper toppers) com camadas de papel colorido, glitter e acabamentos que tornam qualquer bolo uma verdadeira atração. Totalmente personalizados com o tema e nome que você escolher.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Serviço 3: Adesivos Personalizados -->
+      <div class="animate-antigravity-3 h-full">
+        <div class="bg-white border-4 border-on-surface rounded-3xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover-lift flex flex-col h-full -rotate-1">
+          <div class="aspect-video w-full border-b-4 border-on-surface overflow-hidden relative bg-secondary-fixed/20">
+            <img 
+              src="/assets/adesivos_personalizados.png" 
+              alt="Adesivos Personalizados" 
+              class="w-full h-full object-cover"
+              onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23ffe16d%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22>Adesivos 🏷️</text></svg>'"
+            />
+          </div>
+          <div class="p-6 flex flex-col flex-grow gap-3">
+            <span class="text-xs font-label-bold text-on-secondary-fixed-variant uppercase tracking-wider">Adesivos & Rótulos</span>
+            <h3 class="font-headline-md text-xl text-on-surface">Adesivos Personalizados</h3>
+            <p class="font-body-md text-sm text-on-surface-variant leading-relaxed flex-grow">
+              Adesivos em papel fotográfico e vinil de alta qualidade, recortados eletronicamente sob medida. Perfeitos para lembrancinhas de festas infantis, lacres de sacolas, identificação de produtos, cardápios e brindes em geral.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Seção de Portfólio (Foco Central - Netflix) -->
+    <div class="flex flex-col gap-6 relative z-10 mt-12 overflow-hidden">
+      <div class="flex flex-col gap-2 text-center items-center">
+        <h2 class="font-headline-lg text-3xl text-on-surface flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary text-3xl">auto_awesome</span> Portfólio de Sonhos Realizados
+        </h2>
+        <p class="font-body-md text-sm text-on-surface-variant">Confira alguns dos mimos exclusivos que já entregamos com muito carinho!</p>
+      </div>
+
+      <!-- Carrossel Wrapper -->
+      <div class="relative group w-full py-4">
+        <!-- Seta Esquerda -->
+        <button 
+          id="prev-btn" 
+          class="absolute left-[8%] top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white text-primary border-3 border-black rounded-full shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center cursor-pointer hover:bg-primary-fixed active-press opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        >
+          <span class="material-symbols-outlined select-none text-2xl">arrow_back_ios_new</span>
+        </button>
+
+        <!-- Seta Direita -->
+        <button 
+          id="next-btn" 
+          class="absolute right-[8%] top-1/2 -translate-y-1/2 z-20 w-14 h-14 bg-white text-primary border-3 border-black rounded-full shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center cursor-pointer hover:bg-primary-fixed active-press opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        >
+        </button>
+
+        <div 
+          id="portfolio-carousel" 
+          class="flex gap-12 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory py-8"
+          style="padding-left: calc(50% - 190px); padding-right: calc(50% - 190px);"
+        >
+          <!-- Item 1 -->
+          <div class="w-[380px] shrink-0 snap-center carousel-item transition-all duration-500 ease-out transform scale-90 opacity-40">
+            <div class="bg-white border-4 border-on-surface rounded-3xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+              <div class="aspect-square w-full overflow-hidden bg-tertiary-fixed/10 border-b-4 border-on-surface">
+                <img src="/assets/portfolio/topper_pix.png" alt="Topper de Bolo Pix" class="w-full h-full object-cover" />
+              </div>
+              <div class="p-5 bg-tertiary-fixed text-center">
+                <span class="font-headline-md text-md text-on-tertiary-fixed">Topper de Bolo Pix divertido</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="w-[380px] shrink-0 snap-center carousel-item transition-all duration-500 ease-out transform scale-90 opacity-40">
+            <div class="bg-white border-4 border-on-surface rounded-3xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(75,37,187,1)]">
+              <div class="aspect-square w-full overflow-hidden bg-primary-fixed/10 border-b-4 border-on-surface">
+                <img src="/assets/portfolio/caixinha_concha.png" alt="Caixinha Concha Fundo do Mar" class="w-full h-full object-cover" />
+              </div>
+              <div class="p-5 bg-primary-fixed text-center">
+                <span class="font-headline-md text-md text-on-primary-fixed">Caixinha Concha Fundo do Mar</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="w-[380px] shrink-0 snap-center carousel-item transition-all duration-500 ease-out transform scale-90 opacity-40">
+            <div class="bg-white border-4 border-on-surface rounded-3xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+              <div class="aspect-square w-full overflow-hidden bg-secondary-fixed/10 border-b-4 border-on-surface">
+                <img src="/assets/portfolio/adesivos_patrulha.jpg" alt="Adesivos Patrulha Canina" class="w-full h-full object-cover" />
+              </div>
+              <div class="p-5 bg-secondary-fixed text-center">
+                <span class="font-headline-md text-md text-on-secondary-fixed">Adesivos Patrulha Canina</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="w-[380px] shrink-0 snap-center carousel-item transition-all duration-500 ease-out transform scale-90 opacity-40">
+            <div class="bg-white border-4 border-on-surface rounded-3xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(75,37,187,1)]">
+              <div class="aspect-square w-full overflow-hidden bg-primary-fixed/10 border-b-4 border-on-surface">
+                <img src="/assets/portfolio/topper_larissa.jpg" alt="Topper de Bolo Larissa 30 Anos" class="w-full h-full object-cover" />
+              </div>
+              <div class="p-5 bg-primary-fixed text-center">
+                <span class="font-headline-md text-md text-on-primary-fixed">Topper de Bolo Rose Gold</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="w-[380px] shrink-0 snap-center carousel-item transition-all duration-500 ease-out transform scale-90 opacity-40">
+            <div class="bg-white border-4 border-on-surface rounded-3xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+              <div class="aspect-square w-full overflow-hidden bg-tertiary-fixed/10 border-b-4 border-on-surface">
+                <img src="/assets/portfolio/adesivos_memes.jpg" alt="Adesivos Personalizados Diversos" class="w-full h-full object-cover" />
+              </div>
+              <div class="p-5 bg-tertiary-fixed text-center">
+                <span class="font-headline-md text-md text-on-tertiary-fixed">Adesivos de Memes & Frases</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="w-[380px] shrink-0 snap-center carousel-item transition-all duration-500 ease-out transform scale-90 opacity-40">
+            <div class="bg-white border-4 border-on-surface rounded-3xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(75,37,187,1)]">
+              <div class="aspect-square w-full overflow-hidden bg-secondary-fixed/10 border-b-4 border-on-surface">
+                <img src="/assets/portfolio/cardapio_porcoes.jpg" alt="Cardápio Plastificado para Eventos" class="w-full h-full object-cover" />
+              </div>
+              <div class="p-5 bg-secondary-fixed text-center">
+                <span class="font-headline-md text-md text-on-secondary-fixed">Cardápio de Porções Plastificado</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 7 -->
+          <div class="w-[380px] shrink-0 snap-center carousel-item transition-all duration-500 ease-out transform scale-90 opacity-40">
+            <div class="bg-white border-4 border-on-surface rounded-3xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+              <div class="aspect-square w-full overflow-hidden bg-primary-fixed/10 border-b-4 border-on-surface">
+                <img src="/assets/portfolio/topper_40anos.png" alt="Topper de Bolo Dourado Como Assim 40?" class="w-full h-full object-cover" />
+              </div>
+              <div class="p-5 bg-primary-fixed text-center">
+                <span class="font-headline-md text-md text-on-primary-fixed">Topper de Bolo Dourado 40 anos</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 8 -->
+          <div class="w-[380px] shrink-0 snap-center carousel-item transition-all duration-500 ease-out transform scale-90 opacity-40">
+            <div class="bg-white border-4 border-on-surface rounded-3xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(75,37,187,1)]">
+              <div class="aspect-square w-full overflow-hidden bg-secondary-fixed/10 border-b-4 border-on-surface">
+                <img src="/assets/portfolio/caixinha_astronauta_cone.png" alt="Caixinha Cone Astronauta" class="w-full h-full object-cover" />
+              </div>
+              <div class="p-5 bg-secondary-fixed text-center">
+                <span class="font-headline-md text-md text-on-secondary-fixed">Caixinha Cone Astronauta</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 9 -->
+          <div class="w-[380px] shrink-0 snap-center carousel-item transition-all duration-500 ease-out transform scale-90 opacity-40">
+            <div class="bg-white border-4 border-on-surface rounded-3xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+              <div class="aspect-square w-full overflow-hidden bg-tertiary-fixed/10 border-b-4 border-on-surface">
+                <img src="/assets/portfolio/topper_tardezinha.png" alt="Topper de Bolo Tema Tardezinha" class="w-full h-full object-cover" />
+              </div>
+              <div class="p-5 bg-tertiary-fixed text-center">
+                <span class="font-headline-md text-md text-on-tertiary-fixed">Topper de Bolo Tardezinha</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 10 -->
+          <div class="w-[380px] shrink-0 snap-center carousel-item transition-all duration-500 ease-out transform scale-90 opacity-40">
+            <div class="bg-white border-4 border-on-surface rounded-3xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(75,37,187,1)]">
+              <div class="aspect-square w-full overflow-hidden bg-secondary-fixed/10 border-b-4 border-on-surface">
+                <img src="/assets/portfolio/caixinha_incriveis.jpg" alt="Caixinha Lembrancinha Os Incríveis" class="w-full h-full object-cover" />
+              </div>
+              <div class="p-5 bg-secondary-fixed text-center">
+                <span class="font-headline-md text-md text-on-secondary-fixed">Caixinha Lembrancinha Os Incríveis</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 11 -->
+          <div class="w-[380px] shrink-0 snap-center carousel-item transition-all duration-500 ease-out transform scale-90 opacity-40">
+            <div class="bg-white border-4 border-on-surface rounded-3xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+              <div class="aspect-square w-full overflow-hidden bg-tertiary-fixed/10 border-b-4 border-on-surface">
+                <img src="/assets/portfolio/topper_dosrosa.png" alt="Topper de Bolo Infantil Dos Rosa" class="w-full h-full object-cover" />
+              </div>
+              <div class="p-5 bg-tertiary-fixed text-center">
+                <span class="font-headline-md text-md text-on-tertiary-fixed">Topper Infantil Dos Rosa</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 12 -->
+          <div class="w-[380px] shrink-0 snap-center carousel-item transition-all duration-500 ease-out transform scale-90 opacity-40">
+            <div class="bg-white border-4 border-on-surface rounded-3xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(75,37,187,1)]">
+              <div class="aspect-square w-full overflow-hidden bg-primary-fixed/10 border-b-4 border-on-surface">
+                <img src="/assets/portfolio/caixinha_astronauta_alca.png" alt="Caixinha Astronauta com Alça" class="w-full h-full object-cover" />
+              </div>
+              <div class="p-5 bg-primary-fixed text-center">
+                <span class="font-headline-md text-md text-on-primary-fixed">Caixinha Astronauta com Alça</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', () => {
+        const carousel = document.getElementById('portfolio-carousel');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        if (carousel && prevBtn && nextBtn) {
+          const scrollAmount = 428; // largura do card (380px) + gap (48px)
+
+          prevBtn.addEventListener('click', () => {
+            carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+          });
+
+          nextBtn.addEventListener('click', () => {
+            carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+          });
+
+          const cards = carousel.querySelectorAll('.carousel-item');
+
+          function updateActiveCard() {
+            const carouselRect = carousel.getBoundingClientRect();
+            const carouselCenter = carouselRect.left + carouselRect.width / 2;
+
+            cards.forEach(card => {
+              const cardRect = card.getBoundingClientRect();
+              const cardCenter = cardRect.left + cardRect.width / 2;
+              const distanceFromCenter = Math.abs(carouselCenter - cardCenter);
+
+              if (distanceFromCenter < 200) {
+                card.classList.remove('opacity-40', 'scale-90');
+                card.classList.add('opacity-100', 'scale-105', 'z-10');
+              } else {
+                card.classList.remove('opacity-100', 'scale-105', 'z-10');
+                card.classList.add('opacity-40', 'scale-90');
+              }
+            });
+          }
+
+          carousel.addEventListener('scroll', updateActiveCard);
+          window.addEventListener('resize', updateActiveCard);
+          setTimeout(updateActiveCard, 300);
+        }
+      });
+    </script>
+
+    <!-- Informações sobre Orçamento / Chat (WhatsApp e Instagram) -->
+    <div class="bg-secondary-fixed text-on-secondary-fixed p-8 border-4 border-on-surface rounded-3xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col md:flex-row items-center justify-between gap-6 relative z-10 mt-6">
+      <div class="flex flex-col gap-2 max-w-2xl text-left">
+        <h3 class="font-headline-md text-2xl flex items-center gap-2">
+          <span class="material-symbols-outlined text-2xl">chat</span> Orçamentos & Detalhes por Chat
+        </h3>
+        <p class="font-body-md text-sm leading-relaxed">
+          Como os nossos serviços extras são artesanais e totalmente sob medida, <strong>os valores finais de cada item dependem da complexidade, quantidade e dos materiais escolhidos</strong>. Conversamos e alinhamos todos os detalhes diretamente pelo WhatsApp ou direct do Instagram para criar algo perfeito para você!
+        </p>
+      </div>
+      
+      <div class="flex flex-col sm:flex-row gap-4 shrink-0 w-full md:w-auto">
+        <a 
+          href="https://wa.me/5531972122639?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20para%20serviços%20personalizados%20(caixinhas/toppers/adesivos)." 
+          target="_blank"
+          class="bg-white border-2 border-black rounded-xl px-6 py-4 font-label-bold text-sm shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active-press hover:bg-surface-container-high transition-colors text-center text-primary flex items-center justify-center gap-2"
+        >
+          <span class="material-symbols-outlined">chat</span> Chamar no WhatsApp
+        </a>
+        
+        <a 
+          href="https://www.instagram.com/p.sonharte/" 
+          target="_blank"
+          class="bg-tertiary text-white border-2 border-black rounded-xl px-6 py-4 font-label-bold text-sm shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active-press hover:bg-tertiary-container transition-colors text-center flex items-center justify-center gap-2"
+        >
+          <span class="material-symbols-outlined">photo_camera</span> Instagram Direct
+        </a>
+      </div>
+    </div>
+    
+  </main>
+
+  <Footer />
+  <FAB />
+</BaseLayout>

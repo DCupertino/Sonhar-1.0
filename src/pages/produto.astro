@@ -1,0 +1,369 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TopNavBar from '../components/desktop/TopNavBar.astro';
+import Footer from '../components/desktop/Footer.astro';
+import FAB from '../components/desktop/FAB.astro';
+---
+
+<BaseLayout title="Sonharte | Detalhe do Produto">
+  <TopNavBar />
+  
+  <main class="max-w-container-max mx-auto px-gutter py-12 min-h-screen relative overflow-hidden">
+    <!-- Decorações de Fundo -->
+    <div class="absolute top-20 -right-20 w-96 h-96 rounded-full watercolor-blob" style="background: radial-gradient(circle, rgba(230,222,255,0.3) 0%, rgba(252,248,249,0) 70%); z-index: -1;"></div>
+
+    <!-- Breadcrumb de Navegação -->
+    <nav class="flex items-center gap-2 text-xs font-label-bold text-on-surface-variant mb-8 bg-white/60 backdrop-blur-sm p-3 border-2 border-black rounded-xl shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] w-fit" aria-label="Breadcrumb">
+      <a href="/" class="hover:text-primary transition-colors flex items-center gap-1">
+        <span class="material-symbols-outlined text-sm">home</span> Início
+      </a>
+      <span class="text-on-surface-variant/40">/</span>
+      <a href="/catalogo" class="hover:text-primary transition-colors">Catálogo</a>
+      <span class="text-on-surface-variant/40">/</span>
+      <span id="breadcrumb-current" class="text-primary truncate max-w-[200px]">Carregando...</span>
+    </nav>
+
+    <!-- Estado de Carregamento (Skeleton) -->
+    <div id="product-loading" class="flex flex-col lg:flex-row gap-12 animate-pulse">
+      <div class="w-full lg:w-1/2 aspect-square bg-surface-container border-4 border-on-surface rounded-3xl"></div>
+      <div class="w-full lg:w-1/2 flex flex-col gap-6">
+        <div class="h-6 w-32 bg-surface-container rounded-full"></div>
+        <div class="h-10 w-3/4 bg-surface-container rounded-xl"></div>
+        <div class="h-12 w-40 bg-surface-container rounded-xl"></div>
+        <div class="h-32 w-full bg-surface-container rounded-2xl"></div>
+      </div>
+    </div>
+
+    <!-- Alerta de Erro se produto não encontrado -->
+    <div id="product-error" class="hidden flex flex-col items-center justify-center py-20 text-center bg-white border-4 border-dashed border-red-700 rounded-3xl max-w-lg mx-auto">
+      <span class="material-symbols-outlined text-6xl text-red-600 mb-4 animate-bounce">error</span>
+      <h3 class="font-label-bold text-xl text-on-surface text-red-700">Mimo não encontrado!</h3>
+      <p class="text-sm text-on-surface-variant mt-2 px-6">O produto pode ter sido removido ou o link está incorreto. Volte ao catálogo para ver todos os nossos mimos.</p>
+      <a href="/catalogo" class="mt-6 px-6 py-3 bg-primary text-white border-2 border-black rounded-xl font-label-bold text-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-0.5 active:translate-y-0.5 active:shadow-none transition-all">
+        Voltar ao Catálogo 🛍️
+      </a>
+    </div>
+
+    <!-- Conteúdo do Produto -->
+    <div id="product-details" class="hidden flex flex-col lg:flex-row gap-12">
+      <!-- Coluna da Esquerda: Galeria / Imagem Grande -->
+      <div class="w-full lg:w-1/2">
+        <div class="aspect-square bg-white border-4 border-on-surface rounded-3xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] overflow-hidden relative group">
+          <img id="detail-image" src="" alt="Imagem do Produto" class="w-full h-full object-contain p-6 group-hover:scale-105 transition-transform duration-500" />
+          
+          <!-- Badges flutuantes -->
+          <span id="detail-category-badge" class="absolute top-4 left-4 bg-secondary-fixed text-on-secondary-fixed text-xs font-label-bold px-4 py-1.5 border-2 border-black rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] -rotate-1">
+            Categoria
+          </span>
+          <span id="detail-destaque-badge" class="hidden absolute top-4 right-4 bg-tertiary-fixed text-on-tertiary-fixed text-xs font-label-bold px-4 py-1.5 border-2 border-black rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rotate-2">
+            Destaque
+          </span>
+        </div>
+      </div>
+
+      <!-- Coluna da Direita: Informações e Ações -->
+      <div class="w-full lg:w-1/2 flex flex-col gap-6">
+        <!-- Cabeçalho do Produto -->
+        <div class="flex flex-col gap-2">
+          <span id="detail-category" class="text-xs font-label-bold text-primary tracking-widest uppercase">Categoria</span>
+          <h1 id="detail-title" class="font-headline-lg text-4xl text-on-surface leading-tight">Título do Produto</h1>
+        </div>
+
+        <!-- Preço e Disponibilidade -->
+        <div class="flex items-center gap-4">
+          <div class="bg-primary-container text-white border-4 border-black px-6 py-3 rounded-2xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] font-headline-md text-3xl font-bold">
+            <span id="detail-price">R$ 0,00</span>
+          </div>
+          <div class="flex flex-col text-xs font-label-bold text-on-surface-variant">
+            <span class="flex items-center gap-1 text-green-700">
+              <span class="w-2.5 h-2.5 rounded-full bg-green-500 border border-black animate-pulse"></span> Disponível em estoque
+            </span>
+            <span class="mt-0.5 text-on-surface-variant/70">Entrega rápida ou retirada combinada</span>
+          </div>
+        </div>
+
+        <!-- Divisor -->
+        <hr class="border-2 border-dashed border-primary-container/30 my-2" />
+
+        <!-- Descrição -->
+        <div class="bg-surface-container-low border-2 border-black p-5 rounded-2xl relative shadow-[3px_3px_0px_0px_rgba(0,0,0,0.08)]">
+          <div class="absolute -top-3 left-4 bg-white px-3 border-2 border-black rounded-md font-label-bold text-[10px] uppercase text-primary tracking-wider shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+            Detalhes do Mimo ✨
+          </div>
+          <p id="detail-desc" class="font-body-md text-sm text-on-surface leading-relaxed mt-1 whitespace-pre-line">
+            Descrição detalhada do produto...
+          </p>
+        </div>
+
+        <!-- Seletor de Quantidade e Ações -->
+        <div class="flex flex-col gap-4 mt-2">
+          <div class="flex items-center gap-4">
+            <label class="font-label-bold text-xs text-on-surface uppercase tracking-wider">Quantidade:</label>
+            <div class="flex items-center border-2 border-black rounded-xl bg-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
+              <button id="qty-minus" class="px-3 py-2 font-bold text-sm bg-surface-container-high hover:bg-surface-dim active:scale-95 transition-all border-r-2 border-black flex items-center justify-center select-none">-</button>
+              <input type="number" id="qty-input" value="1" min="1" max="99" class="w-12 text-center text-sm font-label-bold outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
+              <button id="qty-plus" class="px-3 py-2 font-bold text-sm bg-surface-container-high hover:bg-surface-dim active:scale-95 transition-all border-l-2 border-black flex items-center justify-center select-none">+</button>
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-4 mt-2">
+            <!-- Adicionar à Sacola -->
+            <button 
+              id="add-to-cart-btn"
+              class="flex-1 bg-primary text-white py-4 border-2 border-black rounded-2xl font-label-bold text-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-0.5 active:translate-y-0.5 active:shadow-none transition-all flex items-center justify-center gap-2 hover:bg-tertiary active-press"
+            >
+              <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+              Adicionar à Sacola
+            </button>
+
+            <!-- Comprar via WhatsApp -->
+            <a 
+              id="whatsapp-buy-btn"
+              href="#"
+              target="_blank"
+              class="flex-1 bg-green-500 text-white py-4 border-2 border-black rounded-2xl font-label-bold text-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-0.5 active:translate-y-0.5 active:shadow-none transition-all flex items-center justify-center gap-2 hover:bg-green-600"
+            >
+              <span class="material-symbols-outlined text-lg">chat</span>
+              Comprar no WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- Forma de Encomenda Informativa -->
+        <div class="bg-secondary-fixed-dim/20 border-2 border-black p-4 rounded-xl flex items-start gap-3 mt-2">
+          <span class="material-symbols-outlined text-primary text-xl mt-0.5">info</span>
+          <p class="text-xs text-on-surface-variant font-body-md leading-relaxed">
+            <strong>Como funciona?</strong> Você adiciona os produtos que gostou na sacola e nos envia pelo WhatsApp para combinarmos o pagamento (Pix ou Cartão) e a entrega/retirada. É super fácil e prático!
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divisor de Seção -->
+    <hr class="border-4 border-on-surface my-16" />
+
+    <!-- Produtos Relacionados -->
+    <section id="related-products-section" class="hidden">
+      <div class="flex items-center gap-3 mb-8">
+        <h2 class="font-headline-lg text-2xl text-primary">Quem comprou este mimo, também amou... ✨</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="related-products-grid">
+        <!-- Injetado dinamicamente -->
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+  <FAB />
+</BaseLayout>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Pegar ID do produto nos parâmetros da URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id');
+
+    if (!productId) {
+      showError();
+      return;
+    }
+
+    let currentProduct = null;
+    let productsList = [];
+
+    async function loadProductDetails() {
+      try {
+        productsList = await window.SonharteDB.getProducts();
+        currentProduct = productsList.find(p => p.id === productId && p.ativo !== false);
+
+        if (!currentProduct) {
+          showError();
+          return;
+        }
+
+        // Preencher detalhes
+        document.getElementById('breadcrumb-current').textContent = currentProduct.titulo;
+        document.getElementById('detail-title').textContent = currentProduct.titulo;
+        document.getElementById('detail-category').textContent = currentProduct.categoria;
+        document.getElementById('detail-category-badge').textContent = currentProduct.categoria;
+        document.getElementById('detail-price').textContent = `R$ ${currentProduct.preco.toFixed(2).replace('.', ',')}`;
+        document.getElementById('detail-desc').textContent = currentProduct.descricao || "Nenhuma descrição disponível para este mimo.";
+        
+        const imgEl = document.getElementById('detail-image');
+        imgEl.src = currentProduct.imagem;
+        imgEl.alt = currentProduct.titulo;
+
+        // Destaque Badge
+        const destaqueBadge = document.getElementById('detail-destaque-badge');
+        if (currentProduct.destaque) {
+          destaqueBadge.textContent = currentProduct.destaque;
+          destaqueBadge.classList.remove('hidden');
+        } else {
+          destaqueBadge.classList.add('hidden');
+        }
+
+        // Configurar botão de comprar via WhatsApp
+        updateWhatsAppLink(1);
+
+        // Ocultar skeleton e exibir detalhes
+        document.getElementById('product-loading').classList.add('hidden');
+        document.getElementById('product-details').classList.remove('hidden');
+
+        // Carregar produtos relacionados
+        loadRelatedProducts(currentProduct);
+
+      } catch (err) {
+        console.error("Erro ao carregar detalhes do produto:", err);
+        showError();
+      }
+    }
+
+    function showError() {
+      document.getElementById('product-loading').classList.add('hidden');
+      document.getElementById('product-error').classList.remove('hidden');
+    }
+
+    // Gerenciar quantidade
+    const qtyInput = document.getElementById('qty-input');
+    const qtyMinus = document.getElementById('qty-minus');
+    const qtyPlus = document.getElementById('qty-plus');
+
+    qtyMinus.addEventListener('click', () => {
+      let val = parseInt(qtyInput.value);
+      if (val > 1) {
+        qtyInput.value = val - 1;
+        updateWhatsAppLink(val - 1);
+      }
+    });
+
+    qtyPlus.addEventListener('click', () => {
+      let val = parseInt(qtyInput.value);
+      qtyInput.value = val + 1;
+      updateWhatsAppLink(val + 1);
+    });
+
+    qtyInput.addEventListener('change', () => {
+      let val = parseInt(qtyInput.value);
+      if (isNaN(val) || val < 1) {
+        qtyInput.value = 1;
+        val = 1;
+      }
+      updateWhatsAppLink(val);
+    });
+
+    // Atualiza o link do WhatsApp para compra direta deste produto
+    function updateWhatsAppLink(quantidade) {
+      if (!currentProduct) return;
+      const WHATSAPP_PHONE = '5531972122639';
+      const precoTotal = (currentProduct.preco * quantidade).toFixed(2).replace('.', ',');
+      const text = `Olá! Tenho interesse no mimo: *${currentProduct.titulo}*\nPreço unitário: R$ ${currentProduct.preco.toFixed(2).replace('.', ',')}\nQuantidade: *${quantidade}x*\nValor total: R$ ${precoTotal}\n\nGostaria de verificar a disponibilidade e combinar a entrega!`;
+      const encoded = encodeURIComponent(text);
+      document.getElementById('whatsapp-buy-btn').href = `https://wa.me/${WHATSAPP_PHONE}?text=${encoded}`;
+    }
+
+    // Configurar adicionar ao carrinho
+    const addToCartBtn = document.getElementById('add-to-cart-btn');
+    addToCartBtn.addEventListener('click', () => {
+      if (!currentProduct) return;
+      const qty = parseInt(qtyInput.value) || 1;
+
+      // Chama add com quantidade
+      window.SonharteCart.add(currentProduct.id, currentProduct.titulo, currentProduct.preco, currentProduct.imagem);
+      
+      // Se for maior que 1, atualiza a quantidade total
+      if (qty > 1) {
+        const cart = window.SonharteCart.get();
+        const existing = cart.find(item => item.id === currentProduct.id);
+        if (existing) {
+          window.SonharteCart.update(currentProduct.id, existing.quantidade - 1 + qty);
+        }
+      }
+
+      // Feedback visual e abre o carrinho
+      if (typeof window.toggleCartDrawer === 'function') {
+        window.toggleCartDrawer();
+      }
+    });
+
+    // Carregar mimos relacionados da mesma categoria
+    function loadRelatedProducts(product) {
+      const relatedGrid = document.getElementById('related-products-grid');
+      const relatedSection = document.getElementById('related-products-section');
+      if (!relatedGrid || !relatedSection) return;
+
+      const related = productsList
+        .filter(p => p.categoria === product.categoria && p.id !== product.id && p.ativo !== false)
+        .slice(0, 4);
+
+      if (related.length === 0) {
+        relatedSection.classList.add('hidden');
+        return;
+      }
+
+      let html = '';
+      const rotationClasses = ['-rotate-1', 'rotate-1', 'rotate-2', '-rotate-2'];
+
+      related.forEach((p, idx) => {
+        const rot = rotationClasses[idx % rotationClasses.length];
+        html += `
+          <div class="group">
+            <div class="h-full border-4 border-on-surface rounded-2xl bg-white overflow-hidden flex flex-col hover:-translate-y-1 hover:rotate-0 transition-all duration-300 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+              <a href="/produto?id=${p.id}" class="block aspect-square bg-surface-variant border-b-4 border-on-surface overflow-hidden relative">
+                <img src="${p.imagem}" alt="${p.titulo}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                <span class="absolute top-2 left-2 bg-secondary-fixed text-on-secondary-fixed text-[10px] font-label-bold px-3 py-1 border-2 border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+                  ${p.categoria}
+                </span>
+                ${p.destaque ? `
+                  <span class="absolute top-2 right-2 bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-label-bold px-3 py-1 border-2 border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] z-10">
+                    ${p.destaque}
+                  </span>
+                ` : ''}
+              </a>
+              <div class="p-4 flex-grow flex flex-col justify-between gap-2 bg-white">
+                <a href="/produto?id=${p.id}">
+                  <h4 class="font-headline-md text-sm text-on-surface hover:text-primary transition-colors mb-1 truncate" title="${p.titulo}">${p.titulo}</h4>
+                </a>
+                <div class="flex justify-between items-center mt-2">
+                  <span class="text-base font-bold text-primary font-headline-md">R$ ${p.preco.toFixed(2).replace('.', ',')}</span>
+                  <button 
+                    class="add-to-cart-quick-btn bg-primary text-white p-2 border-2 border-black rounded-lg active-press hover:bg-tertiary transition-colors flex items-center justify-center"
+                    data-id="${p.id}"
+                    data-titulo="${p.titulo}"
+                    data-preco="${p.preco}"
+                    data-imagem="${p.imagem}"
+                  >
+                    <span class="material-symbols-outlined text-xs">add_shopping_cart</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      relatedGrid.innerHTML = html;
+      relatedSection.classList.remove('hidden');
+
+      // Hook rápido nos botões de adicionar ao carrinho
+      const quickBtns = relatedGrid.querySelectorAll('.add-to-cart-quick-btn');
+      quickBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const id = btn.getAttribute('data-id');
+          const title = btn.getAttribute('data-titulo');
+          const price = parseFloat(btn.getAttribute('data-preco'));
+          const image = btn.getAttribute('data-imagem');
+          
+          window.SonharteCart.add(id, title, price, image);
+          
+          if (typeof window.toggleCartDrawer === 'function') {
+            window.toggleCartDrawer();
+          }
+        });
+      });
+    }
+
+    loadProductDetails();
+  });
+</script>

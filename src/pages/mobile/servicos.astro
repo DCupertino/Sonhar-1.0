@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/mobile/Header.astro';
+import HorizontalNav from '../../components/mobile/HorizontalNav.astro';
+import Footer from '../../components/mobile/Footer.astro';
+---
+
+<BaseLayout title="Sonharte | Serviços">
+  <Header />
+  <HorizontalNav />
+  
+  <main class="flex flex-col gap-10 py-10 px-4 min-h-screen relative overflow-hidden">
+    <!-- Decorações de Fundo -->
+    <div class="absolute bottom-10 -left-20 w-72 h-72 rounded-full watercolor-blob" style="background: radial-gradient(circle, rgba(230,222,255,0.3) 0%, rgba(252,248,249,0) 70%);"></div>
+
+    <!-- Seção de Cabeçalho -->
+    <div class="text-center flex flex-col items-center gap-3 relative z-10">
+      <span class="bg-tertiary-fixed text-on-tertiary-fixed text-[11px] font-label-bold px-3 py-1 border-2 border-black rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rotate-1 animate-float">
+        Impressões de Alta Qualidade 🖨️
+      </span>
+      <h1 class="font-headline-xl text-3xl text-primary mt-1">Impressões & Cópias</h1>
+      <div class="w-24 h-1.5 bg-primary mt-1 cartoon-border rounded-full"></div>
+    </div>
+
+    <!-- Tabela de Preços Adaptada em Cards -->
+    <div class="bg-white p-6 border-4 border-on-surface rounded-2xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] relative z-10">
+      <h2 class="font-headline-md text-lg text-primary mb-4 border-b-2 border-dashed border-primary-container pb-2 flex items-center gap-2">
+        <span class="material-symbols-outlined">receipt_long</span> Tabela de Preços
+      </h2>
+      
+      <!-- Lista de Serviços -->
+      <div class="flex flex-col gap-4" id="services-list-container">
+        <p class="text-xs text-on-surface-variant text-center py-6 animate-pulse">
+          Carregando serviços... 🌸
+        </p>
+      </div>
+    </div>
+
+    <!-- Como Funciona Mobile -->
+    <div class="bg-white p-6 border-4 border-on-surface rounded-2xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] rotate-1 relative z-10">
+      <h3 class="font-headline-md text-md text-primary mb-4 flex items-center gap-2">
+        <span class="material-symbols-outlined text-sm">question_mark</span> Como Solicitar?
+      </h3>
+      <div class="flex flex-col gap-3.5">
+        
+        <!-- Passo 1 -->
+        <div class="flex gap-2.5 items-start">
+          <div class="w-6 h-6 rounded-full bg-primary text-white border-2 border-black flex items-center justify-center font-headline-md text-xs shrink-0 mt-0.5">1</div>
+          <p class="font-body-md text-xs text-on-surface-variant">Envie seus arquivos PDF/Imagem pelo WhatsApp.</p>
+        </div>
+
+        <!-- Passo 2 -->
+        <div class="flex gap-2.5 items-start">
+          <div class="w-6 h-6 rounded-full bg-secondary-fixed text-on-secondary-fixed border-2 border-black flex items-center justify-center font-headline-md text-xs shrink-0 mt-0.5">2</div>
+          <p class="font-body-md text-xs text-on-surface-variant">Nós enviamos o orçamento e combinamos os detalhes.</p>
+        </div>
+
+        <!-- Passo 3 -->
+        <div class="flex gap-2.5 items-start">
+          <div class="w-6 h-6 rounded-full bg-tertiary-fixed text-on-tertiary-fixed border-2 border-black flex items-center justify-center font-headline-md text-xs shrink-0 mt-0.5">3</div>
+          <p class="font-body-md text-xs text-on-surface-variant">Confirmado o Pix, nós fazemos a impressão rapidinho.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Botão WhatsApp Impressão Mobile -->
+    <a 
+      href="https://wa.me/5531972122639?text=Olá!%20Gostaria%20de%20enviar%20arquivos%20para%20impressão/cópia." 
+      target="_blank"
+      class="bg-primary text-white border-4 border-on-surface rounded-2xl p-5 text-center flex flex-col items-center gap-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all relative z-10"
+    >
+      <span class="material-symbols-outlined text-3xl">print</span>
+      <h4 class="font-headline-md text-lg">Enviar Arquivos</h4>
+      <p class="font-body-md text-primary-fixed text-xs">Chamar no WhatsApp</p>
+    </a>
+
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const listContainer = document.getElementById('services-list-container');
+    if (!listContainer || !window.SonharteDB) return;
+
+    try {
+      const services = await window.SonharteDB.getServices();
+      if (services.length === 0) {
+        listContainer.innerHTML = '<p class="text-xs text-on-surface-variant text-center py-6">Nenhum serviço disponível no momento... 🌸</p>';
+        return;
+      }
+
+      listContainer.innerHTML = services.map((s, idx) => {
+        const bgClass = idx % 2 === 1 ? 'bg-surface-container-lowest' : 'bg-surface-container-low';
+        return `
+          <div class="flex justify-between items-center p-3 border-2 border-black rounded-xl ${bgClass}">
+            <div>
+              <h4 class="font-label-bold text-sm text-on-surface">${s.titulo}</h4>
+              <p class="font-body-md text-[10px] text-on-surface-variant">${s.descricao}</p>
+            </div>
+            <span class="font-headline-md text-md text-primary bg-white border-2 border-black px-2 py-0.5 rounded shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] shrink-0">
+              R$ ${parseFloat(s.preco).toFixed(2).replace('.', ',')}
+            </span>
+          </div>
+        `;
+      }).join('');
+    } catch (e) {
+      console.error("Erro ao carregar serviços mobile:", e);
+      listContainer.innerHTML = '<p class="text-xs text-red-700 text-center py-6">Erro ao carregar os serviços...</p>';
+    }
+  });
+</script>

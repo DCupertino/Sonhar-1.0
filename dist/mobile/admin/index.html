@@ -1,0 +1,775 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="pt-br"> <head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><link href="/assets/17edea699b9b27907616409003241ce2.css" rel="stylesheet"><link href="/assets/a39f5c6fcbb87b419667ec984d2e579a.css" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>(function(){const supabaseUrl = "";
+const supabaseAnonKey = "";
+
+      window.SUPABASE_URL = supabaseUrl;
+      window.SUPABASE_ANON_KEY = supabaseAnonKey;
+    })();</script><script src="/assets/db.js"></script><script src="/assets/cart.js"></script><title>Sonharte | Painel ADM</title><link rel="stylesheet" href="/_astro/admin.hZO2VeTW.css">
+<style>@keyframes shine{0%{transform:translate(-150%) skew(-15deg)}50%{transform:translate(150%) skew(-15deg)}to{transform:translate(150%) skew(-15deg)}}.animate-shine[data-astro-cid-gmu4iemy]{animation:shine 3.5s infinite ease-in-out}@keyframes pulse-soft{0%,to{transform:scale(1) rotate(0)}50%{transform:scale(1.2) rotate(15deg)}}.animate-pulse-soft[data-astro-cid-gmu4iemy]{display:inline-block;animation:pulse-soft 2s infinite ease-in-out}
+</style></head> <body class="font-body-md text-on-background overflow-x-hidden selection:bg-secondary-container">  <!-- Top AppBar --><header id="mobile-header" class="w-full top-0 sticky z-50 transition-transform duration-300 ease-in-out flex justify-between items-center px-4 py-3 bg-surface border-b-4 border-on-background"> <button class="p-2 active:scale-90 transition-transform" onclick="toggleDrawer()"> <span class="material-symbols-outlined text-primary text-3xl">menu</span> </button> <a href="/mobile" class="flex items-center gap-2 hover:opacity-90 transition-opacity"> <img alt="Sonharte Logo" class="h-20 w-20 object-contain" src="/assets/logo_clean.png"> </a> <div class="flex items-center gap-3"> <button id="mobile-search-trigger" class="material-symbols-outlined text-primary p-1 active:scale-90 transition-transform">search</button> <button id="mobile-cart-btn" class="material-symbols-outlined text-primary p-1 relative">
+shopping_cart
+<span id="mobile-cart-badge" class="absolute -top-1 -right-1 bg-tertiary text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center border border-black hidden">0</span> </button> </div> </header> <!-- Mobile Search Overlay (Barra de Busca Expansível Premium) --> <div id="mobile-search-overlay" class="fixed inset-x-0 top-0 bg-surface border-b-4 border-on-background z-[80] shadow-[0_8px_0_0_rgba(0,0,0,0.15)] -translate-y-full transition-all duration-300 ease-out flex flex-col p-4 gap-4 pointer-events-none opacity-0"> <div class="flex items-center gap-3"> <!-- Input Container --> <div class="flex-1 relative"> <input type="search" id="mobile-search-input" placeholder="O que você está procurando? 🌸" class="w-full px-4 py-2.5 pr-10 bg-white text-on-surface font-body-md border-3 border-on-surface rounded-xl focus:outline-none focus:border-primary text-sm shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] placeholder:text-on-surface-variant/50" autocomplete="off"> <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-primary text-xl">search</span> </div> <!-- Close Button --> <button id="mobile-search-close" class="p-1.5 border-2 border-black bg-secondary-fixed text-on-secondary-fixed rounded-xl shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:scale-95 transition-transform flex items-center justify-center"> <span class="material-symbols-outlined text-lg">close</span> </button> </div> <!-- Suggestions Panel --> <div id="mobile-search-suggestions" class="max-h-[60vh] overflow-y-auto flex flex-col bg-white border-3 border-on-surface rounded-xl shadow-[3px_3px_0px_0px_rgba(75,37,187,1)] hidden divide-y divide-slate-100"></div> </div> <!-- Navigation Drawer (Hidden by default) --> <div class="fixed inset-0 bg-black/50 z-[60] hidden backdrop-blur-sm transition-opacity opacity-0" id="drawer-overlay" onclick="toggleDrawer()"></div> <aside class="fixed inset-y-0 left-0 z-[70] w-72 bg-surface-container border-r-4 border-on-background -translate-x-full transition-transform duration-300 ease-out flex flex-col" id="drawer"> <div class="p-6 bg-primary-container text-on-primary-container border-b-4 border-on-background"> <h2 class="font-headline-md text-headline-md">Categorias</h2> </div> <nav class="flex-1 overflow-y-auto py-4"> <a class="bg-secondary-container text-on-secondary-container border-2 border-on-background rounded-lg m-2 p-4 flex items-center gap-3 font-label-bold font-body-md" href="/mobile"> <span class="material-symbols-outlined">home</span> Início
+</a> <!-- Workshops em Primeiro Lugar e Destacado --> <a class="text-primary font-bold bg-primary/5 border-l-4 border-primary p-4 flex items-center gap-3 font-label-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors" href="/mobile/workshops"> <span class="material-symbols-outlined text-pink-600 animate-pulse">auto_awesome</span> Workshops ✨
+</a> <a class="text-on-surface p-4 flex items-center gap-3 font-label-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors" href="/mobile/catalogo"> <span class="material-symbols-outlined">shopping_bag</span> Todos os produtos
+</a> <a class="text-on-surface p-4 flex items-center gap-3 font-label-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors border-b border-outline-variant/40" href="/mobile/catalogo?categoria=Lápis de Cor"> <span class="material-symbols-outlined">edit</span> Lápis de Cor
+</a> <a class="text-on-surface p-4 flex items-center gap-3 font-label-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors border-b border-outline-variant/40" href="/mobile/catalogo?categoria=Cadernos"> <span class="material-symbols-outlined">book</span> Cadernos
+</a> <a class="text-on-surface p-4 flex items-center gap-3 font-label-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors border-b border-outline-variant/40" href="/mobile/catalogo?categoria=Canetas"> <span class="material-symbols-outlined">draw</span> Canetas
+</a> <a class="text-on-surface p-4 flex items-center gap-3 font-label-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors border-b-2 border-on-background" href="/mobile/catalogo?categoria=Materiais"> <span class="material-symbols-outlined">architecture</span> Materiais
+</a> <a class="text-on-surface p-4 flex items-center gap-3 font-label-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors" href="/mobile/servicos"> <span class="material-symbols-outlined">design_services</span> Serviços
+</a> <a class="text-on-surface p-4 flex items-center gap-3 font-label-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors" href="/mobile/sobre"> <span class="material-symbols-outlined">info</span> Sobre Nós
+</a> <a class="text-on-surface p-4 flex items-center gap-3 font-label-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors" href="/mobile/contato"> <span class="material-symbols-outlined">mail</span> Contato
+</a> </nav> </aside> <script>
+  function toggleDrawer() {
+      const drawer = document.getElementById('drawer');
+      const overlay = document.getElementById('drawer-overlay');
+      const isHidden = drawer.classList.contains('-translate-x-full');
+
+      if (isHidden) {
+          drawer.classList.remove('-translate-x-full');
+          overlay.classList.remove('hidden');
+          setTimeout(() => overlay.classList.add('opacity-100'), 10);
+          document.body.classList.add('overflow-hidden');
+      } else {
+          drawer.classList.add('-translate-x-full');
+          overlay.classList.remove('opacity-100');
+          setTimeout(() => overlay.classList.add('hidden'), 300);
+          document.body.classList.remove('overflow-hidden');
+      }
+  }
+
+  function updateMobileCartBadge() {
+    const badge = document.getElementById('mobile-cart-badge');
+    if (!badge || !window.SonharteCart) return;
+    const count = window.SonharteCart.count();
+    if (count > 0) {
+      badge.textContent = count;
+      badge.classList.remove('hidden');
+    } else {
+      badge.classList.add('hidden');
+    }
+  }
+
+  // Atualiza no carregamento e escuta eventos de alteração
+  window.addEventListener('load', updateMobileCartBadge);
+  window.addEventListener('cart-updated', updateMobileCartBadge);
+  // Escuta imediata caso o DOM já esteja carregado
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    updateMobileCartBadge();
+  }
+
+  // Lógica do Autocomplete de Sugestões de Pesquisa (Mobile)
+  document.addEventListener('DOMContentLoaded', () => {
+    const trigger = document.getElementById('mobile-search-trigger');
+    const overlay = document.getElementById('mobile-search-overlay');
+    const closeBtn = document.getElementById('mobile-search-close');
+    const input = document.getElementById('mobile-search-input');
+    const suggestions = document.getElementById('mobile-search-suggestions');
+
+    if (!trigger || !overlay || !closeBtn || !input || !suggestions) return;
+
+    let products = [];
+
+    // Abrir overlay
+    trigger.addEventListener('click', async () => {
+      overlay.classList.remove('-translate-y-full', 'pointer-events-none', 'opacity-0');
+      overlay.classList.add('translate-y-0', 'pointer-events-auto', 'opacity-100');
+      input.focus();
+
+      // Carrega os produtos se ainda não tiver carregado
+      if (products.length === 0 && window.SonharteDB) {
+        try {
+          const raw = await window.SonharteDB.getProducts();
+          products = raw.filter(p => p.ativo !== false);
+        } catch (e) {
+          console.error("Erro ao carregar produtos para sugestões mobile:", e);
+        }
+      }
+    });
+
+    // Fechar overlay
+    closeBtn.addEventListener('click', () => {
+      overlay.classList.add('-translate-y-full', 'pointer-events-none', 'opacity-0');
+      overlay.classList.remove('translate-y-0', 'pointer-events-auto', 'opacity-100');
+      input.value = '';
+      suggestions.innerHTML = '';
+      suggestions.classList.add('hidden');
+    });
+
+    // Buscar no input
+    input.addEventListener('input', () => {
+      if (input.value === 'adminM') {
+        window.location.href = '/mobile/admin';
+        return;
+      }
+      const query = input.value.trim().toLowerCase();
+      if (!query) {
+        suggestions.innerHTML = '';
+        suggestions.classList.add('hidden');
+        return;
+      }
+
+      // Filtra produtos
+      const filtered = products.filter(p => 
+        p.titulo.toLowerCase().includes(query) || 
+        (p.descricao && p.descricao.toLowerCase().includes(query))
+      ).slice(0, 5);
+
+      if (filtered.length === 0) {
+        suggestions.innerHTML = `
+          <div class="p-4 text-center text-on-surface-variant font-body-md flex flex-col items-center justify-center gap-1 bg-white">
+            <span class="material-symbols-outlined text-pink-500 text-2xl">sentiment_dissatisfied</span>
+            <span class="text-[11px] font-label-bold">Nenhum mimo encontrado... 🌸</span>
+          </div>
+        `;
+        suggestions.classList.remove('hidden');
+        return;
+      }
+
+      // Paleta de cores pastel para tags de categoria
+      const catColors = {
+        'Lápis de Cor': 'bg-pink-100 text-pink-700',
+        'Cadernos': 'bg-yellow-100 text-yellow-700',
+        'Canetas': 'bg-purple-100 text-purple-700',
+        'Presentes Criativos': 'bg-blue-100 text-blue-700',
+        'Materiais': 'bg-green-100 text-green-700'
+      };
+
+      suggestions.innerHTML = filtered.map((p, idx) => {
+        const tagClass = catColors[p.categoria] || 'bg-slate-100 text-slate-700';
+        
+        // Cores suaves de fundo para hover rotativo neobrutalista
+        const hovers = ['hover:bg-yellow-50/50', 'hover:bg-pink-50/50', 'hover:bg-purple-50/50', 'hover:bg-blue-50/50', 'hover:bg-green-50/50'];
+        const hoverClass = hovers[idx % hovers.length];
+
+        return `
+          <a 
+            href="/mobile/catalogo?busca=${encodeURIComponent(p.titulo)}" 
+            class="flex items-center gap-3 p-3 ${hoverClass} transition-colors cursor-pointer text-left decoration-none"
+          >
+            <img src="${p.imagem}" alt="${p.titulo}" class="w-10 h-10 object-cover rounded-lg border-2 border-black shrink-0 shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]" />
+            <div class="flex-1 min-w-0">
+              <h4 class="font-label-bold text-[11px] text-on-surface">${p.titulo}</h4>
+              <div class="flex items-center gap-1.5 mt-0.5">
+                <span class="px-2 py-0.5 text-[8px] font-label-bold rounded-full border border-black/10 ${tagClass}">${p.categoria}</span>
+              </div>
+            </div>
+            <div class="shrink-0 font-label-bold text-[10px] text-primary bg-primary/5 border border-primary/20 px-2 py-0.5 rounded-md">
+              R$ ${parseFloat(p.preco).toFixed(2).replace('.', ',')}
+            </div>
+          </a>
+        `;
+      }).join('');
+      suggestions.classList.remove('hidden');
+    });
+
+    // Se apertar enter no input, ir para o catálogo geral
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        const query = input.value.trim();
+        if (query === 'adminM') {
+          e.preventDefault();
+          window.location.href = '/mobile/admin';
+          return;
+        }
+        if (query) {
+          window.location.href = `/mobile/catalogo?busca=${encodeURIComponent(query)}`;
+        }
+      }
+    });
+  });
+
+  // Lógica do Smart Header (Esconde ao rolar para baixo, aparece ao rolar para cima)
+  document.addEventListener('DOMContentLoaded', () => {
+    const header = document.getElementById('mobile-header');
+    if (!header) return;
+
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      
+      // Esconde se rolar para baixo e passar de 100px
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        header.style.transform = 'translateY(-110%)';
+      } else {
+        // Mostra se rolar para cima
+        header.style.transform = 'translateY(0)';
+      }
+      
+      lastScrollY = currentScrollY;
+    }, { passive: true });
+  });
+</script> <!-- Scrolling Horizontal Menu --><nav class="flex overflow-x-auto no-scrollbar gap-3 px-4 py-4 bg-surface-container-low border-b-2 border-on-background" id="mobile-horizontal-nav" data-astro-cid-gmu4iemy> <!-- Botão Criativo e Destacado de Workshops --> <a href="/mobile/workshops" class="workshop-nav-btn whitespace-nowrap px-4 py-2 border-2 border-black rounded-full bg-gradient-to-r from-[#FF007A] via-[#8F00FF] to-primary text-white font-label-bold flex items-center gap-1 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all relative overflow-hidden shrink-0" id="nav-workshops-btn" data-astro-cid-gmu4iemy> <span class="absolute inset-0 w-full h-full bg-white/25 transform -translate-x-full skew-x-12 animate-shine" data-astro-cid-gmu4iemy></span> <span class="material-symbols-outlined text-[14px] animate-pulse-soft" data-astro-cid-gmu4iemy>auto_awesome</span>
+Workshops ✨
+</a> <button class="category-btn whitespace-nowrap px-4 py-2 thin-border rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-bold block-shadow-secondary active:translate-x-0.5 active:translate-y-0.5 active:shadow-none" data-category="Todos" data-astro-cid-gmu4iemy>Todos</button> <button class="category-btn whitespace-nowrap px-4 py-2 thin-border rounded-full bg-white text-on-surface font-label-bold transition-all" data-category="Lápis de Cor & Desenho" data-astro-cid-gmu4iemy>Lápis de Cor & Desenho</button> <button class="category-btn whitespace-nowrap px-4 py-2 thin-border rounded-full bg-white text-on-surface font-label-bold transition-all" data-category="Cadernos & Papéis" data-astro-cid-gmu4iemy>Cadernos & Papéis</button> <button class="category-btn whitespace-nowrap px-4 py-2 thin-border rounded-full bg-white text-on-surface font-label-bold transition-all" data-category="Canetas & Escrita" data-astro-cid-gmu4iemy>Canetas & Escrita</button> <button class="category-btn whitespace-nowrap px-4 py-2 thin-border rounded-full bg-white text-on-surface font-label-bold transition-all" data-category="Artes & Utilidades" data-astro-cid-gmu4iemy>Artes & Utilidades</button> <button class="category-btn whitespace-nowrap px-4 py-2 thin-border rounded-full bg-white text-on-surface font-label-bold transition-all" data-category="Organização & Escritório" data-astro-cid-gmu4iemy>Organização & Escritório</button> </nav>  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const nav = document.getElementById('mobile-horizontal-nav');
+    if (!nav) return;
+    const buttons = nav.querySelectorAll('.category-btn');
+    
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cat = btn.getAttribute('data-category') || 'Todos';
+        
+        // Se NÃO estiver na página de catálogo, redireciona
+        if (!window.location.pathname.includes('/mobile/catalogo')) {
+          window.location.href = `/mobile/catalogo?categoria=${encodeURIComponent(cat)}`;
+          return;
+        }
+
+        buttons.forEach(b => {
+          // Volta todos para o estado inativo
+          b.className = "category-btn whitespace-nowrap px-4 py-2 thin-border rounded-full bg-white text-on-surface font-label-bold transition-all";
+        });
+        // Aplica o estado ativo no botão clicado
+        btn.className = "category-btn whitespace-nowrap px-4 py-2 thin-border rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-bold block-shadow-secondary active:translate-x-0.5 active:translate-y-0.5 active:shadow-none";
+      });
+    });
+  });
+</script> <main class="flex flex-col gap-8 py-10 px-4 min-h-screen relative overflow-hidden"> <!-- Decorações de Fundo --> <div class="absolute top-20 -right-20 w-72 h-72 rounded-full watercolor-blob" style="background: radial-gradient(circle, rgba(230,222,255,0.3) 0%, rgba(252,248,249,0) 70%);"></div> <!-- TELA DE LOGIN MOBILE --> <div id="login-container" class="w-full relative z-10 my-4"> <form id="login-form" class="bg-white p-6 border-4 border-on-surface rounded-2xl shadow-[4px_4px_0px_0px_rgba(75,37,187,1)] flex flex-col gap-5"> <div class="text-center flex flex-col items-center"> <span class="bg-secondary-fixed text-on-secondary-fixed text-[10px] font-label-bold px-3 py-1 border-2 border-black rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] -rotate-1">
+Restrito ADM 🔐
+</span> <h2 class="font-headline-md text-xl text-primary mt-2">Painel de Acesso</h2> </div> <div id="login-error" class="hidden bg-red-100 text-red-700 p-2.5 border-2 border-red-700 rounded-lg font-body-md text-xs">
+Erro ao fazer login. Verifique suas credenciais.
+</div> <div class="flex flex-col gap-1"> <label for="login-email" class="font-label-bold text-xs text-on-surface">E-mail</label> <input type="email" id="login-email" required placeholder="admin@sonharte.com" class="w-full px-3 py-2.5 border-2 border-on-surface rounded-lg focus:outline-none focus:border-primary text-xs font-body-md bg-background"> </div> <div class="flex flex-col gap-1"> <label for="login-password" class="font-label-bold text-xs text-on-surface">Senha</label> <input type="password" id="login-password" required placeholder="••••••••" class="w-full px-3 py-2.5 border-2 border-on-surface rounded-lg focus:outline-none focus:border-primary text-xs font-body-md bg-background"> </div> <button type="submit" class="w-full bg-primary text-white py-3 border-2 border-black rounded-lg font-label-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none text-xs">
+Entrar no Painel 🚀
+</button> </form> </div> <!-- PAINEL OPERACIONAL MOBILE --> <div id="admin-dashboard" class="hidden flex flex-col gap-6 relative z-10"> <!-- Cabeçalho do Admin --> <div class="bg-white p-4 border-4 border-on-surface rounded-2xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex justify-between items-center"> <div> <span class="text-[10px] text-on-surface-variant font-label-bold">Painel Mobile</span> <h2 class="font-headline-md text-lg text-primary" id="admin-welcome">Olá, Myllena! 🌸</h2> </div> <button id="logout-btn" class="bg-red-100 text-red-700 px-3 py-1.5 border-2 border-red-700 rounded-lg font-label-bold text-[10px] hover:bg-red-200 transition-colors shadow-[1px_1px_0px_0px_rgba(186,26,26,1)] active:translate-x-0.5 active:translate-y-0.5">
+Sair
+</button> </div> <!-- Abas Mobile --> <div class="flex border-b-2 border-on-surface pb-0.5 gap-2"> <button id="tab-products-btn" class="flex-1 py-2 font-label-bold text-xs bg-white border-x-2 border-t-2 border-on-surface rounded-t-lg translate-y-[3px] z-10 shadow-[0px_-2px_0px_0px_rgba(0,0,0,1)] transition-all">
+Produtos
+</button> <button id="tab-feedbacks-btn" class="flex-1 py-2 font-label-bold text-xs text-on-surface-variant hover:text-primary transition-all">
+Depoimentos
+</button> </div> <!-- SEÇÃO 1: GERENCIAR PRODUTOS MOBILE --> <div id="section-products" class="flex flex-col gap-6"> <!-- Toggle para Mostrar/Ocultar Formulário --> <button id="toggle-form-btn" class="w-full bg-secondary-fixed text-on-secondary-fixed py-3 border-2 border-black rounded-lg font-label-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none text-xs flex items-center justify-center gap-1"> <span class="material-symbols-outlined text-sm" id="toggle-form-icon">add</span> <span id="toggle-form-text">Adicionar Produto</span> </button> <!-- Formulário (Oculto por padrão no mobile) --> <div id="product-form-wrapper" class="hidden"> <form id="product-form" class="bg-white p-5 border-4 border-on-surface rounded-2xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col gap-3.5"> <h3 class="font-headline-md text-md text-primary border-b-2 border-dashed border-primary-container pb-1.5" id="form-title">Adicionar Novo Produto</h3> <input type="hidden" id="prod-id"> <div class="flex flex-col gap-1"> <label for="prod-titulo" class="font-label-bold text-[10px] text-on-surface">Título do Produto</label> <input type="text" id="prod-titulo" required class="w-full px-2.5 py-2 border-2 border-on-surface rounded-lg text-xs font-body-md bg-background" placeholder="Planner Bloom 2025"> </div> <div class="flex flex-col gap-1"> <label for="prod-preco" class="font-label-bold text-[10px] text-on-surface">Preço (R$)</label> <input type="number" step="0.01" id="prod-preco" required class="w-full px-2.5 py-2 border-2 border-on-surface rounded-lg text-xs font-body-md bg-background" placeholder="89.90"> </div> <div class="flex flex-col gap-1"> <label for="prod-categoria" class="font-label-bold text-[10px] text-on-surface">Categoria</label> <select id="prod-categoria" required class="w-full px-2.5 py-2 border-2 border-on-surface rounded-lg text-xs font-body-md bg-background"> <option value="Lápis de Cor">Lápis de Cor</option> <option value="Cadernos">Cadernos</option> <option value="Canetas">Canetas</option> <option value="Presentes Criativos">Presentes Criativos</option> <option value="Materiais">Materiais</option> </select> </div> <div class="flex flex-col gap-1"> <label for="prod-destaque" class="font-label-bold text-[10px] text-on-surface">Selo de Destaque</label> <select id="prod-destaque" class="w-full px-2.5 py-2 border-2 border-on-surface rounded-lg text-xs font-body-md bg-background"> <option value="">Nenhum</option> <option value="Lançamento">Lançamento 🚀</option> <option value="Mais Vendido">Mais Vendido 🔥</option> <option value="Destaque">Destaque ✨</option> </select> </div> <div class="flex flex-col gap-1"> <label for="prod-imagem-file" class="font-label-bold text-[10px] text-on-surface">Imagem do Produto (Anexo)</label> <input type="file" id="prod-imagem-file" accept="image/*" class="w-full px-2.5 py-2 border-2 border-on-surface rounded-lg text-xs font-body-md bg-background cursor-pointer"> <input type="hidden" id="prod-imagem" required> <div id="prod-imagem-preview-container" class="hidden mt-2 border-2 border-dashed border-on-surface rounded-lg p-1.5 flex items-center justify-center bg-surface-container-low"> <img id="prod-imagem-preview" src="" alt="Preview" class="max-h-24 object-contain rounded-lg border border-black shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]"> </div> </div> <div class="flex flex-col gap-1"> <label for="prod-descricao" class="font-label-bold text-[10px] text-on-surface">Descrição Curta</label> <textarea id="prod-descricao" required rows="2" class="w-full px-2.5 py-2 border-2 border-on-surface rounded-lg text-xs font-body-md bg-background resize-none" placeholder="Escreva os detalhes..."></textarea> </div> <div class="flex items-center gap-2 py-1"> <input type="checkbox" id="prod-ativo" checked class="w-4 h-4 accent-primary"> <label for="prod-ativo" class="font-label-bold text-[11px] text-on-surface">Produto ativo</label> </div> <div class="flex gap-2"> <button type="submit" class="flex-1 bg-primary text-white py-2.5 border-2 border-black rounded-lg font-label-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none text-xs">
+Salvar Produto 💾
+</button> <button type="button" id="cancel-edit-btn" class="hidden px-3 bg-surface-container border-2 border-black rounded-lg font-label-bold text-xs hover:bg-surface-dim transition-colors active:translate-x-0.5 active:translate-y-0.5">
+Cancelar
+</button> </div> </form> </div> <!-- Lista de Produtos Mobile --> <div class="bg-white p-4 border-4 border-on-surface rounded-2xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"> <h3 class="font-headline-md text-md text-on-surface mb-3 flex items-center justify-between">
+Produtos Cadastrados
+<span class="text-xs bg-primary-fixed text-on-primary-fixed border border-black px-2 py-0.5 rounded" id="products-count-badge">0</span> </h3> <div class="flex flex-col gap-3" id="products-list-container"> <!-- Injetado dinamicamente --> </div> </div> </div> <!-- SEÇÃO 2: MODERAR DEPOIMENTOS MOBILE --> <div id="section-feedbacks" class="hidden bg-white p-4 border-4 border-on-surface rounded-2xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"> <h3 class="font-headline-md text-md text-on-surface mb-4 flex justify-between items-center">
+Depoimentos
+<span class="text-xs bg-tertiary-fixed text-on-tertiary-fixed border border-black px-2 py-0.5 rounded" id="feedbacks-count-badge">0</span> </h3> <div class="flex flex-col gap-4" id="feedbacks-list-container"> <!-- Injetado dinamicamente --> </div> </div> </div> </main> <!-- Footer / Location Map --><footer class="px-4 py-12 bg-surface-container-high border-t-4 border-on-background"> <a href="/mobile" class="flex flex-col items-center mb-8 hover:opacity-90 transition-opacity"> <img alt="Sonharte Logo" class="h-[77px] w-[77px] mb-4 object-contain" src="/assets/logo_clean.png"> <h3 class="font-headline-lg text-primary tracking-tighter">SONHARTE</h3> </a> <div class="mb-10"> <h4 class="font-headline-md text-lg mb-4 flex items-center gap-2"> <span class="material-symbols-outlined text-primary">location_on</span> Nossa Casinha
+</h4> <div class="thick-border rounded-2xl overflow-hidden h-48 relative block-shadow-primary"> <iframe src="https://maps.google.com/maps?q=Rua%20S%C3%B3crates,%20679%20-%20Belo%20Horizonte%20MG%2031990-010&t=&z=15&ie=UTF8&iwloc=&output=embed" class="w-full h-full border-0 grayscale contrast-125 hover:grayscale-0 transition-all duration-300" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe> </div> <p class="text-sm font-label-bold mt-3 text-on-surface-variant px-1">Rua Sócrates, 679 - Belo Horizonte, MG - CEP 31990-010</p> </div> <div class="grid grid-cols-2 gap-8 mb-10"> <div> <h5 class="font-label-bold uppercase text-primary mb-3">Links</h5> <ul class="space-y-2 text-sm"> <li><a class="hover:underline" href="/mobile/sobre">Sobre nós</a></li> <li><a class="hover:underline" href="/mobile/workshops">Workshops</a></li> <li><a class="hover:underline" href="#">Como comprar</a></li> <li><a class="hover:underline" href="#">Frete e Prazos</a></li> <li><a class="hover:underline" href="#">Trocas e Devoluções</a></li> </ul> </div> <div> <h5 class="font-label-bold uppercase text-tertiary mb-3">Ajuda</h5> <ul class="space-y-2 text-sm"> <li><a class="hover:underline" href="#">Perguntas Frequentes</a></li> <li><a class="hover:underline" href="/mobile/contato">Fale Conosco</a></li> <li><a class="hover:underline" href="mailto:m.sonharte@gmail.com">E-mail</a></li> <li><a class="hover:underline" href="https://wa.me/5531972122639" target="_blank">WhatsApp</a></li> <li><a class="hover:underline" href="#">Privacidade</a></li> </ul> </div> </div> <div class="flex justify-center gap-6 mb-8"> <a class="w-12 h-12 bg-white thick-border rounded-xl flex items-center justify-center block-shadow-primary overflow-hidden" href="https://www.instagram.com/p.sonharte/" target="_blank"> <img alt="Instagram" class="w-full h-full object-cover" src="/assets/instagram_new.png"> </a> <a class="w-12 h-12 bg-white thick-border rounded-xl flex items-center justify-center block-shadow-secondary overflow-hidden" href="https://wa.me/5531972122639" target="_blank"> <img alt="WhatsApp" class="w-full h-full object-cover" src="/assets/whatsapp_new.png"> </a> </div> <div class="text-center pt-8 border-t border-dashed border-outline"> <p class="text-xs font-label-bold opacity-60">© 2025 Sonharte Estúdio Criativo.<br>Feito com amor e papel.</p> </div> </footer>  <!-- Cart Drawer Overlay --><div id="cart-overlay" class="fixed inset-0 bg-black/50 z-[90] hidden opacity-0 transition-opacity duration-300 backdrop-blur-sm"></div> <!-- Cart Drawer Container --> <aside id="cart-drawer" class="fixed right-0 top-0 h-full w-[320px] sm:w-[380px] bg-surface border-l-4 border-on-background z-[100] translate-x-full transition-transform duration-300 ease-out flex flex-col shadow-[-10px_0px_0px_0px_rgba(0,0,0,0.15)]"> <!-- Header --> <div class="p-6 bg-primary-container text-on-primary-container border-b-4 border-on-background flex justify-between items-center shrink-0"> <div class="flex items-center gap-2"> <span class="material-symbols-outlined text-2xl">shopping_cart</span> <h2 class="font-headline-md text-xl tracking-tight">Sacola de Sonhos</h2> </div> <button id="cart-close-btn" class="material-symbols-outlined text-2xl p-1 bg-white text-on-surface border-2 border-on-background rounded-lg hover:scale-105 active:scale-95 transition-transform flex items-center justify-center">
+close
+</button> </div> <!-- Cart Content (Scrollable) --> <div class="flex-grow overflow-y-auto p-4 flex flex-col gap-4 no-scrollbar" id="cart-items-container"> <!-- Items will be injected dynamically here --> <div class="flex flex-col items-center justify-center h-full text-center text-on-surface-variant py-12"> <span class="material-symbols-outlined text-5xl mb-4 opacity-40">shopping_bag</span> <p class="font-label-bold text-lg">Sua sacola está vazia!</p> <p class="text-sm mt-1">Navegue pelas abas e adicione seus mimos favoritos.</p> </div> </div> <!-- Footer (Fixed in Drawer) --> <div class="p-6 bg-surface-container-high border-t-4 border-on-background flex flex-col gap-4 shrink-0"> <div class="flex justify-between items-center"> <span class="font-label-bold text-lg text-on-surface-variant">Valor Total:</span> <span class="font-headline-md text-2xl text-primary" id="cart-total-value">R$ 0,00</span> </div> <a id="cart-checkout-btn" href="#" target="_blank" class="w-full py-4 bg-tertiary text-white text-center font-label-bold text-lg border-4 border-on-background rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-0.5 active:translate-y-0.5 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:shadow-none transition-all flex items-center justify-center gap-2 pointer-events-none opacity-50"> <span class="material-symbols-outlined">send</span> Finalizar no WhatsApp
+</a> </div> </aside> <script>
+  // O telefone do WhatsApp da loja (com DDI + DDD)
+  const WHATSAPP_PHONE = '5531972122639'; // Telefone extraído do logo original
+
+  function toggleCartDrawer() {
+    const drawer = document.getElementById('cart-drawer');
+    const overlay = document.getElementById('cart-overlay');
+    if (!drawer || !overlay) return;
+
+    const isOpen = !drawer.classList.contains('translate-x-full');
+
+    if (isOpen) {
+      // Fechar
+      drawer.classList.add('translate-x-full');
+      overlay.classList.remove('opacity-100');
+      setTimeout(() => overlay.classList.add('hidden'), 300);
+      document.body.classList.remove('overflow-hidden');
+    } else {
+      // Abrir
+      overlay.classList.remove('hidden');
+      setTimeout(() => overlay.classList.add('opacity-100'), 10);
+      drawer.classList.remove('translate-x-full');
+      document.body.classList.add('overflow-hidden');
+    }
+  }
+  
+  window.toggleCartDrawer = toggleCartDrawer;
+
+  function renderCartItems() {
+    const container = document.getElementById('cart-items-container');
+    const totalEl = document.getElementById('cart-total-value');
+    const checkoutBtn = document.getElementById('cart-checkout-btn');
+    if (!container || !window.SonharteCart) return;
+
+    const cart = window.SonharteCart.get();
+    
+    if (cart.length === 0) {
+      container.innerHTML = `
+        <div class="flex flex-col items-center justify-center h-full text-center text-on-surface-variant py-12">
+          <span class="material-symbols-outlined text-5xl mb-4 opacity-40">shopping_bag</span>
+          <p class="font-label-bold text-lg">Sua sacola está vazia!</p>
+          <p class="text-sm mt-1">Navegue pelas abas e adicione seus mimos favoritos.</p>
+        </div>
+      `;
+      totalEl.textContent = 'R$ 0,00';
+      checkoutBtn.classList.add('pointer-events-none', 'opacity-50');
+      checkoutBtn.href = '#';
+      return;
+    }
+
+    // Renderizar itens
+    let html = '';
+    cart.forEach(item => {
+      html += `
+        <div class="flex gap-4 p-3 bg-white border-2 border-on-background rounded-xl shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] items-center">
+          <img src="${item.imagem}" alt="${item.titulo}" class="w-16 h-16 object-cover border-2 border-on-background rounded-lg shrink-0" />
+          <div class="flex-grow min-w-0">
+            <h4 class="font-label-bold text-sm truncate text-on-surface">${item.titulo}</h4>
+            <div class="flex justify-between items-center mt-2">
+              <span class="font-bold text-primary text-sm">R$ ${(item.preco * item.quantidade).toFixed(2)}</span>
+              <!-- Controle de Qtd -->
+              <div class="flex items-center border border-on-background rounded-lg overflow-hidden bg-surface-container-low shrink-0 scale-90">
+                <button class="px-2 py-1 hover:bg-surface-variant font-bold btn-minus" data-id="${item.id}">-</button>
+                <span class="px-3 py-1 bg-white text-xs font-label-bold border-x border-on-background min-w-[28px] text-center">${item.quantidade}</span>
+                <button class="px-2 py-1 hover:bg-surface-variant font-bold btn-plus" data-id="${item.id}">+</button>
+              </div>
+            </div>
+          </div>
+          <button class="material-symbols-outlined text-error hover:scale-110 active:scale-95 transition-transform shrink-0 p-1 btn-remove" data-id="${item.id}">
+            delete
+          </button>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+    totalEl.textContent = `R$ ${window.SonharteCart.total().toFixed(2)}`;
+    checkoutBtn.classList.remove('pointer-events-none', 'opacity-50');
+    checkoutBtn.href = window.SonharteCart.link(WHATSAPP_PHONE);
+
+    // Adicionar eventos aos botões recém-criados
+    container.querySelectorAll('.btn-plus').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        const item = window.SonharteCart.get().find(i => i.id === id);
+        if (item) {
+          window.SonharteCart.add(item.id, item.titulo, item.preco, item.imagem);
+        }
+      });
+    });
+
+    container.querySelectorAll('.btn-minus').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        window.SonharteCart.decrease(id);
+      });
+    });
+
+    container.querySelectorAll('.btn-remove').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        window.SonharteCart.remove(id);
+      });
+    });
+  }
+
+  // Configuração inicial ao carregar a página
+  document.addEventListener('DOMContentLoaded', () => {
+    // Configurar botões de fechar e overlay
+    const closeBtn = document.getElementById('cart-close-btn');
+    const overlay = document.getElementById('cart-overlay');
+    if (closeBtn) closeBtn.addEventListener('click', toggleCartDrawer);
+    if (overlay) overlay.addEventListener('click', toggleCartDrawer);
+
+    // Capturar cliques nos botões de cabeçalho (Desktop e Mobile)
+    const desktopCartBtn = document.getElementById('desktop-cart-btn');
+    const mobileCartBtn = document.getElementById('mobile-cart-btn');
+    if (desktopCartBtn) desktopCartBtn.addEventListener('click', toggleCartDrawer);
+    if (mobileCartBtn) mobileCartBtn.addEventListener('click', toggleCartDrawer);
+
+    // Escutar atualizações do carrinho
+    window.addEventListener('cart-updated', renderCartItems);
+    
+    // Forçar primeira renderização
+    renderCartItems();
+
+    // Delegação de evento de clique global para qualquer botão ".add-to-cart-btn"
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.add-to-cart-btn');
+      if (!btn || !window.SonharteCart) return;
+
+      e.preventDefault();
+      const id = btn.getAttribute('data-id');
+      const titulo = btn.getAttribute('data-titulo');
+      const preco = btn.getAttribute('data-preco');
+      const imagem = btn.getAttribute('data-imagem');
+
+      if (id && titulo && preco && imagem) {
+        window.SonharteCart.add(id, titulo, parseFloat(preco), imagem);
+        
+        // Abre a gaveta se ela estiver fechada
+        const drawer = document.getElementById('cart-drawer');
+        const isOpen = drawer && !drawer.classList.contains('translate-x-full');
+        if (!isOpen) {
+          toggleCartDrawer();
+        }
+      }
+    });
+  });
+</script> </body></html> <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Referências do DOM
+    const loginContainer = document.getElementById('login-container');
+    const dashboard = document.getElementById('admin-dashboard');
+    const loginForm = document.getElementById('login-form');
+    const loginError = document.getElementById('login-error');
+    const logoutBtn = document.getElementById('logout-btn');
+
+    const tabProducts = document.getElementById('tab-products-btn');
+    const tabFeedbacks = document.getElementById('tab-feedbacks-btn');
+    const sectionProducts = document.getElementById('section-products');
+    const sectionFeedbacks = document.getElementById('section-feedbacks');
+
+    const toggleFormBtn = document.getElementById('toggle-form-btn');
+    const productFormWrapper = document.getElementById('product-form-wrapper');
+    const toggleFormIcon = document.getElementById('toggle-form-icon');
+    const toggleFormText = document.getElementById('toggle-form-text');
+
+    const productForm = document.getElementById('product-form');
+    const formTitle = document.getElementById('form-title');
+    const cancelEditBtn = document.getElementById('cancel-edit-btn');
+    
+    // Inputs do form
+    const prodId = document.getElementById('prod-id');
+    const prodTitulo = document.getElementById('prod-titulo');
+    const prodPreco = document.getElementById('prod-preco');
+    const prodCategoria = document.getElementById('prod-categoria');
+    const prodDestaque = document.getElementById('prod-destaque');
+    const prodImagem = document.getElementById('prod-imagem');
+    const prodDescricao = document.getElementById('prod-descricao');
+    const prodAtivo = document.getElementById('prod-ativo');
+
+    // Inputs adicionais para anexo de imagem mobile
+    const prodImagemFile = document.getElementById('prod-imagem-file');
+    const previewContainer = document.getElementById('prod-imagem-preview-container');
+    const previewImage = document.getElementById('prod-imagem-preview');
+
+    if (prodImagemFile) {
+      prodImagemFile.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            prodImagem.value = event.target.result;
+            if (previewImage) previewImage.src = event.target.result;
+            if (previewContainer) previewContainer.classList.remove('hidden');
+          };
+          reader.readAsDataURL(file);
+        } else {
+          if (!prodId.value) {
+            prodImagem.value = '';
+            if (previewContainer) previewContainer.classList.add('hidden');
+            if (previewImage) previewImage.src = '';
+          }
+        }
+      });
+    }
+
+    // Inicializador
+    checkAuth();
+
+    // Mostrar/Ocultar Formulário Mobile
+    if (toggleFormBtn && productFormWrapper) {
+      toggleFormBtn.addEventListener('click', () => {
+        const isHidden = productFormWrapper.classList.contains('hidden');
+        const isEditMode = prodId.value !== '';
+        
+        if (isHidden) {
+          // Se estava em edição, limpamos para iniciar como Adição
+          if (isEditMode) {
+            resetProductForm(false);
+          }
+          productFormWrapper.classList.remove('hidden');
+          toggleFormIcon.textContent = 'close';
+          toggleFormText.textContent = 'Fechar Formulário';
+          toggleFormBtn.className = "w-full bg-surface-container text-on-surface py-3 border-2 border-black rounded-lg font-label-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none text-xs flex items-center justify-center gap-1";
+        } else {
+          // Se já está visível e estamos em modo de edição,
+          // alternar para modo de adição em vez de fechar
+          if (isEditMode) {
+            resetProductForm(false);
+          } else {
+            closeFormDrawer();
+          }
+        }
+      });
+    }
+
+    function closeFormDrawer() {
+      productFormWrapper.classList.add('hidden');
+      toggleFormIcon.textContent = 'add';
+      toggleFormText.textContent = 'Adicionar Produto';
+      toggleFormBtn.className = "w-full bg-secondary-fixed text-on-secondary-fixed py-3 border-2 border-black rounded-lg font-label-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none text-xs flex items-center justify-center gap-1";
+    }
+
+    // 1. Verificação de Autenticação
+    async function checkAuth() {
+      const user = await window.SonharteDB.getCurrentUser();
+      if (user) {
+        loginContainer.classList.add('hidden');
+        dashboard.classList.remove('hidden');
+        loadProducts();
+        loadFeedbacks();
+      } else {
+        dashboard.classList.add('hidden');
+        loginContainer.classList.remove('hidden');
+      }
+    }
+
+    // Formulário de Login
+    if (loginForm) {
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        loginError.classList.add('hidden');
+        const email = document.getElementById('login-email').value;
+        const pass = document.getElementById('login-password').value;
+
+        try {
+          await window.SonharteDB.login(email, pass);
+          checkAuth();
+        } catch (err) {
+          loginError.textContent = err.message || 'Erro ao realizar login.';
+          loginError.classList.remove('hidden');
+        }
+      });
+    }
+
+    // Logout
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', () => {
+        window.SonharteDB.logout();
+        checkAuth();
+      });
+    }
+
+    // 2. Abas do Dashboard
+    if (tabProducts && tabFeedbacks) {
+      tabProducts.addEventListener('click', () => {
+        tabProducts.className = "flex-1 py-2 font-label-bold text-xs bg-white border-x-2 border-t-2 border-on-surface rounded-t-lg translate-y-[3px] z-10 shadow-[0px_-2px_0px_0px_rgba(0,0,0,1)] transition-all";
+        tabFeedbacks.className = "flex-1 py-2 font-label-bold text-xs text-on-surface-variant hover:text-primary transition-all";
+        sectionProducts.classList.remove('hidden');
+        sectionFeedbacks.classList.add('hidden');
+      });
+
+      tabFeedbacks.addEventListener('click', () => {
+        tabFeedbacks.className = "flex-1 py-2 font-label-bold text-xs bg-white border-x-2 border-t-2 border-on-surface rounded-t-lg translate-y-[3px] z-10 shadow-[0px_-2px_0px_0px_rgba(0,0,0,1)] transition-all";
+        tabProducts.className = "flex-1 py-2 font-label-bold text-xs text-on-surface-variant hover:text-primary transition-all";
+        sectionFeedbacks.classList.remove('hidden');
+        sectionProducts.classList.add('hidden');
+      });
+    }
+
+    // 3. Gerenciamento de Produtos
+    let productsList = [];
+
+    async function loadProducts() {
+      const listContainer = document.getElementById('products-list-container');
+      const badge = document.getElementById('products-count-badge');
+      if (!listContainer) return;
+
+      try {
+        productsList = await window.SonharteDB.getProducts();
+        badge.textContent = productsList.length;
+
+        if (productsList.length === 0) {
+          listContainer.innerHTML = '<p class="text-xs text-on-surface-variant text-center py-6">Nenhum produto cadastrado.</p>';
+          return;
+        }
+
+        let html = '';
+        productsList.forEach(p => {
+          html += `
+            <div class="flex items-center justify-between p-2.5 border-2 border-black rounded-xl bg-surface-container-low hover:bg-white transition-colors gap-3">
+              <div class="flex items-center gap-2.5 min-w-0">
+                <img src="${p.imagem}" alt="${p.titulo}" class="w-10 h-10 object-cover border-2 border-black rounded-lg bg-surface-variant shrink-0" />
+                <div class="min-w-0">
+                  <h4 class="font-label-bold text-xs text-on-surface truncate" title="${p.titulo}">${p.titulo}</h4>
+                  <p class="font-body-md text-[9px] text-on-surface-variant">R$ ${p.preco.toFixed(2)} • ${p.ativo ? 'Ativo' : 'Pausado'} ${p.destaque ? `• Selo: ${p.destaque}` : ''}</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <button 
+                  class="edit-prod-btn material-symbols-outlined text-[15px] p-1.5 bg-secondary-fixed text-on-secondary-fixed border-2 border-black rounded-lg shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]"
+                  data-id="${p.id}"
+                >
+                  edit
+                </button>
+                <button 
+                  class="delete-prod-btn material-symbols-outlined text-[15px] p-1.5 bg-red-100 text-red-700 border-2 border-red-700 rounded-lg shadow-[1px_1px_0px_0px_rgba(186,26,26,1)]"
+                  data-id="${p.id}"
+                >
+                  delete
+                </button>
+              </div>
+            </div>
+          `;
+        });
+        listContainer.innerHTML = html;
+        setupProductListEvents();
+      } catch (err) {
+        listContainer.innerHTML = '<p class="text-xs text-red-700 text-center py-6">Erro ao carregar lista de produtos.</p>';
+      }
+    }
+
+    function setupProductListEvents() {
+      // Editar
+      const editBtns = document.querySelectorAll('.edit-prod-btn');
+      editBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-id');
+          const product = productsList.find(p => p.id === id);
+          if (product) {
+            prodId.value = product.id;
+            prodTitulo.value = product.titulo;
+            prodPreco.value = product.preco;
+            prodCategoria.value = product.categoria;
+            if (prodDestaque) prodDestaque.value = product.destaque || '';
+            prodImagem.value = product.imagem;
+            prodDescricao.value = product.descricao;
+            prodAtivo.checked = product.ativo !== false;
+
+            if (previewContainer && previewImage) {
+              previewImage.src = product.imagem;
+              previewContainer.classList.remove('hidden');
+            }
+
+            formTitle.textContent = "Editar Produto";
+            cancelEditBtn.classList.remove('hidden');
+            
+            // Força abertura do formulário
+            productFormWrapper.classList.remove('hidden');
+            toggleFormIcon.textContent = 'close';
+            toggleFormText.textContent = 'Fechar Formulário';
+            toggleFormBtn.className = "w-full bg-surface-container text-on-surface py-3 border-2 border-black rounded-lg font-label-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none text-xs flex items-center justify-center gap-1";
+            
+            productFormWrapper.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+
+      // Excluir
+      const deleteBtns = document.querySelectorAll('.delete-prod-btn');
+      deleteBtns.forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const id = btn.getAttribute('data-id');
+          if (confirm('Deseja deletar este produto?')) {
+            try {
+              await window.SonharteDB.deleteProduct(id);
+              loadProducts();
+            } catch (err) {
+              alert('Erro ao excluir: ' + err.message);
+            }
+          }
+        });
+      });
+    }
+
+    // Cancelar
+    if (cancelEditBtn) {
+      cancelEditBtn.addEventListener('click', () => {
+        resetProductForm();
+      });
+    }
+
+    function resetProductForm(shouldCloseDrawer = true) {
+      productForm.reset();
+      prodId.value = '';
+      prodImagem.value = '';
+      if (prodDestaque) prodDestaque.value = '';
+      if (previewContainer && previewImage) {
+        previewContainer.classList.add('hidden');
+        previewImage.src = '';
+      }
+      formTitle.textContent = "Adicionar Novo Produto";
+      cancelEditBtn.classList.add('hidden');
+      if (shouldCloseDrawer) {
+        closeFormDrawer();
+      }
+    }
+
+    // Submit de Produto
+    if (productForm) {
+      productForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const payload = {
+          titulo: prodTitulo.value,
+          preco: parseFloat(prodPreco.value),
+          categoria: prodCategoria.value,
+          destaque: prodDestaque ? prodDestaque.value : '',
+          imagem: prodImagem.value,
+          descricao: prodDescricao.value,
+          ativo: prodAtivo.checked
+        };
+
+        if (prodId.value) {
+          payload.id = prodId.value;
+        }
+
+        try {
+          await window.SonharteDB.saveProduct(payload);
+          resetProductForm();
+          loadProducts();
+        } catch (err) {
+          alert('Erro ao salvar: ' + err.message);
+        }
+      });
+    }
+
+    // 4. Depoimentos Mobile
+    async function loadFeedbacks() {
+      const listContainer = document.getElementById('feedbacks-list-container');
+      const badge = document.getElementById('feedbacks-count-badge');
+      if (!listContainer) return;
+
+      try {
+        const feedbacksList = await window.SonharteDB.getFeedbacks();
+        badge.textContent = feedbacksList.length;
+
+        if (feedbacksList.length === 0) {
+          listContainer.innerHTML = '<p class="text-xs text-on-surface-variant text-center py-6">Nenhum depoimento cadastrado.</p>';
+          return;
+        }
+
+        let html = '';
+        feedbacksList.forEach(f => {
+          html += `
+            <div class="bg-surface-container-low p-3.5 border-2 border-black rounded-xl flex flex-col justify-between gap-2.5 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+              <div>
+                <div class="flex justify-between items-center mb-1.5">
+                  <h4 class="font-label-bold text-xs text-on-surface">${f.nome}</h4>
+                  <span class="text-[9px] text-on-surface-variant font-label-bold">${f.data || 'Recente'}</span>
+                </div>
+                <p class="font-body-md text-[11px] text-on-surface-variant leading-relaxed">"${f.texto}"</p>
+                <div class="flex text-amber-500 mt-1">
+                  ${Array(f.estrelas).fill('<span class="material-symbols-outlined text-[11px]">star</span>').join('')}
+                </div>
+              </div>
+              <button 
+                class="delete-feedback-btn w-full bg-red-100 text-red-700 py-1.5 border-2 border-red-700 rounded-lg font-label-bold text-[9px] shadow-[1px_1px_0px_0px_rgba(186,26,26,1)] flex items-center justify-center gap-1 mt-1"
+                data-id="${f.id}"
+              >
+                <span class="material-symbols-outlined text-[10px]">delete</span> Remover
+              </button>
+            </div>
+          `;
+        });
+        listContainer.innerHTML = html;
+        setupFeedbackListEvents();
+      } catch (err) {
+        listContainer.innerHTML = '<p class="text-xs text-red-700 text-center py-6">Erro ao carregar depoimentos.</p>';
+      }
+    }
+
+    function setupFeedbackListEvents() {
+      const deleteBtns = document.querySelectorAll('.delete-feedback-btn');
+      deleteBtns.forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const id = btn.getAttribute('data-id');
+          if (confirm('Deseja realmente remover este depoimento?')) {
+            try {
+              await window.SonharteDB.deleteFeedback(id);
+              loadFeedbacks();
+            } catch (err) {
+              alert('Erro: ' + err.message);
+            }
+          }
+        });
+      });
+    }
+
+  });
+</script>

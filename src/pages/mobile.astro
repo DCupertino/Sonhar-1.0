@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/mobile/Header.astro';
+import HorizontalNav from '../components/mobile/HorizontalNav.astro';
+import Hero from '../components/mobile/Hero.astro';
+import Categories from '../components/mobile/Categories.astro';
+import Favorites from '../components/mobile/Favorites.astro';
+import Process from '../components/mobile/Process.astro';
+import Feedbacks from '../components/mobile/Feedbacks.astro';
+import Footer from '../components/mobile/Footer.astro';
+import WorkshopHighlight from '../components/mobile/WorkshopHighlight.astro';
+---
+
+<BaseLayout title="Sonharte | Versão Mobile">
+  <Header />
+  <main class="overflow-hidden">
+    <HorizontalNav />
+    <Hero />
+    <Categories />
+    <WorkshopHighlight />
+    <Favorites />
+    <Process />
+    <Feedbacks />
+    <Footer />
+  </main>
+
+  <script>
+    // Horizontal Scroll Interactions for products or categories
+    const scrolls = document.querySelectorAll('.no-scrollbar');
+    scrolls.forEach(scroll => {
+        let isDown = false;
+        let sx: number, sl: number;
+        const element = scroll as HTMLElement;
+
+        element.addEventListener('mousedown', (e) => { 
+            isDown = true; 
+            sx = e.pageX - element.offsetLeft; 
+            sl = element.scrollLeft; 
+        });
+        element.addEventListener('mouseleave', () => { isDown = false; });
+        element.addEventListener('mouseup', () => { isDown = false; });
+        element.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - element.offsetLeft;
+            const walk = (x - sx) * 2;
+            element.scrollLeft = sl - walk;
+        });
+    });
+  </script>
+</BaseLayout>

@@ -1,0 +1,240 @@
+<!-- Feedbacks: O que dizem nossos clientes -->
+<section class="px-4 py-12 bg-surface-container-low border-t-2 border-on-background">
+  <h2 class="font-headline-md text-headline-md-mobile mb-4 text-center">Nossas Sonhadoras</h2>
+  
+  <!-- Formulário de Feedback Mobile -->
+  <div class="bg-white thick-border p-5 rounded-2xl mb-8 block-shadow-primary max-w-sm mx-auto">
+    <h3 class="font-label-bold text-primary mb-1">Deixe seu depoimento</h3>
+    <p class="text-xs text-on-surface-variant mb-4">Sua opinião vale ouro para nós!</p>
+    
+    <form id="mobile-feedback-form" class="flex flex-col gap-4">
+      <div class="flex flex-col gap-1">
+        <label for="m-name" class="text-xs font-bold text-on-surface">Nome <span class="text-[10px] font-normal text-on-surface-variant">(não obrigatório)</span></label>
+        <input 
+          type="text" 
+          id="m-name" 
+          placeholder="Seu nome" 
+          class="px-3 py-2 bg-white text-on-surface font-body-md thin-border rounded-xl focus:outline-none"
+        />
+      </div>
+      
+      <div class="flex flex-col gap-1">
+        <span class="text-xs font-bold text-on-surface">Sua Nota</span>
+        <div class="flex gap-1 rating-stars" id="mobile-stars">
+          <button type="button" class="m-star-btn material-symbols-outlined text-2xl text-on-surface-variant/30 cursor-pointer" data-value="1">star</button>
+          <button type="button" class="m-star-btn material-symbols-outlined text-2xl text-on-surface-variant/30 cursor-pointer" data-value="2">star</button>
+          <button type="button" class="m-star-btn material-symbols-outlined text-2xl text-on-surface-variant/30 cursor-pointer" data-value="3">star</button>
+          <button type="button" class="m-star-btn material-symbols-outlined text-2xl text-on-surface-variant/30 cursor-pointer" data-value="4">star</button>
+          <button type="button" class="m-star-btn material-symbols-outlined text-2xl text-on-surface-variant/30 cursor-pointer" data-value="5">star</button>
+        </div>
+        <input type="hidden" id="m-rating" value="0" />
+      </div>
+      
+      <div class="flex flex-col gap-1">
+        <label for="m-message" class="text-xs font-bold text-on-surface">Mensagem</label>
+        <textarea 
+          id="m-message" 
+          required
+          rows="3" 
+          placeholder="O que achou dos mimos?..." 
+          class="px-3 py-2 bg-white text-on-surface font-body-md thin-border rounded-xl focus:outline-none resize-none"
+        ></textarea>
+      </div>
+      
+      <button 
+        type="submit" 
+        class="w-full py-3 mt-1 bg-primary text-white font-label-bold thin-border block-shadow-tertiary rounded-xl text-center active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
+      >
+        Enviar Feedback
+      </button>
+    </form>
+  </div>
+
+  <!-- Carrossel de Feedbacks Mobile -->
+  <div id="mobile-feedbacks-carousel" class="flex overflow-x-auto gap-4 no-scrollbar pt-6 pb-6 -mx-4 px-4">
+    <!-- Testimonial 1 -->
+    <div class="min-w-[280px] bg-white thick-border p-6 rounded-2xl block-shadow-primary -rotate-1 flex flex-col justify-between flex-shrink-0">
+      <div>
+        <div class="flex text-secondary mb-3">
+          <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+          <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+          <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+          <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+          <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+        </div>
+        <p class="font-body-md italic mb-4">"O capricho na embalagem me emocionou. Dá pra sentir o amor em cada detalhe!"</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full thin-border bg-primary-fixed overflow-hidden">
+          <img class="w-full h-full object-cover" alt="Marina Silva Profile" src="/assets/de5112865cc28b0b9a00ea41a45dcf55.png" />
+        </div>
+        <div>
+          <p class="font-label-bold">Marina Silva</p>
+          <p class="text-xs text-on-surface-variant">24/06/2026</p>
+        </div>
+      </div>
+    </div>
+    <!-- Testimonial 2 -->
+    <div class="min-w-[280px] bg-white thick-border p-6 rounded-2xl block-shadow-tertiary rotate-1 flex flex-col justify-between flex-shrink-0">
+      <div>
+        <div class="flex text-secondary mb-3">
+          <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+          <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+          <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+          <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+          <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+        </div>
+        <p class="font-body-md italic mb-4">"Minhas anotações nunca foram tão divertidas. O planner é simplesmente perfeito!"</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full thin-border bg-tertiary-fixed overflow-hidden">
+          <img class="w-full h-full object-cover" alt="Clara Mendes Profile" src="/assets/e2714f94bbe13ce84afd5ba3e8a01710.png" />
+        </div>
+        <div>
+  </div>
+</section>
+
+<script is:inline>
+  // Script para avaliação por estrelas (Mobile)
+  const mStars = document.querySelectorAll('#mobile-stars .m-star-btn');
+  const mRatingInput = document.getElementById('m-rating');
+
+  mStars.forEach(star => {
+    star.addEventListener('click', () => {
+      const value = parseInt(star.getAttribute('data-value'));
+      mRatingInput.value = value;
+      
+      mStars.forEach(s => {
+        const sVal = parseInt(s.getAttribute('data-value'));
+        if (sVal <= value) {
+          s.classList.remove('text-on-surface-variant/30');
+          s.classList.add('text-secondary');
+          s.style.fontVariationSettings = "'FILL' 1";
+        } else {
+          s.classList.remove('text-secondary');
+          s.classList.add('text-on-surface-variant/30');
+          s.style.fontVariationSettings = "'FILL' 0";
+        }
+      });
+    });
+  });
+
+  // Script para submissão do feedback (Mobile)
+  const mForm = document.getElementById('mobile-feedback-form');
+  const mCarousel = document.getElementById('mobile-feedbacks-carousel');
+
+  async function loadMobileFeedbacks() {
+    if (!mCarousel) return;
+
+    try {
+      const list = await window.SonharteDB.getFeedbacks();
+      mCarousel.innerHTML = '';
+      
+      if (list.length === 0) {
+        mCarousel.innerHTML = `
+          <div class="w-full text-center py-6 font-body-md text-on-surface-variant text-xs">
+            Seja o primeiro a deixar um depoimento! 🌸
+          </div>
+        `;
+        return;
+      }
+
+      list.forEach((f, idx) => {
+        const firstLetter = (f.nome || 'A').charAt(0).toUpperCase();
+        let starsHtml = '';
+        for (let i = 1; i <= 5; i++) {
+          const fill = i <= f.estrelas ? "style=\"font-variation-settings: 'FILL' 1;\"" : "";
+          const color = i <= f.estrelas ? "text-secondary" : "text-on-surface-variant/30";
+          starsHtml += `<span class="material-symbols-outlined text-sm ${color}" ${fill}>star</span>`;
+        }
+
+        const colors = ['bg-primary-fixed text-primary', 'bg-tertiary-fixed text-tertiary', 'bg-secondary-fixed text-secondary'];
+        const randomColor = colors[idx % colors.length];
+        
+        const shadows = ['block-shadow-primary', 'block-shadow-secondary', 'block-shadow-tertiary'];
+        const randomShadow = shadows[idx % shadows.length];
+        
+        const rotations = ['-rotate-1', 'rotate-1', '-rotate-2', 'rotate-2'];
+        const randomRotation = rotations[idx % rotations.length];
+        
+        let displayData = f.data;
+        if (f.criado_em) {
+          displayData = new Date(f.criado_em).toLocaleDateString('pt-BR');
+        }
+
+        const card = document.createElement('div');
+        card.className = `min-w-[280px] bg-white thick-border p-6 rounded-2xl ${randomShadow} ${randomRotation} flex flex-col justify-between flex-shrink-0`;
+        card.innerHTML = `
+          <div>
+            <div class="flex mb-3">
+              ${starsHtml}
+            </div>
+            <p class="font-body-md italic text-xs mb-4">"${f.texto}"</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full thin-border ${randomColor} flex items-center justify-center font-label-bold text-xs">${firstLetter}</div>
+            <div>
+              <p class="font-label-bold text-xs">${f.nome || 'Anônimo'}</p>
+              <p class="text-[10px] text-on-surface-variant">${displayData || 'Recente'}</p>
+            </div>
+          </div>
+        `;
+        mCarousel.appendChild(card);
+      });
+    } catch (err) {
+      console.error("Erro ao carregar feedbacks:", err);
+    }
+  }
+
+  if (mForm) {
+    mForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const nameInput = document.getElementById('m-name').value.trim();
+      const name = nameInput !== "" ? nameInput : "Anônimo";
+      const rating = parseInt(mRatingInput.value) || 5;
+      const message = document.getElementById('m-message').value;
+
+      const payload = {
+        nome: name,
+        texto: message,
+        estrelas: rating
+      };
+
+      try {
+        await window.SonharteDB.saveFeedback(payload);
+        loadMobileFeedbacks();
+        
+        // Limpa formulário
+        mForm.reset();
+        mRatingInput.value = 0;
+        mStars.forEach(s => {
+          s.classList.remove('text-secondary');
+          s.classList.add('text-on-surface-variant/30');
+          s.style.fontVariationSettings = "'FILL' 0";
+        });
+      } catch (err) {
+        alert("Erro ao enviar depoimento: " + err.message);
+      }
+    });
+  }
+
+  // Inicializa a listagem
+  window.addEventListener('load', loadMobileFeedbacks);
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    loadMobileFeedbacks();
+  }
+</script>
+
+<style>
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9) translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+</style>

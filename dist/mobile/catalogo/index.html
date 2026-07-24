@@ -1,0 +1,579 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="pt-br"> <head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><link href="/assets/17edea699b9b27907616409003241ce2.css" rel="stylesheet"><link href="/assets/a39f5c6fcbb87b419667ec984d2e579a.css" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>(function(){const supabaseUrl = "";
+const supabaseAnonKey = "";
+
+      window.SUPABASE_URL = supabaseUrl;
+      window.SUPABASE_ANON_KEY = supabaseAnonKey;
+    })();</script><script src="/assets/db.js"></script><script src="/assets/cart.js"></script><title>Sonharte | Catálogo Móvel</title><link rel="stylesheet" href="/_astro/admin.hZO2VeTW.css">
+<style>@keyframes shine{0%{transform:translate(-150%) skew(-15deg)}50%{transform:translate(150%) skew(-15deg)}to{transform:translate(150%) skew(-15deg)}}.animate-shine[data-astro-cid-gmu4iemy]{animation:shine 3.5s infinite ease-in-out}@keyframes pulse-soft{0%,to{transform:scale(1) rotate(0)}50%{transform:scale(1.2) rotate(15deg)}}.animate-pulse-soft[data-astro-cid-gmu4iemy]{display:inline-block;animation:pulse-soft 2s infinite ease-in-out}
+</style></head> <body class="font-body-md text-on-background overflow-x-hidden selection:bg-secondary-container">  <!-- Top AppBar --><header id="mobile-header" class="w-full top-0 sticky z-50 transition-transform duration-300 ease-in-out flex justify-between items-center px-4 py-3 bg-surface border-b-4 border-on-background"> <button class="p-2 active:scale-90 transition-transform" onclick="toggleDrawer()"> <span class="material-symbols-outlined text-primary text-3xl">menu</span> </button> <a href="/mobile" class="flex items-center gap-2 hover:opacity-90 transition-opacity"> <img alt="Sonharte Logo" class="h-20 w-20 object-contain" src="/assets/logo_clean.png"> </a> <div class="flex items-center gap-3"> <button id="mobile-search-trigger" class="material-symbols-outlined text-primary p-1 active:scale-90 transition-transform">search</button> <button id="mobile-cart-btn" class="material-symbols-outlined text-primary p-1 relative">
+shopping_cart
+<span id="mobile-cart-badge" class="absolute -top-1 -right-1 bg-tertiary text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center border border-black hidden">0</span> </button> </div> </header> <!-- Mobile Search Overlay (Barra de Busca Expansível Premium) --> <div id="mobile-search-overlay" class="fixed inset-x-0 top-0 bg-surface border-b-4 border-on-background z-[80] shadow-[0_8px_0_0_rgba(0,0,0,0.15)] -translate-y-full transition-all duration-300 ease-out flex flex-col p-4 gap-4 pointer-events-none opacity-0"> <div class="flex items-center gap-3"> <!-- Input Container --> <div class="flex-1 relative"> <input type="search" id="mobile-search-input" placeholder="O que você está procurando? 🌸" class="w-full px-4 py-2.5 pr-10 bg-white text-on-surface font-body-md border-3 border-on-surface rounded-xl focus:outline-none focus:border-primary text-sm shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] placeholder:text-on-surface-variant/50" autocomplete="off"> <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-primary text-xl">search</span> </div> <!-- Close Button --> <button id="mobile-search-close" class="p-1.5 border-2 border-black bg-secondary-fixed text-on-secondary-fixed rounded-xl shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:scale-95 transition-transform flex items-center justify-center"> <span class="material-symbols-outlined text-lg">close</span> </button> </div> <!-- Suggestions Panel --> <div id="mobile-search-suggestions" class="max-h-[60vh] overflow-y-auto flex flex-col bg-white border-3 border-on-surface rounded-xl shadow-[3px_3px_0px_0px_rgba(75,37,187,1)] hidden divide-y divide-slate-100"></div> </div> <!-- Navigation Drawer (Hidden by default) --> <div class="fixed inset-0 bg-black/50 z-[60] hidden backdrop-blur-sm transition-opacity opacity-0" id="drawer-overlay" onclick="toggleDrawer()"></div> <aside class="fixed inset-y-0 left-0 z-[70] w-72 bg-surface-container border-r-4 border-on-background -translate-x-full transition-transform duration-300 ease-out flex flex-col" id="drawer"> <div class="p-6 bg-primary-container text-on-primary-container border-b-4 border-on-background"> <h2 class="font-headline-md text-headline-md">Categorias</h2> </div> <nav class="flex-1 overflow-y-auto py-4"> <a class="bg-secondary-container text-on-secondary-container border-2 border-on-background rounded-lg m-2 p-4 flex items-center gap-3 font-label-bold font-body-md" href="/mobile"> <span class="material-symbols-outlined">home</span> Início
+</a> <!-- Workshops em Primeiro Lugar e Destacado --> <a class="text-primary font-bold bg-primary/5 border-l-4 border-primary p-4 flex items-center gap-3 font-label-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors" href="/mobile/workshops"> <span class="material-symbols-outlined text-pink-600 animate-pulse">auto_awesome</span> Workshops ✨
+</a> <a class="text-on-surface p-4 flex items-center gap-3 font-label-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors" href="/mobile/catalogo"> <span class="material-symbols-outlined">shopping_bag</span> Todos os produtos
+</a> <a class="text-on-surface p-4 flex items-center gap-3 font-label-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors border-b border-outline-variant/40" href="/mobile/catalogo?categoria=Lápis de Cor"> <span class="material-symbols-outlined">edit</span> Lápis de Cor
+</a> <a class="text-on-surface p-4 flex items-center gap-3 font-label-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors border-b border-outline-variant/40" href="/mobile/catalogo?categoria=Cadernos"> <span class="material-symbols-outlined">book</span> Cadernos
+</a> <a class="text-on-surface p-4 flex items-center gap-3 font-label-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors border-b border-outline-variant/40" href="/mobile/catalogo?categoria=Canetas"> <span class="material-symbols-outlined">draw</span> Canetas
+</a> <a class="text-on-surface p-4 flex items-center gap-3 font-label-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors border-b-2 border-on-background" href="/mobile/catalogo?categoria=Materiais"> <span class="material-symbols-outlined">architecture</span> Materiais
+</a> <a class="text-on-surface p-4 flex items-center gap-3 font-label-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors" href="/mobile/servicos"> <span class="material-symbols-outlined">design_services</span> Serviços
+</a> <a class="text-on-surface p-4 flex items-center gap-3 font-label-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors" href="/mobile/sobre"> <span class="material-symbols-outlined">info</span> Sobre Nós
+</a> <a class="text-on-surface p-4 flex items-center gap-3 font-label-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors" href="/mobile/contato"> <span class="material-symbols-outlined">mail</span> Contato
+</a> </nav> </aside> <script>
+  function toggleDrawer() {
+      const drawer = document.getElementById('drawer');
+      const overlay = document.getElementById('drawer-overlay');
+      const isHidden = drawer.classList.contains('-translate-x-full');
+
+      if (isHidden) {
+          drawer.classList.remove('-translate-x-full');
+          overlay.classList.remove('hidden');
+          setTimeout(() => overlay.classList.add('opacity-100'), 10);
+          document.body.classList.add('overflow-hidden');
+      } else {
+          drawer.classList.add('-translate-x-full');
+          overlay.classList.remove('opacity-100');
+          setTimeout(() => overlay.classList.add('hidden'), 300);
+          document.body.classList.remove('overflow-hidden');
+      }
+  }
+
+  function updateMobileCartBadge() {
+    const badge = document.getElementById('mobile-cart-badge');
+    if (!badge || !window.SonharteCart) return;
+    const count = window.SonharteCart.count();
+    if (count > 0) {
+      badge.textContent = count;
+      badge.classList.remove('hidden');
+    } else {
+      badge.classList.add('hidden');
+    }
+  }
+
+  // Atualiza no carregamento e escuta eventos de alteração
+  window.addEventListener('load', updateMobileCartBadge);
+  window.addEventListener('cart-updated', updateMobileCartBadge);
+  // Escuta imediata caso o DOM já esteja carregado
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    updateMobileCartBadge();
+  }
+
+  // Lógica do Autocomplete de Sugestões de Pesquisa (Mobile)
+  document.addEventListener('DOMContentLoaded', () => {
+    const trigger = document.getElementById('mobile-search-trigger');
+    const overlay = document.getElementById('mobile-search-overlay');
+    const closeBtn = document.getElementById('mobile-search-close');
+    const input = document.getElementById('mobile-search-input');
+    const suggestions = document.getElementById('mobile-search-suggestions');
+
+    if (!trigger || !overlay || !closeBtn || !input || !suggestions) return;
+
+    let products = [];
+
+    // Abrir overlay
+    trigger.addEventListener('click', async () => {
+      overlay.classList.remove('-translate-y-full', 'pointer-events-none', 'opacity-0');
+      overlay.classList.add('translate-y-0', 'pointer-events-auto', 'opacity-100');
+      input.focus();
+
+      // Carrega os produtos se ainda não tiver carregado
+      if (products.length === 0 && window.SonharteDB) {
+        try {
+          const raw = await window.SonharteDB.getProducts();
+          products = raw.filter(p => p.ativo !== false);
+        } catch (e) {
+          console.error("Erro ao carregar produtos para sugestões mobile:", e);
+        }
+      }
+    });
+
+    // Fechar overlay
+    closeBtn.addEventListener('click', () => {
+      overlay.classList.add('-translate-y-full', 'pointer-events-none', 'opacity-0');
+      overlay.classList.remove('translate-y-0', 'pointer-events-auto', 'opacity-100');
+      input.value = '';
+      suggestions.innerHTML = '';
+      suggestions.classList.add('hidden');
+    });
+
+    // Buscar no input
+    input.addEventListener('input', () => {
+      if (input.value === 'adminM') {
+        window.location.href = '/mobile/admin';
+        return;
+      }
+      const query = input.value.trim().toLowerCase();
+      if (!query) {
+        suggestions.innerHTML = '';
+        suggestions.classList.add('hidden');
+        return;
+      }
+
+      // Filtra produtos
+      const filtered = products.filter(p => 
+        p.titulo.toLowerCase().includes(query) || 
+        (p.descricao && p.descricao.toLowerCase().includes(query))
+      ).slice(0, 5);
+
+      if (filtered.length === 0) {
+        suggestions.innerHTML = `
+          <div class="p-4 text-center text-on-surface-variant font-body-md flex flex-col items-center justify-center gap-1 bg-white">
+            <span class="material-symbols-outlined text-pink-500 text-2xl">sentiment_dissatisfied</span>
+            <span class="text-[11px] font-label-bold">Nenhum mimo encontrado... 🌸</span>
+          </div>
+        `;
+        suggestions.classList.remove('hidden');
+        return;
+      }
+
+      // Paleta de cores pastel para tags de categoria
+      const catColors = {
+        'Lápis de Cor': 'bg-pink-100 text-pink-700',
+        'Cadernos': 'bg-yellow-100 text-yellow-700',
+        'Canetas': 'bg-purple-100 text-purple-700',
+        'Presentes Criativos': 'bg-blue-100 text-blue-700',
+        'Materiais': 'bg-green-100 text-green-700'
+      };
+
+      suggestions.innerHTML = filtered.map((p, idx) => {
+        const tagClass = catColors[p.categoria] || 'bg-slate-100 text-slate-700';
+        
+        // Cores suaves de fundo para hover rotativo neobrutalista
+        const hovers = ['hover:bg-yellow-50/50', 'hover:bg-pink-50/50', 'hover:bg-purple-50/50', 'hover:bg-blue-50/50', 'hover:bg-green-50/50'];
+        const hoverClass = hovers[idx % hovers.length];
+
+        return `
+          <a 
+            href="/mobile/catalogo?busca=${encodeURIComponent(p.titulo)}" 
+            class="flex items-center gap-3 p-3 ${hoverClass} transition-colors cursor-pointer text-left decoration-none"
+          >
+            <img src="${p.imagem}" alt="${p.titulo}" class="w-10 h-10 object-cover rounded-lg border-2 border-black shrink-0 shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]" />
+            <div class="flex-1 min-w-0">
+              <h4 class="font-label-bold text-[11px] text-on-surface">${p.titulo}</h4>
+              <div class="flex items-center gap-1.5 mt-0.5">
+                <span class="px-2 py-0.5 text-[8px] font-label-bold rounded-full border border-black/10 ${tagClass}">${p.categoria}</span>
+              </div>
+            </div>
+            <div class="shrink-0 font-label-bold text-[10px] text-primary bg-primary/5 border border-primary/20 px-2 py-0.5 rounded-md">
+              R$ ${parseFloat(p.preco).toFixed(2).replace('.', ',')}
+            </div>
+          </a>
+        `;
+      }).join('');
+      suggestions.classList.remove('hidden');
+    });
+
+    // Se apertar enter no input, ir para o catálogo geral
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        const query = input.value.trim();
+        if (query === 'adminM') {
+          e.preventDefault();
+          window.location.href = '/mobile/admin';
+          return;
+        }
+        if (query) {
+          window.location.href = `/mobile/catalogo?busca=${encodeURIComponent(query)}`;
+        }
+      }
+    });
+  });
+
+  // Lógica do Smart Header (Esconde ao rolar para baixo, aparece ao rolar para cima)
+  document.addEventListener('DOMContentLoaded', () => {
+    const header = document.getElementById('mobile-header');
+    if (!header) return;
+
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      
+      // Esconde se rolar para baixo e passar de 100px
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        header.style.transform = 'translateY(-110%)';
+      } else {
+        // Mostra se rolar para cima
+        header.style.transform = 'translateY(0)';
+      }
+      
+      lastScrollY = currentScrollY;
+    }, { passive: true });
+  });
+</script> <!-- Scrolling Horizontal Menu --><nav class="flex overflow-x-auto no-scrollbar gap-3 px-4 py-4 bg-surface-container-low border-b-2 border-on-background" id="mobile-horizontal-nav" data-astro-cid-gmu4iemy> <!-- Botão Criativo e Destacado de Workshops --> <a href="/mobile/workshops" class="workshop-nav-btn whitespace-nowrap px-4 py-2 border-2 border-black rounded-full bg-gradient-to-r from-[#FF007A] via-[#8F00FF] to-primary text-white font-label-bold flex items-center gap-1 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all relative overflow-hidden shrink-0" id="nav-workshops-btn" data-astro-cid-gmu4iemy> <span class="absolute inset-0 w-full h-full bg-white/25 transform -translate-x-full skew-x-12 animate-shine" data-astro-cid-gmu4iemy></span> <span class="material-symbols-outlined text-[14px] animate-pulse-soft" data-astro-cid-gmu4iemy>auto_awesome</span>
+Workshops ✨
+</a> <button class="category-btn whitespace-nowrap px-4 py-2 thin-border rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-bold block-shadow-secondary active:translate-x-0.5 active:translate-y-0.5 active:shadow-none" data-category="Todos" data-astro-cid-gmu4iemy>Todos</button> <button class="category-btn whitespace-nowrap px-4 py-2 thin-border rounded-full bg-white text-on-surface font-label-bold transition-all" data-category="Lápis de Cor & Desenho" data-astro-cid-gmu4iemy>Lápis de Cor & Desenho</button> <button class="category-btn whitespace-nowrap px-4 py-2 thin-border rounded-full bg-white text-on-surface font-label-bold transition-all" data-category="Cadernos & Papéis" data-astro-cid-gmu4iemy>Cadernos & Papéis</button> <button class="category-btn whitespace-nowrap px-4 py-2 thin-border rounded-full bg-white text-on-surface font-label-bold transition-all" data-category="Canetas & Escrita" data-astro-cid-gmu4iemy>Canetas & Escrita</button> <button class="category-btn whitespace-nowrap px-4 py-2 thin-border rounded-full bg-white text-on-surface font-label-bold transition-all" data-category="Artes & Utilidades" data-astro-cid-gmu4iemy>Artes & Utilidades</button> <button class="category-btn whitespace-nowrap px-4 py-2 thin-border rounded-full bg-white text-on-surface font-label-bold transition-all" data-category="Organização & Escritório" data-astro-cid-gmu4iemy>Organização & Escritório</button> </nav>  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const nav = document.getElementById('mobile-horizontal-nav');
+    if (!nav) return;
+    const buttons = nav.querySelectorAll('.category-btn');
+    
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cat = btn.getAttribute('data-category') || 'Todos';
+        
+        // Se NÃO estiver na página de catálogo, redireciona
+        if (!window.location.pathname.includes('/mobile/catalogo')) {
+          window.location.href = `/mobile/catalogo?categoria=${encodeURIComponent(cat)}`;
+          return;
+        }
+
+        buttons.forEach(b => {
+          // Volta todos para o estado inativo
+          b.className = "category-btn whitespace-nowrap px-4 py-2 thin-border rounded-full bg-white text-on-surface font-label-bold transition-all";
+        });
+        // Aplica o estado ativo no botão clicado
+        btn.className = "category-btn whitespace-nowrap px-4 py-2 thin-border rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-bold block-shadow-secondary active:translate-x-0.5 active:translate-y-0.5 active:shadow-none";
+      });
+    });
+  });
+</script> <main class="flex flex-col gap-6 py-6 min-h-screen"> <!-- Barra de Filtros Compacta para Mobile --> <div class="px-4 py-4 bg-surface-container flex flex-col gap-3 border-b-2 border-on-background"> <!-- Busca por Nome --> <div class="relative"> <input type="text" id="search-input-mobile" placeholder="O que você está procurando?" class="w-full px-4 py-2 border-2 border-on-background rounded-xl text-sm focus:outline-none focus:border-primary bg-white font-body-md"> <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span> </div> <!-- Filtros Secundários Lado a Lado --> <div class="flex gap-3"> <!-- Ordenação --> <div class="w-1/2"> <select id="sort-select-mobile" class="w-full px-2 py-2.5 border-2 border-on-background rounded-xl text-xs font-label-bold bg-white focus:outline-none focus:border-primary"> <option value="default">Relevância</option> <option value="price-asc">Preço: Menor-Maior</option> <option value="price-desc">Preço: Maior-Menor</option> <option value="name-asc">Nome: A-Z</option> </select> </div> <!-- Preço Máximo Slider Compacto --> <div class="w-1/2 border-2 border-on-background rounded-xl px-3 py-1.5 bg-white flex flex-col justify-center"> <div class="flex justify-between items-center text-[10px] font-label-bold text-on-surface-variant mb-1"> <span>Máx:</span> <span id="price-value-mobile" class="bg-primary-container text-white px-1 py-0.2 rounded">R$ 50</span> </div> <input type="range" id="price-range-mobile" min="0" max="50" step="1" value="50" class="w-full accent-primary h-2"> </div> </div> </div> <!-- Resultados e Grade de Itens --> <div class="px-4"> <div class="flex justify-between items-center mb-4"> <h2 class="font-headline-md text-lg" id="mobile-results-title">Todos os Produtos</h2> <span class="text-xs font-label-bold text-on-surface-variant" id="mobile-results-count">0 itens</span> </div> <!-- Grade Mobile (2 colunas) --> <div class="grid grid-cols-2 gap-4" id="products-grid-mobile"> <!-- Injetado dinamicamente --> </div> <!-- Alerta se nenhum produto for encontrado --> <div id="no-products-alert-mobile" class="hidden flex flex-col items-center justify-center py-16 text-center bg-white border-2 border-dashed border-outline-variant rounded-2xl px-4"> <span class="material-symbols-outlined text-5xl text-on-surface-variant/40 mb-3">search_off</span> <h3 class="font-label-bold text-md text-on-surface">Nenhum mimo encontrado</h3> <p class="text-xs text-on-surface-variant mt-1">Experimente mudar seus filtros ou termos de pesquisa!</p> </div> </div> </main> <!-- Footer / Location Map --><footer class="px-4 py-12 bg-surface-container-high border-t-4 border-on-background"> <a href="/mobile" class="flex flex-col items-center mb-8 hover:opacity-90 transition-opacity"> <img alt="Sonharte Logo" class="h-[77px] w-[77px] mb-4 object-contain" src="/assets/logo_clean.png"> <h3 class="font-headline-lg text-primary tracking-tighter">SONHARTE</h3> </a> <div class="mb-10"> <h4 class="font-headline-md text-lg mb-4 flex items-center gap-2"> <span class="material-symbols-outlined text-primary">location_on</span> Nossa Casinha
+</h4> <div class="thick-border rounded-2xl overflow-hidden h-48 relative block-shadow-primary"> <iframe src="https://maps.google.com/maps?q=Rua%20S%C3%B3crates,%20679%20-%20Belo%20Horizonte%20MG%2031990-010&t=&z=15&ie=UTF8&iwloc=&output=embed" class="w-full h-full border-0 grayscale contrast-125 hover:grayscale-0 transition-all duration-300" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe> </div> <p class="text-sm font-label-bold mt-3 text-on-surface-variant px-1">Rua Sócrates, 679 - Belo Horizonte, MG - CEP 31990-010</p> </div> <div class="grid grid-cols-2 gap-8 mb-10"> <div> <h5 class="font-label-bold uppercase text-primary mb-3">Links</h5> <ul class="space-y-2 text-sm"> <li><a class="hover:underline" href="/mobile/sobre">Sobre nós</a></li> <li><a class="hover:underline" href="/mobile/workshops">Workshops</a></li> <li><a class="hover:underline" href="#">Como comprar</a></li> <li><a class="hover:underline" href="#">Frete e Prazos</a></li> <li><a class="hover:underline" href="#">Trocas e Devoluções</a></li> </ul> </div> <div> <h5 class="font-label-bold uppercase text-tertiary mb-3">Ajuda</h5> <ul class="space-y-2 text-sm"> <li><a class="hover:underline" href="#">Perguntas Frequentes</a></li> <li><a class="hover:underline" href="/mobile/contato">Fale Conosco</a></li> <li><a class="hover:underline" href="mailto:m.sonharte@gmail.com">E-mail</a></li> <li><a class="hover:underline" href="https://wa.me/5531972122639" target="_blank">WhatsApp</a></li> <li><a class="hover:underline" href="#">Privacidade</a></li> </ul> </div> </div> <div class="flex justify-center gap-6 mb-8"> <a class="w-12 h-12 bg-white thick-border rounded-xl flex items-center justify-center block-shadow-primary overflow-hidden" href="https://www.instagram.com/p.sonharte/" target="_blank"> <img alt="Instagram" class="w-full h-full object-cover" src="/assets/instagram_new.png"> </a> <a class="w-12 h-12 bg-white thick-border rounded-xl flex items-center justify-center block-shadow-secondary overflow-hidden" href="https://wa.me/5531972122639" target="_blank"> <img alt="WhatsApp" class="w-full h-full object-cover" src="/assets/whatsapp_new.png"> </a> </div> <div class="text-center pt-8 border-t border-dashed border-outline"> <p class="text-xs font-label-bold opacity-60">© 2025 Sonharte Estúdio Criativo.<br>Feito com amor e papel.</p> </div> </footer>  <!-- Cart Drawer Overlay --><div id="cart-overlay" class="fixed inset-0 bg-black/50 z-[90] hidden opacity-0 transition-opacity duration-300 backdrop-blur-sm"></div> <!-- Cart Drawer Container --> <aside id="cart-drawer" class="fixed right-0 top-0 h-full w-[320px] sm:w-[380px] bg-surface border-l-4 border-on-background z-[100] translate-x-full transition-transform duration-300 ease-out flex flex-col shadow-[-10px_0px_0px_0px_rgba(0,0,0,0.15)]"> <!-- Header --> <div class="p-6 bg-primary-container text-on-primary-container border-b-4 border-on-background flex justify-between items-center shrink-0"> <div class="flex items-center gap-2"> <span class="material-symbols-outlined text-2xl">shopping_cart</span> <h2 class="font-headline-md text-xl tracking-tight">Sacola de Sonhos</h2> </div> <button id="cart-close-btn" class="material-symbols-outlined text-2xl p-1 bg-white text-on-surface border-2 border-on-background rounded-lg hover:scale-105 active:scale-95 transition-transform flex items-center justify-center">
+close
+</button> </div> <!-- Cart Content (Scrollable) --> <div class="flex-grow overflow-y-auto p-4 flex flex-col gap-4 no-scrollbar" id="cart-items-container"> <!-- Items will be injected dynamically here --> <div class="flex flex-col items-center justify-center h-full text-center text-on-surface-variant py-12"> <span class="material-symbols-outlined text-5xl mb-4 opacity-40">shopping_bag</span> <p class="font-label-bold text-lg">Sua sacola está vazia!</p> <p class="text-sm mt-1">Navegue pelas abas e adicione seus mimos favoritos.</p> </div> </div> <!-- Footer (Fixed in Drawer) --> <div class="p-6 bg-surface-container-high border-t-4 border-on-background flex flex-col gap-4 shrink-0"> <div class="flex justify-between items-center"> <span class="font-label-bold text-lg text-on-surface-variant">Valor Total:</span> <span class="font-headline-md text-2xl text-primary" id="cart-total-value">R$ 0,00</span> </div> <a id="cart-checkout-btn" href="#" target="_blank" class="w-full py-4 bg-tertiary text-white text-center font-label-bold text-lg border-4 border-on-background rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-0.5 active:translate-y-0.5 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:shadow-none transition-all flex items-center justify-center gap-2 pointer-events-none opacity-50"> <span class="material-symbols-outlined">send</span> Finalizar no WhatsApp
+</a> </div> </aside> <script>
+  // O telefone do WhatsApp da loja (com DDI + DDD)
+  const WHATSAPP_PHONE = '5531972122639'; // Telefone extraído do logo original
+
+  function toggleCartDrawer() {
+    const drawer = document.getElementById('cart-drawer');
+    const overlay = document.getElementById('cart-overlay');
+    if (!drawer || !overlay) return;
+
+    const isOpen = !drawer.classList.contains('translate-x-full');
+
+    if (isOpen) {
+      // Fechar
+      drawer.classList.add('translate-x-full');
+      overlay.classList.remove('opacity-100');
+      setTimeout(() => overlay.classList.add('hidden'), 300);
+      document.body.classList.remove('overflow-hidden');
+    } else {
+      // Abrir
+      overlay.classList.remove('hidden');
+      setTimeout(() => overlay.classList.add('opacity-100'), 10);
+      drawer.classList.remove('translate-x-full');
+      document.body.classList.add('overflow-hidden');
+    }
+  }
+  
+  window.toggleCartDrawer = toggleCartDrawer;
+
+  function renderCartItems() {
+    const container = document.getElementById('cart-items-container');
+    const totalEl = document.getElementById('cart-total-value');
+    const checkoutBtn = document.getElementById('cart-checkout-btn');
+    if (!container || !window.SonharteCart) return;
+
+    const cart = window.SonharteCart.get();
+    
+    if (cart.length === 0) {
+      container.innerHTML = `
+        <div class="flex flex-col items-center justify-center h-full text-center text-on-surface-variant py-12">
+          <span class="material-symbols-outlined text-5xl mb-4 opacity-40">shopping_bag</span>
+          <p class="font-label-bold text-lg">Sua sacola está vazia!</p>
+          <p class="text-sm mt-1">Navegue pelas abas e adicione seus mimos favoritos.</p>
+        </div>
+      `;
+      totalEl.textContent = 'R$ 0,00';
+      checkoutBtn.classList.add('pointer-events-none', 'opacity-50');
+      checkoutBtn.href = '#';
+      return;
+    }
+
+    // Renderizar itens
+    let html = '';
+    cart.forEach(item => {
+      html += `
+        <div class="flex gap-4 p-3 bg-white border-2 border-on-background rounded-xl shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] items-center">
+          <img src="${item.imagem}" alt="${item.titulo}" class="w-16 h-16 object-cover border-2 border-on-background rounded-lg shrink-0" />
+          <div class="flex-grow min-w-0">
+            <h4 class="font-label-bold text-sm truncate text-on-surface">${item.titulo}</h4>
+            <div class="flex justify-between items-center mt-2">
+              <span class="font-bold text-primary text-sm">R$ ${(item.preco * item.quantidade).toFixed(2)}</span>
+              <!-- Controle de Qtd -->
+              <div class="flex items-center border border-on-background rounded-lg overflow-hidden bg-surface-container-low shrink-0 scale-90">
+                <button class="px-2 py-1 hover:bg-surface-variant font-bold btn-minus" data-id="${item.id}">-</button>
+                <span class="px-3 py-1 bg-white text-xs font-label-bold border-x border-on-background min-w-[28px] text-center">${item.quantidade}</span>
+                <button class="px-2 py-1 hover:bg-surface-variant font-bold btn-plus" data-id="${item.id}">+</button>
+              </div>
+            </div>
+          </div>
+          <button class="material-symbols-outlined text-error hover:scale-110 active:scale-95 transition-transform shrink-0 p-1 btn-remove" data-id="${item.id}">
+            delete
+          </button>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+    totalEl.textContent = `R$ ${window.SonharteCart.total().toFixed(2)}`;
+    checkoutBtn.classList.remove('pointer-events-none', 'opacity-50');
+    checkoutBtn.href = window.SonharteCart.link(WHATSAPP_PHONE);
+
+    // Adicionar eventos aos botões recém-criados
+    container.querySelectorAll('.btn-plus').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        const item = window.SonharteCart.get().find(i => i.id === id);
+        if (item) {
+          window.SonharteCart.add(item.id, item.titulo, item.preco, item.imagem);
+        }
+      });
+    });
+
+    container.querySelectorAll('.btn-minus').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        window.SonharteCart.decrease(id);
+      });
+    });
+
+    container.querySelectorAll('.btn-remove').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        window.SonharteCart.remove(id);
+      });
+    });
+  }
+
+  // Configuração inicial ao carregar a página
+  document.addEventListener('DOMContentLoaded', () => {
+    // Configurar botões de fechar e overlay
+    const closeBtn = document.getElementById('cart-close-btn');
+    const overlay = document.getElementById('cart-overlay');
+    if (closeBtn) closeBtn.addEventListener('click', toggleCartDrawer);
+    if (overlay) overlay.addEventListener('click', toggleCartDrawer);
+
+    // Capturar cliques nos botões de cabeçalho (Desktop e Mobile)
+    const desktopCartBtn = document.getElementById('desktop-cart-btn');
+    const mobileCartBtn = document.getElementById('mobile-cart-btn');
+    if (desktopCartBtn) desktopCartBtn.addEventListener('click', toggleCartDrawer);
+    if (mobileCartBtn) mobileCartBtn.addEventListener('click', toggleCartDrawer);
+
+    // Escutar atualizações do carrinho
+    window.addEventListener('cart-updated', renderCartItems);
+    
+    // Forçar primeira renderização
+    renderCartItems();
+
+    // Delegação de evento de clique global para qualquer botão ".add-to-cart-btn"
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.add-to-cart-btn');
+      if (!btn || !window.SonharteCart) return;
+
+      e.preventDefault();
+      const id = btn.getAttribute('data-id');
+      const titulo = btn.getAttribute('data-titulo');
+      const preco = btn.getAttribute('data-preco');
+      const imagem = btn.getAttribute('data-imagem');
+
+      if (id && titulo && preco && imagem) {
+        window.SonharteCart.add(id, titulo, parseFloat(preco), imagem);
+        
+        // Abre a gaveta se ela estiver fechada
+        const drawer = document.getElementById('cart-drawer');
+        const isOpen = drawer && !drawer.classList.contains('translate-x-full');
+        if (!isOpen) {
+          toggleCartDrawer();
+        }
+      }
+    });
+  });
+</script> </body></html> <script>
+  let rawProducts = [];
+
+  let activeCategory = 'Todos';
+  let searchQuery = '';
+  let maxPrice = 50;
+  let sortBy = 'default';
+
+  async function initCatalogMobile() {
+    try {
+      const data = await window.SonharteDB.getProducts();
+      rawProducts = data.filter(p => p.ativo !== false);
+    } catch (err) {
+      console.error("Falha ao carregar produtos:", err);
+      rawProducts = [];
+    }
+
+    // Processar filtros da URL pós carregamento
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    const urlBusca = urlParams.get('busca');
+    if (urlBusca) {
+      const searchInput = document.getElementById('search-input-mobile');
+      if (searchInput) {
+        searchInput.value = urlBusca;
+        searchQuery = urlBusca;
+      }
+    }
+
+    const urlCat = urlParams.get('categoria');
+    if (urlCat) {
+      const nav = document.getElementById('mobile-horizontal-nav');
+      if (nav) {
+        const buttons = nav.querySelectorAll('.category-btn');
+        buttons.forEach(btn => {
+          const cat = btn.getAttribute('data-category') || 'Todos';
+          if (cat === urlCat) {
+            btn.className = "category-btn whitespace-nowrap px-4 py-2 thin-border rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-bold block-shadow-secondary active:translate-x-0.5 active:translate-y-0.5 active:shadow-none";
+            activeCategory = urlCat;
+          } else {
+            btn.className = "category-btn whitespace-nowrap px-4 py-2 thin-border rounded-full bg-white text-on-surface font-label-bold transition-all";
+          }
+        });
+      }
+    }
+
+    applyFiltersAndSortMobile();
+  }
+
+  function applyFiltersAndSortMobile() {
+    let filtered = [...rawProducts];
+
+    // 1. Categoria
+    if (activeCategory !== 'Todos') {
+      filtered = filtered.filter(p => p.categoria === activeCategory);
+    }
+
+    // 2. Busca
+    if (searchQuery.trim() !== '') {
+      const q = searchQuery.toLowerCase();
+      filtered = filtered.filter(p => 
+        p.titulo.toLowerCase().includes(q) || 
+        p.descricao.toLowerCase().includes(q)
+      );
+    }
+
+    // 3. Preço
+    filtered = filtered.filter(p => p.preco <= maxPrice);
+
+    // 4. Ordenar
+    if (sortBy === 'price-asc') {
+      filtered.sort((a, b) => a.preco - b.preco);
+    } else if (sortBy === 'price-desc') {
+      filtered.sort((a, b) => b.preco - a.preco);
+    } else if (sortBy === 'name-asc') {
+      filtered.sort((a, b) => a.titulo.localeCompare(b.titulo));
+    }
+
+    renderMobileProductsGrid(filtered);
+  }
+
+  function renderMobileProductsGrid(products) {
+    const grid = document.getElementById('products-grid-mobile');
+    const alertEl = document.getElementById('no-products-alert-mobile');
+    const countEl = document.getElementById('mobile-results-count');
+    const titleEl = document.getElementById('mobile-results-title');
+    if (!grid || !alertEl || !countEl || !titleEl) return;
+
+    countEl.textContent = `${products.length} ${products.length === 1 ? 'item' : 'itens'}`;
+    titleEl.textContent = activeCategory === 'Todos' ? 'Todos os Produtos' : activeCategory;
+
+    if (products.length === 0) {
+      grid.innerHTML = '';
+      alertEl.classList.remove('hidden');
+      return;
+    }
+
+    alertEl.classList.add('hidden');
+    let html = '';
+
+    products.forEach((product, idx) => {
+      // Alternância de rotação e sombra neobrutalista para mobile
+      const rotations = ['-rotate-1', 'rotate-1'];
+      const rot = rotations[idx % rotations.length];
+      const shadows = ['block-shadow-primary', 'block-shadow-tertiary', 'block-shadow-secondary'];
+      const shadow = shadows[idx % shadows.length];
+
+      html += `
+        <div class="thick-border rounded-2xl bg-white p-3.5 relative flex flex-col justify-between ${shadow}">
+          <div>
+            <a href="/mobile/produto?id=${product.id}" class="block relative w-full aspect-square mb-2.5">
+              <img src="${product.imagem}" alt="${product.titulo}" class="w-full h-full object-cover rounded-xl thin-border" />
+              <span class="absolute top-1 left-1 bg-white text-on-surface text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+                ${product.categoria}
+              </span>
+              ${product.destaque ? `
+                <span class="absolute top-1 right-1 bg-tertiary-fixed text-on-tertiary-fixed text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] z-10">
+                  ${product.destaque}
+                </span>
+              ` : ''}
+            </a>
+            <a href="/mobile/produto?id=${product.id}">
+              <h3 class="font-headline-md text-sm hover:text-primary transition-colors mb-1" title="${product.titulo}">${product.titulo}</h3>
+            </a>
+          </div>
+          <div class="flex items-center justify-between mt-3 gap-2">
+            <span class="font-headline-md text-base text-primary font-bold">R$ ${product.preco.toFixed(2)}</span>
+            <button 
+              class="add-to-cart-btn thin-border bg-primary text-white p-2 rounded-lg block-shadow-primary active:translate-x-0.5 active:translate-y-0.5 active:shadow-none shrink-0 flex items-center justify-center"
+              data-id="${product.id}"
+              data-titulo="${product.titulo}"
+              data-preco="${product.preco}"
+              data-imagem="${product.imagem}"
+            >
+              <span class="material-symbols-outlined text-xs">add_shopping_cart</span>
+            </button>
+          </div>
+        </div>
+      `;
+    });
+
+    grid.innerHTML = html;
+  }
+
+  // Interceptar cliques na barra de navegação horizontal mobile
+  function setupHorizontalNavHooks() {
+    const nav = document.getElementById('mobile-horizontal-nav');
+    if (!nav) return;
+
+    const buttons = nav.querySelectorAll('.category-btn');
+    buttons.forEach(btn => {
+      // Removemos o listener padrão do componente e adicionamos um focado no catálogo
+      btn.addEventListener('click', (e) => {
+        // Obter categoria
+        const cat = btn.getAttribute('data-category') || 'Todos';
+        activeCategory = cat;
+        applyFiltersAndSortMobile();
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // 1. Configurar input de busca
+    const searchInput = document.getElementById('search-input-mobile');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        applyFiltersAndSortMobile();
+      });
+    }
+
+    // 2. Configurar range de preço
+    const priceRange = document.getElementById('price-range-mobile');
+    const priceValue = document.getElementById('price-value-mobile');
+    if (priceRange && priceValue) {
+      priceRange.addEventListener('input', (e) => {
+        maxPrice = parseFloat(e.target.value);
+        priceValue.textContent = `R$ ${maxPrice}`;
+        applyFiltersAndSortMobile();
+      });
+    }
+
+    // 3. Configurar select de ordenação
+    const sortSelect = document.getElementById('sort-select-mobile');
+    if (sortSelect) {
+      sortSelect.addEventListener('change', (e) => {
+        sortBy = e.target.value;
+        applyFiltersAndSortMobile();
+      });
+    }
+
+    // 4. Mapear links da barra horizontal
+    setupHorizontalNavHooks();
+
+    // Executar renderização inicial do banco de dados
+    initCatalogMobile();
+  });
+</script>

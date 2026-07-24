@@ -1,0 +1,261 @@
+<!-- Seção de Destaque para Workshops e Personalizados (Home Desktop) -->
+<section class="px-gutter py-16 md:py-24 bg-tertiary-fixed/20 border-t-4 border-on-surface relative overflow-hidden">
+  <!-- Efeitos de Fundo -->
+  <div class="absolute -top-10 -left-10 w-80 h-80 rounded-full watercolor-blob" style="background: radial-gradient(circle, rgba(255,225,109,0.3) 0%, rgba(252,248,249,0) 70%);"></div>
+  <div class="absolute -bottom-10 -right-10 w-96 h-96 rounded-full watercolor-blob" style="background: radial-gradient(circle, rgba(75,37,187,0.15) 0%, rgba(252,248,249,0) 70%);"></div>
+
+  <div class="max-w-container-max mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
+    
+    <!-- Lado Esquerdo: Colagem Visual do Diferencial -->
+    <div class="relative flex justify-center items-center">
+      <!-- Fundo Decorativo -->
+      <div class="absolute inset-0 bg-primary/5 rounded-3xl -rotate-2 border-4 border-dashed border-primary-fixed-dim/45 -z-10"></div>
+      
+      <!-- Imagem de Destaque Central (Slideshow de Papel Rasgado) -->
+      <div class="bg-white p-4 border-4 border-on-surface rounded-3xl shadow-[8px_8px_0px_0px_rgba(75,37,187,1)] max-w-md w-full relative rotate-1">
+        <div class="aspect-square w-full rounded-2xl bg-surface-variant overflow-hidden border-2 border-on-surface relative" id="brush-slideshow-container">
+          <img 
+            src="/assets/caixinhas_personalizadas.png" 
+            alt="Caixinhas Personalizadas" 
+            class="brush-slide absolute inset-0 w-full h-full object-cover transition-all duration-[600ms] opacity-100 scale-100"
+            data-caption="Caixinhas Personalizadas 🌸"
+          />
+          <img 
+            src="/assets/topper_bolo.png" 
+            alt="Topper de Bolo" 
+            class="brush-slide absolute inset-0 w-full h-full object-cover transition-all duration-[600ms] opacity-0 scale-95"
+            data-caption="Toppers de Bolo Decorativos 🎂"
+          />
+          <img 
+            src="/assets/adesivos_personalizados.png" 
+            alt="Adesivos Personalizados" 
+            class="brush-slide absolute inset-0 w-full h-full object-cover transition-all duration-[600ms] opacity-0 scale-95"
+            data-caption="Adesivos & Rótulos Exclusivos 🏷️"
+          />
+
+          <!-- Elemento de Papel Rasgado para Transição -->
+          <div id="paper-wipe-overlay">
+            <div class="paper-body"></div>
+            <!-- Borda Direita -->
+            <svg class="paper-edge edge-right absolute top-0 bottom-0 -right-4 w-4 h-full opacity-0" viewBox="0 0 20 100" preserveAspectRatio="none">
+              <path d="M0,0 L4,3 L1,7 L5,11 L2,15 L6,20 L3,25 L5,31 L1,37 L4,42 L2,48 L6,53 L3,59 L5,64 L1,70 L4,76 L2,81 L6,87 L3,93 L5,98 L0,100 Z" />
+            </svg>
+            <!-- Borda Esquerda -->
+            <svg class="paper-edge edge-left absolute top-0 bottom-0 -left-4 w-4 h-full opacity-0 transform rotate-180" viewBox="0 0 20 100" preserveAspectRatio="none">
+              <path d="M0,0 L4,3 L1,7 L5,11 L2,15 L6,20 L3,25 L5,31 L1,37 L4,42 L2,48 L6,53 L3,59 L5,64 L1,70 L4,76 L2,81 L6,87 L3,93 L5,98 L0,100 Z" />
+            </svg>
+            <!-- Borda Inferior -->
+            <svg class="paper-edge edge-bottom absolute left-0 right-0 -bottom-4 h-4 w-full opacity-0" viewBox="0 0 100 20" preserveAspectRatio="none">
+              <path d="M0,0 L3,4 L7,1 L11,5 L15,2 L20,6 L25,3 L31,5 L37,1 L42,4 L48,2 L53,6 L59,3 L64,5 L70,1 L76,4 L81,2 L87,6 L93,3 L98,5 L100,0 Z" />
+            </svg>
+            <!-- Borda Superior -->
+            <svg class="paper-edge edge-top absolute left-0 right-0 -top-4 h-4 w-full opacity-0 transform rotate-180" viewBox="0 0 100 20" preserveAspectRatio="none">
+              <path d="M0,0 L3,4 L7,1 L11,5 L15,2 L20,6 L25,3 L31,5 L37,1 L42,4 L48,2 L53,6 L59,3 L64,5 L70,1 L76,4 L81,2 L87,6 L93,3 L98,5 L100,0 Z" />
+            </svg>
+          </div>
+        </div>
+        <div class="mt-4 flex justify-between items-center px-1">
+          <span class="font-headline-md text-primary text-sm font-bold flex items-center gap-1.5" id="brush-slide-caption">
+            <span class="material-symbols-outlined text-sm">stars</span> Caixinhas Personalizadas 🌸
+          </span>
+          <span class="text-xs text-on-surface-variant font-body-md italic">Sonharte Estúdio</span>
+        </div>
+        
+        <!-- Balãozinho / Sticker de Destaque -->
+        <div class="absolute -top-6 -right-4 bg-secondary-fixed text-on-secondary-fixed border-3 border-black px-4 py-2 rounded-2xl shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] rotate-6 font-label-bold text-xs select-none animate-float z-20">
+          Diferencial Sonharte! 🌸
+        </div>
+      </div>
+
+      <style is:inline>
+        #paper-wipe-overlay {
+          position: absolute;
+          inset: 0;
+          z-index: 30;
+          pointer-events: none;
+          transform: translateX(105%);
+        }
+        .paper-body {
+          position: absolute;
+          inset: 0;
+        }
+        .paper-edge {
+          position: absolute;
+          pointer-events: none;
+          transition: opacity 0.2s ease;
+        }
+
+        /* LR (Left to Right) */
+        .paper-animate-lr {
+          animation: paper-wipe-lr-anim 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+        }
+        @keyframes paper-wipe-lr-anim {
+          0% { transform: translateX(-105%); }
+          45%, 55% { transform: translateX(0%); }
+          100% { transform: translateX(105%); }
+        }
+
+        /* RL (Right to Left) */
+        .paper-animate-rl {
+          animation: paper-wipe-rl-anim 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+        }
+        @keyframes paper-wipe-rl-anim {
+          0% { transform: translateX(105%); }
+          45%, 55% { transform: translateX(0%); }
+          100% { transform: translateX(-105%); }
+        }
+
+        /* TB (Top to Bottom) */
+        .paper-animate-tb {
+          animation: paper-wipe-tb-anim 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+        }
+        @keyframes paper-wipe-tb-anim {
+          0% { transform: translateY(-105%); }
+          45%, 55% { transform: translateY(0%); }
+          100% { transform: translateY(105%); }
+        }
+
+        /* BT (Bottom to Top) */
+        .paper-animate-bt {
+          animation: paper-wipe-bt-anim 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+        }
+        @keyframes paper-wipe-bt-anim {
+          0% { transform: translateY(105%); }
+          45%, 55% { transform: translateY(0%); }
+          100% { transform: translateY(-105%); }
+        }
+      </style>
+
+      <script is:inline>
+        document.addEventListener('DOMContentLoaded', () => {
+          const slides = document.querySelectorAll('.brush-slide');
+          const caption = document.getElementById('brush-slide-caption');
+          const container = document.getElementById('brush-slideshow-container');
+          if (!container) return;
+          
+          const paperOverlay = document.getElementById('paper-wipe-overlay');
+          const paperBody = paperOverlay.querySelector('.paper-body');
+          const edges = paperOverlay.querySelectorAll('.paper-edge');
+          
+          let currentIdx = 0;
+          let dirIdx = 0;
+          const directions = ['lr', 'tb', 'rl', 'bt'];
+          const colors = ['#ffd8ec', '#e5d9ff', '#fff2b2'];
+          let colorIdx = 0;
+
+          if (slides.length > 0 && caption && paperOverlay) {
+            setInterval(() => {
+              const currentDir = directions[dirIdx];
+              const currentColor = colors[colorIdx];
+              
+              // 1. Configura a cor do papel e dos SVGs de borda
+              paperBody.style.backgroundColor = currentColor;
+              edges.forEach(edge => {
+                edge.style.fill = currentColor;
+                edge.classList.add('opacity-0');
+                edge.classList.remove('opacity-100');
+              });
+              
+              // 2. Ativa o SVG da borda de ataque correspondente
+              let activeEdge;
+              if (currentDir === 'lr') activeEdge = paperOverlay.querySelector('.edge-right');
+              if (currentDir === 'rl') activeEdge = paperOverlay.querySelector('.edge-left');
+              if (currentDir === 'tb') activeEdge = paperOverlay.querySelector('.edge-bottom');
+              if (currentDir === 'bt') activeEdge = paperOverlay.querySelector('.edge-top');
+              
+              if (activeEdge) {
+                activeEdge.classList.remove('opacity-0');
+                activeEdge.classList.add('opacity-100');
+              }
+              
+              // 3. Dispara a animação do papel
+              paperOverlay.className = `paper-animate-${currentDir}`;
+              
+              // 4. No meio da animação (550ms, quando a tela está totalmente coberta pelo papel)
+              // trocamos o slide e a legenda por baixo
+              setTimeout(() => {
+                slides[currentIdx].classList.remove('opacity-100', 'scale-100');
+                slides[currentIdx].classList.add('opacity-0', 'scale-95');
+
+                currentIdx = (currentIdx + 1) % slides.length;
+
+                slides[currentIdx].classList.remove('opacity-0', 'scale-95');
+                slides[currentIdx].classList.add('opacity-100', 'scale-100');
+
+                caption.innerHTML = `<span class="material-symbols-outlined text-sm">stars</span> ${slides[currentIdx].getAttribute('data-caption')}`;
+              }, 550);
+
+              // 5. Após a conclusão (1200ms), limpa a classe e atualiza os índices
+              setTimeout(() => {
+                paperOverlay.className = '';
+                dirIdx = (dirIdx + 1) % directions.length;
+                colorIdx = (colorIdx + 1) % colors.length;
+              }, 1250);
+
+            }, 7000);
+          }
+        });
+      </script>
+    </div>
+
+    <!-- Lado Direito: Texto Explicativo e Benefícios -->
+    <div class="flex flex-col gap-8 text-left">
+      <div class="flex flex-col gap-3">
+        <span class="bg-primary text-white font-label-bold text-xs px-4 py-1.5 border-2 border-black rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] self-start -rotate-1">
+          Papelaria Premium Sob Medida 🎨
+        </span>
+        <h2 class="font-headline-lg text-4xl text-on-surface">Você sonha, a gente realiza!</h2>
+        <div class="w-24 h-1.5 bg-primary cartoon-border rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"></div>
+      </div>
+
+      <p class="font-body-md text-on-surface-variant leading-relaxed">
+        Além da nossa papelaria de escrita e planejamento tradicional, nós somos especialistas em criar **artigos de festa, toppers de bolo e adesivos personalizados 100% sob medida**. Cada peça é confeccionada individualmente, garantindo que a sua comemoração seja tão única e especial quanto você imaginou!
+      </p>
+
+      <!-- Lista de Serviços Diferenciais -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        
+        <div class="bg-white p-4 border-3 border-on-surface rounded-xl flex flex-col items-center text-center shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover-lift">
+          <div class="w-10 h-10 rounded-lg bg-pink-100 text-pink-600 flex items-center justify-center border-2 border-black mb-2">
+            <span class="material-symbols-outlined">card_giftcard</span>
+          </div>
+          <span class="font-headline-md text-sm text-on-surface font-bold">Caixinhas</span>
+        </div>
+
+        <div class="bg-white p-4 border-3 border-on-surface rounded-xl flex flex-col items-center text-center shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover-lift">
+          <div class="w-10 h-10 rounded-lg bg-yellow-100 text-yellow-600 flex items-center justify-center border-2 border-black mb-2">
+            <span class="material-symbols-outlined">cake</span>
+          </div>
+          <span class="font-headline-md text-sm text-on-surface font-bold">Topper de Bolo</span>
+        </div>
+
+        <div class="bg-white p-4 border-3 border-on-surface rounded-xl flex flex-col items-center text-center shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover-lift">
+          <div class="w-10 h-10 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center border-2 border-black mb-2">
+            <span class="material-symbols-outlined">celebration</span>
+          </div>
+          <span class="font-headline-md text-sm text-on-surface font-bold">Adesivos & Rótulos</span>
+        </div>
+
+      </div>
+
+      <!-- CTA -->
+      <div class="flex flex-col sm:flex-row gap-4 mt-2">
+        <a 
+          href="/workshops" 
+          class="bg-primary text-white border-3 border-black rounded-2xl px-8 py-5 font-label-bold text-md shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] active-press hover:bg-tertiary transition-all text-center flex items-center justify-center gap-2"
+        >
+          <span class="material-symbols-outlined text-xl">auto_awesome</span> Conhecer Nossos Workshops
+        </a>
+        <a 
+          href="https://wa.me/5531972122639?text=Olá!%20Gostaria%20de%20conversar%20sobre%20personalizados." 
+          target="_blank"
+          class="bg-white border-3 border-black rounded-2xl px-8 py-5 font-label-bold text-md shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] active-press hover:bg-surface-container-high transition-all text-center text-primary flex items-center justify-center gap-2"
+        >
+          <span class="material-symbols-outlined text-xl">chat</span> Orçar no Chat
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</section>

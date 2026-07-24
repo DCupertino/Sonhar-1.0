@@ -1,0 +1,308 @@
+<!-- Feedbacks Section -->
+<section class="px-gutter py-20 bg-surface-container">
+  <div class="max-w-container-max mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="font-headline-xl text-headline-xl text-primary mb-4">O que dizem nossos clientes</h2>
+      <div class="w-24 h-2 bg-secondary mx-auto cartoon-border rounded-full"></div>
+    </div>
+    
+    <div class="grid md:grid-cols-3 gap-12 items-start">
+      <!-- Coluna da Esquerda: Formulário de Feedback Fixo -->
+      <div class="md:col-span-1 bg-white cartoon-border cartoon-shadow p-8 rounded-2xl sticky top-28">
+        <h3 class="font-headline-md text-primary mb-2">Deixe seu depoimento</h3>
+        <p class="font-body-md text-on-surface-variant mb-6">Sua opinião é mágica para nós!</p>
+        
+        <form id="desktop-feedback-form" class="flex flex-col gap-5">
+          <div class="flex flex-col gap-2">
+            <label for="d-name" class="font-label-bold text-on-surface">Seu Nome <span class="text-xs font-body-md text-on-surface-variant font-normal">(não obrigatório)</span></label>
+            <input 
+              type="text" 
+              id="d-name" 
+              placeholder="Digite seu nome completo" 
+              class="px-4 py-3 bg-white text-on-surface font-body-md border-4 border-on-surface rounded-xl focus:outline-none focus:bg-surface-container-low transition-colors"
+            />
+          </div>
+          
+          <div class="flex flex-col gap-2">
+            <span class="font-label-bold text-on-surface">Sua Nota</span>
+            <div class="flex gap-1 rating-stars" id="desktop-stars">
+              <button type="button" class="star-btn material-symbols-outlined text-3xl text-on-surface-variant/30 hover:scale-110 transition-transform cursor-pointer" data-value="1">star</button>
+              <button type="button" class="star-btn material-symbols-outlined text-3xl text-on-surface-variant/30 hover:scale-110 transition-transform cursor-pointer" data-value="2">star</button>
+              <button type="button" class="star-btn material-symbols-outlined text-3xl text-on-surface-variant/30 hover:scale-110 transition-transform cursor-pointer" data-value="3">star</button>
+              <button type="button" class="star-btn material-symbols-outlined text-3xl text-on-surface-variant/30 hover:scale-110 transition-transform cursor-pointer" data-value="4">star</button>
+              <button type="button" class="star-btn material-symbols-outlined text-3xl text-on-surface-variant/30 hover:scale-110 transition-transform cursor-pointer" data-value="5">star</button>
+            </div>
+            <input type="hidden" id="d-rating" value="0" />
+          </div>
+          
+          <div class="flex flex-col gap-2">
+            <label for="d-message" class="font-label-bold text-on-surface">Sua Mensagem</label>
+            <textarea 
+              id="d-message" 
+              required
+              rows="4" 
+              placeholder="Compartilhe como foi sua experiência..." 
+              class="px-4 py-3 bg-white text-on-surface font-body-md border-4 border-on-surface rounded-xl focus:outline-none focus:bg-surface-container-low transition-colors resize-none"
+            ></textarea>
+          </div>
+          
+          <button 
+            type="submit" 
+            class="w-full py-4 mt-2 bg-primary text-white font-headline-md cartoon-border cartoon-shadow-tertiary rounded-xl hover-lift active-press text-center cursor-pointer"
+          >
+            Enviar Feedback
+          </button>
+        </form>
+      </div>
+
+      <!-- Coluna da Direita: Carrossel Horizontal de Feedbacks -->
+      <div class="md:col-span-2 overflow-hidden w-full relative">
+        <div class="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-surface-container to-transparent z-10 pointer-events-none"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-surface-container to-transparent z-10 pointer-events-none"></div>
+        
+        <div id="desktop-feedbacks-carousel" class="flex gap-6 overflow-x-auto no-scrollbar pb-8 pt-6 scroll-smooth items-stretch">
+          <!-- Testimonial 1 -->
+          <div class="min-w-[320px] md:min-w-[360px] bg-white cartoon-border cartoon-shadow p-8 rounded-2xl hover-lift transition-all flex flex-col justify-between flex-shrink-0">
+            <div>
+              <div class="flex gap-1 text-secondary mb-4">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+              </div>
+              <p class="font-body-md italic text-on-surface mb-6">"Simplesmente apaixonada pelo meu planner! A qualidade é impecável e o perfume que vem na caixa é maravilhoso. Dá pra ver que foi feito com muito amor."</p>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full cartoon-border bg-tertiary-fixed flex items-center justify-center font-headline-md text-tertiary">M</div>
+              <div>
+                <p class="font-label-bold text-on-surface">Mariana Silva</p>
+                <p class="text-xs text-on-surface-variant">24/06/2026</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Testimonial 2 -->
+          <div class="min-w-[320px] md:min-w-[360px] bg-white cartoon-border cartoon-shadow-primary p-8 rounded-2xl hover-lift transition-all flex flex-col justify-between flex-shrink-0">
+            <div>
+              <div class="flex gap-1 text-secondary mb-4">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+              </div>
+              <p class="font-body-md italic text-on-surface mb-6">"Melhor atendimento que já recebi! Tive uma dúvida no WhatsApp e me responderam super rápido com toda a atenção do mundo. Os produtos são mágicos!"</p>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full cartoon-border bg-primary-fixed flex items-center justify-center font-headline-md text-primary">R</div>
+              <div>
+                <p class="font-label-bold text-on-surface">Ricardo Gomes</p>
+                <p class="text-xs text-on-surface-variant">22/06/2026</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Testimonial 3 -->
+          <div class="min-w-[320px] md:min-w-[360px] bg-white cartoon-border cartoon-shadow-tertiary p-8 rounded-2xl hover-lift transition-all flex flex-col justify-between flex-shrink-0">
+            <div>
+              <div class="flex gap-1 text-secondary mb-4">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+              </div>
+              <p class="font-body-md italic text-on-surface mb-6">"Os kits de presente são a salvação! Sempre que preciso de algo especial, venho aqui. Embalagem linda e mimos que encantam qualquer um."</p>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full cartoon-border bg-secondary-fixed flex items-center justify-center font-headline-md text-secondary">A</div>
+              <div>
+                <p class="font-label-bold text-on-surface">Ana Paula</p>
+                <p class="text-xs text-on-surface-variant">18/06/2026</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  // Script para lidar com avaliação por estrelas (Desktop)
+  const dStars = document.querySelectorAll('#desktop-stars .star-btn');
+  const dRatingInput = document.getElementById('d-rating');
+
+  dStars.forEach(star => {
+    star.addEventListener('click', () => {
+      const value = parseInt(star.getAttribute('data-value'));
+      dRatingInput.value = value;
+      
+      dStars.forEach(s => {
+        const sVal = parseInt(s.getAttribute('data-value'));
+        if (sVal <= value) {
+          s.classList.remove('text-on-surface-variant/30');
+          s.classList.add('text-secondary');
+          s.style.fontVariationSettings = "'FILL' 1";
+        } else {
+          s.classList.remove('text-secondary');
+          s.classList.add('text-on-surface-variant/30');
+          s.style.fontVariationSettings = "'FILL' 0";
+        }
+      });
+    });
+  });
+
+  // Script para submissão do feedback (Desktop)
+  const dForm = document.getElementById('desktop-feedback-form');
+  const dCarousel = document.getElementById('desktop-feedbacks-carousel');
+
+  async function loadFeedbacksCarousel() {
+    if (!dCarousel) return;
+
+    try {
+      const list = await window.SonharteDB.getFeedbacks();
+      dCarousel.innerHTML = '';
+      
+      if (list.length === 0) {
+        dCarousel.innerHTML = `
+          <div class="w-full text-center py-10 font-body-md text-on-surface-variant">
+            Seja o primeiro a deixar um depoimento! 🌸
+          </div>
+        `;
+        return;
+      }
+
+      list.forEach((f, idx) => {
+        const firstLetter = (f.nome || 'A').charAt(0).toUpperCase();
+        let starsHtml = '';
+        for (let i = 1; i <= 5; i++) {
+          const fill = i <= f.estrelas ? "style=\"font-variation-settings: 'FILL' 1;\"" : "";
+          const color = i <= f.estrelas ? "text-secondary" : "text-on-surface-variant/30";
+          starsHtml += `<span class="material-symbols-outlined text-sm ${color}" ${fill}>star</span>`;
+        }
+
+        const colors = ['bg-tertiary-fixed text-tertiary', 'bg-primary-fixed text-primary', 'bg-secondary-fixed text-secondary'];
+        const randomColor = colors[idx % colors.length];
+        const shadows = ['cartoon-shadow', 'cartoon-shadow-primary', 'cartoon-shadow-tertiary'];
+        const randomShadow = shadows[idx % shadows.length];
+        
+        let displayData = f.data;
+        if (f.criado_em) {
+          displayData = new Date(f.criado_em).toLocaleDateString('pt-BR');
+        }
+
+        const card = document.createElement('div');
+        card.className = `min-w-[320px] md:min-w-[360px] bg-white cartoon-border ${randomShadow} p-8 rounded-2xl hover-lift transition-all flex flex-col justify-between flex-shrink-0`;
+        card.innerHTML = `
+          <div>
+            <div class="flex gap-1 mb-4">
+              ${starsHtml}
+            </div>
+            <p class="font-body-md italic text-on-surface mb-6">"${f.texto}"</p>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full cartoon-border ${randomColor} flex items-center justify-center font-headline-md">${firstLetter}</div>
+            <div>
+              <p class="font-label-bold text-on-surface">${f.nome || 'Anônimo'}</p>
+              <p class="text-xs text-on-surface-variant">${displayData || 'Recente'}</p>
+            </div>
+          </div>
+        `;
+        dCarousel.appendChild(card);
+      });
+    } catch (err) {
+      console.error("Erro ao carregar feedbacks:", err);
+    }
+  }
+
+  if (dForm) {
+    dForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const nameInput = document.getElementById('d-name').value.trim();
+      const name = nameInput !== "" ? nameInput : "Anônimo";
+      const rating = parseInt(dRatingInput.value) || 5;
+      const message = document.getElementById('d-message').value;
+
+      const payload = {
+        nome: name,
+        texto: message,
+        estrelas: rating
+      };
+
+      try {
+        await window.SonharteDB.saveFeedback(payload);
+        loadFeedbacksCarousel();
+        
+        // Limpa formulário
+        dForm.reset();
+        dRatingInput.value = 0;
+        dStars.forEach(s => {
+          s.classList.remove('text-secondary');
+          s.classList.add('text-on-surface-variant/30');
+          s.style.fontVariationSettings = "'FILL' 0";
+        });
+      } catch (err) {
+        alert("Erro ao enviar feedback: " + err.message);
+      }
+    });
+  }
+
+  // Carrega feedbacks na inicialização do script
+  window.addEventListener('load', loadFeedbacksCarousel);
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    loadFeedbacksCarousel();
+  }
+
+  // Script para arrastar o carrossel com o mouse (drag-to-scroll)
+  if (dCarousel) {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    dCarousel.addEventListener('mousedown', (e) => {
+      isDown = true;
+      startX = e.pageX - dCarousel.offsetLeft;
+      scrollLeft = dCarousel.scrollLeft;
+      dCarousel.style.scrollBehavior = 'auto';
+      dCarousel.style.cursor = 'grabbing';
+    });
+
+    dCarousel.addEventListener('mouseleave', () => {
+      isDown = false;
+      dCarousel.style.cursor = 'grab';
+    });
+
+    dCarousel.addEventListener('mouseup', () => {
+      isDown = false;
+      dCarousel.style.scrollBehavior = 'smooth';
+      dCarousel.style.cursor = 'grab';
+    });
+
+    dCarousel.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - dCarousel.offsetLeft;
+      const walk = (x - startX) * 2; // Ajusta a velocidade de rolagem
+      dCarousel.scrollLeft = scrollLeft - walk;
+    });
+
+    // Configura o cursor inicial
+    dCarousel.style.cursor = 'grab';
+  }
+</script>
+
+<style>
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9) translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateX(0);
+    }
+  }
+</style>

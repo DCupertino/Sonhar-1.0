@@ -1,0 +1,208 @@
+<!-- TopNavBar -->
+<nav id="desktop-nav" class="sticky top-0 z-50 transition-transform duration-300 ease-in-out bg-surface border-b-4 border-on-surface shadow-[4px_4px_0px_0px_rgba(75,37,187,1)]">
+  <div class="max-w-container-max mx-auto px-gutter py-4">
+    <div class="flex justify-between items-center w-full mb-4 gap-8">
+      <a href="/" class="flex items-center gap-4 shrink-0 hover:opacity-90 transition-opacity">
+        <img alt="Sonharte Logo" class="h-[103px] md:h-[138px] object-contain" src="/assets/logo_clean.png" />
+      </a>
+      <!-- Search Bar -->
+      <div class="hidden md:flex flex-1 max-w-xl relative">
+        <form action="/catalogo" class="w-full flex items-center relative" method="GET" autocomplete="off">
+          <input 
+            type="search" 
+            name="busca"
+            id="desktop-search-input"
+            placeholder="O que você está procurando?" 
+            class="w-full px-5 py-3 pr-12 bg-white text-on-surface font-body-md border-4 border-on-surface rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] focus:outline-none focus:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] focus:translate-x-0.5 focus:translate-y-0.5 transition-all placeholder:text-on-surface-variant/60" 
+            autocomplete="off"
+          />
+          <button 
+            type="submit" 
+            class="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-primary text-2xl hover:scale-110 active:scale-95 transition-transform"
+          >
+            search
+          </button>
+        </form>
+        <!-- Sugestões de Pesquisa (Dropdown Neobrutalista) -->
+        <div 
+          id="desktop-search-suggestions" 
+          class="absolute left-0 right-0 top-full mt-2 bg-white border-4 border-on-surface rounded-2xl shadow-[6px_6px_0px_0px_rgba(75,37,187,1)] z-50 overflow-hidden hidden max-h-96 overflow-y-auto divide-y divide-slate-100"
+        >
+        </div>
+      </div>
+      <div class="flex items-center gap-4 shrink-0">
+        <button class="material-symbols-outlined p-2 bg-secondary-fixed text-on-secondary-fixed cartoon-border rounded-lg cartoon-shadow active-press heart-btn-effect">favorite</button>
+        <button id="desktop-cart-btn" class="material-symbols-outlined p-2 bg-primary-container text-white cartoon-border rounded-lg cartoon-shadow active-press relative">
+          shopping_cart
+          <span id="desktop-cart-badge" class="absolute -top-2 -right-2 bg-tertiary text-white text-[12px] font-label-bold w-6 h-6 rounded-full flex items-center justify-center border-2 border-black shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hidden">0</span>
+        </button>
+      </div>
+    </div>
+    <!-- Comprehensive Navigation Menu -->
+    <div class="flex flex-wrap gap-x-6 gap-y-2 items-center justify-center border-t border-outline-variant pt-4 overflow-x-auto no-scrollbar">
+      <a class="font-label-bold text-sm text-primary whitespace-nowrap hover:underline underline-offset-4" href="/">Início</a>
+      <a class="font-body-md text-sm text-on-surface-variant whitespace-nowrap hover:text-primary transition-colors" href="/catalogo">Todos os produtos</a>
+      <a class="font-body-md text-sm text-on-surface-variant whitespace-nowrap hover:text-primary transition-colors" href="/catalogo?categoria=Lápis de Cor %26 Desenho">Lápis de Cor</a>
+      <a class="font-body-md text-sm text-on-surface-variant whitespace-nowrap hover:text-primary transition-colors" href="/catalogo?categoria=Cadernos %26 Papéis">Cadernos</a>
+      <a class="font-body-md text-sm text-on-surface-variant whitespace-nowrap hover:text-primary transition-colors" href="/catalogo?categoria=Canetas %26 Escrita">Canetas</a>
+      <a class="font-body-md text-sm text-on-surface-variant whitespace-nowrap hover:text-primary transition-colors" href="/catalogo?categoria=Organização %26 Escritório">Materiais</a>
+      <a class="font-body-md text-sm text-on-surface-variant whitespace-nowrap hover:text-primary transition-colors border-l pl-6 border-outline-variant" href="/servicos">Serviços</a>
+      <a class="font-body-md text-sm text-on-surface-variant whitespace-nowrap hover:text-primary transition-colors" href="/workshops">Workshops</a>
+      <a class="font-body-md text-sm text-on-surface-variant whitespace-nowrap hover:text-primary transition-colors" href="/sobre">Sobre Nós</a>
+      <a class="font-body-md text-sm text-on-surface-variant whitespace-nowrap hover:text-primary transition-colors" href="/contato">Contato</a>
+    </div>
+  </div>
+</nav>
+
+<script is:inline>
+  function updateDesktopCartBadge() {
+    const badge = document.getElementById('desktop-cart-badge');
+    if (!badge || !window.SonharteCart) return;
+    const count = window.SonharteCart.count();
+    if (count > 0) {
+      badge.textContent = count;
+      badge.classList.remove('hidden');
+    } else {
+      badge.classList.add('hidden');
+    }
+  }
+
+  // Atualiza no carregamento e escuta eventos de alteração
+  window.addEventListener('load', updateDesktopCartBadge);
+  window.addEventListener('cart-updated', updateDesktopCartBadge);
+  // Escuta imediata caso o DOM já esteja carregado
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    updateDesktopCartBadge();
+  }
+
+  // Lógica do Autocomplete de Sugestões de Pesquisa (Desktop)
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('desktop-search-input');
+    const suggestionsContainer = document.getElementById('desktop-search-suggestions');
+    if (!searchInput || !suggestionsContainer) return;
+
+    let products = [];
+    
+    // Carrega os produtos assim que focado para ficar instantâneo
+    searchInput.addEventListener('focus', async () => {
+      if (products.length === 0 && window.SonharteDB) {
+        try {
+          const raw = await window.SonharteDB.getProducts();
+          products = raw.filter(p => p.ativo !== false);
+        } catch (e) {
+          console.error("Erro ao carregar produtos para sugestões:", e);
+        }
+      }
+      showSuggestions();
+    });
+
+    searchInput.addEventListener('input', () => {
+      if (searchInput.value === 'adminM') {
+        window.location.href = '/admin';
+        return;
+      }
+      showSuggestions();
+    });
+
+    const searchForm = searchInput.closest('form');
+    if (searchForm) {
+      searchForm.addEventListener('submit', (e) => {
+        if (searchInput.value === 'adminM') {
+          e.preventDefault();
+          window.location.href = '/admin';
+        }
+      });
+    }
+
+    function showSuggestions() {
+      const query = searchInput.value.trim().toLowerCase();
+      if (!query) {
+        suggestionsContainer.innerHTML = '';
+        suggestionsContainer.classList.add('hidden');
+        return;
+      }
+
+      // Filtra produtos correspondentes
+      const filtered = products.filter(p => 
+        p.titulo.toLowerCase().includes(query) || 
+        (p.descricao && p.descricao.toLowerCase().includes(query))
+      ).slice(0, 6);
+
+      if (filtered.length === 0) {
+        suggestionsContainer.innerHTML = `
+          <div class="p-5 text-center text-on-surface-variant font-body-md flex flex-col items-center justify-center gap-1.5 bg-white">
+            <span class="material-symbols-outlined text-pink-500 text-3xl">sentiment_dissatisfied</span>
+            <span class="text-xs font-label-bold">Nenhum mimo encontrado... 🌸</span>
+          </div>
+        `;
+        suggestionsContainer.classList.remove('hidden');
+        return;
+      }
+
+      // Paleta de cores pastel para tags de categoria
+      const catColors = {
+        'Lápis de Cor': 'bg-pink-100 text-pink-700',
+        'Cadernos': 'bg-yellow-100 text-yellow-700',
+        'Canetas': 'bg-purple-100 text-purple-700',
+        'Presentes Criativos': 'bg-blue-100 text-blue-700',
+        'Materiais': 'bg-green-100 text-green-700'
+      };
+
+      suggestionsContainer.innerHTML = filtered.map((p, idx) => {
+        const tagClass = catColors[p.categoria] || 'bg-slate-100 text-slate-700';
+        
+        // Cores suaves de fundo para hover rotativo neobrutalista
+        const hovers = ['hover:bg-yellow-50/50', 'hover:bg-pink-50/50', 'hover:bg-purple-50/50', 'hover:bg-blue-50/50', 'hover:bg-green-50/50'];
+        const hoverClass = hovers[idx % hovers.length];
+
+        return `
+          <a 
+            href="/catalogo?busca=${encodeURIComponent(p.titulo)}" 
+            class="flex items-center gap-3 p-3 border-b border-slate-100 ${hoverClass} transition-colors last:border-0 cursor-pointer text-left decoration-none"
+          >
+            <img src="${p.imagem}" alt="${p.titulo}" class="w-11 h-11 object-cover rounded-lg border-2 border-black shrink-0 shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]" />
+            <div class="flex-1 min-w-0">
+              <h4 class="font-label-bold text-xs text-on-surface">${p.titulo}</h4>
+              <div class="flex items-center gap-2 mt-1">
+                <span class="px-2 py-0.5 text-[9px] font-label-bold rounded-full border border-black/10 ${tagClass}">${p.categoria}</span>
+              </div>
+            </div>
+            <div class="shrink-0 font-label-bold text-xs text-primary bg-primary/5 border border-primary/20 px-2 py-1 rounded-md">
+              R$ ${parseFloat(p.preco).toFixed(2).replace('.', ',')}
+            </div>
+          </a>
+        `;
+      }).join('');
+      suggestionsContainer.classList.remove('hidden');
+    }
+
+    // Fechar ao clicar fora
+    document.addEventListener('click', (e) => {
+      if (!searchInput.contains(e.target) && !suggestionsContainer.contains(e.target)) {
+        suggestionsContainer.classList.add('hidden');
+      }
+    });
+  });
+
+  // Lógica do Smart Header (Esconde ao rolar para baixo, aparece ao rolar para cima)
+  document.addEventListener('DOMContentLoaded', () => {
+    const nav = document.getElementById('desktop-nav');
+    if (!nav) return;
+
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      
+      // Esconde se rolar para baixo e passar de 150px
+      if (currentScrollY > lastScrollY && currentScrollY > 150) {
+        nav.style.transform = 'translateY(-110%)';
+      } else {
+        // Mostra se rolar para cima
+        nav.style.transform = 'translateY(0)';
+      }
+      
+      lastScrollY = currentScrollY;
+    }, { passive: true });
+  });
+</script>

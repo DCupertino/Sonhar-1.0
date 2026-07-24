@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TopNavBar from '../components/desktop/TopNavBar.astro';
+import Footer from '../components/desktop/Footer.astro';
+import FAB from '../components/desktop/FAB.astro';
+---
+
+<BaseLayout title="Sonharte | Nossa História">
+  <TopNavBar />
+  
+  <main class="max-w-container-max mx-auto px-gutter py-16 flex flex-col gap-16 min-h-screen relative overflow-hidden">
+    <!-- Decorações de Fundo -->
+    <div class="absolute top-20 -left-20 w-96 h-96 rounded-full watercolor-blob"></div>
+    <div class="absolute bottom-20 -right-20 w-96 h-96 rounded-full watercolor-blob" style="background: radial-gradient(circle, rgba(255,217,228,0.5) 0%, rgba(252,248,249,0) 70%);"></div>
+
+    <!-- Seção de Cabeçalho -->
+    <div class="text-center flex flex-col items-center gap-4 relative z-10">
+      <span class="bg-secondary-fixed text-on-secondary-fixed text-xs font-label-bold px-4 py-1.5 border-2 border-black rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] -rotate-2 animate-float">
+        Conheça nossa marca ✨
+      </span>
+      <h1 class="font-headline-xl text-5xl text-primary mt-2">Quem Faz a Sonharte?</h1>
+      <div class="w-32 h-2 bg-primary mt-2 cartoon-border rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"></div>
+    </div>
+
+    <!-- História Principal -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
+      <div class="flex flex-col gap-6">
+        <div class="bg-white p-8 border-4 border-on-surface rounded-3xl shadow-[6px_6px_0px_0px_rgba(75,37,187,1)] -rotate-1">
+          <h2 class="font-headline-md text-2xl text-primary mb-4">Quem somos?</h2>
+          <p class="font-body-md text-on-surface-variant leading-relaxed mb-4">
+            Na Sonharte Personalizados, transformamos ideias em mimos reais, criando peças únicas que tornam cada momento ainda mais especial. Trabalhamos com topper de bolo, adesivos, caixinhas personalizadas e diversos itens feitos com carinho e atenção aos detalhes.
+          </p>
+          <p class="font-body-md text-on-surface-variant leading-relaxed">
+            Nosso objetivo é dar vida aos seus sonhos através de personalizados criativos e encantadores, perfeitos para festas, eventos e lembranças inesquecíveis. Cada projeto é desenvolvido com dedicação para refletir a sua personalidade e tornar sua celebração única.
+          </p>
+        </div>
+      </div>
+      <div class="flex justify-center relative">
+        <!-- Moldura Neobrutalista para foto/imagem -->
+        <div class="bg-tertiary-fixed border-4 border-on-surface rounded-3xl p-4 rotate-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] max-w-sm w-full">
+          <div class="aspect-[4/5] rounded-2xl bg-white border-2 border-on-surface overflow-hidden relative">
+            <div class="absolute inset-0 bg-primary-container/10 flex items-center justify-center">
+              <!-- Placeholder fofo de foto -->
+              <span class="material-symbols-outlined text-8xl text-primary-fixed-dim select-none">favorite</span>
+            </div>
+            <img src="/assets/sobre-photo.jpg" alt="Myllena na Sonharte" class="w-full h-full object-cover relative z-10 opacity-0 transition-opacity duration-300" onload="this.style.opacity='1'" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22 viewBox=%220 0 100 100%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23ffd9e4%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2210%22 fill=%22%238f0051%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22>Feito com Amor 🌸</text></svg>'" />
+          </div>
+          <div class="text-center mt-4">
+            <span class="font-label-bold text-on-tertiary-fixed text-sm">Myllena — Fundadora & Artesã</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Valores da Marca -->
+    <div class="flex flex-col gap-8 relative z-10 mt-8">
+      <h2 class="font-headline-lg text-3xl text-on-surface text-center">Nossos Valores de Ouro</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Valor 1 -->
+        <div class="bg-white p-6 border-4 border-on-surface rounded-2xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col gap-3 hover:-translate-y-1 hover:rotate-1 transition-all">
+          <div class="w-12 h-12 bg-primary-fixed text-primary rounded-xl border-2 border-black flex items-center justify-center font-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+            <span class="material-symbols-outlined">favorite</span>
+          </div>
+          <h3 class="font-headline-md text-xl text-on-surface">Amor em cada detalhe</h3>
+          <p class="font-body-md text-on-surface-variant text-sm leading-relaxed">
+            Desde a embalagem cheirosa até a seleção minuciosa dos produtos, cada entrega é enviada como um presente repleto de carinho.
+          </p>
+        </div>
+
+        <!-- Valor 2 -->
+        <div class="bg-white p-6 border-4 border-on-surface rounded-2xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col gap-3 hover:-translate-y-1 hover:rotate-1 transition-all">
+          <div class="w-12 h-12 bg-tertiary-fixed text-tertiary rounded-xl border-2 border-black flex items-center justify-center font-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+            <span class="material-symbols-outlined">draw</span>
+          </div>
+          <h3 class="font-headline-md text-xl text-on-surface">Criatividade Sem Limites</h3>
+          <p class="font-body-md text-on-surface-variant text-sm leading-relaxed">
+            Nossos personalizados são desenhados para expressar a personalidade única de cada cliente, tornando a escrita e o estudo prazerosos.
+          </p>
+        </div>
+
+        <!-- Valor 3 -->
+        <div class="bg-white p-6 border-4 border-on-surface rounded-2xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col gap-3 hover:-translate-y-1 hover:rotate-1 transition-all">
+          <div class="w-12 h-12 bg-secondary-fixed text-on-secondary-fixed rounded-xl border-2 border-black flex items-center justify-center font-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+            <span class="material-symbols-outlined">diversity_1</span>
+          </div>
+          <h3 class="font-headline-md text-xl text-on-surface">Atendimento Próximo</h3>
+          <p class="font-body-md text-on-surface-variant text-sm leading-relaxed">
+            A venda só termina quando você está 100% satisfeito. O suporte direto via WhatsApp garante a você a melhor experiência e segurança.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="bg-primary-container text-white border-4 border-on-surface rounded-3xl p-8 text-center flex flex-col items-center gap-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] relative z-10 mt-8 rotate-1">
+      <h2 class="font-headline-lg text-3xl">Pronto para dar asas aos seus sonhos?</h2>
+      <p class="font-body-md text-primary-fixed text-sm max-w-xl">
+        Dê uma olhada no nosso catálogo repleto de mimos e monte a sua sacola para conversarmos diretamente pelo WhatsApp!
+      </p>
+      <a href="/catalogo" class="bg-secondary-fixed text-on-secondary-fixed px-8 py-3.5 border-4 border-black rounded-xl font-label-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active-press hover:bg-white transition-colors text-md">
+        Explorar Nosso Catálogo 🚀
+      </a>
+    </div>
+
+  </main>
+
+  <Footer />
+  <FAB />
+</BaseLayout>

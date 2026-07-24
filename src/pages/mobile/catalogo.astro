@@ -1,0 +1,278 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/mobile/Header.astro';
+import HorizontalNav from '../../components/mobile/HorizontalNav.astro';
+import Footer from '../../components/mobile/Footer.astro';
+import produtosData from '../../data/produtos-mock.json';
+---
+
+<BaseLayout title="Sonharte | Catálogo Móvel">
+  <Header />
+  <HorizontalNav />
+  
+  <main class="flex flex-col gap-6 py-6 min-h-screen">
+    <!-- Barra de Filtros Compacta para Mobile -->
+    <div class="px-4 py-4 bg-surface-container flex flex-col gap-3 border-b-2 border-on-background">
+      <!-- Busca por Nome -->
+      <div class="relative">
+        <input 
+          type="text" 
+          id="search-input-mobile" 
+          placeholder="O que você está procurando?" 
+          class="w-full px-4 py-2 border-2 border-on-background rounded-xl text-sm focus:outline-none focus:border-primary bg-white font-body-md"
+        />
+        <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+      </div>
+
+      <!-- Filtros Secundários Lado a Lado -->
+      <div class="flex gap-3">
+        <!-- Ordenação -->
+        <div class="w-1/2">
+          <select id="sort-select-mobile" class="w-full px-2 py-2.5 border-2 border-on-background rounded-xl text-xs font-label-bold bg-white focus:outline-none focus:border-primary">
+            <option value="default">Relevância</option>
+            <option value="price-asc">Preço: Menor-Maior</option>
+            <option value="price-desc">Preço: Maior-Menor</option>
+            <option value="name-asc">Nome: A-Z</option>
+          </select>
+        </div>
+        <!-- Preço Máximo Slider Compacto -->
+        <div class="w-1/2 border-2 border-on-background rounded-xl px-3 py-1.5 bg-white flex flex-col justify-center">
+          <div class="flex justify-between items-center text-[10px] font-label-bold text-on-surface-variant mb-1">
+            <span>Máx:</span>
+            <span id="price-value-mobile" class="bg-primary-container text-white px-1 py-0.2 rounded">R$ 50</span>
+          </div>
+          <input 
+            type="range" 
+            id="price-range-mobile" 
+            min="0" 
+            max="50" 
+            step="1" 
+            value="50" 
+            class="w-full accent-primary h-2"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Resultados e Grade de Itens -->
+    <div class="px-4">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="font-headline-md text-lg" id="mobile-results-title">Todos os Produtos</h2>
+        <span class="text-xs font-label-bold text-on-surface-variant" id="mobile-results-count">0 itens</span>
+      </div>
+
+      <!-- Grade Mobile (2 colunas) -->
+      <div class="grid grid-cols-2 gap-4" id="products-grid-mobile">
+        <!-- Injetado dinamicamente -->
+      </div>
+
+      <!-- Alerta se nenhum produto for encontrado -->
+      <div id="no-products-alert-mobile" class="hidden flex flex-col items-center justify-center py-16 text-center bg-white border-2 border-dashed border-outline-variant rounded-2xl px-4">
+        <span class="material-symbols-outlined text-5xl text-on-surface-variant/40 mb-3">search_off</span>
+        <h3 class="font-label-bold text-md text-on-surface">Nenhum mimo encontrado</h3>
+        <p class="text-xs text-on-surface-variant mt-1">Experimente mudar seus filtros ou termos de pesquisa!</p>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<script is:inline>
+  let rawProducts = [];
+
+  let activeCategory = 'Todos';
+  let searchQuery = '';
+  let maxPrice = 50;
+  let sortBy = 'default';
+
+  async function initCatalogMobile() {
+    try {
+      const data = await window.SonharteDB.getProducts();
+      rawProducts = data.filter(p => p.ativo !== false);
+    } catch (err) {
+      console.error("Falha ao carregar produtos:", err);
+      rawProducts = [];
+    }
+
+    // Processar filtros da URL pós carregamento
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    const urlBusca = urlParams.get('busca');
+    if (urlBusca) {
+      const searchInput = document.getElementById('search-input-mobile');
+      if (searchInput) {
+        searchInput.value = urlBusca;
+        searchQuery = urlBusca;
+      }
+    }
+
+    const urlCat = urlParams.get('categoria');
+    if (urlCat) {
+      const nav = document.getElementById('mobile-horizontal-nav');
+      if (nav) {
+        const buttons = nav.querySelectorAll('.category-btn');
+        buttons.forEach(btn => {
+          const cat = btn.getAttribute('data-category') || 'Todos';
+          if (cat === urlCat) {
+            btn.className = "category-btn whitespace-nowrap px-4 py-2 thin-border rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-bold block-shadow-secondary active:translate-x-0.5 active:translate-y-0.5 active:shadow-none";
+            activeCategory = urlCat;
+          } else {
+            btn.className = "category-btn whitespace-nowrap px-4 py-2 thin-border rounded-full bg-white text-on-surface font-label-bold transition-all";
+          }
+        });
+      }
+    }
+
+    applyFiltersAndSortMobile();
+  }
+
+  function applyFiltersAndSortMobile() {
+    let filtered = [...rawProducts];
+
+    // 1. Categoria
+    if (activeCategory !== 'Todos') {
+      filtered = filtered.filter(p => p.categoria === activeCategory);
+    }
+
+    // 2. Busca
+    if (searchQuery.trim() !== '') {
+      const q = searchQuery.toLowerCase();
+      filtered = filtered.filter(p => 
+        p.titulo.toLowerCase().includes(q) || 
+        p.descricao.toLowerCase().includes(q)
+      );
+    }
+
+    // 3. Preço
+    filtered = filtered.filter(p => p.preco <= maxPrice);
+
+    // 4. Ordenar
+    if (sortBy === 'price-asc') {
+      filtered.sort((a, b) => a.preco - b.preco);
+    } else if (sortBy === 'price-desc') {
+      filtered.sort((a, b) => b.preco - a.preco);
+    } else if (sortBy === 'name-asc') {
+      filtered.sort((a, b) => a.titulo.localeCompare(b.titulo));
+    }
+
+    renderMobileProductsGrid(filtered);
+  }
+
+  function renderMobileProductsGrid(products) {
+    const grid = document.getElementById('products-grid-mobile');
+    const alertEl = document.getElementById('no-products-alert-mobile');
+    const countEl = document.getElementById('mobile-results-count');
+    const titleEl = document.getElementById('mobile-results-title');
+    if (!grid || !alertEl || !countEl || !titleEl) return;
+
+    countEl.textContent = `${products.length} ${products.length === 1 ? 'item' : 'itens'}`;
+    titleEl.textContent = activeCategory === 'Todos' ? 'Todos os Produtos' : activeCategory;
+
+    if (products.length === 0) {
+      grid.innerHTML = '';
+      alertEl.classList.remove('hidden');
+      return;
+    }
+
+    alertEl.classList.add('hidden');
+    let html = '';
+
+    products.forEach((product, idx) => {
+      // Alternância de rotação e sombra neobrutalista para mobile
+      const rotations = ['-rotate-1', 'rotate-1'];
+      const rot = rotations[idx % rotations.length];
+      const shadows = ['block-shadow-primary', 'block-shadow-tertiary', 'block-shadow-secondary'];
+      const shadow = shadows[idx % shadows.length];
+
+      html += `
+        <div class="thick-border rounded-2xl bg-white p-3.5 relative flex flex-col justify-between ${shadow}">
+          <div>
+            <a href="/mobile/produto?id=${product.id}" class="block relative w-full aspect-square mb-2.5">
+              <img src="${product.imagem}" alt="${product.titulo}" class="w-full h-full object-cover rounded-xl thin-border" />
+              <span class="absolute top-1 left-1 bg-white text-on-surface text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+                ${product.categoria}
+              </span>
+              ${product.destaque ? `
+                <span class="absolute top-1 right-1 bg-tertiary-fixed text-on-tertiary-fixed text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] z-10">
+                  ${product.destaque}
+                </span>
+              ` : ''}
+            </a>
+            <a href="/mobile/produto?id=${product.id}">
+              <h3 class="font-headline-md text-sm hover:text-primary transition-colors mb-1" title="${product.titulo}">${product.titulo}</h3>
+            </a>
+          </div>
+          <div class="flex items-center justify-between mt-3 gap-2">
+            <span class="font-headline-md text-base text-primary font-bold">R$ ${product.preco.toFixed(2)}</span>
+            <button 
+              class="add-to-cart-btn thin-border bg-primary text-white p-2 rounded-lg block-shadow-primary active:translate-x-0.5 active:translate-y-0.5 active:shadow-none shrink-0 flex items-center justify-center"
+              data-id="${product.id}"
+              data-titulo="${product.titulo}"
+              data-preco="${product.preco}"
+              data-imagem="${product.imagem}"
+            >
+              <span class="material-symbols-outlined text-xs">add_shopping_cart</span>
+            </button>
+          </div>
+        </div>
+      `;
+    });
+
+    grid.innerHTML = html;
+  }
+
+  // Interceptar cliques na barra de navegação horizontal mobile
+  function setupHorizontalNavHooks() {
+    const nav = document.getElementById('mobile-horizontal-nav');
+    if (!nav) return;
+
+    const buttons = nav.querySelectorAll('.category-btn');
+    buttons.forEach(btn => {
+      // Removemos o listener padrão do componente e adicionamos um focado no catálogo
+      btn.addEventListener('click', (e) => {
+        // Obter categoria
+        const cat = btn.getAttribute('data-category') || 'Todos';
+        activeCategory = cat;
+        applyFiltersAndSortMobile();
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // 1. Configurar input de busca
+    const searchInput = document.getElementById('search-input-mobile');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        applyFiltersAndSortMobile();
+      });
+    }
+
+    // 2. Configurar range de preço
+    const priceRange = document.getElementById('price-range-mobile');
+    const priceValue = document.getElementById('price-value-mobile');
+    if (priceRange && priceValue) {
+      priceRange.addEventListener('input', (e) => {
+        maxPrice = parseFloat(e.target.value);
+        priceValue.textContent = `R$ ${maxPrice}`;
+        applyFiltersAndSortMobile();
+      });
+    }
+
+    // 3. Configurar select de ordenação
+    const sortSelect = document.getElementById('sort-select-mobile');
+    if (sortSelect) {
+      sortSelect.addEventListener('change', (e) => {
+        sortBy = e.target.value;
+        applyFiltersAndSortMobile();
+      });
+    }
+
+    // 4. Mapear links da barra horizontal
+    setupHorizontalNavHooks();
+
+    // Executar renderização inicial do banco de dados
+    initCatalogMobile();
+  });
+</script>

@@ -1,0 +1,197 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TopNavBar from '../components/desktop/TopNavBar.astro';
+import Footer from '../components/desktop/Footer.astro';
+import FAB from '../components/desktop/FAB.astro';
+---
+
+<BaseLayout title="Sonharte | Fale Conosco">
+  <TopNavBar />
+  
+  <main class="max-w-container-max mx-auto px-gutter py-16 flex flex-col gap-12 min-h-screen relative overflow-hidden">
+    <!-- Decorações de Fundo -->
+    <div class="absolute top-10 right-10 w-96 h-96 rounded-full watercolor-blob" style="background: radial-gradient(circle, rgba(255,225,109,0.4) 0%, rgba(252,248,249,0) 70%);"></div>
+
+    <!-- Seção de Cabeçalho -->
+    <div class="text-center flex flex-col items-center gap-4 relative z-10">
+      <span class="bg-primary-fixed text-on-primary-fixed text-xs font-label-bold px-4 py-1.5 border-2 border-black rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] -rotate-1 animate-float">
+        Dúvidas ou sugestões? 💬
+      </span>
+      <h1 class="font-headline-xl text-5xl text-primary mt-2">Vamos Bater um Papo?</h1>
+      <div class="w-32 h-2 bg-primary mt-2 cartoon-border rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"></div>
+    </div>
+
+    <!-- Conteúdo Duas Colunas (Infos + Form) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10 mt-6">
+      
+      <!-- Lado Esquerdo: Informações de Contato -->
+      <div class="flex flex-col gap-8">
+        <div class="bg-white p-8 border-4 border-on-surface rounded-3xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] -rotate-1">
+          <h2 class="font-headline-md text-2xl text-primary mb-6">Nossos Canais</h2>
+          <div class="flex flex-col gap-6">
+            
+            <!-- Canal WhatsApp -->
+            <a href="https://wa.me/5531972122639" target="_blank" class="group flex items-center gap-4 p-4 border-2 border-transparent hover:border-black rounded-2xl hover:bg-secondary-fixed transition-all hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+              <div class="w-12 h-12 bg-green-100 text-green-600 rounded-xl border-2 border-black flex items-center justify-center font-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] shrink-0">
+                <span class="material-symbols-outlined text-2xl">chat</span>
+              </div>
+              <div>
+                <h4 class="font-headline-md text-lg text-on-surface">WhatsApp</h4>
+                <p class="font-body-md text-on-surface-variant text-sm">(31) 97212-2639</p>
+              </div>
+            </a>
+
+            <!-- Canal Instagram -->
+            <a href="https://www.instagram.com/p.sonharte/" target="_blank" class="group flex items-center gap-4 p-4 border-2 border-transparent hover:border-black rounded-2xl hover:bg-tertiary-fixed transition-all hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+              <div class="w-12 h-12 bg-pink-100 text-pink-600 rounded-xl border-2 border-black flex items-center justify-center font-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] shrink-0">
+                <span class="material-symbols-outlined text-2xl">photo_camera</span>
+              </div>
+              <div>
+                <h4 class="font-headline-md text-lg text-on-surface">Instagram</h4>
+                <p class="font-body-md text-on-surface-variant text-sm">@p.sonharte</p>
+              </div>
+            </a>
+
+            <!-- Canal E-mail -->
+            <a href="mailto:m.sonharte@gmail.com" class="group flex items-center gap-4 p-4 border-2 border-transparent hover:border-black rounded-2xl hover:bg-primary-fixed transition-all hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+              <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl border-2 border-black flex items-center justify-center font-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] shrink-0">
+                <span class="material-symbols-outlined text-2xl">mail</span>
+              </div>
+              <div>
+                <h4 class="font-headline-md text-lg text-on-surface">E-mail</h4>
+                <p class="font-body-md text-on-surface-variant text-sm">m.sonharte@gmail.com</p>
+              </div>
+            </a>
+
+            <!-- Canal Local/Retirada -->
+            <div class="flex items-center gap-4 p-4">
+              <div class="w-12 h-12 bg-primary-fixed text-primary rounded-xl border-2 border-black flex items-center justify-center font-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] shrink-0">
+                <span class="material-symbols-outlined text-2xl">location_on</span>
+              </div>
+              <div>
+                <h4 class="font-headline-md text-lg text-on-surface">Ponto de Retirada</h4>
+                <p class="font-body-md text-on-surface-variant text-sm">Rua Sócrates, 679 - Belo Horizonte, MG - CEP 31990-010</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- FAQ Rápido -->
+        <div class="bg-secondary-fixed text-on-secondary-fixed p-6 border-4 border-on-surface rounded-3xl shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] rotate-1">
+          <h3 class="font-headline-md text-xl mb-3 flex items-center gap-2">
+            <span class="material-symbols-outlined">help</span> Informações Importantes
+          </h3>
+          <ul class="font-body-md text-xs flex flex-col gap-2 list-disc list-inside leading-relaxed">
+            <li>Retiradas físicas devem ser agendadas previamente via WhatsApp.</li>
+            <li>Pedidos personalizados levam em média de 3 a 5 dias úteis para confecção.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Lado Direito: Formulário de Contato -->
+      <div>
+        <form id="contact-form" class="bg-white p-8 border-4 border-on-surface rounded-3xl shadow-[6px_6px_0px_0px_rgba(75,37,187,1)] flex flex-col gap-5 rotate-1">
+          <h2 class="font-headline-md text-2xl text-primary mb-2">Envie uma mensagem</h2>
+          
+          <div class="flex flex-col gap-2">
+            <label for="name" class="font-label-bold text-sm text-on-surface">Seu Nome</label>
+            <input 
+              type="text" 
+              id="name" 
+              required
+              placeholder="Como podemos te chamar?" 
+              class="w-full px-4 py-3 border-2 border-on-surface rounded-xl focus:outline-none focus:border-primary transition-colors text-sm font-body-md bg-background"
+            />
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label for="email" class="font-label-bold text-sm text-on-surface">Seu E-mail</label>
+            <input 
+              type="email" 
+              id="email" 
+              required
+              placeholder="exemplo@email.com" 
+              class="w-full px-4 py-3 border-2 border-on-surface rounded-xl focus:outline-none focus:border-primary transition-colors text-sm font-body-md bg-background"
+            />
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label for="subject" class="font-label-bold text-sm text-on-surface">Assunto</label>
+            <input 
+              type="text" 
+              id="subject" 
+              required
+              placeholder="Qual o motivo do contato?" 
+              class="w-full px-4 py-3 border-2 border-on-surface rounded-xl focus:outline-none focus:border-primary transition-colors text-sm font-body-md bg-background"
+            />
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label for="message" class="font-label-bold text-sm text-on-surface">Mensagem</label>
+            <textarea 
+              id="message" 
+              required
+              rows="4"
+              placeholder="Digite aqui o que você gostaria de nos dizer..." 
+              class="w-full px-4 py-3 border-2 border-on-surface rounded-xl focus:outline-none focus:border-primary transition-colors text-sm font-body-md bg-background resize-none"
+            ></textarea>
+          </div>
+
+          <button 
+            type="submit" 
+            class="w-full bg-primary text-white py-4 border-2 border-black rounded-xl font-label-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active-press hover:bg-tertiary transition-colors text-sm mt-2 flex items-center justify-center gap-2"
+          >
+            Enviar Mensagem <span class="material-symbols-outlined text-sm">send</span>
+          </button>
+        </form>
+
+        <!-- Mensagem de Sucesso (Oculta por padrão) -->
+        <div id="success-message" class="hidden flex flex-col items-center justify-center p-8 bg-white border-4 border-on-surface rounded-3xl shadow-[6px_6px_0px_0px_rgba(75,37,187,1)] text-center gap-4 rotate-1">
+          <div class="w-16 h-16 bg-green-100 border-2 border-black rounded-full flex items-center justify-center text-green-600 animate-bounce">
+            <span class="material-symbols-outlined text-3xl">check_circle</span>
+          </div>
+          <h3 class="font-headline-md text-2xl text-on-surface">Eba! Mensagem Enviada!</h3>
+          <p class="font-body-md text-on-surface-variant text-sm max-w-sm">
+            Seu recado foi recebido com muito carinho. Em breve, a Myllena retornará o contato diretamente por e-mail ou WhatsApp!
+          </p>
+          <button 
+            id="reset-form-btn"
+            class="bg-secondary-fixed text-on-secondary-fixed px-6 py-2 border-2 border-black rounded-xl font-label-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active-press hover:bg-white transition-colors text-xs"
+          >
+            Enviar Nova Mensagem
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <Footer />
+  <FAB />
+</BaseLayout>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contact-form');
+    const success = document.getElementById('success-message');
+    const resetBtn = document.getElementById('reset-form-btn');
+    
+    if (form && success && resetBtn) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Simulação de envio para backend (Supabase ou Email)
+        form.classList.add('hidden');
+        success.classList.remove('hidden');
+      });
+
+      resetBtn.addEventListener('click', () => {
+        form.reset();
+        success.classList.add('hidden');
+        form.classList.remove('hidden');
+      });
+    }
+  });
+</script>
