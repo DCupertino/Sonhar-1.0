@@ -174,6 +174,17 @@ import Footer from '../../components/mobile/Footer.astro';
             <span class="text-xs bg-primary-fixed text-on-primary-fixed border border-black px-2 py-0.5 rounded" id="products-count-badge">0</span>
           </h3>
 
+          <!-- Barra de Pesquisa de Produtos Mobile -->
+          <div class="mb-3 relative">
+            <span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-base">search</span>
+            <input 
+              type="text" 
+              id="search-products-input" 
+              class="w-full pl-8 pr-3 py-1.5 border-2 border-on-surface rounded-lg text-xs font-body-md bg-background focus:outline-none focus:border-primary transition-colors" 
+              placeholder="Pesquisar produto pelo nome..."
+            />
+          </div>
+
           <div class="flex flex-col gap-3" id="products-list-container">
             <!-- Injetado dinamicamente -->
           </div>
@@ -473,53 +484,78 @@ import Footer from '../../components/mobile/Footer.astro';
     // 3. Gerenciamento de Produtos
     let productsList = [];
 
+    // Barra de pesquisa de produtos mobile
+    const searchInput = document.getElementById('search-products-input');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        const filtered = productsList.filter(p => 
+          p.titulo.toLowerCase().includes(query) || 
+          (p.categoria && p.categoria.toLowerCase().includes(query))
+        );
+        displayProducts(filtered);
+      });
+    }
+
     async function loadProducts() {
+      try {
+        productsList = await window.SonharteDB.getProducts();
+        
+        // Limpa a barra de pesquisa ao recarregar a lista do banco
+        if (searchInput) searchInput.value = '';
+        
+        displayProducts(productsList);
+      } catch (err) {
+        const listContainer = document.getElementById('products-list-container');
+        if (listContainer) {
+          listContainer.innerHTML = '<p class="text-xs text-red-700 text-center py-6">Erro ao carregar lista de produtos.</p>';
+        }
+      }
+    }
+
+    function displayProducts(list) {
       const listContainer = document.getElementById('products-list-container');
       const badge = document.getElementById('products-count-badge');
       if (!listContainer) return;
 
-      try {
-        productsList = await window.SonharteDB.getProducts();
-        badge.textContent = productsList.length;
+      badge.textContent = list.length;
 
-        if (productsList.length === 0) {
-          listContainer.innerHTML = '<p class="text-xs text-on-surface-variant text-center py-6">Nenhum produto cadastrado.</p>';
-          return;
-        }
+      if (list.length === 0) {
+        listContainer.innerHTML = '<p class="text-xs text-on-surface-variant text-center py-6">Nenhum produto encontrado.</p>';
+        return;
+      }
 
-        let html = '';
-        productsList.forEach(p => {
-          html += `
-            <div class="flex items-center justify-between p-2.5 border-2 border-black rounded-xl bg-surface-container-low hover:bg-white transition-colors gap-3">
-              <div class="flex items-center gap-2.5 min-w-0">
-                <img src="${p.imagem}" alt="${p.titulo}" class="w-10 h-10 object-cover border-2 border-black rounded-lg bg-surface-variant shrink-0" />
-                <div class="min-w-0">
-                  <h4 class="font-label-bold text-xs text-on-surface truncate" title="${p.titulo}">${p.titulo}</h4>
-                  <p class="font-body-md text-[9px] text-on-surface-variant">R$ ${p.preco.toFixed(2)} • ${p.ativo ? 'Ativo' : 'Pausado'} ${p.destaque ? `• Selo: ${p.destaque}` : ''}</p>
-                </div>
-              </div>
-              <div class="flex items-center gap-2 shrink-0">
-                <button 
-                  class="edit-prod-btn material-symbols-outlined text-[15px] p-1.5 bg-secondary-fixed text-on-secondary-fixed border-2 border-black rounded-lg shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]"
-                  data-id="${p.id}"
-                >
-                  edit
-                </button>
-                <button 
-                  class="delete-prod-btn material-symbols-outlined text-[15px] p-1.5 bg-red-100 text-red-700 border-2 border-red-700 rounded-lg shadow-[1px_1px_0px_0px_rgba(186,26,26,1)]"
-                  data-id="${p.id}"
-                >
-                  delete
-                </button>
+      let html = '';
+      list.forEach(p => {
+        const preco = typeof p.preco === 'number' ? p.preco : parseFloat(p.preco || 0);
+        html += `
+          <div class="flex items-center justify-between p-2.5 border-2 border-black rounded-xl bg-surface-container-low hover:bg-white transition-colors gap-3">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <img src="${p.imagem}" alt="${p.titulo}" class="w-10 h-10 object-cover border-2 border-black rounded-lg bg-surface-variant shrink-0" />
+              <div class="min-w-0">
+                <h4 class="font-label-bold text-xs text-on-surface truncate" title="${p.titulo}">${p.titulo}</h4>
+                <p class="font-body-md text-[9px] text-on-surface-variant">R$ ${preco.toFixed(2).replace('.', ',')} • ${p.ativo ? 'Ativo' : 'Pausado'} ${p.destaque ? `• Selo: ${p.destaque}` : ''}</p>
               </div>
             </div>
-          `;
-        });
-        listContainer.innerHTML = html;
-        setupProductListEvents();
-      } catch (err) {
-        listContainer.innerHTML = '<p class="text-xs text-red-700 text-center py-6">Erro ao carregar lista de produtos.</p>';
-      }
+            <div class="flex items-center gap-2 shrink-0">
+              <button 
+                class="edit-prod-btn material-symbols-outlined text-[15px] p-1.5 bg-secondary-fixed text-on-secondary-fixed border-2 border-black rounded-lg shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]"
+                data-id="${p.id}"
+              >
+                edit
+              </button>
+              <button 
+                class="delete-prod-btn material-symbols-outlined text-[15px] p-1.5 bg-red-100 text-red-700 border-2 border-red-700 rounded-lg shadow-[1px_1px_0px_0px_rgba(186,26,26,1)]"
+                data-id="${p.id}"
+              >
+                delete
+              </button>
+            </div>
+          </div>
+        `;
+      });
+      listContainer.innerHTML = html;
+      setupProductListEvents();
     }
 
     function setupProductListEvents() {
