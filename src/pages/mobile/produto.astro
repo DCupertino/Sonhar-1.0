@@ -170,7 +170,7 @@ import Footer from '../../components/mobile/Footer.astro';
     async function loadProductDetailsMobile() {
       try {
         productsList = await window.SonharteDB.getProducts();
-        currentProduct = productsList.find(p => p.id === productId && p.ativo !== false);
+        currentProduct = productsList.find(p => p.id == productId && p.ativo !== false);
 
         if (!currentProduct) {
           showErrorMobile();
