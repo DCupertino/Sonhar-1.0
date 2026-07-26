@@ -1,27 +1,5 @@
 ---
-import products from '../../data/produtos-mock.json';
-
-// Selecionar produtos reais específicos
-const favorites = [
-  products.find(p => p.id === "1"),
-  products.find(p => p.id === "6"),
-  products.find(p => p.id === "21"),
-  products.find(p => p.id === "12")
-].filter(Boolean);
-
-const news = [
-  products.find(p => p.id === "73"),
-  products.find(p => p.id === "76"),
-  products.find(p => p.id === "84"),
-  products.find(p => p.id === "88")
-].filter(Boolean);
-
-const bestSellers = [
-  products.find(p => p.id === "3"),
-  products.find(p => p.id === "22"),
-  products.find(p => p.id === "32"),
-  products.find(p => p.id === "50")
-].filter(Boolean);
+// Mapeamento dinâmico no cliente a partir do Supabase (Desktop)
 ---
 
 <!-- Bento Grid Products: Favoritos da Semana -->
@@ -34,119 +12,8 @@ const bestSellers = [
     <a href="/catalogo" class="px-6 py-2 bg-surface cartoon-border cartoon-shadow rounded-lg font-label-bold hover-lift transition-all inline-block">Ver todos</a>
   </div>
   
-  <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-    {favorites.length >= 4 && (
-      <>
-        <!-- Card 1 Bento (Grande Destaque) -->
-        <div class="md:col-span-2 md:row-span-2 group">
-          <div class="h-full cartoon-border cartoon-shadow-primary rounded-2xl bg-white overflow-hidden flex flex-col justify-between">
-            <a href={`/produto?id=${favorites[0].id}`} class="block relative h-[75%] min-h-[350px]">
-              <img alt={favorites[0].titulo} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src={favorites[0].imagem} />
-              <div class="absolute top-4 right-4 bg-error text-white px-3 py-1 cartoon-border rounded-full font-label-bold text-xs">Destaque</div>
-            </a>
-            <div class="p-4 flex-grow flex flex-col justify-between gap-2 bg-white">
-              <div>
-                <a href={`/produto?id=${favorites[0].id}`} class="hover:text-primary transition-colors">
-                  <h3 class="font-headline-md text-base text-on-surface mb-1 font-bold">{favorites[0].titulo}</h3>
-                </a>
-              </div>
-              <div class="flex justify-between items-center mt-2">
-                <span class="text-xl font-headline-md text-primary font-bold">R$ {favorites[0].preco.toFixed(2).replace('.', ',')}</span>
-                <button 
-                  class="add-to-cart-btn bg-primary text-white px-5 py-1.5 cartoon-border rounded-lg active-press hover:bg-tertiary transition-colors text-xs"
-                  data-id={favorites[0].id}
-                  data-titulo={favorites[0].titulo}
-                  data-preco={favorites[0].preco}
-                  data-imagem={favorites[0].imagem}
-                >
-                  Eu quero!
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="group">
-          <div class="cartoon-border cartoon-shadow rounded-2xl bg-white overflow-hidden hover-lift transition-all">
-            <a href={`/produto?id=${favorites[1].id}`} class="block aspect-square bg-secondary-fixed">
-              <img alt={favorites[1].titulo} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src={favorites[1].imagem} />
-            </a>
-            <div class="p-3.5 flex justify-between items-center bg-white gap-2">
-              <div>
-                <a href={`/produto?id=${favorites[1].id}`} class="hover:text-primary transition-colors">
-                  <h4 class="font-headline-md text-on-surface text-sm truncate max-w-[110px] font-bold" title={favorites[1].titulo}>{favorites[1].titulo}</h4>
-                </a>
-                <span class="text-base font-bold text-tertiary">R$ {favorites[1].preco.toFixed(2).replace('.', ',')}</span>
-              </div>
-              <button 
-                class="add-to-cart-btn p-1.5 bg-tertiary text-white rounded-lg border-2 border-black active-press hover:bg-primary transition-colors flex items-center justify-center shrink-0"
-                data-id={favorites[1].id}
-                data-titulo={favorites[1].titulo}
-                data-preco={favorites[1].preco}
-                data-imagem={favorites[1].imagem}
-              >
-                <span class="material-symbols-outlined text-xs">add_shopping_cart</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="group">
-          <div class="cartoon-border cartoon-shadow rounded-2xl bg-white overflow-hidden hover-lift transition-all">
-            <a href={`/produto?id=${favorites[2].id}`} class="block aspect-square bg-tertiary-fixed">
-              <img alt={favorites[2].titulo} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src={favorites[2].imagem} />
-            </a>
-            <div class="p-3.5 flex justify-between items-center bg-white gap-2">
-              <div>
-                <a href={`/produto?id=${favorites[2].id}`} class="hover:text-primary transition-colors">
-                  <h4 class="font-headline-md text-on-surface text-sm truncate max-w-[110px] font-bold" title={favorites[2].titulo}>{favorites[2].titulo}</h4>
-                </a>
-                <span class="text-base font-bold text-tertiary">R$ {favorites[2].preco.toFixed(2).replace('.', ',')}</span>
-              </div>
-              <button 
-                class="add-to-cart-btn p-1.5 bg-tertiary text-white rounded-lg border-2 border-black active-press hover:bg-primary transition-colors flex items-center justify-center shrink-0"
-                data-id={favorites[2].id}
-                data-titulo={favorites[2].titulo}
-                data-preco={favorites[2].preco}
-                data-imagem={favorites[2].imagem}
-              >
-                <span class="material-symbols-outlined text-xs">add_shopping_cart</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 4 (Horizontal Bento) -->
-        <div class="md:col-span-2 group">
-          <div class="cartoon-border cartoon-shadow rounded-2xl bg-white overflow-hidden flex items-center hover-lift transition-all h-full">
-            <a href={`/produto?id=${favorites[3].id}`} class="w-[45%] aspect-square bg-primary-fixed shrink-0 block">
-              <img alt={favorites[3].titulo} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src={favorites[3].imagem} />
-            </a>
-            <div class="p-4 w-[55%] flex flex-col justify-between h-full gap-2">
-              <div>
-                <a href={`/produto?id=${favorites[3].id}`} class="hover:text-primary transition-colors">
-                  <h4 class="font-headline-md text-base text-on-surface font-bold">{favorites[3].titulo}</h4>
-                </a>
-              </div>
-              <div class="flex justify-between items-center mt-auto">
-                <span class="text-lg font-bold text-primary font-headline-md">R$ {favorites[3].preco.toFixed(2).replace('.', ',')}</span>
-                <button 
-                  class="add-to-cart-btn bg-primary text-white px-4 py-2 cartoon-border rounded-lg active-press hover:bg-tertiary transition-colors text-xs"
-                  data-id={favorites[3].id}
-                  data-titulo={favorites[3].titulo}
-                  data-preco={favorites[3].preco}
-                  data-imagem={favorites[3].imagem}
-                >
-                  Eu quero!
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </>
-    )}
+  <div id="desktop-favorites-grid" class="grid grid-cols-1 md:grid-cols-4 gap-8 min-h-[300px]">
+    <div class="md:col-span-4 text-center text-sm text-on-surface-variant py-12">Carregando favoritos...</div>
   </div>
 </section>
 
@@ -157,38 +24,8 @@ const bestSellers = [
     <p class="font-body-md text-on-surface-variant">Os últimos mimos que acabaram de chegar na Sonharte!</p>
   </div>
   
-  <div class="max-w-container-max mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-    {news.map(p => (
-      <div class="group font-body-md">
-        <div class="cartoon-border cartoon-shadow rounded-2xl bg-white overflow-hidden hover-lift transition-all flex flex-col justify-between h-full">
-          <div>
-            <a href={`/produto?id=${p.id}`} class="aspect-square bg-slate-50 relative overflow-hidden flex items-center justify-center block">
-              <img alt={p.titulo} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src={p.imagem} />
-              <span class="absolute top-3 left-3 bg-tertiary text-white text-[10px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
-                Novo!
-              </span>
-            </a>
-            <div class="p-4">
-              <a href={`/produto?id=${p.id}`} class="hover:text-primary transition-colors">
-                <h4 class="font-headline-md text-on-surface text-sm mb-1 font-bold" title={p.titulo}>{p.titulo}</h4>
-              </a>
-            </div>
-          </div>
-          <div class="p-4 pt-0 flex justify-between items-center bg-white gap-2">
-            <span class="text-base font-bold text-primary font-headline-md">R$ {p.preco.toFixed(2).replace('.', ',')}</span>
-            <button 
-              class="add-to-cart-btn p-2 bg-primary text-white rounded-lg border-2 border-black active-press hover:bg-tertiary transition-colors flex items-center justify-center shrink-0"
-              data-id={p.id}
-              data-titulo={p.titulo}
-              data-preco={p.preco}
-              data-imagem={p.imagem}
-            >
-              <span class="material-symbols-outlined text-xs">add_shopping_cart</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    ))}
+  <div id="desktop-news-grid" class="max-w-container-max mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 min-h-[200px]">
+    <div class="sm:col-span-2 md:col-span-4 text-center text-sm text-on-surface-variant py-12">Carregando novidades...</div>
   </div>
 </section>
 
@@ -199,37 +36,269 @@ const bestSellers = [
     <p class="font-body-md text-on-surface-variant">Os queridinhos que todo mundo está amando levar para casa!</p>
   </div>
   
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-    {bestSellers.map(p => (
-      <div class="group font-body-md">
+  <div id="desktop-bestsellers-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 min-h-[200px]">
+    <div class="sm:col-span-2 md:col-span-4 text-center text-sm text-on-surface-variant py-12">Carregando mais vendidos...</div>
+  </div>
+</section>
+
+<script is:inline>
+  async function loadHomeProductsDesktop() {
+    const favoritesGrid = document.getElementById('desktop-favorites-grid');
+    const newsGrid = document.getElementById('desktop-news-grid');
+    const bestsellersGrid = document.getElementById('desktop-bestsellers-grid');
+
+    if (!window.SonharteDB) return;
+
+    try {
+      const products = await window.SonharteDB.getProducts();
+      const activeProducts = products.filter(p => p.ativo !== false);
+
+      // 1. Favoritos (selo "Destaque")
+      let favorites = activeProducts.filter(p => p.destaque === 'Destaque');
+      if (favorites.length === 0) {
+        favorites = activeProducts.slice(0, 4);
+      } else {
+        favorites = favorites.slice(0, 4);
+      }
+
+      // 2. Novidades (selo "Lançamento")
+      let news = activeProducts.filter(p => p.destaque === 'Lançamento');
+      if (news.length === 0) {
+        news = activeProducts.slice(4, 8);
+      } else {
+        news = news.slice(0, 4);
+      }
+
+      // 3. Mais Vendidos (selo "Mais Vendido")
+      let bestSellers = activeProducts.filter(p => p.destaque === 'Mais Vendido');
+      if (bestSellers.length === 0) {
+        bestSellers = activeProducts.slice(8, 12);
+      } else {
+        bestSellers = bestSellers.slice(0, 4);
+      }
+
+      // Renderiza favoritos no Bento Grid
+      renderFavoritesBentoGrid(favoritesGrid, favorites);
+
+      // Renderiza as outras duas seções no grid padrão
+      renderDesktopStandardGrid(newsGrid, news, 'Novo!', 'tertiary');
+      renderDesktopStandardGrid(bestsellersGrid, bestSellers, '★ Sucesso', 'secondary');
+
+    } catch (err) {
+      console.error("Erro ao carregar favoritos na home desktop:", err);
+      if (favoritesGrid) favoritesGrid.innerHTML = '<p class="md:col-span-4 text-center text-sm text-red-600">Erro ao carregar favoritos.</p>';
+      if (newsGrid) newsGrid.innerHTML = '<p class="md:col-span-4 text-center text-sm text-red-600">Erro ao carregar novidades.</p>';
+      if (bestsellersGrid) bestsellersGrid.innerHTML = '<p class="md:col-span-4 text-center text-sm text-red-600">Erro ao carregar mais vendidos.</p>';
+    }
+  }
+
+  function renderFavoritesBentoGrid(container, list) {
+    if (!container) return;
+    container.innerHTML = '';
+
+    if (list.length < 4) {
+      container.innerHTML = '<p class="md:col-span-4 text-center text-sm text-on-surface-variant py-12">Nenhum produto nos favoritos.</p>';
+      return;
+    }
+
+    // Card 1 Bento (Grande Destaque - col-span-2 row-span-2)
+    const p0 = list[0];
+    const priceVal0 = typeof p0.preco === 'number' ? p0.preco : parseFloat(p0.preco || 0);
+    const precoFormatado0 = priceVal0.toFixed(2).replace('.', ',');
+    
+    const card0 = document.createElement('div');
+    card0.className = 'md:col-span-2 md:row-span-2 group';
+    card0.innerHTML = `
+      <div class="h-full cartoon-border cartoon-shadow-primary rounded-2xl bg-white overflow-hidden flex flex-col justify-between">
+        <a href="/produto?id=${p0.id}" class="block relative h-[75%] min-h-[350px]">
+          <img alt="${p0.titulo}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="${p0.imagem}" />
+          <div class="absolute top-4 right-4 bg-error text-white px-3 py-1 cartoon-border rounded-full font-label-bold text-xs">Destaque</div>
+        </a>
+        <div class="p-4 flex-grow flex flex-col justify-between gap-2 bg-white">
+          <div>
+            <a href="/produto?id=${p0.id}" class="hover:text-primary transition-colors">
+              <h3 class="font-headline-md text-base text-on-surface mb-1 font-bold">${p0.titulo}</h3>
+            </a>
+          </div>
+          <div class="flex justify-between items-center mt-2">
+            <span class="text-xl font-headline-md text-primary font-bold">R$ ${precoFormatado0}</span>
+            <button 
+              class="add-to-cart-btn bg-primary text-white px-5 py-1.5 cartoon-border rounded-lg active-press hover:bg-tertiary transition-colors text-xs"
+              data-id="${p0.id}"
+              data-titulo="${p0.titulo}"
+              data-preco="${p0.preco}"
+              data-imagem="${p0.imagem}"
+            >
+              Eu quero!
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+    container.appendChild(card0);
+
+    // Card 2
+    const p1 = list[1];
+    const priceVal1 = typeof p1.preco === 'number' ? p1.preco : parseFloat(p1.preco || 0);
+    const precoFormatado1 = priceVal1.toFixed(2).replace('.', ',');
+    
+    const card1 = document.createElement('div');
+    card1.className = 'group';
+    card1.innerHTML = `
+      <div class="cartoon-border cartoon-shadow rounded-2xl bg-white overflow-hidden hover-lift transition-all">
+        <a href="/produto?id=${p1.id}" class="block aspect-square bg-secondary-fixed">
+          <img alt="${p1.titulo}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="${p1.imagem}" />
+        </a>
+        <div class="p-3.5 flex justify-between items-center bg-white gap-2">
+          <div>
+            <a href="/produto?id=${p1.id}" class="hover:text-primary transition-colors">
+              <h4 class="font-headline-md text-on-surface text-sm truncate max-w-[110px] font-bold" title="${p1.titulo}">${p1.titulo}</h4>
+            </a>
+            <span class="text-base font-bold text-tertiary">R$ ${precoFormatado1}</span>
+          </div>
+          <button 
+            class="add-to-cart-btn p-1.5 bg-tertiary text-white rounded-lg border-2 border-black active-press hover:bg-primary transition-colors flex items-center justify-center shrink-0"
+            data-id="${p1.id}"
+            data-titulo="${p1.titulo}"
+            data-preco="${p1.preco}"
+            data-imagem="${p1.imagem}"
+          >
+            <span class="material-symbols-outlined text-xs">add_shopping_cart</span>
+          </button>
+        </div>
+      </div>
+    `;
+    container.appendChild(card1);
+
+    // Card 3
+    const p2 = list[2];
+    const priceVal2 = typeof p2.preco === 'number' ? p2.preco : parseFloat(p2.preco || 0);
+    const precoFormatado2 = priceVal2.toFixed(2).replace('.', ',');
+    
+    const card2 = document.createElement('div');
+    card2.className = 'group';
+    card2.innerHTML = `
+      <div class="cartoon-border cartoon-shadow rounded-2xl bg-white overflow-hidden hover-lift transition-all">
+        <a href="/produto?id=${p2.id}" class="block aspect-square bg-tertiary-fixed">
+          <img alt="${p2.titulo}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="${p2.imagem}" />
+        </a>
+        <div class="p-3.5 flex justify-between items-center bg-white gap-2">
+          <div>
+            <a href="/produto?id=${p2.id}" class="hover:text-primary transition-colors">
+              <h4 class="font-headline-md text-on-surface text-sm truncate max-w-[110px] font-bold" title="${p2.titulo}">${p2.titulo}</h4>
+            </a>
+            <span class="text-base font-bold text-tertiary">R$ ${precoFormatado2}</span>
+          </div>
+          <button 
+            class="add-to-cart-btn p-1.5 bg-tertiary text-white rounded-lg border-2 border-black active-press hover:bg-primary transition-colors flex items-center justify-center shrink-0"
+            data-id="${p2.id}"
+            data-titulo="${p2.titulo}"
+            data-preco="${p2.preco}"
+            data-imagem="${p2.imagem}"
+          >
+            <span class="material-symbols-outlined text-xs">add_shopping_cart</span>
+          </button>
+        </div>
+      </div>
+    `;
+    container.appendChild(card2);
+
+    // Card 4 Bento Horizontal (col-span-2)
+    const p3 = list[3];
+    const priceVal3 = typeof p3.preco === 'number' ? p3.preco : parseFloat(p3.preco || 0);
+    const precoFormatado3 = priceVal3.toFixed(2).replace('.', ',');
+    
+    const card3 = document.createElement('div');
+    card3.className = 'md:col-span-2 group';
+    card3.innerHTML = `
+      <div class="cartoon-border cartoon-shadow rounded-2xl bg-white overflow-hidden flex items-center hover-lift transition-all h-full">
+        <a href="/produto?id=${p3.id}" class="w-[45%] aspect-square bg-primary-fixed shrink-0 block">
+          <img alt="${p3.titulo}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="${p3.imagem}" />
+        </a>
+        <div class="p-4 w-[55%] flex flex-col justify-between h-full gap-2">
+          <div>
+            <a href="/produto?id=${p3.id}" class="hover:text-primary transition-colors">
+              <h4 class="font-headline-md text-base text-on-surface font-bold">${p3.titulo}</h4>
+            </a>
+          </div>
+          <div class="flex justify-between items-center mt-auto">
+            <span class="text-lg font-bold text-primary font-headline-md">R$ ${precoFormatado3}</span>
+            <button 
+              class="add-to-cart-btn bg-primary text-white px-4 py-2 cartoon-border rounded-lg active-press hover:bg-tertiary transition-colors text-xs"
+              data-id="${p3.id}"
+              data-titulo="${p3.titulo}"
+              data-preco="${p3.preco}"
+              data-imagem="${p3.imagem}"
+            >
+              Eu quero!
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+    container.appendChild(card3);
+  }
+
+  function renderDesktopStandardGrid(container, list, badgeText, themeColor) {
+    if (!container) return;
+    container.innerHTML = '';
+
+    if (list.length === 0) {
+      container.innerHTML = '<p class="md:col-span-4 text-center text-sm text-on-surface-variant py-12">Nenhum produto nesta seção.</p>';
+      return;
+    }
+
+    list.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'group font-body-md';
+      
+      const badgeClass = themeColor === 'tertiary' 
+        ? 'bg-tertiary text-white' 
+        : 'bg-secondary-container text-on-secondary-fixed';
+        
+      const buttonBg = themeColor === 'tertiary' ? 'bg-primary' : 'bg-tertiary';
+      const buttonHover = themeColor === 'tertiary' ? 'hover:bg-tertiary' : 'hover:bg-primary';
+      const textTheme = themeColor === 'tertiary' ? 'text-primary' : 'text-tertiary';
+
+      const priceVal = typeof p.preco === 'number' ? p.preco : parseFloat(p.preco || 0);
+      const precoFormatado = priceVal.toFixed(2).replace('.', ',');
+
+      card.innerHTML = `
         <div class="cartoon-border cartoon-shadow rounded-2xl bg-white overflow-hidden hover-lift transition-all flex flex-col justify-between h-full">
           <div>
-            <a href={`/produto?id=${p.id}`} class="aspect-square bg-slate-50 relative overflow-hidden flex items-center justify-center block">
-              <img alt={p.titulo} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src={p.imagem} />
-              <span class="absolute top-3 left-3 bg-secondary-container text-on-secondary-fixed text-[10px] font-label-bold px-2.5 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
-                ★ Sucesso
+            <a href="/produto?id=${p.id}" class="aspect-square bg-slate-50 relative overflow-hidden flex items-center justify-center block">
+              <img alt="${p.titulo}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="${p.imagem}" />
+              <span class="absolute top-3 left-3 ${badgeClass} text-[10px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+                ${badgeText}
               </span>
             </a>
             <div class="p-4">
-              <a href={`/produto?id=${p.id}`} class="hover:text-primary transition-colors">
-                <h4 class="font-headline-md text-on-surface text-sm mb-1 font-bold" title={p.titulo}>{p.titulo}</h4>
+              <a href="/produto?id=${p.id}" class="hover:text-primary transition-colors">
+                <h4 class="font-headline-md text-on-surface text-sm mb-1 font-bold" title="${p.titulo}">${p.titulo}</h4>
               </a>
             </div>
           </div>
           <div class="p-4 pt-0 flex justify-between items-center bg-white gap-2">
-            <span class="text-base font-bold text-tertiary font-headline-md">R$ {p.preco.toFixed(2).replace('.', ',')}</span>
+            <span class="text-base font-bold ${textTheme} font-headline-md">R$ ${precoFormatado}</span>
             <button 
-              class="add-to-cart-btn p-2 bg-tertiary text-white rounded-lg border-2 border-black active-press hover:bg-primary transition-colors flex items-center justify-center shrink-0"
-              data-id={p.id}
-              data-titulo={p.titulo}
-              data-preco={p.preco}
-              data-imagem={p.imagem}
+              class="add-to-cart-btn p-2 ${buttonBg} text-white rounded-lg border-2 border-black active-press ${buttonHover} transition-colors flex items-center justify-center shrink-0"
+              data-id="${p.id}"
+              data-titulo="${p.titulo}"
+              data-preco="${p.preco}"
+              data-imagem="${p.imagem}"
             >
               <span class="material-symbols-outlined text-xs">add_shopping_cart</span>
             </button>
           </div>
         </div>
-      </div>
-    ))}
-  </div>
-</section>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  // Inicializa
+  document.addEventListener('DOMContentLoaded', loadHomeProductsDesktop);
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    loadHomeProductsDesktop();
+  }
+</script>

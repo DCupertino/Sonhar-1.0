@@ -444,7 +444,7 @@ import Footer from '../components/desktop/Footer.astro';
       editBtns.forEach(btn => {
         btn.addEventListener('click', () => {
           const id = btn.getAttribute('data-id');
-          const product = productsList.find(p => p.id === id);
+          const product = productsList.find(p => p.id == id);
           if (product) {
             prodId.value = product.id;
             prodTitulo.value = product.titulo;

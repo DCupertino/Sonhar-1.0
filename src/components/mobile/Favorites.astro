@@ -1,27 +1,5 @@
 ---
-import products from '../../data/produtos-mock.json';
-
-// Selecionar produtos reais específicos
-const favorites = [
-  products.find(p => p.id === "1"),
-  products.find(p => p.id === "6"),
-  products.find(p => p.id === "21"),
-  products.find(p => p.id === "12")
-].filter(Boolean);
-
-const news = [
-  products.find(p => p.id === "73"),
-  products.find(p => p.id === "76"),
-  products.find(p => p.id === "84"),
-  products.find(p => p.id === "88")
-].filter(Boolean);
-
-const bestSellers = [
-  products.find(p => p.id === "3"),
-  products.find(p => p.id === "22"),
-  products.find(p => p.id === "32"),
-  products.find(p => p.id === "50")
-].filter(Boolean);
+// Mapeamento dinâmico no cliente a partir do Supabase
 ---
 
 <!-- Product Grid: Favoritos da Semana -->
@@ -31,39 +9,8 @@ const bestSellers = [
     <h2 class="font-headline-md text-headline-md-mobile text-primary">Favoritos da Semana</h2>
   </div>
   
-  <div class="grid grid-cols-2 gap-4">
-    {favorites.map((p, idx) => (
-      <div class={`thick-border rounded-2xl bg-white p-3.5 relative flex flex-col justify-between ${idx % 2 === 0 ? 'block-shadow-primary' : 'block-shadow-tertiary'}`}>
-        <div>
-          {idx === 0 && (
-            <div class="absolute -top-2.5 -left-2 bg-secondary-container text-on-secondary-container font-label-bold text-[8px] px-2 py-0.5 thick-border rounded-full z-10 rotate-[-5deg] flex items-center gap-0.5 shadow-md">
-              <span class="material-symbols-outlined text-[8px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span> DESTAQUE
-            </div>
-          )}
-          <a href={`/mobile/produto?id=${p.id}`} class="block relative w-full aspect-square mb-2.5">
-            <img class="w-full h-full object-cover rounded-xl thin-border" alt={p.titulo} src={p.imagem} />
-            <span class="absolute top-1 left-1 bg-white text-on-surface text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
-              {p.categoria.split('&')[0].trim()}
-            </span>
-          </a>
-          <a href={`/mobile/produto?id=${p.id}`}>
-            <h3 class="font-headline-md text-sm mb-1 font-bold text-on-surface hover:text-primary transition-colors">{p.titulo}</h3>
-          </a>
-        </div>
-        <div class="flex items-center justify-between mt-3 gap-2">
-          <span class="font-headline-md text-base text-primary font-bold">R$ {p.preco.toFixed(2).replace('.', ',')}</span>
-          <button 
-            class="add-to-cart-btn thin-border bg-primary text-white p-2 rounded-lg block-shadow-primary active:translate-x-0.5 active:translate-y-0.5 active:shadow-none shrink-0 flex items-center justify-center"
-            data-id={p.id}
-            data-titulo={p.titulo}
-            data-preco={p.preco}
-            data-imagem={p.imagem}
-          >
-            <span class="material-symbols-outlined text-xs">add_shopping_cart</span>
-          </button>
-        </div>
-      </div>
-    ))}
+  <div id="mobile-favorites-grid" class="grid grid-cols-2 gap-4 min-h-[150px]">
+    <div class="col-span-2 text-center text-xs text-on-surface-variant py-8">Carregando favoritos...</div>
   </div>
 </section>
 
@@ -74,34 +21,8 @@ const bestSellers = [
     <h2 class="font-headline-md text-headline-md-mobile text-primary">Novidades</h2>
   </div>
   
-  <div class="grid grid-cols-2 gap-4">
-    {news.map((p, idx) => (
-      <div class={`thick-border rounded-2xl bg-white p-3.5 relative flex flex-col justify-between ${idx % 2 === 0 ? 'block-shadow-tertiary' : 'block-shadow-primary'}`}>
-        <div>
-          <a href={`/mobile/produto?id=${p.id}`} class="block relative w-full aspect-square mb-2.5">
-            <img class="w-full h-full object-cover rounded-xl thin-border" alt={p.titulo} src={p.imagem} />
-            <span class="absolute top-1 left-1 bg-tertiary text-white text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
-              Novo!
-            </span>
-          </a>
-          <a href={`/mobile/produto?id=${p.id}`}>
-            <h3 class="font-headline-md text-sm mb-1 font-bold text-on-surface hover:text-primary transition-colors">{p.titulo}</h3>
-          </a>
-        </div>
-        <div class="flex items-center justify-between mt-3 gap-2">
-          <span class="font-headline-md text-base text-tertiary font-bold">R$ {p.preco.toFixed(2).replace('.', ',')}</span>
-          <button 
-            class="add-to-cart-btn thin-border bg-tertiary text-white p-2 rounded-lg block-shadow-tertiary active:translate-x-0.5 active:translate-y-0.5 active:shadow-none shrink-0 flex items-center justify-center"
-            data-id={p.id}
-            data-titulo={p.titulo}
-            data-preco={p.preco}
-            data-imagem={p.imagem}
-          >
-            <span class="material-symbols-outlined text-xs">add_shopping_cart</span>
-          </button>
-        </div>
-      </div>
-    ))}
+  <div id="mobile-news-grid" class="grid grid-cols-2 gap-4 min-h-[150px]">
+    <div class="col-span-2 text-center text-xs text-on-surface-variant py-8">Carregando novidades...</div>
   </div>
 </section>
 
@@ -112,37 +33,141 @@ const bestSellers = [
     <h2 class="font-headline-md text-headline-md-mobile text-primary">Mais Vendidos</h2>
   </div>
   
-  <div class="grid grid-cols-2 gap-4">
-    {bestSellers.map((p, idx) => (
-      <div class={`thick-border rounded-2xl bg-white p-3.5 relative flex flex-col justify-between ${idx % 2 === 0 ? 'block-shadow-primary' : 'block-shadow-tertiary'}`}>
-        <div>
-          <a href={`/mobile/produto?id=${p.id}`} class="block relative w-full aspect-square mb-2.5">
-            <img class="w-full h-full object-cover rounded-xl thin-border" alt={p.titulo} src={p.imagem} />
-            <span class="absolute top-1 left-1 bg-secondary-container text-on-secondary-fixed text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
-              Sucesso
-            </span>
-          </a>
-          <a href={`/mobile/produto?id=${p.id}`}>
-            <h3 class="font-headline-md text-sm mb-1 font-bold text-on-surface hover:text-primary transition-colors">{p.titulo}</h3>
-          </a>
-        </div>
-        <div class="flex items-center justify-between mt-3 gap-2">
-          <span class="font-headline-md text-base text-primary font-bold">R$ {p.preco.toFixed(2).replace('.', ',')}</span>
-          <button 
-            class="add-to-cart-btn thin-border bg-primary text-white p-2 rounded-lg block-shadow-primary active:translate-x-0.5 active:translate-y-0.5 active:shadow-none shrink-0 flex items-center justify-center"
-            data-id={p.id}
-            data-titulo={p.titulo}
-            data-preco={p.preco}
-            data-imagem={p.imagem}
-          >
-            <span class="material-symbols-outlined text-xs">add_shopping_cart</span>
-          </button>
-        </div>
-      </div>
-    ))}
+  <div id="mobile-bestsellers-grid" class="grid grid-cols-2 gap-4 min-h-[150px]">
+    <div class="col-span-2 text-center text-xs text-on-surface-variant py-8">Carregando mais vendidos...</div>
   </div>
   
   <a href="/mobile/catalogo" class="w-full mt-8 thin-border py-4 bg-surface-container rounded-2xl font-label-bold flex items-center justify-center gap-2 hover:bg-surface-container-high text-on-surface">
     Ver todos os produtos <span class="material-symbols-outlined">chevron_right</span>
   </a>
 </section>
+
+<script is:inline>
+  async function loadHomeProductsMobile() {
+    const favoritesGrid = document.getElementById('mobile-favorites-grid');
+    const newsGrid = document.getElementById('mobile-news-grid');
+    const bestsellersGrid = document.getElementById('mobile-bestsellers-grid');
+
+    if (!window.SonharteDB) return;
+
+    try {
+      const products = await window.SonharteDB.getProducts();
+      const activeProducts = products.filter(p => p.ativo !== false);
+
+      // 1. Favoritos (selo "Destaque")
+      let favorites = activeProducts.filter(p => p.destaque === 'Destaque');
+      if (favorites.length === 0) {
+        favorites = activeProducts.slice(0, 4);
+      } else {
+        favorites = favorites.slice(0, 4);
+      }
+
+      // 2. Novidades (selo "Lançamento")
+      let news = activeProducts.filter(p => p.destaque === 'Lançamento');
+      if (news.length === 0) {
+        news = activeProducts.slice(4, 8);
+      } else {
+        news = news.slice(0, 4);
+      }
+
+      // 3. Mais Vendidos (selo "Mais Vendido")
+      let bestSellers = activeProducts.filter(p => p.destaque === 'Mais Vendido');
+      if (bestSellers.length === 0) {
+        bestSellers = activeProducts.slice(8, 12);
+      } else {
+        bestSellers = bestSellers.slice(0, 4);
+      }
+
+      // Renderiza
+      renderMobileGrid(favoritesGrid, favorites, 'primary', 'Destaque');
+      renderMobileGrid(newsGrid, news, 'tertiary', 'Novo!');
+      renderMobileGrid(bestsellersGrid, bestSellers, 'primary', 'Sucesso');
+
+    } catch (err) {
+      console.error("Erro ao carregar favoritos mobile:", err);
+      if (favoritesGrid) favoritesGrid.innerHTML = '<p class="col-span-2 text-center text-xs text-red-600">Erro ao carregar favoritos.</p>';
+      if (newsGrid) newsGrid.innerHTML = '<p class="col-span-2 text-center text-xs text-red-600">Erro ao carregar novidades.</p>';
+      if (bestsellersGrid) bestsellersGrid.innerHTML = '<p class="col-span-2 text-center text-xs text-red-600">Erro ao carregar mais vendidos.</p>';
+    }
+  }
+
+  function renderMobileGrid(container, list, themeColor, badgeText) {
+    if (!container) return;
+    container.innerHTML = '';
+
+    if (list.length === 0) {
+      container.innerHTML = '<p class="col-span-2 text-center text-xs text-on-surface-variant py-8">Nenhum produto nesta seção.</p>';
+      return;
+    }
+
+    list.forEach((p, idx) => {
+      const card = document.createElement('div');
+      const shadowClass = idx % 2 === 0 ? 'block-shadow-primary' : 'block-shadow-tertiary';
+      const buttonBg = themeColor === 'primary' ? 'bg-primary' : 'bg-tertiary';
+      const buttonShadow = themeColor === 'primary' ? 'block-shadow-primary' : 'block-shadow-tertiary';
+      const textTheme = themeColor === 'primary' ? 'text-primary' : 'text-tertiary';
+      
+      card.className = `thick-border rounded-2xl bg-white p-3.5 relative flex flex-col justify-between ${shadowClass}`;
+      
+      let badgeHtml = '';
+      if (idx === 0 && themeColor === 'primary' && badgeText === 'Destaque') {
+        badgeHtml = `
+          <div class="absolute -top-2.5 -left-2 bg-secondary-container text-on-secondary-container font-label-bold text-[8px] px-2 py-0.5 thick-border rounded-full z-10 rotate-[-5deg] flex items-center gap-0.5 shadow-md">
+            <span class="material-symbols-outlined text-[8px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span> DESTAQUE
+          </div>
+        `;
+      } else if (badgeText === 'Novo!') {
+        badgeHtml = `
+          <span class="absolute top-1 left-1 bg-tertiary text-white text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+            Novo!
+          </span>
+        `;
+      } else if (badgeText === 'Sucesso') {
+        badgeHtml = `
+          <span class="absolute top-1 left-1 bg-secondary-fixed text-on-secondary-fixed text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+            Sucesso
+          </span>
+        `;
+      }
+      
+      const priceVal = typeof p.preco === 'number' ? p.preco : parseFloat(p.preco || 0);
+      const precoFormatado = priceVal.toFixed(2).replace('.', ',');
+      const firstCat = p.categoria ? p.categoria.split('&')[0].trim() : 'Mimos';
+
+      card.innerHTML = `
+        <div>
+          ${badgeHtml}
+          <a href="/mobile/produto?id=${p.id}" class="block relative w-full aspect-square mb-2.5">
+            <img class="w-full h-full object-cover rounded-xl thin-border" alt="${p.titulo}" src="${p.imagem}" />
+            ${badgeText !== 'Novo!' && badgeText !== 'Sucesso' && idx !== 0 ? `
+            <span class="absolute top-1 left-1 bg-white text-on-surface text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+              ${firstCat}
+            </span>` : ''}
+          </a>
+          <a href="/mobile/produto?id=${p.id}">
+            <h3 class="font-headline-md text-sm mb-1 font-bold text-on-surface hover:text-primary transition-colors">${p.titulo}</h3>
+          </a>
+        </div>
+        <div class="flex items-center justify-between mt-3 gap-2">
+          <span class="font-headline-md text-base ${textTheme} font-bold">R$ ${precoFormatado}</span>
+          <button 
+            class="add-to-cart-btn thin-border ${buttonBg} text-white p-2 rounded-lg ${buttonShadow} active:translate-x-0.5 active:translate-y-0.5 active:shadow-none shrink-0 flex items-center justify-center"
+            data-id="${p.id}"
+            data-titulo="${p.titulo}"
+            data-preco="${p.preco}"
+            data-imagem="${p.imagem}"
+          >
+            <span class="material-symbols-outlined text-xs">add_shopping_cart</span>
+          </button>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  // Inicializa
+  document.addEventListener('DOMContentLoaded', loadHomeProductsMobile);
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    loadHomeProductsMobile();
+  }
+</script>
