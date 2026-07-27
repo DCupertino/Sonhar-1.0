@@ -110,21 +110,23 @@
       card.className = `thick-border rounded-2xl bg-white p-3.5 relative flex flex-col justify-between ${shadowClass}`;
       
       let badgeHtml = '';
-      if (idx === 0 && themeColor === 'primary' && badgeText === 'Destaque') {
+      const isDestaque = idx === 0 && themeColor === 'primary' && badgeText === 'Destaque';
+      
+      if (isDestaque) {
         badgeHtml = `
-          <div class="absolute -top-2.5 -left-2 bg-secondary-container text-on-secondary-container font-label-bold text-[8px] px-2 py-0.5 thick-border rounded-full z-10 rotate-[-5deg] flex items-center gap-0.5 shadow-md">
+          <div class="absolute -top-2.5 -left-2 bg-secondary-container text-on-secondary-container font-label-bold text-[8px] px-2 py-0.5 thick-border rounded-full z-20 rotate-[-5deg] flex items-center gap-0.5 shadow-md">
             <span class="material-symbols-outlined text-[8px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span> DESTAQUE
           </div>
         `;
       } else if (badgeText === 'Novo!') {
         badgeHtml = `
-          <span class="absolute top-1 left-1 bg-tertiary text-white text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+          <span class="absolute top-1.5 left-1.5 bg-tertiary text-white text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] z-10">
             Novo!
           </span>
         `;
       } else if (badgeText === 'Sucesso') {
         badgeHtml = `
-          <span class="absolute top-1 left-1 bg-secondary-fixed text-on-secondary-fixed text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+          <span class="absolute top-1.5 left-1.5 bg-secondary-fixed text-on-secondary-fixed text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] z-10">
             Sucesso
           </span>
         `;
@@ -136,11 +138,12 @@
 
       card.innerHTML = `
         <div>
-          ${badgeHtml}
+          ${isDestaque ? badgeHtml : ''}
           <a href="/mobile/produto?id=${p.id}" class="block relative w-full aspect-square mb-2.5">
             <img class="w-full h-full object-cover rounded-xl thin-border" alt="${p.titulo}" src="${p.imagem}" />
-            ${badgeText !== 'Novo!' && badgeText !== 'Sucesso' && idx !== 0 ? `
-            <span class="absolute top-1 left-1 bg-white text-on-surface text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+            ${!isDestaque && badgeText !== 'Destaque' ? badgeHtml : ''}
+            ${badgeText !== 'Novo!' && badgeText !== 'Sucesso' && !isDestaque ? `
+            <span class="absolute top-1.5 left-1.5 bg-white text-on-surface text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] z-10">
               ${firstCat}
             </span>` : ''}
           </a>
