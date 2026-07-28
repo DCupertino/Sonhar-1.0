@@ -1097,14 +1097,7 @@
       return data.user;
     }
 
-    // Fallback: LocalStorage (Simulado)
-    if (email === 'adm@sonharte.com' && password === 'sonharteMy') {
-      const mockUser = { email: email, role: 'admin', id: 'mock_admin_uid' };
-      sessionStorage.setItem('sonharte_admin_user', JSON.stringify(mockUser));
-      return mockUser;
-    } else {
-      throw new Error('Credenciais offline incorretas');
-    }
+    throw new Error('Serviço de autenticação offline. Conecte-se ao Supabase para acessar o painel.');
   }
 
   function logout() {
