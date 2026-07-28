@@ -1,11 +1,30 @@
-<!DOCTYPE html><html class="scroll-smooth" lang="pt-br"> <head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><link href="/assets/17edea699b9b27907616409003241ce2.css" rel="stylesheet"><link href="/assets/a39f5c6fcbb87b419667ec984d2e579a.css" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>(function(){const supabaseUrl = "";
+<!DOCTYPE html><html class="scroll-smooth" lang="pt-br"> <head><meta charset="utf-8"><script>
+      (function() {
+        const isMobilePage = window.location.pathname.startsWith('/mobile');
+        const isMobileDevice = window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        if (isMobileDevice && !isMobilePage) {
+          let newPath = '/mobile' + window.location.pathname;
+          if (window.location.pathname === '/') {
+            newPath = '/mobile';
+          }
+          window.location.href = newPath + window.location.search + window.location.hash;
+        } else if (!isMobileDevice && isMobilePage) {
+          let newPath = window.location.pathname.replace(/^\/mobile/, '');
+          if (newPath === '') {
+            newPath = '/';
+          }
+          window.location.href = newPath + window.location.search + window.location.hash;
+        }
+      })();
+    </script><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta name="description" content="Sonharte - Papelaria Criativa, Mimos Afetivos e Workshops Personalizados. Tornando seus momentos inesquecíveis! ✨"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://sonharte.com.br/"><meta property="og:title" content="Sonharte | Detalhe do Produto"><meta property="og:description" content="Sonharte - Papelaria Criativa, Mimos Afetivos e Workshops Personalizados. Tornando seus momentos inesquecíveis! ✨"><meta property="og:image" content="/assets/logo_clean.png"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:title" content="Sonharte | Detalhe do Produto"><meta property="twitter:description" content="Sonharte - Papelaria Criativa, Mimos Afetivos e Workshops Personalizados. Tornando seus momentos inesquecíveis! ✨"><meta property="twitter:image" content="/assets/logo_clean.png"><!-- Favicon --><link rel="icon" type="image/png" href="/assets/logo_clean.png"><link href="/assets/17edea699b9b27907616409003241ce2.css" rel="stylesheet"><link href="/assets/a39f5c6fcbb87b419667ec984d2e579a.css" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script><script>(function(){const supabaseUrl = "";
 const supabaseAnonKey = "";
 
       window.SUPABASE_URL = supabaseUrl;
       window.SUPABASE_ANON_KEY = supabaseAnonKey;
-    })();</script><script src="/assets/db.js"></script><script src="/assets/cart.js"></script><title>Sonharte | Detalhe do Produto</title><link rel="stylesheet" href="/_astro/admin.hZO2VeTW.css"></head> <body class="font-body-md text-on-background overflow-x-hidden selection:bg-secondary-container">  <!-- TopNavBar --><nav id="desktop-nav" class="sticky top-0 z-50 transition-transform duration-300 ease-in-out bg-surface border-b-4 border-on-surface shadow-[4px_4px_0px_0px_rgba(75,37,187,1)]"> <div class="max-w-container-max mx-auto px-gutter py-4"> <div class="flex justify-between items-center w-full mb-4 gap-8"> <a href="/" class="flex items-center gap-4 shrink-0 hover:opacity-90 transition-opacity"> <img alt="Sonharte Logo" class="h-[103px] md:h-[138px] object-contain" src="/assets/logo_clean.png"> </a> <!-- Search Bar --> <div class="hidden md:flex flex-1 max-w-xl relative"> <form action="/catalogo" class="w-full flex items-center relative" method="GET" autocomplete="off"> <input type="search" name="busca" id="desktop-search-input" placeholder="O que você está procurando?" class="w-full px-5 py-3 pr-12 bg-white text-on-surface font-body-md border-4 border-on-surface rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] focus:outline-none focus:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] focus:translate-x-0.5 focus:translate-y-0.5 transition-all placeholder:text-on-surface-variant/60" autocomplete="off"> <button type="submit" class="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-primary text-2xl hover:scale-110 active:scale-95 transition-transform">
+    })();</script><script src="/assets/db.js"></script><script src="/assets/cart.js"></script><title>Sonharte | Detalhe do Produto</title><link rel="stylesheet" href="/_astro/admin.CkShA2AA.css"></head> <body class="font-body-md text-on-background overflow-x-hidden selection:bg-secondary-container">  <!-- TopNavBar --><nav id="desktop-nav" class="sticky top-0 z-50 transition-transform duration-300 ease-in-out bg-surface border-b-4 border-on-surface shadow-[4px_4px_0px_0px_rgba(75,37,187,1)]"> <div class="max-w-container-max mx-auto px-gutter py-4"> <div class="flex justify-between items-center w-full mb-4 gap-8"> <a href="/" class="flex items-center gap-4 shrink-0 hover:opacity-90 transition-opacity"> <img alt="Sonharte Logo" class="h-[103px] md:h-[138px] object-contain" src="/assets/logo_clean.png"> </a> <!-- Search Bar --> <div class="hidden md:flex flex-1 max-w-xl relative"> <form action="/catalogo" class="w-full flex items-center relative" method="GET" autocomplete="off"> <input type="search" name="busca" id="desktop-search-input" placeholder="O que você está procurando?" class="w-full px-5 py-3 pr-12 bg-white text-on-surface font-body-md border-4 border-on-surface rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] focus:outline-none focus:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] focus:translate-x-0.5 focus:translate-y-0.5 transition-all placeholder:text-on-surface-variant/60" autocomplete="off"> <button type="submit" class="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-primary text-2xl hover:scale-110 active:scale-95 transition-transform">
 search
-</button> </form> <!-- Sugestões de Pesquisa (Dropdown Neobrutalista) --> <div id="desktop-search-suggestions" class="absolute left-0 right-0 top-full mt-2 bg-white border-4 border-on-surface rounded-2xl shadow-[6px_6px_0px_0px_rgba(75,37,187,1)] z-50 overflow-hidden hidden max-h-96 overflow-y-auto divide-y divide-slate-100"></div> </div> <div class="flex items-center gap-4 shrink-0"> <button class="material-symbols-outlined p-2 bg-secondary-fixed text-on-secondary-fixed cartoon-border rounded-lg cartoon-shadow active-press">favorite</button> <button id="desktop-cart-btn" class="material-symbols-outlined p-2 bg-primary-container text-white cartoon-border rounded-lg cartoon-shadow active-press relative">
+</button> </form> <!-- Sugestões de Pesquisa (Dropdown Neobrutalista) --> <div id="desktop-search-suggestions" class="absolute left-0 right-0 top-full mt-2 bg-white border-4 border-on-surface rounded-2xl shadow-[6px_6px_0px_0px_rgba(75,37,187,1)] z-50 overflow-hidden hidden max-h-96 overflow-y-auto divide-y divide-slate-100"></div> </div> <div class="flex items-center gap-4 shrink-0"> <button class="material-symbols-outlined p-2 bg-secondary-fixed text-on-secondary-fixed cartoon-border rounded-lg cartoon-shadow active-press heart-btn-effect">favorite</button> <button id="desktop-cart-btn" class="material-symbols-outlined p-2 bg-primary-container text-white cartoon-border rounded-lg cartoon-shadow active-press relative">
 shopping_cart
 <span id="desktop-cart-badge" class="absolute -top-2 -right-2 bg-tertiary text-white text-[12px] font-label-bold w-6 h-6 rounded-full flex items-center justify-center border-2 border-black shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hidden">0</span> </button> </div> </div> <!-- Comprehensive Navigation Menu --> <div class="flex flex-wrap gap-x-6 gap-y-2 items-center justify-center border-t border-outline-variant pt-4 overflow-x-auto no-scrollbar"> <a class="font-label-bold text-sm text-primary whitespace-nowrap hover:underline underline-offset-4" href="/">Início</a> <a class="font-body-md text-sm text-on-surface-variant whitespace-nowrap hover:text-primary transition-colors" href="/catalogo">Todos os produtos</a> <a class="font-body-md text-sm text-on-surface-variant whitespace-nowrap hover:text-primary transition-colors" href="/catalogo?categoria=Lápis de Cor %26 Desenho">Lápis de Cor</a> <a class="font-body-md text-sm text-on-surface-variant whitespace-nowrap hover:text-primary transition-colors" href="/catalogo?categoria=Cadernos %26 Papéis">Cadernos</a> <a class="font-body-md text-sm text-on-surface-variant whitespace-nowrap hover:text-primary transition-colors" href="/catalogo?categoria=Canetas %26 Escrita">Canetas</a> <a class="font-body-md text-sm text-on-surface-variant whitespace-nowrap hover:text-primary transition-colors" href="/catalogo?categoria=Organização %26 Escritório">Materiais</a> <a class="font-body-md text-sm text-on-surface-variant whitespace-nowrap hover:text-primary transition-colors border-l pl-6 border-outline-variant" href="/servicos">Serviços</a> <a class="font-body-md text-sm text-on-surface-variant whitespace-nowrap hover:text-primary transition-colors" href="/workshops">Workshops</a> <a class="font-body-md text-sm text-on-surface-variant whitespace-nowrap hover:text-primary transition-colors" href="/sobre">Sobre Nós</a> <a class="font-body-md text-sm text-on-surface-variant whitespace-nowrap hover:text-primary transition-colors" href="/contato">Contato</a> </div> </div> </nav> <script>
   function updateDesktopCartBadge() {
@@ -175,7 +194,7 @@ Adicionar à Sacola
 </button> <!-- Comprar via WhatsApp --> <a id="whatsapp-buy-btn" href="#" target="_blank" class="flex-1 bg-green-500 text-white py-4 border-2 border-black rounded-2xl font-label-bold text-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-0.5 active:translate-y-0.5 active:shadow-none transition-all flex items-center justify-center gap-2 hover:bg-green-600"> <span class="material-symbols-outlined text-lg">chat</span>
 Comprar no WhatsApp
 </a> </div> </div> <!-- Forma de Encomenda Informativa --> <div class="bg-secondary-fixed-dim/20 border-2 border-black p-4 rounded-xl flex items-start gap-3 mt-2"> <span class="material-symbols-outlined text-primary text-xl mt-0.5">info</span> <p class="text-xs text-on-surface-variant font-body-md leading-relaxed"> <strong>Como funciona?</strong> Você adiciona os produtos que gostou na sacola e nos envia pelo WhatsApp para combinarmos o pagamento (Pix ou Cartão) e a entrega/retirada. É super fácil e prático!
-</p> </div> </div> </div> <!-- Divisor de Seção --> <hr class="border-4 border-on-surface my-16"> <!-- Produtos Relacionados --> <section id="related-products-section" class="hidden"> <div class="flex items-center gap-3 mb-8"> <h2 class="font-headline-lg text-2xl text-primary">Quem comprou este mimo, também amou... ✨</h2> </div> <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="related-products-grid"> <!-- Injetado dinamicamente --> </div> </section> </main> <!-- Footer --><footer class="bg-surface-container-high border-t-4 border-on-surface"> <div class="max-w-container-max mx-auto px-gutter py-16 flex flex-col gap-12"> <a href="/" class="flex flex-col items-center gap-4 hover:opacity-90 transition-opacity"> <img alt="Sonharte Logo" class="h-[115px] md:h-[154px] object-contain" src="/assets/logo_clean.png"> </a> <div class="grid grid-cols-1 md:grid-cols-4 gap-x-12 gap-y-12 w-full border-y-2 border-on-surface-variant/20 py-12"> <div class="flex flex-col gap-4"> <h5 class="font-label-bold text-primary uppercase">Loja</h5> <a class="font-body-md text-on-surface-variant hover:text-tertiary hover:underline" href="/workshops">Workshops</a> <a class="font-body-md text-on-surface-variant hover:text-tertiary hover:underline" href="#">Trocas e Devoluções</a> <a class="font-body-md text-on-surface-variant hover:text-tertiary hover:underline" href="#">Privacidade</a> <a class="font-body-md text-on-surface-variant hover:text-tertiary hover:underline" href="#">Trabalhe Conosco</a> </div> <div class="flex flex-col gap-4"> <h5 class="font-label-bold text-primary uppercase">Categorias</h5> <a class="font-body-md text-on-surface-variant hover:text-tertiary hover:underline" href="#">Escrita Criativa</a> <a class="font-body-md text-on-surface-variant hover:text-tertiary hover:underline" href="#">Planejamento</a> <a class="font-body-md text-on-surface-variant hover:text-tertiary hover:underline" href="#">Papelaria Afetiva</a> </div> <!-- Nossas Lojas Section with Interactive Map Placeholder --> <div class="flex flex-col gap-4 md:col-span-1"> <h5 class="font-label-bold text-primary uppercase">Nossa Loja</h5> <div class="relative w-full aspect-video cartoon-border rounded-lg bg-surface-variant overflow-hidden group"> <iframe src="https://maps.google.com/maps?q=Rua%20S%C3%B3crates,%20679%20-%20Belo%20Horizonte%20MG%2031990-010&t=&z=15&ie=UTF8&iwloc=&output=embed" class="w-full h-full border-0 grayscale hover:grayscale-0 transition-all duration-300" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+</p> </div> </div> </div> <!-- Divisor de Seção --> <hr class="border-4 border-on-surface my-16"> <!-- Produtos Relacionados --> <section id="related-products-section" class="hidden"> <div class="flex items-center gap-3 mb-8"> <h2 class="font-headline-lg text-2xl text-primary">Quem comprou este mimo, também amou... ✨</h2> </div> <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="related-products-grid"> <!-- Injetado dinamicamente --> </div> </section> </main> <!-- Footer --><footer class="bg-surface-container-high border-t-4 border-on-surface"> <div class="max-w-container-max mx-auto px-gutter py-16 flex flex-col gap-12"> <a href="/" class="flex flex-col items-center gap-4 hover:opacity-90 transition-opacity"> <img alt="Sonharte Logo" class="h-[115px] md:h-[154px] object-contain" src="/assets/logo_clean.png"> </a> <div class="grid grid-cols-1 md:grid-cols-4 gap-x-12 gap-y-12 w-full border-y-2 border-on-surface-variant/20 py-12"> <div class="flex flex-col gap-4"> <h5 class="font-label-bold text-primary uppercase">Loja</h5> <a class="font-body-md text-on-surface-variant hover:text-tertiary hover:underline" href="/">Início</a> <a class="font-body-md text-on-surface-variant hover:text-tertiary hover:underline" href="/catalogo">Todos os Produtos</a> <a class="font-body-md text-on-surface-variant hover:text-tertiary hover:underline" href="/servicos">Serviços</a> <a class="font-body-md text-on-surface-variant hover:text-tertiary hover:underline" href="/workshops">Workshops</a> <a class="font-body-md text-on-surface-variant hover:text-tertiary hover:underline" href="/sobre">Sobre Nós</a> <a class="font-body-md text-on-surface-variant hover:text-tertiary hover:underline" href="/contato">Fale Conosco</a> </div> <div class="flex flex-col gap-4"> <h5 class="font-label-bold text-primary uppercase">Categorias</h5> <a class="font-body-md text-on-surface-variant hover:text-tertiary hover:underline" href="/catalogo?categoria=Lápis de Cor %26 Desenho">Lápis & Desenho</a> <a class="font-body-md text-on-surface-variant hover:text-tertiary hover:underline" href="/catalogo?categoria=Cadernos %26 Papéis">Cadernos & Papéis</a> <a class="font-body-md text-on-surface-variant hover:text-tertiary hover:underline" href="/catalogo?categoria=Canetas %26 Escrita">Canetas & Escrita</a> <a class="font-body-md text-on-surface-variant hover:text-tertiary hover:underline" href="/catalogo?categoria=Organização %26 Escritório">Organização & Escritório</a> </div> <!-- Nossas Lojas Section with Interactive Map Placeholder --> <div class="flex flex-col gap-4 md:col-span-1"> <h5 class="font-label-bold text-primary uppercase">Nossa Loja</h5> <div class="relative w-full aspect-video cartoon-border rounded-lg bg-surface-variant overflow-hidden group"> <iframe src="https://maps.google.com/maps?q=Rua%20S%C3%B3crates,%20679%20-%20Belo%20Horizonte%20MG%2031990-010&t=&z=15&ie=UTF8&iwloc=&output=embed" class="w-full h-full border-0 grayscale hover:grayscale-0 transition-all duration-300" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
           </iframe> </div> <p class="text-xs text-on-surface-variant mt-2 italic">Rua Sócrates, 679<br>Belo Horizonte, MG - CEP 31990-010</p> </div> <div class="flex flex-col gap-4 items-center md:items-end"> <h5 class="font-label-bold text-primary uppercase">Contato & Redes</h5> <a href="mailto:m.sonharte@gmail.com" class="font-body-md text-on-surface-variant hover:text-tertiary hover:underline text-sm mb-1">m.sonharte@gmail.com</a> <div class="flex gap-4"> <a class="w-12 h-12 bg-white rounded-lg cartoon-border flex items-center justify-center cartoon-shadow-tertiary hover-lift overflow-hidden" href="https://www.instagram.com/p.sonharte/" target="_blank"> <img alt="Instagram" class="w-full h-full object-cover" src="/assets/instagram_new.png"> </a> <a class="w-12 h-12 bg-white rounded-lg cartoon-border flex items-center justify-center cartoon-shadow-primary hover-lift overflow-hidden" href="https://wa.me/5531972122639" target="_blank"> <img alt="WhatsApp" class="w-full h-full object-cover" src="/assets/whatsapp_new.png"> </a> </div> </div> </div> <p class="font-body-md text-tertiary text-center">© 2025 Sonharte Bookstore. Feito com brilho e carinho.</p> </div> </footer> <!-- FAB for quick contact --><button class="fixed bottom-8 right-8 z-[60] w-16 h-16 bg-secondary-container text-on-secondary-container rounded-full cartoon-border cartoon-shadow-primary flex items-center justify-center active-press group overflow-hidden"> <span class="material-symbols-outlined text-3xl group-hover:scale-125 transition-transform">phone_iphone</span> </button>  <!-- Cart Drawer Overlay --><div id="cart-overlay" class="fixed inset-0 bg-black/50 z-[90] hidden opacity-0 transition-opacity duration-300 backdrop-blur-sm"></div> <!-- Cart Drawer Container --> <aside id="cart-drawer" class="fixed right-0 top-0 h-full w-[320px] sm:w-[380px] bg-surface border-l-4 border-on-background z-[100] translate-x-full transition-transform duration-300 ease-out flex flex-col shadow-[-10px_0px_0px_0px_rgba(0,0,0,0.15)]"> <!-- Header --> <div class="p-6 bg-primary-container text-on-primary-container border-b-4 border-on-background flex justify-between items-center shrink-0"> <div class="flex items-center gap-2"> <span class="material-symbols-outlined text-2xl">shopping_cart</span> <h2 class="font-headline-md text-xl tracking-tight">Sacola de Sonhos</h2> </div> <button id="cart-close-btn" class="material-symbols-outlined text-2xl p-1 bg-white text-on-surface border-2 border-on-background rounded-lg hover:scale-105 active:scale-95 transition-transform flex items-center justify-center">
 close
 </button> </div> <!-- Cart Content (Scrollable) --> <div class="flex-grow overflow-y-auto p-4 flex flex-col gap-4 no-scrollbar" id="cart-items-container"> <!-- Items will be injected dynamically here --> <div class="flex flex-col items-center justify-center h-full text-center text-on-surface-variant py-12"> <span class="material-symbols-outlined text-5xl mb-4 opacity-40">shopping_bag</span> <p class="font-label-bold text-lg">Sua sacola está vazia!</p> <p class="text-sm mt-1">Navegue pelas abas e adicione seus mimos favoritos.</p> </div> </div> <!-- Footer (Fixed in Drawer) --> <div class="p-6 bg-surface-container-high border-t-4 border-on-background flex flex-col gap-4 shrink-0"> <div class="flex justify-between items-center"> <span class="font-label-bold text-lg text-on-surface-variant">Valor Total:</span> <span class="font-headline-md text-2xl text-primary" id="cart-total-value">R$ 0,00</span> </div> <a id="cart-checkout-btn" href="#" target="_blank" class="w-full py-4 bg-tertiary text-white text-center font-label-bold text-lg border-4 border-on-background rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-0.5 active:translate-y-0.5 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:shadow-none transition-all flex items-center justify-center gap-2 pointer-events-none opacity-50"> <span class="material-symbols-outlined">send</span> Finalizar no WhatsApp
@@ -319,6 +338,18 @@ close
       if (id && titulo && preco && imagem) {
         window.SonharteCart.add(id, titulo, parseFloat(preco), imagem);
         
+        // Efeito de animação nos botões de carrinho (desktop e mobile)
+        const desktopCartBtn = document.getElementById('desktop-cart-btn');
+        const mobileCartBtn = document.getElementById('mobile-cart-btn');
+        if (desktopCartBtn) {
+          desktopCartBtn.classList.add('animate-cart-bounce');
+          setTimeout(() => desktopCartBtn.classList.remove('animate-cart-bounce'), 800);
+        }
+        if (mobileCartBtn) {
+          mobileCartBtn.classList.add('animate-cart-bounce');
+          setTimeout(() => mobileCartBtn.classList.remove('animate-cart-bounce'), 800);
+        }
+        
         // Abre a gaveta se ela estiver fechada
         const drawer = document.getElementById('cart-drawer');
         const isOpen = drawer && !drawer.classList.contains('translate-x-full');
@@ -328,7 +359,170 @@ close
       }
     });
   });
-</script> </body></html> <script>
+</script> <!-- Canvas para efeito lúdico do botão de coração --> <canvas id="brush-effect-canvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 999999; display: block;"></canvas> <script>
+      (function() {
+        const canvas = document.getElementById('brush-effect-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        
+        let brushes = [];
+        let animationFrameId = null;
+        
+        function resizeCanvas() {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        }
+        
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        
+        class Brush {
+          constructor() {
+            const side = Math.floor(Math.random() * 4); // 0: E->D, 1: D->E, 2: C->B, 3: B->C
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+            
+            this.t = 0;
+            this.speed = 0.003 + Math.random() * 0.0025; // duração ~3 a 5 seg
+            this.hue = Math.floor(Math.random() * 360);
+            this.angle = Math.random() * Math.PI * 2;
+            this.angleSpeed = (0.05 + Math.random() * 0.07) * (Math.random() < 0.5 ? 1 : -1);
+            
+            this.radiusBase = 20 + Math.random() * 35;
+            
+            this.path = [];
+            this.maxPathLen = 75;
+            this.active = true;
+            this.lineWidth = 3 + Math.random() * 2;
+            
+            switch(side) {
+              case 0:
+                this.startX = -100;
+                this.startY = h * (0.15 + Math.random() * 0.7);
+                this.endX = w + 100;
+                this.endY = h * (0.15 + Math.random() * 0.7);
+                break;
+              case 1:
+                this.startX = w + 100;
+                this.startY = h * (0.15 + Math.random() * 0.7);
+                this.endX = -100;
+                this.endY = h * (0.15 + Math.random() * 0.7);
+                break;
+              case 2:
+                this.startX = w * (0.15 + Math.random() * 0.7);
+                this.startY = -100;
+                this.endX = w * (0.15 + Math.random() * 0.7);
+                this.endY = h + 100;
+                break;
+              case 3:
+                this.startX = w * (0.15 + Math.random() * 0.7);
+                this.startY = h + 100;
+                this.endX = w * (0.15 + Math.random() * 0.7);
+                this.endY = -100;
+                break;
+            }
+            
+            this.x = this.startX;
+            this.y = this.startY;
+          }
+          
+          update() {
+            if (!this.active) {
+              if (this.path.length > 0) {
+                this.path.shift();
+              }
+              return;
+            }
+            
+            this.t += this.speed;
+            if (this.t >= 1) {
+              this.t = 1;
+              this.active = false;
+            }
+            
+            const baseX = this.startX + (this.endX - this.startX) * this.t;
+            const baseY = this.startY + (this.endY - this.startY) * this.t;
+            
+            this.angle += this.angleSpeed;
+            const currentRadius = this.radiusBase * (1 + 0.4 * Math.sin(this.t * Math.PI * 8));
+            
+            this.x = baseX + Math.cos(this.angle) * currentRadius;
+            this.y = baseY + Math.sin(this.angle) * currentRadius;
+            
+            this.hue = (this.hue + 2) % 360;
+            
+            this.path.push({ x: this.x, y: this.y, hue: this.hue });
+            if (this.path.length > this.maxPathLen) {
+              this.path.shift();
+            }
+          }
+          
+          draw(ctx) {
+            if (this.path.length < 2) return;
+            
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            
+            for (let i = 0; i < this.path.length - 1; i++) {
+              const pt1 = this.path[i];
+              const pt2 = this.path[i + 1];
+              const opacity = i / this.path.length;
+              
+              ctx.beginPath();
+              ctx.moveTo(pt1.x, pt1.y);
+              ctx.lineTo(pt2.x, pt2.y);
+              
+              ctx.lineWidth = this.lineWidth * (0.4 + 0.6 * opacity);
+              ctx.strokeStyle = `hsla(${pt1.hue}, 90%, 65%, ${opacity * 0.85})`;
+              ctx.stroke();
+            }
+          }
+        }
+        
+        function animate() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          
+          let hasVisibleBrushes = false;
+          
+          for (let i = 0; i < brushes.length; i++) {
+            const brush = brushes[i];
+            brush.update();
+            brush.draw(ctx);
+            if (brush.active || brush.path.length > 0) {
+              hasVisibleBrushes = true;
+            }
+          }
+          
+          brushes = brushes.filter(b => b.active || b.path.length > 0);
+          
+          if (hasVisibleBrushes && brushes.length > 0) {
+            animationFrameId = requestAnimationFrame(animate);
+          } else {
+            animationFrameId = null;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+          }
+        }
+        
+        function startEffect() {
+          const count = 2 + Math.floor(Math.random() * 2);
+          for (let i = 0; i < count; i++) {
+            setTimeout(() => {
+              brushes.push(new Brush());
+              if (!animationFrameId) {
+                animate();
+              }
+            }, i * 250);
+          }
+        }
+        
+        document.addEventListener('click', function(e) {
+          const target = e.target.closest('.heart-btn-effect');
+          if (target) {
+            startEffect();
+          }
+        });
+      })();
+    </script> </body> </html> <script>
   document.addEventListener('DOMContentLoaded', () => {
     // Pegar ID do produto nos parâmetros da URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -345,7 +539,7 @@ close
     async function loadProductDetails() {
       try {
         productsList = await window.SonharteDB.getProducts();
-        currentProduct = productsList.find(p => p.id === productId && p.ativo !== false);
+        currentProduct = productsList.find(p => p.id == productId && p.ativo !== false);
 
         if (!currentProduct) {
           showError();

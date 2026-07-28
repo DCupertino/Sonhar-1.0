@@ -1,9 +1,28 @@
-<!DOCTYPE html><html class="scroll-smooth" lang="pt-br"> <head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><link href="/assets/17edea699b9b27907616409003241ce2.css" rel="stylesheet"><link href="/assets/a39f5c6fcbb87b419667ec984d2e579a.css" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>(function(){const supabaseUrl = "";
+<!DOCTYPE html><html class="scroll-smooth" lang="pt-br"> <head><meta charset="utf-8"><script>
+      (function() {
+        const isMobilePage = window.location.pathname.startsWith('/mobile');
+        const isMobileDevice = window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        if (isMobileDevice && !isMobilePage) {
+          let newPath = '/mobile' + window.location.pathname;
+          if (window.location.pathname === '/') {
+            newPath = '/mobile';
+          }
+          window.location.href = newPath + window.location.search + window.location.hash;
+        } else if (!isMobileDevice && isMobilePage) {
+          let newPath = window.location.pathname.replace(/^\/mobile/, '');
+          if (newPath === '') {
+            newPath = '/';
+          }
+          window.location.href = newPath + window.location.search + window.location.hash;
+        }
+      })();
+    </script><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta name="description" content="Sonharte - Papelaria Criativa, Mimos Afetivos e Workshops Personalizados. Tornando seus momentos inesquecíveis! ✨"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://sonharte.com.br/"><meta property="og:title" content="Sonharte | Versão Mobile"><meta property="og:description" content="Sonharte - Papelaria Criativa, Mimos Afetivos e Workshops Personalizados. Tornando seus momentos inesquecíveis! ✨"><meta property="og:image" content="/assets/logo_clean.png"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:title" content="Sonharte | Versão Mobile"><meta property="twitter:description" content="Sonharte - Papelaria Criativa, Mimos Afetivos e Workshops Personalizados. Tornando seus momentos inesquecíveis! ✨"><meta property="twitter:image" content="/assets/logo_clean.png"><!-- Favicon --><link rel="icon" type="image/png" href="/assets/logo_clean.png"><link href="/assets/17edea699b9b27907616409003241ce2.css" rel="stylesheet"><link href="/assets/a39f5c6fcbb87b419667ec984d2e579a.css" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script><script>(function(){const supabaseUrl = "";
 const supabaseAnonKey = "";
 
       window.SUPABASE_URL = supabaseUrl;
       window.SUPABASE_ANON_KEY = supabaseAnonKey;
-    })();</script><script src="/assets/db.js"></script><script src="/assets/cart.js"></script><title>Sonharte | Versão Mobile</title><link rel="stylesheet" href="/_astro/admin.hZO2VeTW.css">
+    })();</script><script src="/assets/db.js"></script><script src="/assets/cart.js"></script><title>Sonharte | Versão Mobile</title><link rel="stylesheet" href="/_astro/admin.CkShA2AA.css">
 <style>@keyframes shine{0%{transform:translate(-150%) skew(-15deg)}50%{transform:translate(150%) skew(-15deg)}to{transform:translate(150%) skew(-15deg)}}.animate-shine[data-astro-cid-gmu4iemy]{animation:shine 3.5s infinite ease-in-out}@keyframes pulse-soft{0%,to{transform:scale(1) rotate(0)}50%{transform:scale(1.2) rotate(15deg)}}.animate-pulse-soft[data-astro-cid-gmu4iemy]{display:inline-block;animation:pulse-soft 2s infinite ease-in-out}
 @keyframes fadeIn{0%{opacity:0;transform:scale(.9) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
 </style></head> <body class="font-body-md text-on-background overflow-x-hidden selection:bg-secondary-container">  <!-- Top AppBar --><header id="mobile-header" class="w-full top-0 sticky z-50 transition-transform duration-300 ease-in-out flex justify-between items-center px-4 py-3 bg-surface border-b-4 border-on-background"> <button class="p-2 active:scale-90 transition-transform" onclick="toggleDrawer()"> <span class="material-symbols-outlined text-primary text-3xl">menu</span> </button> <a href="/mobile" class="flex items-center gap-2 hover:opacity-90 transition-opacity"> <img alt="Sonharte Logo" class="h-20 w-20 object-contain" src="/assets/logo_clean.png"> </a> <div class="flex items-center gap-3"> <button id="mobile-search-trigger" class="material-symbols-outlined text-primary p-1 active:scale-90 transition-transform">search</button> <button id="mobile-cart-btn" class="material-symbols-outlined text-primary p-1 relative">
@@ -230,33 +249,276 @@ Workshops ✨
 Ver Catálogo <span class="material-symbols-outlined">arrow_forward</span> </a> </div> <!-- Background Doodles --> <span class="material-symbols-outlined absolute top-20 right-4 text-secondary-container opacity-40 text-6xl rotate-12">brush</span> <span class="material-symbols-outlined absolute bottom-10 left-4 text-tertiary opacity-30 text-5xl -rotate-12">favorite</span> </section> <!-- Categories: Nossos Universos --><section class="px-4 py-12 bg-white"> <div class="flex items-center justify-between mb-8"> <h2 class="font-headline-md text-headline-md-mobile border-b-4 border-dashed border-secondary-container">Nossos Universos</h2> <div class="text-tertiary"><span class="material-symbols-outlined">stars</span></div> </div> <div class="grid grid-cols-2 gap-4"> <!-- Lápis de Cor & Desenho --> <a href="/mobile/catalogo?categoria=Lápis de Cor %26 Desenho" class="thick-border p-4 rounded-2xl bg-primary-fixed flex flex-col items-center justify-center text-center -rotate-1 block-shadow-primary hover:scale-[1.02] active:scale-95 transition-all"> <span class="material-symbols-outlined text-4xl text-primary mb-2">palette</span> <span class="font-label-bold">Lápis de Cor & Desenho</span> </a> <!-- Cadernos & Papéis --> <a href="/mobile/catalogo?categoria=Cadernos %26 Papéis" class="thick-border p-4 rounded-2xl bg-tertiary-fixed flex flex-col items-center justify-center text-center rotate-1 block-shadow-tertiary hover:scale-[1.02] active:scale-95 transition-all"> <span class="material-symbols-outlined text-4xl text-tertiary mb-2">menu_book</span> <span class="font-label-bold">Cadernos & Papéis</span> </a> <!-- Canetas & Escrita --> <a href="/mobile/catalogo?categoria=Canetas %26 Escrita" class="thick-border p-4 rounded-2xl bg-secondary-fixed flex flex-col items-center justify-center text-center rotate-2 block-shadow-secondary hover:scale-[1.02] active:scale-95 transition-all"> <span class="material-symbols-outlined text-4xl text-secondary mb-2">draw</span> <span class="font-label-bold">Canetas & Escrita</span> </a> <!-- Artes & Utilidades --> <a href="/mobile/catalogo?categoria=Artes %26 Utilidades" class="thick-border p-4 rounded-2xl bg-surface-container flex flex-col items-center justify-center text-center -rotate-2 block-shadow-primary hover:scale-[1.02] active:scale-95 transition-all"> <span class="material-symbols-outlined text-4xl text-on-surface mb-2">extension</span> <span class="font-label-bold">Artes & Utilidades</span> </a> <!-- Organização & Escritório --> <a href="/mobile/catalogo?categoria=Organização %26 Escritório" class="thick-border p-4 rounded-2xl bg-primary-container text-white flex flex-col items-center justify-center text-center rotate-1 block-shadow-secondary col-span-2 hover:scale-[1.02] active:scale-95 transition-all"> <span class="material-symbols-outlined text-4xl text-white mb-2">inventory_2</span> <span class="font-label-bold">Organização & Escritório</span> </a> <!-- Workshops & Personalizados (Diferencial Destacado) --> <a href="/mobile/workshops" class="thick-border p-4 rounded-2xl bg-amber-100 flex flex-col items-center justify-center text-center -rotate-1 block-shadow-primary col-span-2 hover:scale-[1.02] active:scale-95 transition-all"> <span class="material-symbols-outlined text-4xl text-primary mb-1">school</span> <span class="font-label-bold text-on-surface">Workshops & Personalizados</span> </a> </div> </section> <!-- Seção de Destaque para Workshops e Personalizados (Home Mobile) --><section class="px-4 py-12 bg-tertiary-fixed/20 border-t-4 border-on-background relative overflow-hidden"> <!-- Efeitos de Fundo --> <div class="absolute bottom-10 -left-10 w-72 h-72 rounded-full watercolor-blob" style="background: radial-gradient(circle, rgba(75,37,187,0.1) 0%, rgba(252,248,249,0) 70%);"></div> <div class="flex flex-col gap-8 relative z-10"> <!-- Cabeçalho --> <div class="text-center flex flex-col items-center gap-2"> <span class="bg-primary text-white font-label-bold text-[10px] px-3 py-1 border-2 border-black rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] -rotate-1 self-center">
 O Diferencial da Sonharte ✨
 </span> <h2 class="font-headline-lg text-2xl text-on-surface mt-2">Você sonha, realizamos!</h2> <div class="w-20 h-1 bg-primary cartoon-border rounded-full"></div> <p class="font-body-md text-xs text-on-surface-variant max-w-sm mt-1 leading-relaxed">
-Além dos produtos de pronta entrega, somos especialistas em criar **artigos de festa, toppers de bolo e velas artesanais 100% personalizados**.
-</p> </div> <!-- Imagem de Destaque Mobile --> <div class="relative flex justify-center items-center py-2"> <div class="bg-white p-3 border-4 border-on-surface rounded-2xl shadow-[4px_4px_0px_0px_rgba(75,37,187,1)] w-full max-w-xs relative rotate-1"> <div class="aspect-square w-full rounded-xl bg-surface-variant overflow-hidden border-2 border-on-surface"> <img src="/assets/caixinhas_personalizadas.png" alt="Serviços Personalizados Sonharte" class="w-full h-full object-cover"> </div> <div class="mt-2.5 text-center"> <span class="font-label-bold text-primary text-xs flex items-center justify-center gap-1.5"> <span class="material-symbols-outlined text-xs">stars</span> Confeccionado com Amor
-</span> </div> </div> <!-- Balãozinho / Sticker Mobile --> <div class="absolute -top-3 -right-2 bg-secondary-fixed text-on-secondary-fixed border-2 border-black px-3 py-1.5 rounded-xl shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rotate-6 font-label-bold text-[10px] select-none">
+Além dos produtos de pronta entrega, somos especialistas em criar **artigos de festa, toppers de bolo e adesivos personalizados 100% sob medida**.
+</p> </div> <!-- Imagem de Destaque Mobile (Slideshow de Papel Rasgado) --> <div class="relative flex justify-center items-center py-2"> <div class="bg-white p-3 border-4 border-on-surface rounded-2xl shadow-[4px_4px_0px_0px_rgba(75,37,187,1)] w-full max-w-xs relative rotate-1"> <div class="aspect-square w-full rounded-xl bg-surface-variant overflow-hidden border-2 border-on-surface relative" id="brush-slideshow-container-mobile"> <img src="/assets/caixinhas_personalizadas.png" alt="Caixinhas Personalizadas" class="brush-slide-mobile absolute inset-0 w-full h-full object-cover transition-all duration-[600ms] opacity-100 scale-100" data-caption="Caixinhas Personalizadas 🌸"> <img src="/assets/topper_bolo.png" alt="Topper de Bolo" class="brush-slide-mobile absolute inset-0 w-full h-full object-cover transition-all duration-[600ms] opacity-0 scale-95" data-caption="Toppers de Bolo Decorativos 🎂"> <img src="/assets/adesivos_personalizados.png" alt="Adesivos Personalizados" class="brush-slide-mobile absolute inset-0 w-full h-full object-cover transition-all duration-[600ms] opacity-0 scale-95" data-caption="Adesivos & Rótulos Exclusivos 🏷️"> <!-- Elemento de Papel Rasgado para Transição Mobile --> <div id="paper-wipe-overlay-mobile"> <div class="paper-body-mobile"></div> <!-- Borda Direita --> <svg class="paper-edge-mobile edge-right-mobile absolute top-0 bottom-0 -right-4 w-4 h-full opacity-0" viewBox="0 0 20 100" preserveAspectRatio="none"> <path d="M0,0 L4,3 L1,7 L5,11 L2,15 L6,20 L3,25 L5,31 L1,37 L4,42 L2,48 L6,53 L3,59 L5,64 L1,70 L4,76 L2,81 L6,87 L3,93 L5,98 L0,100 Z"></path> </svg> <!-- Borda Esquerda --> <svg class="paper-edge-mobile edge-left-mobile absolute top-0 bottom-0 -left-4 w-4 h-full opacity-0 transform rotate-180" viewBox="0 0 20 100" preserveAspectRatio="none"> <path d="M0,0 L4,3 L1,7 L5,11 L2,15 L6,20 L3,25 L5,31 L1,37 L4,42 L2,48 L6,53 L3,59 L5,64 L1,70 L4,76 L2,81 L6,87 L3,93 L5,98 L0,100 Z"></path> </svg> <!-- Borda Inferior --> <svg class="paper-edge-mobile edge-bottom-mobile absolute left-0 right-0 -bottom-4 h-4 w-full opacity-0" viewBox="0 0 100 20" preserveAspectRatio="none"> <path d="M0,0 L3,4 L7,1 L11,5 L15,2 L20,6 L25,3 L31,5 L37,1 L42,4 L48,2 L53,6 L59,3 L64,5 L70,1 L76,4 L81,2 L87,6 L93,3 L98,5 L100,0 Z"></path> </svg> <!-- Borda Superior --> <svg class="paper-edge-mobile edge-top-mobile absolute left-0 right-0 -top-4 h-4 w-full opacity-0 transform rotate-180" viewBox="0 0 100 20" preserveAspectRatio="none"> <path d="M0,0 L3,4 L7,1 L11,5 L15,2 L20,6 L25,3 L31,5 L37,1 L42,4 L48,2 L53,6 L59,3 L64,5 L70,1 L76,4 L81,2 L87,6 L93,3 L98,5 L100,0 Z"></path> </svg> </div> </div> <div class="mt-2.5 text-center"> <span class="font-label-bold text-primary text-xs flex items-center justify-center gap-1.5" id="brush-slide-caption-mobile"> <span class="material-symbols-outlined text-xs">stars</span> Caixinhas Personalizadas 🌸
+</span> </div> <!-- Balãozinho / Sticker Mobile --> <div class="absolute -top-3 -right-2 bg-secondary-fixed text-on-secondary-fixed border-2 border-black px-3 py-1.5 rounded-xl shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rotate-6 font-label-bold text-[10px] select-none z-20">
 Exclusivo! 🌸
-</div> </div> <!-- Lista de Diferenciais Compacta --> <div class="grid grid-cols-3 gap-2"> <div class="bg-white p-2.5 border-2 border-on-surface rounded-xl flex flex-col items-center text-center shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"> <span class="material-symbols-outlined text-pink-600 text-xl mb-1">card_giftcard</span> <span class="font-label-bold text-[10px]">Caixinhas</span> </div> <div class="bg-white p-2.5 border-2 border-on-surface rounded-xl flex flex-col items-center text-center shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"> <span class="material-symbols-outlined text-yellow-600 text-xl mb-1">cake</span> <span class="font-label-bold text-[10px]">Topper Bolo</span> </div> <div class="bg-white p-2.5 border-2 border-on-surface rounded-xl flex flex-col items-center text-center shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"> <span class="material-symbols-outlined text-blue-600 text-xl mb-1">celebration</span> <span class="font-label-bold text-[10px]">Velas</span> </div> </div> <!-- CTAs Mobile --> <div class="flex flex-col gap-3"> <a href="/mobile/workshops" class="bg-primary text-white border-2 border-black rounded-xl py-4 font-label-bold text-xs shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all text-center flex items-center justify-center gap-1.5"> <span class="material-symbols-outlined text-sm">auto_awesome</span> Conhecer Nossos Workshops
+</div> </div> <style>
+        #paper-wipe-overlay-mobile {
+          position: absolute;
+          inset: 0;
+          z-index: 30;
+          pointer-events: none;
+          transform: translateX(105%);
+        }
+        .paper-body-mobile {
+          position: absolute;
+          inset: 0;
+        }
+        .paper-edge-mobile {
+          position: absolute;
+          pointer-events: none;
+          transition: opacity 0.2s ease;
+        }
+
+        /* LR (Left to Right) */
+        .paper-animate-lr-mobile {
+          animation: paper-wipe-lr-anim-mobile 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+        }
+        @keyframes paper-wipe-lr-anim-mobile {
+          0% { transform: translateX(-105%); }
+          45%, 55% { transform: translateX(0%); }
+          100% { transform: translateX(105%); }
+        }
+
+        /* RL (Right to Left) */
+        .paper-animate-rl-mobile {
+          animation: paper-wipe-rl-anim-mobile 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+        }
+        @keyframes paper-wipe-rl-anim-mobile {
+          0% { transform: translateX(105%); }
+          45%, 55% { transform: translateX(0%); }
+          100% { transform: translateX(-105%); }
+        }
+
+        /* TB (Top to Bottom) */
+        .paper-animate-tb-mobile {
+          animation: paper-wipe-tb-anim-mobile 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+        }
+        @keyframes paper-wipe-tb-anim-mobile {
+          0% { transform: translateY(-105%); }
+          45%, 55% { transform: translateY(0%); }
+          100% { transform: translateY(105%); }
+        }
+
+        /* BT (Bottom to Top) */
+        .paper-animate-bt-mobile {
+          animation: paper-wipe-bt-anim-mobile 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+        }
+        @keyframes paper-wipe-bt-anim-mobile {
+          0% { transform: translateY(105%); }
+          45%, 55% { transform: translateY(0%); }
+          100% { transform: translateY(-105%); }
+        }
+      </style> <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const slides = document.querySelectorAll('.brush-slide-mobile');
+          const caption = document.getElementById('brush-slide-caption-mobile');
+          const container = document.getElementById('brush-slideshow-container-mobile');
+          if (!container) return;
+          
+          const paperOverlay = document.getElementById('paper-wipe-overlay-mobile');
+          const paperBody = paperOverlay.querySelector('.paper-body-mobile');
+          const edges = paperOverlay.querySelectorAll('.paper-edge-mobile');
+          
+          let currentIdx = 0;
+          let dirIdx = 0;
+          const directions = ['lr', 'tb', 'rl', 'bt'];
+          const colors = ['#ffd8ec', '#e5d9ff', '#fff2b2'];
+          let colorIdx = 0;
+
+          if (slides.length > 0 && caption && paperOverlay) {
+            setInterval(() => {
+              const currentDir = directions[dirIdx];
+              const currentColor = colors[colorIdx];
+              
+              // 1. Configura a cor do papel e dos SVGs de borda
+              paperBody.style.backgroundColor = currentColor;
+              edges.forEach(edge => {
+                edge.style.fill = currentColor;
+                edge.classList.add('opacity-0');
+                edge.classList.remove('opacity-100');
+              });
+              
+              // 2. Ativa o SVG da borda de ataque correspondente
+              let activeEdge;
+              if (currentDir === 'lr') activeEdge = paperOverlay.querySelector('.edge-right-mobile');
+              if (currentDir === 'rl') activeEdge = paperOverlay.querySelector('.edge-left-mobile');
+              if (currentDir === 'tb') activeEdge = paperOverlay.querySelector('.edge-bottom-mobile');
+              if (currentDir === 'bt') activeEdge = paperOverlay.querySelector('.edge-top-mobile');
+              
+              if (activeEdge) {
+                activeEdge.classList.remove('opacity-0');
+                activeEdge.classList.add('opacity-100');
+              }
+              
+              // 3. Dispara a animação do papel
+              paperOverlay.className = `paper-animate-${currentDir}-mobile`;
+              
+              // 4. No meio da animação (550ms, quando a tela está totalmente coberta pelo papel)
+              // trocamos o slide e a legenda por baixo
+              setTimeout(() => {
+                slides[currentIdx].classList.remove('opacity-100', 'scale-100');
+                slides[currentIdx].classList.add('opacity-0', 'scale-95');
+
+                currentIdx = (currentIdx + 1) % slides.length;
+
+                slides[currentIdx].classList.remove('opacity-0', 'scale-95');
+                slides[currentIdx].classList.add('opacity-100', 'scale-100');
+
+                caption.innerHTML = `<span class="material-symbols-outlined text-xs">stars</span> ${slides[currentIdx].getAttribute('data-caption')}`;
+              }, 550);
+
+              // 5. Após a conclusão (1200ms), limpa a classe e atualiza os índices
+              setTimeout(() => {
+                paperOverlay.className = '';
+                dirIdx = (dirIdx + 1) % directions.length;
+                colorIdx = (colorIdx + 1) % colors.length;
+              }, 1250);
+
+            }, 7000);
+          }
+        });
+      </script> </div> <!-- Lista de Diferenciais Compacta --> <div class="grid grid-cols-3 gap-2"> <div class="bg-white p-2.5 border-2 border-on-surface rounded-xl flex flex-col items-center text-center shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"> <span class="material-symbols-outlined text-pink-600 text-xl mb-1">card_giftcard</span> <span class="font-label-bold text-[10px]">Caixinhas</span> </div> <div class="bg-white p-2.5 border-2 border-on-surface rounded-xl flex flex-col items-center text-center shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"> <span class="material-symbols-outlined text-yellow-600 text-xl mb-1">cake</span> <span class="font-label-bold text-[10px]">Topper Bolo</span> </div> <div class="bg-white p-2.5 border-2 border-on-surface rounded-xl flex flex-col items-center text-center shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"> <span class="material-symbols-outlined text-blue-600 text-xl mb-1">celebration</span> <span class="font-label-bold text-[10px]">Adesivos</span> </div> </div> <!-- CTAs Mobile --> <div class="flex flex-col gap-3"> <a href="/mobile/workshops" class="bg-primary text-white border-2 border-black rounded-xl py-4 font-label-bold text-xs shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all text-center flex items-center justify-center gap-1.5"> <span class="material-symbols-outlined text-sm">auto_awesome</span> Conhecer Nossos Workshops
 </a> <a href="https://wa.me/5531972122639?text=Olá!%20Gostaria%20de%20conversar%20sobre%20personalizados." target="_blank" class="bg-white border-2 border-black rounded-xl py-4 font-label-bold text-xs shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all text-center text-primary flex items-center justify-center gap-1.5"> <span class="material-symbols-outlined text-sm">chat</span> Orçar no WhatsApp
-</a> </div> </div> </section> <!-- Product Grid: Favoritos da Semana --><section class="px-4 py-12"> <div class="flex items-center gap-3 mb-8"> <span class="material-symbols-outlined text-secondary-container text-4xl" style="font-variation-settings: 'FILL' 1;">star</span> <h2 class="font-headline-md text-headline-md-mobile text-primary">Favoritos da Semana</h2> </div> <div class="grid grid-cols-2 gap-4"> <div class="thick-border rounded-2xl bg-white p-3.5 relative flex flex-col justify-between block-shadow-primary"> <div> <div class="absolute -top-2.5 -left-2 bg-secondary-container text-on-secondary-container font-label-bold text-[8px] px-2 py-0.5 thick-border rounded-full z-10 rotate-[-5deg] flex items-center gap-0.5 shadow-md"> <span class="material-symbols-outlined text-[8px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span> DESTAQUE
-</div> <a href="/mobile/produto?id=1" class="block relative w-full aspect-square mb-2.5"> <img class="w-full h-full object-cover rounded-xl thin-border" alt="Lápis de Cor Multicolor 24 Cores" src="/assets/produtos/produto_1.jpg"> <span class="absolute top-1 left-1 bg-white text-on-surface text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]"> Lápis de Cor </span> </a> <a href="/mobile/produto?id=1"> <h3 class="font-headline-md text-sm mb-1 font-bold text-on-surface hover:text-primary transition-colors">Lápis de Cor Multicolor 24 Cores</h3> </a> </div> <div class="flex items-center justify-between mt-3 gap-2"> <span class="font-headline-md text-base text-primary font-bold">R$ 21,50</span> <button class="add-to-cart-btn thin-border bg-primary text-white p-2 rounded-lg block-shadow-primary active:translate-x-0.5 active:translate-y-0.5 active:shadow-none shrink-0 flex items-center justify-center" data-id="1" data-titulo="Lápis de Cor Multicolor 24 Cores" data-preco="21.5" data-imagem="/assets/produtos/produto_1.jpg"> <span class="material-symbols-outlined text-xs">add_shopping_cart</span> </button> </div> </div><div class="thick-border rounded-2xl bg-white p-3.5 relative flex flex-col justify-between block-shadow-tertiary"> <div>  <a href="/mobile/produto?id=6" class="block relative w-full aspect-square mb-2.5"> <img class="w-full h-full object-cover rounded-xl thin-border" alt="Canetinha Cis Hidrográfica 24 Cores" src="/assets/produtos/produto_6.jpg"> <span class="absolute top-1 left-1 bg-white text-on-surface text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]"> Lápis de Cor </span> </a> <a href="/mobile/produto?id=6"> <h3 class="font-headline-md text-sm mb-1 font-bold text-on-surface hover:text-primary transition-colors">Canetinha Cis Hidrográfica 24 Cores</h3> </a> </div> <div class="flex items-center justify-between mt-3 gap-2"> <span class="font-headline-md text-base text-primary font-bold">R$ 27,90</span> <button class="add-to-cart-btn thin-border bg-primary text-white p-2 rounded-lg block-shadow-primary active:translate-x-0.5 active:translate-y-0.5 active:shadow-none shrink-0 flex items-center justify-center" data-id="6" data-titulo="Canetinha Cis Hidrográfica 24 Cores" data-preco="27.9" data-imagem="/assets/produtos/produto_6.jpg"> <span class="material-symbols-outlined text-xs">add_shopping_cart</span> </button> </div> </div><div class="thick-border rounded-2xl bg-white p-3.5 relative flex flex-col justify-between block-shadow-primary"> <div>  <a href="/mobile/produto?id=21" class="block relative w-full aspect-square mb-2.5"> <img class="w-full h-full object-cover rounded-xl thin-border" alt="Caneta Cis Spiro Colorida (Unidade)" src="/assets/produtos/produto_21.jpg"> <span class="absolute top-1 left-1 bg-white text-on-surface text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]"> Canetas </span> </a> <a href="/mobile/produto?id=21"> <h3 class="font-headline-md text-sm mb-1 font-bold text-on-surface hover:text-primary transition-colors">Caneta Cis Spiro Colorida (Unidade)</h3> </a> </div> <div class="flex items-center justify-between mt-3 gap-2"> <span class="font-headline-md text-base text-primary font-bold">R$ 4,90</span> <button class="add-to-cart-btn thin-border bg-primary text-white p-2 rounded-lg block-shadow-primary active:translate-x-0.5 active:translate-y-0.5 active:shadow-none shrink-0 flex items-center justify-center" data-id="21" data-titulo="Caneta Cis Spiro Colorida (Unidade)" data-preco="4.9" data-imagem="/assets/produtos/produto_21.jpg"> <span class="material-symbols-outlined text-xs">add_shopping_cart</span> </button> </div> </div><div class="thick-border rounded-2xl bg-white p-3.5 relative flex flex-col justify-between block-shadow-tertiary"> <div>  <a href="/mobile/produto?id=12" class="block relative w-full aspect-square mb-2.5"> <img class="w-full h-full object-cover rounded-xl thin-border" alt="Bloco Auto-Adesivo Post-It 500 folhas" src="/assets/produtos/produto_12.jpg"> <span class="absolute top-1 left-1 bg-white text-on-surface text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]"> Organização </span> </a> <a href="/mobile/produto?id=12"> <h3 class="font-headline-md text-sm mb-1 font-bold text-on-surface hover:text-primary transition-colors">Bloco Auto-Adesivo Post-It 500 folhas</h3> </a> </div> <div class="flex items-center justify-between mt-3 gap-2"> <span class="font-headline-md text-base text-primary font-bold">R$ 7,90</span> <button class="add-to-cart-btn thin-border bg-primary text-white p-2 rounded-lg block-shadow-primary active:translate-x-0.5 active:translate-y-0.5 active:shadow-none shrink-0 flex items-center justify-center" data-id="12" data-titulo="Bloco Auto-Adesivo Post-It 500 folhas" data-preco="7.9" data-imagem="/assets/produtos/produto_12.jpg"> <span class="material-symbols-outlined text-xs">add_shopping_cart</span> </button> </div> </div> </div> </section> <!-- Product Grid: Novidades --> <section class="px-4 py-12 bg-surface-container-low"> <div class="flex items-center gap-3 mb-8"> <span class="material-symbols-outlined text-pink-600 text-4xl animate-pulse">auto_awesome</span> <h2 class="font-headline-md text-headline-md-mobile text-primary">Novidades</h2> </div> <div class="grid grid-cols-2 gap-4"> <div class="thick-border rounded-2xl bg-white p-3.5 relative flex flex-col justify-between block-shadow-tertiary"> <div> <a href="/mobile/produto?id=73" class="block relative w-full aspect-square mb-2.5"> <img class="w-full h-full object-cover rounded-xl thin-border" alt="Caderno Espiral Capa Dura 96 Folhas" src="/assets/produtos/produto_73.jpg"> <span class="absolute top-1 left-1 bg-tertiary text-white text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
-Novo!
-</span> </a> <a href="/mobile/produto?id=73"> <h3 class="font-headline-md text-sm mb-1 font-bold text-on-surface hover:text-primary transition-colors">Caderno Espiral Capa Dura 96 Folhas</h3> </a> </div> <div class="flex items-center justify-between mt-3 gap-2"> <span class="font-headline-md text-base text-tertiary font-bold">R$ 12,90</span> <button class="add-to-cart-btn thin-border bg-tertiary text-white p-2 rounded-lg block-shadow-tertiary active:translate-x-0.5 active:translate-y-0.5 active:shadow-none shrink-0 flex items-center justify-center" data-id="73" data-titulo="Caderno Espiral Capa Dura 96 Folhas" data-preco="12.9" data-imagem="/assets/produtos/produto_73.jpg"> <span class="material-symbols-outlined text-xs">add_shopping_cart</span> </button> </div> </div><div class="thick-border rounded-2xl bg-white p-3.5 relative flex flex-col justify-between block-shadow-primary"> <div> <a href="/mobile/produto?id=76" class="block relative w-full aspect-square mb-2.5"> <img class="w-full h-full object-cover rounded-xl thin-border" alt="Caderneta Costurada 100x140mm" src="/assets/produtos/produto_76.jpg"> <span class="absolute top-1 left-1 bg-tertiary text-white text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
-Novo!
-</span> </a> <a href="/mobile/produto?id=76"> <h3 class="font-headline-md text-sm mb-1 font-bold text-on-surface hover:text-primary transition-colors">Caderneta Costurada 100x140mm</h3> </a> </div> <div class="flex items-center justify-between mt-3 gap-2"> <span class="font-headline-md text-base text-tertiary font-bold">R$ 4,00</span> <button class="add-to-cart-btn thin-border bg-tertiary text-white p-2 rounded-lg block-shadow-tertiary active:translate-x-0.5 active:translate-y-0.5 active:shadow-none shrink-0 flex items-center justify-center" data-id="76" data-titulo="Caderneta Costurada 100x140mm" data-preco="4" data-imagem="/assets/produtos/produto_76.jpg"> <span class="material-symbols-outlined text-xs">add_shopping_cart</span> </button> </div> </div><div class="thick-border rounded-2xl bg-white p-3.5 relative flex flex-col justify-between block-shadow-tertiary"> <div> <a href="/mobile/produto?id=84" class="block relative w-full aspect-square mb-2.5"> <img class="w-full h-full object-cover rounded-xl thin-border" alt="Caderno Capa Dura Brochura 96 Folhas" src="/assets/produtos/produto_84.jpg"> <span class="absolute top-1 left-1 bg-tertiary text-white text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
-Novo!
-</span> </a> <a href="/mobile/produto?id=84"> <h3 class="font-headline-md text-sm mb-1 font-bold text-on-surface hover:text-primary transition-colors">Caderno Capa Dura Brochura 96 Folhas</h3> </a> </div> <div class="flex items-center justify-between mt-3 gap-2"> <span class="font-headline-md text-base text-tertiary font-bold">R$ 13,00</span> <button class="add-to-cart-btn thin-border bg-tertiary text-white p-2 rounded-lg block-shadow-tertiary active:translate-x-0.5 active:translate-y-0.5 active:shadow-none shrink-0 flex items-center justify-center" data-id="84" data-titulo="Caderno Capa Dura Brochura 96 Folhas" data-preco="13" data-imagem="/assets/produtos/produto_84.jpg"> <span class="material-symbols-outlined text-xs">add_shopping_cart</span> </button> </div> </div><div class="thick-border rounded-2xl bg-white p-3.5 relative flex flex-col justify-between block-shadow-primary"> <div> <a href="/mobile/produto?id=88" class="block relative w-full aspect-square mb-2.5"> <img class="w-full h-full object-cover rounded-xl thin-border" alt="Pasta Plástica Maleta 18x245x335mm" src="/assets/produtos/produto_88.jpg"> <span class="absolute top-1 left-1 bg-tertiary text-white text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
-Novo!
-</span> </a> <a href="/mobile/produto?id=88"> <h3 class="font-headline-md text-sm mb-1 font-bold text-on-surface hover:text-primary transition-colors">Pasta Plástica Maleta 18x245x335mm</h3> </a> </div> <div class="flex items-center justify-between mt-3 gap-2"> <span class="font-headline-md text-base text-tertiary font-bold">R$ 7,00</span> <button class="add-to-cart-btn thin-border bg-tertiary text-white p-2 rounded-lg block-shadow-tertiary active:translate-x-0.5 active:translate-y-0.5 active:shadow-none shrink-0 flex items-center justify-center" data-id="88" data-titulo="Pasta Plástica Maleta 18x245x335mm" data-preco="7" data-imagem="/assets/produtos/produto_88.jpg"> <span class="material-symbols-outlined text-xs">add_shopping_cart</span> </button> </div> </div> </div> </section> <!-- Product Grid: Mais Vendidos --> <section class="px-4 py-12"> <div class="flex items-center gap-3 mb-8"> <span class="material-symbols-outlined text-yellow-500 text-4xl" style="font-variation-settings: 'FILL' 1;">workspace_premium</span> <h2 class="font-headline-md text-headline-md-mobile text-primary">Mais Vendidos</h2> </div> <div class="grid grid-cols-2 gap-4"> <div class="thick-border rounded-2xl bg-white p-3.5 relative flex flex-col justify-between block-shadow-primary"> <div> <a href="/mobile/produto?id=3" class="block relative w-full aspect-square mb-2.5"> <img class="w-full h-full object-cover rounded-xl thin-border" alt="Lápis de Cor Leo&#38;Leo 24 Cores" src="/assets/produtos/produto_3.jpg"> <span class="absolute top-1 left-1 bg-secondary-container text-on-secondary-fixed text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
-Sucesso
-</span> </a> <a href="/mobile/produto?id=3"> <h3 class="font-headline-md text-sm mb-1 font-bold text-on-surface hover:text-primary transition-colors">Lápis de Cor Leo&amp;Leo 24 Cores</h3> </a> </div> <div class="flex items-center justify-between mt-3 gap-2"> <span class="font-headline-md text-base text-primary font-bold">R$ 12,00</span> <button class="add-to-cart-btn thin-border bg-primary text-white p-2 rounded-lg block-shadow-primary active:translate-x-0.5 active:translate-y-0.5 active:shadow-none shrink-0 flex items-center justify-center" data-id="3" data-titulo="Lápis de Cor Leo&#38;Leo 24 Cores" data-preco="12" data-imagem="/assets/produtos/produto_3.jpg"> <span class="material-symbols-outlined text-xs">add_shopping_cart</span> </button> </div> </div><div class="thick-border rounded-2xl bg-white p-3.5 relative flex flex-col justify-between block-shadow-tertiary"> <div> <a href="/mobile/produto?id=22" class="block relative w-full aspect-square mb-2.5"> <img class="w-full h-full object-cover rounded-xl thin-border" alt="Marca Texto Pastel Cis" src="/assets/produtos/produto_22.jpg"> <span class="absolute top-1 left-1 bg-secondary-container text-on-secondary-fixed text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
-Sucesso
-</span> </a> <a href="/mobile/produto?id=22"> <h3 class="font-headline-md text-sm mb-1 font-bold text-on-surface hover:text-primary transition-colors">Marca Texto Pastel Cis</h3> </a> </div> <div class="flex items-center justify-between mt-3 gap-2"> <span class="font-headline-md text-base text-primary font-bold">R$ 3,90</span> <button class="add-to-cart-btn thin-border bg-primary text-white p-2 rounded-lg block-shadow-primary active:translate-x-0.5 active:translate-y-0.5 active:shadow-none shrink-0 flex items-center justify-center" data-id="22" data-titulo="Marca Texto Pastel Cis" data-preco="3.9" data-imagem="/assets/produtos/produto_22.jpg"> <span class="material-symbols-outlined text-xs">add_shopping_cart</span> </button> </div> </div><div class="thick-border rounded-2xl bg-white p-3.5 relative flex flex-col justify-between block-shadow-primary"> <div> <a href="/mobile/produto?id=32" class="block relative w-full aspect-square mb-2.5"> <img class="w-full h-full object-cover rounded-xl thin-border" alt="Pilha Rayovac AA (Pacote com 4)" src="/assets/produtos/produto_32.jpg"> <span class="absolute top-1 left-1 bg-secondary-container text-on-secondary-fixed text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
-Sucesso
-</span> </a> <a href="/mobile/produto?id=32"> <h3 class="font-headline-md text-sm mb-1 font-bold text-on-surface hover:text-primary transition-colors">Pilha Rayovac AA (Pacote com 4)</h3> </a> </div> <div class="flex items-center justify-between mt-3 gap-2"> <span class="font-headline-md text-base text-primary font-bold">R$ 6,00</span> <button class="add-to-cart-btn thin-border bg-primary text-white p-2 rounded-lg block-shadow-primary active:translate-x-0.5 active:translate-y-0.5 active:shadow-none shrink-0 flex items-center justify-center" data-id="32" data-titulo="Pilha Rayovac AA (Pacote com 4)" data-preco="6" data-imagem="/assets/produtos/produto_32.jpg"> <span class="material-symbols-outlined text-xs">add_shopping_cart</span> </button> </div> </div><div class="thick-border rounded-2xl bg-white p-3.5 relative flex flex-col justify-between block-shadow-tertiary"> <div> <a href="/mobile/produto?id=50" class="block relative w-full aspect-square mb-2.5"> <img class="w-full h-full object-cover rounded-xl thin-border" alt="Apontador Plástico Yolo (Cores Sortidas)" src="/assets/produtos/produto_50.jpg"> <span class="absolute top-1 left-1 bg-secondary-container text-on-secondary-fixed text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
-Sucesso
-</span> </a> <a href="/mobile/produto?id=50"> <h3 class="font-headline-md text-sm mb-1 font-bold text-on-surface hover:text-primary transition-colors">Apontador Plástico Yolo (Cores Sortidas)</h3> </a> </div> <div class="flex items-center justify-between mt-3 gap-2"> <span class="font-headline-md text-base text-primary font-bold">R$ 1,00</span> <button class="add-to-cart-btn thin-border bg-primary text-white p-2 rounded-lg block-shadow-primary active:translate-x-0.5 active:translate-y-0.5 active:shadow-none shrink-0 flex items-center justify-center" data-id="50" data-titulo="Apontador Plástico Yolo (Cores Sortidas)" data-preco="1" data-imagem="/assets/produtos/produto_50.jpg"> <span class="material-symbols-outlined text-xs">add_shopping_cart</span> </button> </div> </div> </div> <a href="/mobile/catalogo" class="w-full mt-8 thin-border py-4 bg-surface-container rounded-2xl font-label-bold flex items-center justify-center gap-2 hover:bg-surface-container-high text-on-surface">
-Ver todos os produtos <span class="material-symbols-outlined">chevron_right</span> </a> </section> <!-- Process: Como ter seu Sonharte --><section class="px-6 py-12 bg-secondary-fixed"> <h2 class="font-headline-md text-headline-md-mobile text-center mb-10">Como ter seu Sonharte</h2> <div class="relative space-y-10 pl-2"> <!-- Linha Conectora Vertical Lateral --> <div class="absolute left-10 top-8 bottom-8 border-l-4 border-dashed border-on-background opacity-35 z-0"></div> <!-- Step 1 --> <div class="flex items-start gap-6 relative z-10"> <div class="flex flex-col items-center shrink-0"> <div class="w-16 h-16 bg-white thick-border rounded-full flex items-center justify-center block-shadow-primary"> <span class="material-symbols-outlined text-3xl text-primary">shopping_basket</span> </div> </div> <div class="pt-2"> <h4 class="font-headline-md text-lg text-left">1. Monte seu Carrinho</h4> <p class="font-body-md text-on-surface-variant text-left">Escolha seus materiais e monte sua lista no site.</p> </div> </div> <!-- Step 2 --> <div class="flex items-start gap-6 relative z-10"> <div class="flex flex-col items-center shrink-0"> <div class="w-16 h-16 bg-white thick-border rounded-full flex items-center justify-center block-shadow-secondary"> <span class="material-symbols-outlined text-3xl text-secondary">chat</span> </div> </div> <div class="pt-2"> <h4 class="font-headline-md text-lg text-left">2. Combine no WhatsApp</h4> <p class="font-body-md text-on-surface-variant text-left">Seu carrinho vai direto para o chat para alinharmos os detalhes.</p> </div> </div> <!-- Step 3 --> <div class="flex items-start gap-6 relative z-10"> <div class="flex flex-col items-center shrink-0"> <div class="w-16 h-16 bg-white thick-border rounded-full flex items-center justify-center block-shadow-tertiary"> <span class="material-symbols-outlined text-3xl text-tertiary">storefront</span> </div> </div> <div class="pt-2"> <h4 class="font-headline-md text-lg text-left">3. Retire na Loja</h4> <p class="font-body-md text-on-surface-variant text-left">Após confirmarmos tudo no chat, retire seu pedido em nossa loja.</p> </div> </div> </div> </section> <!-- Feedbacks: O que dizem nossos clientes --><section class="px-4 py-12 bg-surface-container-low border-t-2 border-on-background" data-astro-cid-gfv242b7> <h2 class="font-headline-md text-headline-md-mobile mb-4 text-center" data-astro-cid-gfv242b7>Nossas Sonhadoras</h2> <!-- Formulário de Feedback Mobile --> <div class="bg-white thick-border p-5 rounded-2xl mb-8 block-shadow-primary max-w-sm mx-auto" data-astro-cid-gfv242b7> <h3 class="font-label-bold text-primary mb-1" data-astro-cid-gfv242b7>Deixe seu depoimento</h3> <p class="text-xs text-on-surface-variant mb-4" data-astro-cid-gfv242b7>Sua opinião vale ouro para nós!</p> <form id="mobile-feedback-form" class="flex flex-col gap-4" data-astro-cid-gfv242b7> <div class="flex flex-col gap-1" data-astro-cid-gfv242b7> <label for="m-name" class="text-xs font-bold text-on-surface" data-astro-cid-gfv242b7>Nome <span class="text-[10px] font-normal text-on-surface-variant" data-astro-cid-gfv242b7>(não obrigatório)</span></label> <input type="text" id="m-name" placeholder="Seu nome" class="px-3 py-2 bg-white text-on-surface font-body-md thin-border rounded-xl focus:outline-none" data-astro-cid-gfv242b7> </div> <div class="flex flex-col gap-1" data-astro-cid-gfv242b7> <span class="text-xs font-bold text-on-surface" data-astro-cid-gfv242b7>Sua Nota</span> <div class="flex gap-1 rating-stars" id="mobile-stars" data-astro-cid-gfv242b7> <button type="button" class="m-star-btn material-symbols-outlined text-2xl text-on-surface-variant/30 cursor-pointer" data-value="1" data-astro-cid-gfv242b7>star</button> <button type="button" class="m-star-btn material-symbols-outlined text-2xl text-on-surface-variant/30 cursor-pointer" data-value="2" data-astro-cid-gfv242b7>star</button> <button type="button" class="m-star-btn material-symbols-outlined text-2xl text-on-surface-variant/30 cursor-pointer" data-value="3" data-astro-cid-gfv242b7>star</button> <button type="button" class="m-star-btn material-symbols-outlined text-2xl text-on-surface-variant/30 cursor-pointer" data-value="4" data-astro-cid-gfv242b7>star</button> <button type="button" class="m-star-btn material-symbols-outlined text-2xl text-on-surface-variant/30 cursor-pointer" data-value="5" data-astro-cid-gfv242b7>star</button> </div> <input type="hidden" id="m-rating" value="0" data-astro-cid-gfv242b7> </div> <div class="flex flex-col gap-1" data-astro-cid-gfv242b7> <label for="m-message" class="text-xs font-bold text-on-surface" data-astro-cid-gfv242b7>Mensagem</label> <textarea id="m-message" required rows="3" placeholder="O que achou dos mimos?..." class="px-3 py-2 bg-white text-on-surface font-body-md thin-border rounded-xl focus:outline-none resize-none" data-astro-cid-gfv242b7></textarea> </div> <button type="submit" class="w-full py-3 mt-1 bg-primary text-white font-label-bold thin-border block-shadow-tertiary rounded-xl text-center active:translate-x-0.5 active:translate-y-0.5 active:shadow-none" data-astro-cid-gfv242b7>
+</a> </div> </div> </section> <section class="px-4 py-12 bg-surface-container-lowest"> <div class="flex flex-col items-center text-center gap-2 mb-8"> <div class="inline-flex items-center gap-1.5 bg-primary-fixed text-on-primary-fixed px-3 py-1 cartoon-border rounded-full font-label-bold text-[10px] shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] rotate-[-1deg]"> <span class="material-symbols-outlined text-[10px]">print</span> Serviços rápidos
+</div> <h2 class="font-headline-md text-headline-md-mobile text-primary">Nossos Serviços de Impressão</h2> <p class="font-body-md text-xs text-on-surface-variant max-w-[280px]">Tudo o que você precisa para dar vida e durabilidade aos seus documentos e projetos.</p> </div> <div class="flex flex-col gap-6 mb-10"> <!-- Card 1: Impressões e Xerox --> <div class="thick-border rounded-2xl bg-white p-5 block-shadow-primary bg-primary-fixed/5"> <div class="flex items-center gap-4 mb-3"> <div class="w-10 h-10 bg-primary text-white border-2 border-black rounded-lg flex items-center justify-center shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] rotate-[-3deg] shrink-0"> <span class="material-symbols-outlined text-xl">print</span> </div> <h3 class="font-headline-md text-sm text-on-surface font-bold">Xerox e Impressões</h3> </div> <p class="font-body-md text-[11px] text-on-surface-variant leading-relaxed mb-4">A4 Preto e Branco ou Colorida em papel sulfite de alta qualidade. Impressão rápida e cópias sob demanda.</p> <div class="flex justify-between items-center text-[11px] font-label-bold bg-white border border-dashed border-on-surface/20 rounded-lg p-2.5"> <span class="text-on-surface-variant">Xerox A4 P&B</span> <span class="text-primary font-bold">R$ 0,40 /pág</span> </div> </div> <!-- Card 2: Papéis Especiais e Adesivos --> <div class="thick-border rounded-2xl bg-white p-5 block-shadow-tertiary bg-secondary-fixed/5"> <div class="flex items-center gap-4 mb-3"> <div class="w-10 h-10 bg-secondary text-on-secondary-fixed border-2 border-black rounded-lg flex items-center justify-center shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] rotate-[3deg] shrink-0"> <span class="material-symbols-outlined text-xl">auto_awesome</span> </div> <h3 class="font-headline-md text-sm text-on-surface font-bold">Adesivos e Papéis Especiais</h3> </div> <p class="font-body-md text-[11px] text-on-surface-variant leading-relaxed mb-4">Papel Fotográfico premium, Papel Adesivo brilhante, Vinil Transparente e papéis de alta gramatura de 60 quilos.</p> <div class="flex justify-between items-center text-[11px] font-label-bold bg-white border border-dashed border-on-surface/20 rounded-lg p-2.5"> <span class="text-on-surface-variant">Papel Fotográfico</span> <span class="text-secondary font-bold">R$ 5,50 /fl</span> </div> </div> <!-- Card 3: Plastificação e Encadernação --> <div class="thick-border rounded-2xl bg-white p-5 block-shadow-primary bg-tertiary-fixed/5"> <div class="flex items-center gap-4 mb-3"> <div class="w-10 h-10 bg-tertiary text-on-tertiary-fixed border-2 border-black rounded-lg flex items-center justify-center shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] rotate-[-2deg] shrink-0"> <span class="material-symbols-outlined text-xl">book</span> </div> <h3 class="font-headline-md text-sm text-on-surface font-bold">Plastificação e Acabamentos</h3> </div> <p class="font-body-md text-[11px] text-on-surface-variant leading-relaxed mb-4">Plastificação brilhante em polaseal para RG, CPF ou folha A4, e Encadernação Espiral com capa protetora.</p> <div class="flex justify-between items-center text-[11px] font-label-bold bg-white border border-dashed border-on-surface/20 rounded-lg p-2.5"> <span class="text-on-surface-variant">Plastificação RG/CPF</span> <span class="text-tertiary-fixed-dim font-bold">R$ 4,00 /un</span> </div> </div> </div> <div class="flex justify-center"> <a href="/mobile/servicos" class="active-press w-full text-center py-3.5 bg-primary text-white border-2 border-black rounded-xl font-label-bold shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] text-xs inline-block">
+Ver Tabela de Preços Completa 📄
+</a> </div> </section> <!-- Product Grid: Favoritos da Semana --><section class="px-4 py-12"> <div class="flex items-center gap-3 mb-8"> <span class="material-symbols-outlined text-secondary-container text-4xl" style="font-variation-settings: 'FILL' 1;">star</span> <h2 class="font-headline-md text-headline-md-mobile text-primary">Favoritos da Semana</h2> </div> <div id="mobile-favorites-grid" class="grid grid-cols-2 gap-4 min-h-[150px]"> <div class="col-span-2 text-center text-xs text-on-surface-variant py-8">Carregando favoritos...</div> </div> </section> <!-- Product Grid: Novidades --> <section class="px-4 py-12 bg-surface-container-low"> <div class="flex items-center gap-3 mb-8"> <span class="material-symbols-outlined text-pink-600 text-4xl animate-pulse">auto_awesome</span> <h2 class="font-headline-md text-headline-md-mobile text-primary">Novidades</h2> </div> <div id="mobile-news-grid" class="grid grid-cols-2 gap-4 min-h-[150px]"> <div class="col-span-2 text-center text-xs text-on-surface-variant py-8">Carregando novidades...</div> </div> </section> <!-- Product Grid: Mais Vendidos --> <section class="px-4 py-12"> <div class="flex items-center gap-3 mb-8"> <span class="material-symbols-outlined text-yellow-500 text-4xl" style="font-variation-settings: 'FILL' 1;">workspace_premium</span> <h2 class="font-headline-md text-headline-md-mobile text-primary">Mais Vendidos</h2> </div> <div id="mobile-bestsellers-grid" class="grid grid-cols-2 gap-4 min-h-[150px]"> <div class="col-span-2 text-center text-xs text-on-surface-variant py-8">Carregando mais vendidos...</div> </div> <a href="/mobile/catalogo" class="w-full mt-8 thin-border py-4 bg-surface-container rounded-2xl font-label-bold flex items-center justify-center gap-2 hover:bg-surface-container-high text-on-surface">
+Ver todos os produtos <span class="material-symbols-outlined">chevron_right</span> </a> </section> <script>
+  async function loadHomeProductsMobile() {
+    const favoritesGrid = document.getElementById('mobile-favorites-grid');
+    const newsGrid = document.getElementById('mobile-news-grid');
+    const bestsellersGrid = document.getElementById('mobile-bestsellers-grid');
+
+    if (!window.SonharteDB) return;
+
+    try {
+      const products = await window.SonharteDB.getProducts();
+      const activeProducts = products.filter(p => p.ativo !== false);
+
+      // 1. Favoritos (selo "Destaque")
+      let favorites = activeProducts.filter(p => p.destaque === 'Destaque');
+      if (favorites.length === 0) {
+        favorites = activeProducts.slice(0, 4);
+      } else {
+        favorites = favorites.slice(0, 4);
+      }
+
+      // 2. Novidades (selo "Lançamento")
+      let news = activeProducts.filter(p => p.destaque === 'Lançamento');
+      if (news.length === 0) {
+        news = activeProducts.slice(4, 8);
+      } else {
+        news = news.slice(0, 4);
+      }
+
+      // 3. Mais Vendidos (selo "Mais Vendido")
+      let bestSellers = activeProducts.filter(p => p.destaque === 'Mais Vendido');
+      if (bestSellers.length === 0) {
+        bestSellers = activeProducts.slice(8, 12);
+      } else {
+        bestSellers = bestSellers.slice(0, 4);
+      }
+
+      // Renderiza
+      renderMobileGrid(favoritesGrid, favorites, 'primary', 'Destaque');
+      renderMobileGrid(newsGrid, news, 'tertiary', 'Novo!');
+      renderMobileGrid(bestsellersGrid, bestSellers, 'primary', 'Sucesso');
+
+    } catch (err) {
+      console.error("Erro ao carregar favoritos mobile:", err);
+      if (favoritesGrid) favoritesGrid.innerHTML = '<p class="col-span-2 text-center text-xs text-red-600">Erro ao carregar favoritos.</p>';
+      if (newsGrid) newsGrid.innerHTML = '<p class="col-span-2 text-center text-xs text-red-600">Erro ao carregar novidades.</p>';
+      if (bestsellersGrid) bestsellersGrid.innerHTML = '<p class="col-span-2 text-center text-xs text-red-600">Erro ao carregar mais vendidos.</p>';
+    }
+  }
+
+  function renderMobileGrid(container, list, themeColor, badgeText) {
+    if (!container) return;
+    container.innerHTML = '';
+
+    if (list.length === 0) {
+      container.innerHTML = '<p class="col-span-2 text-center text-xs text-on-surface-variant py-8">Nenhum produto nesta seção.</p>';
+      return;
+    }
+
+    list.forEach((p, idx) => {
+      const card = document.createElement('div');
+      const shadowClass = idx % 2 === 0 ? 'block-shadow-primary' : 'block-shadow-tertiary';
+      const buttonBg = themeColor === 'primary' ? 'bg-primary' : 'bg-tertiary';
+      const buttonShadow = themeColor === 'primary' ? 'block-shadow-primary' : 'block-shadow-tertiary';
+      const textTheme = themeColor === 'primary' ? 'text-primary' : 'text-tertiary';
+      
+      card.className = `thick-border rounded-2xl bg-white p-3.5 relative flex flex-col justify-between ${shadowClass}`;
+      
+      let badgeHtml = '';
+      const isDestaque = idx === 0 && themeColor === 'primary' && badgeText === 'Destaque';
+      
+      if (isDestaque) {
+        badgeHtml = `
+          <div class="absolute -top-2.5 -left-2 bg-secondary-container text-on-secondary-container font-label-bold text-[8px] px-2 py-0.5 thick-border rounded-full z-20 rotate-[-5deg] flex items-center gap-0.5 shadow-md">
+            <span class="material-symbols-outlined text-[8px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span> DESTAQUE
+          </div>
+        `;
+      } else if (badgeText === 'Novo!') {
+        badgeHtml = `
+          <span class="absolute top-1.5 left-1.5 bg-tertiary text-white text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] z-10">
+            Novo!
+          </span>
+        `;
+      } else if (badgeText === 'Sucesso') {
+        badgeHtml = `
+          <span class="absolute top-1.5 left-1.5 bg-secondary-fixed text-on-secondary-fixed text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] z-10">
+            Sucesso
+          </span>
+        `;
+      }
+      
+      const priceVal = typeof p.preco === 'number' ? p.preco : parseFloat(p.preco || 0);
+      const precoFormatado = priceVal.toFixed(2).replace('.', ',');
+      const firstCat = p.categoria ? p.categoria.split('&')[0].trim() : 'Mimos';
+
+      card.innerHTML = `
+        <div>
+          ${isDestaque ? badgeHtml : ''}
+          <a href="/mobile/produto?id=${p.id}" class="block relative w-full aspect-square mb-2.5">
+            <img class="w-full h-full object-cover rounded-xl thin-border" alt="${p.titulo}" src="${p.imagem}" />
+            ${!isDestaque && badgeText !== 'Destaque' ? badgeHtml : ''}
+            ${badgeText !== 'Novo!' && badgeText !== 'Sucesso' && !isDestaque ? `
+            <span class="absolute top-1.5 left-1.5 bg-white text-on-surface text-[8px] font-label-bold px-2 py-0.5 border border-black rounded-full shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] z-10">
+              ${firstCat}
+            </span>` : ''}
+          </a>
+          <a href="/mobile/produto?id=${p.id}">
+            <h3 class="font-headline-md text-sm mb-1 font-bold text-on-surface hover:text-primary transition-colors">${p.titulo}</h3>
+          </a>
+        </div>
+        <div class="flex items-center justify-between mt-3 gap-2">
+          <span class="font-headline-md text-base ${textTheme} font-bold">R$ ${precoFormatado}</span>
+          <button 
+            class="add-to-cart-btn thin-border ${buttonBg} text-white p-2 rounded-lg ${buttonShadow} active:translate-x-0.5 active:translate-y-0.5 active:shadow-none shrink-0 flex items-center justify-center"
+            data-id="${p.id}"
+            data-titulo="${p.titulo}"
+            data-preco="${p.preco}"
+            data-imagem="${p.imagem}"
+          >
+            <span class="material-symbols-outlined text-xs">add_shopping_cart</span>
+          </button>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  // Inicializa
+  document.addEventListener('DOMContentLoaded', loadHomeProductsMobile);
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    loadHomeProductsMobile();
+  }
+</script> <!-- Process: Como ter seu Sonharte --><section class="px-6 py-12 bg-secondary-fixed"> <h2 class="font-headline-md text-headline-md-mobile text-center mb-10">Como ter seu Sonharte</h2> <div class="relative space-y-10 pl-2"> <!-- Linha Conectora Vertical Lateral --> <div class="absolute left-10 top-8 bottom-8 border-l-4 border-dashed border-on-background opacity-35 z-0"></div> <!-- Step 1 --> <div class="flex items-start gap-6 relative z-10"> <div class="flex flex-col items-center shrink-0"> <div class="w-16 h-16 bg-white thick-border rounded-full flex items-center justify-center block-shadow-primary"> <span class="material-symbols-outlined text-3xl text-primary">shopping_basket</span> </div> </div> <div class="pt-2"> <h4 class="font-headline-md text-lg text-left">1. Monte seu Carrinho</h4> <p class="font-body-md text-on-surface-variant text-left">Escolha seus materiais e monte sua lista no site.</p> </div> </div> <!-- Step 2 --> <div class="flex items-start gap-6 relative z-10"> <div class="flex flex-col items-center shrink-0"> <div class="w-16 h-16 bg-white thick-border rounded-full flex items-center justify-center block-shadow-secondary"> <span class="material-symbols-outlined text-3xl text-secondary">chat</span> </div> </div> <div class="pt-2"> <h4 class="font-headline-md text-lg text-left">2. Combine no WhatsApp</h4> <p class="font-body-md text-on-surface-variant text-left">Seu carrinho vai direto para o chat para alinharmos os detalhes.</p> </div> </div> <!-- Step 3 --> <div class="flex items-start gap-6 relative z-10"> <div class="flex flex-col items-center shrink-0"> <div class="w-16 h-16 bg-white thick-border rounded-full flex items-center justify-center block-shadow-tertiary"> <span class="material-symbols-outlined text-3xl text-tertiary">storefront</span> </div> </div> <div class="pt-2"> <h4 class="font-headline-md text-lg text-left">3. Retire na Loja</h4> <p class="font-body-md text-on-surface-variant text-left">Após confirmarmos tudo no chat, retire seu pedido em nossa loja.</p> </div> </div> </div> </section> <!-- Feedbacks: O que dizem nossos clientes --><section class="px-4 py-12 bg-surface-container-low border-t-2 border-on-background" data-astro-cid-gfv242b7> <h2 class="font-headline-md text-headline-md-mobile mb-4 text-center" data-astro-cid-gfv242b7>Nossas Sonhadoras</h2> <!-- Formulário de Feedback Mobile --> <div class="bg-white thick-border p-5 rounded-2xl mb-8 block-shadow-primary max-w-sm mx-auto" data-astro-cid-gfv242b7> <h3 class="font-label-bold text-primary mb-1" data-astro-cid-gfv242b7>Deixe seu depoimento</h3> <p class="text-xs text-on-surface-variant mb-4" data-astro-cid-gfv242b7>Sua opinião vale ouro para nós!</p> <form id="mobile-feedback-form" class="flex flex-col gap-4" data-astro-cid-gfv242b7> <div class="flex flex-col gap-1" data-astro-cid-gfv242b7> <label for="m-name" class="text-xs font-bold text-on-surface" data-astro-cid-gfv242b7>Nome <span class="text-[10px] font-normal text-on-surface-variant" data-astro-cid-gfv242b7>(não obrigatório)</span></label> <input type="text" id="m-name" placeholder="Seu nome" class="px-3 py-2 bg-white text-on-surface font-body-md thin-border rounded-xl focus:outline-none" data-astro-cid-gfv242b7> </div> <div class="flex flex-col gap-1" data-astro-cid-gfv242b7> <span class="text-xs font-bold text-on-surface" data-astro-cid-gfv242b7>Sua Nota</span> <div class="flex gap-1 rating-stars" id="mobile-stars" data-astro-cid-gfv242b7> <button type="button" class="m-star-btn material-symbols-outlined text-2xl text-on-surface-variant/30 cursor-pointer" data-value="1" data-astro-cid-gfv242b7>star</button> <button type="button" class="m-star-btn material-symbols-outlined text-2xl text-on-surface-variant/30 cursor-pointer" data-value="2" data-astro-cid-gfv242b7>star</button> <button type="button" class="m-star-btn material-symbols-outlined text-2xl text-on-surface-variant/30 cursor-pointer" data-value="3" data-astro-cid-gfv242b7>star</button> <button type="button" class="m-star-btn material-symbols-outlined text-2xl text-on-surface-variant/30 cursor-pointer" data-value="4" data-astro-cid-gfv242b7>star</button> <button type="button" class="m-star-btn material-symbols-outlined text-2xl text-on-surface-variant/30 cursor-pointer" data-value="5" data-astro-cid-gfv242b7>star</button> </div> <input type="hidden" id="m-rating" value="0" data-astro-cid-gfv242b7> </div> <div class="flex flex-col gap-1" data-astro-cid-gfv242b7> <label for="m-message" class="text-xs font-bold text-on-surface" data-astro-cid-gfv242b7>Mensagem</label> <textarea id="m-message" required rows="3" placeholder="O que achou dos mimos?..." class="px-3 py-2 bg-white text-on-surface font-body-md thin-border rounded-xl focus:outline-none resize-none" data-astro-cid-gfv242b7></textarea> </div> <button type="submit" class="w-full py-3 mt-1 bg-primary text-white font-label-bold thin-border block-shadow-tertiary rounded-xl text-center active:translate-x-0.5 active:translate-y-0.5 active:shadow-none" data-astro-cid-gfv242b7>
 Enviar Feedback
-</button> </form> </div> <!-- Carrossel de Feedbacks Mobile --> <div id="mobile-feedbacks-carousel" class="flex overflow-x-auto gap-4 no-scrollbar pb-4 -mx-4 px-4" data-astro-cid-gfv242b7> <!-- Testimonial 1 --> <div class="min-w-[280px] bg-white thick-border p-6 rounded-2xl block-shadow-primary -rotate-1 flex flex-col justify-between flex-shrink-0" data-astro-cid-gfv242b7> <div data-astro-cid-gfv242b7> <div class="flex text-secondary mb-3" data-astro-cid-gfv242b7> <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;" data-astro-cid-gfv242b7>star</span> <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;" data-astro-cid-gfv242b7>star</span> <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;" data-astro-cid-gfv242b7>star</span> <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;" data-astro-cid-gfv242b7>star</span> <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;" data-astro-cid-gfv242b7>star</span> </div> <p class="font-body-md italic mb-4" data-astro-cid-gfv242b7>"O capricho na embalagem me emocionou. Dá pra sentir o amor em cada detalhe!"</p> </div> <div class="flex items-center gap-3" data-astro-cid-gfv242b7> <div class="w-10 h-10 rounded-full thin-border bg-primary-fixed overflow-hidden" data-astro-cid-gfv242b7> <img class="w-full h-full object-cover" alt="Marina Silva Profile" src="/assets/de5112865cc28b0b9a00ea41a45dcf55.png" data-astro-cid-gfv242b7> </div> <div data-astro-cid-gfv242b7> <p class="font-label-bold" data-astro-cid-gfv242b7>Marina Silva</p> <p class="text-xs text-on-surface-variant" data-astro-cid-gfv242b7>24/06/2026</p> </div> </div> </div> <!-- Testimonial 2 --> <div class="min-w-[280px] bg-white thick-border p-6 rounded-2xl block-shadow-tertiary rotate-1 flex flex-col justify-between flex-shrink-0" data-astro-cid-gfv242b7> <div data-astro-cid-gfv242b7> <div class="flex text-secondary mb-3" data-astro-cid-gfv242b7> <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;" data-astro-cid-gfv242b7>star</span> <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;" data-astro-cid-gfv242b7>star</span> <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;" data-astro-cid-gfv242b7>star</span> <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;" data-astro-cid-gfv242b7>star</span> <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;" data-astro-cid-gfv242b7>star</span> </div> <p class="font-body-md italic mb-4" data-astro-cid-gfv242b7>"Minhas anotações nunca foram tão divertidas. O planner é simplesmente perfeito!"</p> </div> <div class="flex items-center gap-3" data-astro-cid-gfv242b7> <div class="w-10 h-10 rounded-full thin-border bg-tertiary-fixed overflow-hidden" data-astro-cid-gfv242b7> <img class="w-full h-full object-cover" alt="Clara Mendes Profile" src="/assets/e2714f94bbe13ce84afd5ba3e8a01710.png" data-astro-cid-gfv242b7> </div> <div data-astro-cid-gfv242b7></div> </div></div></div></section> <script>
+</button> </form> </div> <!-- Carrossel de Feedbacks Mobile --> <div id="mobile-feedbacks-carousel" class="flex overflow-x-auto gap-4 no-scrollbar pt-6 pb-6 -mx-4 px-4" data-astro-cid-gfv242b7> <!-- Testimonial 1 --> <div class="min-w-[280px] bg-white thick-border p-6 rounded-2xl block-shadow-primary -rotate-1 flex flex-col justify-between flex-shrink-0" data-astro-cid-gfv242b7> <div data-astro-cid-gfv242b7> <div class="flex text-secondary mb-3" data-astro-cid-gfv242b7> <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;" data-astro-cid-gfv242b7>star</span> <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;" data-astro-cid-gfv242b7>star</span> <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;" data-astro-cid-gfv242b7>star</span> <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;" data-astro-cid-gfv242b7>star</span> <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;" data-astro-cid-gfv242b7>star</span> </div> <p class="font-body-md italic mb-4" data-astro-cid-gfv242b7>"O capricho na embalagem me emocionou. Dá pra sentir o amor em cada detalhe!"</p> </div> <div class="flex items-center gap-3" data-astro-cid-gfv242b7> <div class="w-10 h-10 rounded-full thin-border bg-primary-fixed overflow-hidden" data-astro-cid-gfv242b7> <img class="w-full h-full object-cover" alt="Marina Silva Profile" src="/assets/de5112865cc28b0b9a00ea41a45dcf55.png" data-astro-cid-gfv242b7> </div> <div data-astro-cid-gfv242b7> <p class="font-label-bold" data-astro-cid-gfv242b7>Marina Silva</p> <p class="text-xs text-on-surface-variant" data-astro-cid-gfv242b7>24/06/2026</p> </div> </div> </div> <!-- Testimonial 2 --> <div class="min-w-[280px] bg-white thick-border p-6 rounded-2xl block-shadow-tertiary rotate-1 flex flex-col justify-between flex-shrink-0" data-astro-cid-gfv242b7> <div data-astro-cid-gfv242b7> <div class="flex text-secondary mb-3" data-astro-cid-gfv242b7> <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;" data-astro-cid-gfv242b7>star</span> <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;" data-astro-cid-gfv242b7>star</span> <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;" data-astro-cid-gfv242b7>star</span> <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;" data-astro-cid-gfv242b7>star</span> <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;" data-astro-cid-gfv242b7>star</span> </div> <p class="font-body-md italic mb-4" data-astro-cid-gfv242b7>"Minhas anotações nunca foram tão divertidas. O planner é simplesmente perfeito!"</p> </div> <div class="flex items-center gap-3" data-astro-cid-gfv242b7> <div class="w-10 h-10 rounded-full thin-border bg-tertiary-fixed overflow-hidden" data-astro-cid-gfv242b7> <img class="w-full h-full object-cover" alt="Clara Mendes Profile" src="/assets/e2714f94bbe13ce84afd5ba3e8a01710.png" data-astro-cid-gfv242b7> </div> <div data-astro-cid-gfv242b7></div> </div></div></div></section> <script>
   // Script para avaliação por estrelas (Mobile)
   const mStars = document.querySelectorAll('#mobile-stars .m-star-btn');
   const mRatingInput = document.getElementById('m-rating');
@@ -388,7 +650,7 @@ Enviar Feedback
   }
 </script>  <!-- Footer / Location Map --><footer class="px-4 py-12 bg-surface-container-high border-t-4 border-on-background"> <a href="/mobile" class="flex flex-col items-center mb-8 hover:opacity-90 transition-opacity"> <img alt="Sonharte Logo" class="h-[77px] w-[77px] mb-4 object-contain" src="/assets/logo_clean.png"> <h3 class="font-headline-lg text-primary tracking-tighter">SONHARTE</h3> </a> <div class="mb-10"> <h4 class="font-headline-md text-lg mb-4 flex items-center gap-2"> <span class="material-symbols-outlined text-primary">location_on</span> Nossa Casinha
 </h4> <div class="thick-border rounded-2xl overflow-hidden h-48 relative block-shadow-primary"> <iframe src="https://maps.google.com/maps?q=Rua%20S%C3%B3crates,%20679%20-%20Belo%20Horizonte%20MG%2031990-010&t=&z=15&ie=UTF8&iwloc=&output=embed" class="w-full h-full border-0 grayscale contrast-125 hover:grayscale-0 transition-all duration-300" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-      </iframe> </div> <p class="text-sm font-label-bold mt-3 text-on-surface-variant px-1">Rua Sócrates, 679 - Belo Horizonte, MG - CEP 31990-010</p> </div> <div class="grid grid-cols-2 gap-8 mb-10"> <div> <h5 class="font-label-bold uppercase text-primary mb-3">Links</h5> <ul class="space-y-2 text-sm"> <li><a class="hover:underline" href="/mobile/sobre">Sobre nós</a></li> <li><a class="hover:underline" href="/mobile/workshops">Workshops</a></li> <li><a class="hover:underline" href="#">Como comprar</a></li> <li><a class="hover:underline" href="#">Frete e Prazos</a></li> <li><a class="hover:underline" href="#">Trocas e Devoluções</a></li> </ul> </div> <div> <h5 class="font-label-bold uppercase text-tertiary mb-3">Ajuda</h5> <ul class="space-y-2 text-sm"> <li><a class="hover:underline" href="#">Perguntas Frequentes</a></li> <li><a class="hover:underline" href="/mobile/contato">Fale Conosco</a></li> <li><a class="hover:underline" href="mailto:m.sonharte@gmail.com">E-mail</a></li> <li><a class="hover:underline" href="https://wa.me/5531972122639" target="_blank">WhatsApp</a></li> <li><a class="hover:underline" href="#">Privacidade</a></li> </ul> </div> </div> <div class="flex justify-center gap-6 mb-8"> <a class="w-12 h-12 bg-white thick-border rounded-xl flex items-center justify-center block-shadow-primary overflow-hidden" href="https://www.instagram.com/p.sonharte/" target="_blank"> <img alt="Instagram" class="w-full h-full object-cover" src="/assets/instagram_new.png"> </a> <a class="w-12 h-12 bg-white thick-border rounded-xl flex items-center justify-center block-shadow-secondary overflow-hidden" href="https://wa.me/5531972122639" target="_blank"> <img alt="WhatsApp" class="w-full h-full object-cover" src="/assets/whatsapp_new.png"> </a> </div> <div class="text-center pt-8 border-t border-dashed border-outline"> <p class="text-xs font-label-bold opacity-60">© 2025 Sonharte Estúdio Criativo.<br>Feito com amor e papel.</p> </div> </footer> </main> <script type="module">const a=document.querySelectorAll(".no-scrollbar");a.forEach(n=>{let t=!1,l,o;const e=n;e.addEventListener("mousedown",s=>{t=!0,l=s.pageX-e.offsetLeft,o=e.scrollLeft}),e.addEventListener("mouseleave",()=>{t=!1}),e.addEventListener("mouseup",()=>{t=!1}),e.addEventListener("mousemove",s=>{if(!t)return;s.preventDefault();const r=(s.pageX-e.offsetLeft-l)*2;e.scrollLeft=o-r})});</script>  <!-- Cart Drawer Overlay --><div id="cart-overlay" class="fixed inset-0 bg-black/50 z-[90] hidden opacity-0 transition-opacity duration-300 backdrop-blur-sm"></div> <!-- Cart Drawer Container --> <aside id="cart-drawer" class="fixed right-0 top-0 h-full w-[320px] sm:w-[380px] bg-surface border-l-4 border-on-background z-[100] translate-x-full transition-transform duration-300 ease-out flex flex-col shadow-[-10px_0px_0px_0px_rgba(0,0,0,0.15)]"> <!-- Header --> <div class="p-6 bg-primary-container text-on-primary-container border-b-4 border-on-background flex justify-between items-center shrink-0"> <div class="flex items-center gap-2"> <span class="material-symbols-outlined text-2xl">shopping_cart</span> <h2 class="font-headline-md text-xl tracking-tight">Sacola de Sonhos</h2> </div> <button id="cart-close-btn" class="material-symbols-outlined text-2xl p-1 bg-white text-on-surface border-2 border-on-background rounded-lg hover:scale-105 active:scale-95 transition-transform flex items-center justify-center">
+      </iframe> </div> <p class="text-sm font-label-bold mt-3 text-on-surface-variant px-1">Rua Sócrates, 679 - Belo Horizonte, MG - CEP 31990-010</p> </div> <div class="grid grid-cols-2 gap-8 mb-10"> <div> <h5 class="font-label-bold uppercase text-primary mb-3">Links</h5> <ul class="space-y-2 text-sm"> <li><a class="hover:underline" href="/mobile">Início</a></li> <li><a class="hover:underline" href="/mobile/catalogo">Todos os Mimos</a></li> <li><a class="hover:underline" href="/mobile/servicos">Serviços</a></li> <li><a class="hover:underline" href="/mobile/workshops">Workshops</a></li> <li><a class="hover:underline" href="/mobile/sobre">Sobre Nós</a></li> </ul> </div> <div> <h5 class="font-label-bold uppercase text-tertiary mb-3">Contato</h5> <ul class="space-y-2 text-sm"> <li><a class="hover:underline" href="/mobile/contato">Fale Conosco</a></li> <li><a class="hover:underline" href="mailto:m.sonharte@gmail.com">m.sonharte@gmail.com</a></li> <li><a class="hover:underline" href="https://wa.me/5531972122639" target="_blank">WhatsApp</a></li> </ul> </div> </div> <div class="flex justify-center gap-6 mb-8"> <a class="w-12 h-12 bg-white thick-border rounded-xl flex items-center justify-center block-shadow-primary overflow-hidden" href="https://www.instagram.com/p.sonharte/" target="_blank"> <img alt="Instagram" class="w-full h-full object-cover" src="/assets/instagram_new.png"> </a> <a class="w-12 h-12 bg-white thick-border rounded-xl flex items-center justify-center block-shadow-secondary overflow-hidden" href="https://wa.me/5531972122639" target="_blank"> <img alt="WhatsApp" class="w-full h-full object-cover" src="/assets/whatsapp_new.png"> </a> </div> <div class="text-center pt-8 border-t border-dashed border-outline"> <p class="text-xs font-label-bold opacity-60">© 2025 Sonharte Estúdio Criativo.<br>Feito com amor e papel.</p> </div> </footer> </main> <script type="module">const a=document.querySelectorAll(".no-scrollbar");a.forEach(n=>{let t=!1,l,o;const e=n;e.addEventListener("mousedown",s=>{t=!0,l=s.pageX-e.offsetLeft,o=e.scrollLeft}),e.addEventListener("mouseleave",()=>{t=!1}),e.addEventListener("mouseup",()=>{t=!1}),e.addEventListener("mousemove",s=>{if(!t)return;s.preventDefault();const r=(s.pageX-e.offsetLeft-l)*2;e.scrollLeft=o-r})});</script>  <!-- Cart Drawer Overlay --><div id="cart-overlay" class="fixed inset-0 bg-black/50 z-[90] hidden opacity-0 transition-opacity duration-300 backdrop-blur-sm"></div> <!-- Cart Drawer Container --> <aside id="cart-drawer" class="fixed right-0 top-0 h-full w-[320px] sm:w-[380px] bg-surface border-l-4 border-on-background z-[100] translate-x-full transition-transform duration-300 ease-out flex flex-col shadow-[-10px_0px_0px_0px_rgba(0,0,0,0.15)]"> <!-- Header --> <div class="p-6 bg-primary-container text-on-primary-container border-b-4 border-on-background flex justify-between items-center shrink-0"> <div class="flex items-center gap-2"> <span class="material-symbols-outlined text-2xl">shopping_cart</span> <h2 class="font-headline-md text-xl tracking-tight">Sacola de Sonhos</h2> </div> <button id="cart-close-btn" class="material-symbols-outlined text-2xl p-1 bg-white text-on-surface border-2 border-on-background rounded-lg hover:scale-105 active:scale-95 transition-transform flex items-center justify-center">
 close
 </button> </div> <!-- Cart Content (Scrollable) --> <div class="flex-grow overflow-y-auto p-4 flex flex-col gap-4 no-scrollbar" id="cart-items-container"> <!-- Items will be injected dynamically here --> <div class="flex flex-col items-center justify-center h-full text-center text-on-surface-variant py-12"> <span class="material-symbols-outlined text-5xl mb-4 opacity-40">shopping_bag</span> <p class="font-label-bold text-lg">Sua sacola está vazia!</p> <p class="text-sm mt-1">Navegue pelas abas e adicione seus mimos favoritos.</p> </div> </div> <!-- Footer (Fixed in Drawer) --> <div class="p-6 bg-surface-container-high border-t-4 border-on-background flex flex-col gap-4 shrink-0"> <div class="flex justify-between items-center"> <span class="font-label-bold text-lg text-on-surface-variant">Valor Total:</span> <span class="font-headline-md text-2xl text-primary" id="cart-total-value">R$ 0,00</span> </div> <a id="cart-checkout-btn" href="#" target="_blank" class="w-full py-4 bg-tertiary text-white text-center font-label-bold text-lg border-4 border-on-background rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-0.5 active:translate-y-0.5 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:shadow-none transition-all flex items-center justify-center gap-2 pointer-events-none opacity-50"> <span class="material-symbols-outlined">send</span> Finalizar no WhatsApp
 </a> </div> </aside> <script>
@@ -531,6 +793,18 @@ close
       if (id && titulo && preco && imagem) {
         window.SonharteCart.add(id, titulo, parseFloat(preco), imagem);
         
+        // Efeito de animação nos botões de carrinho (desktop e mobile)
+        const desktopCartBtn = document.getElementById('desktop-cart-btn');
+        const mobileCartBtn = document.getElementById('mobile-cart-btn');
+        if (desktopCartBtn) {
+          desktopCartBtn.classList.add('animate-cart-bounce');
+          setTimeout(() => desktopCartBtn.classList.remove('animate-cart-bounce'), 800);
+        }
+        if (mobileCartBtn) {
+          mobileCartBtn.classList.add('animate-cart-bounce');
+          setTimeout(() => mobileCartBtn.classList.remove('animate-cart-bounce'), 800);
+        }
+        
         // Abre a gaveta se ela estiver fechada
         const drawer = document.getElementById('cart-drawer');
         const isOpen = drawer && !drawer.classList.contains('translate-x-full');
@@ -540,4 +814,167 @@ close
       }
     });
   });
-</script> </body></html>
+</script> <!-- Canvas para efeito lúdico do botão de coração --> <canvas id="brush-effect-canvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 999999; display: block;"></canvas> <script>
+      (function() {
+        const canvas = document.getElementById('brush-effect-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        
+        let brushes = [];
+        let animationFrameId = null;
+        
+        function resizeCanvas() {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        }
+        
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        
+        class Brush {
+          constructor() {
+            const side = Math.floor(Math.random() * 4); // 0: E->D, 1: D->E, 2: C->B, 3: B->C
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+            
+            this.t = 0;
+            this.speed = 0.003 + Math.random() * 0.0025; // duração ~3 a 5 seg
+            this.hue = Math.floor(Math.random() * 360);
+            this.angle = Math.random() * Math.PI * 2;
+            this.angleSpeed = (0.05 + Math.random() * 0.07) * (Math.random() < 0.5 ? 1 : -1);
+            
+            this.radiusBase = 20 + Math.random() * 35;
+            
+            this.path = [];
+            this.maxPathLen = 75;
+            this.active = true;
+            this.lineWidth = 3 + Math.random() * 2;
+            
+            switch(side) {
+              case 0:
+                this.startX = -100;
+                this.startY = h * (0.15 + Math.random() * 0.7);
+                this.endX = w + 100;
+                this.endY = h * (0.15 + Math.random() * 0.7);
+                break;
+              case 1:
+                this.startX = w + 100;
+                this.startY = h * (0.15 + Math.random() * 0.7);
+                this.endX = -100;
+                this.endY = h * (0.15 + Math.random() * 0.7);
+                break;
+              case 2:
+                this.startX = w * (0.15 + Math.random() * 0.7);
+                this.startY = -100;
+                this.endX = w * (0.15 + Math.random() * 0.7);
+                this.endY = h + 100;
+                break;
+              case 3:
+                this.startX = w * (0.15 + Math.random() * 0.7);
+                this.startY = h + 100;
+                this.endX = w * (0.15 + Math.random() * 0.7);
+                this.endY = -100;
+                break;
+            }
+            
+            this.x = this.startX;
+            this.y = this.startY;
+          }
+          
+          update() {
+            if (!this.active) {
+              if (this.path.length > 0) {
+                this.path.shift();
+              }
+              return;
+            }
+            
+            this.t += this.speed;
+            if (this.t >= 1) {
+              this.t = 1;
+              this.active = false;
+            }
+            
+            const baseX = this.startX + (this.endX - this.startX) * this.t;
+            const baseY = this.startY + (this.endY - this.startY) * this.t;
+            
+            this.angle += this.angleSpeed;
+            const currentRadius = this.radiusBase * (1 + 0.4 * Math.sin(this.t * Math.PI * 8));
+            
+            this.x = baseX + Math.cos(this.angle) * currentRadius;
+            this.y = baseY + Math.sin(this.angle) * currentRadius;
+            
+            this.hue = (this.hue + 2) % 360;
+            
+            this.path.push({ x: this.x, y: this.y, hue: this.hue });
+            if (this.path.length > this.maxPathLen) {
+              this.path.shift();
+            }
+          }
+          
+          draw(ctx) {
+            if (this.path.length < 2) return;
+            
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            
+            for (let i = 0; i < this.path.length - 1; i++) {
+              const pt1 = this.path[i];
+              const pt2 = this.path[i + 1];
+              const opacity = i / this.path.length;
+              
+              ctx.beginPath();
+              ctx.moveTo(pt1.x, pt1.y);
+              ctx.lineTo(pt2.x, pt2.y);
+              
+              ctx.lineWidth = this.lineWidth * (0.4 + 0.6 * opacity);
+              ctx.strokeStyle = `hsla(${pt1.hue}, 90%, 65%, ${opacity * 0.85})`;
+              ctx.stroke();
+            }
+          }
+        }
+        
+        function animate() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          
+          let hasVisibleBrushes = false;
+          
+          for (let i = 0; i < brushes.length; i++) {
+            const brush = brushes[i];
+            brush.update();
+            brush.draw(ctx);
+            if (brush.active || brush.path.length > 0) {
+              hasVisibleBrushes = true;
+            }
+          }
+          
+          brushes = brushes.filter(b => b.active || b.path.length > 0);
+          
+          if (hasVisibleBrushes && brushes.length > 0) {
+            animationFrameId = requestAnimationFrame(animate);
+          } else {
+            animationFrameId = null;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+          }
+        }
+        
+        function startEffect() {
+          const count = 2 + Math.floor(Math.random() * 2);
+          for (let i = 0; i < count; i++) {
+            setTimeout(() => {
+              brushes.push(new Brush());
+              if (!animationFrameId) {
+                animate();
+              }
+            }, i * 250);
+          }
+        }
+        
+        document.addEventListener('click', function(e) {
+          const target = e.target.closest('.heart-btn-effect');
+          if (target) {
+            startEffect();
+          }
+        });
+      })();
+    </script> </body> </html>

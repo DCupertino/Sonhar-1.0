@@ -995,7 +995,94 @@
     feedback.data = new Date().toLocaleDateString('pt-BR');
     feedbacks.unshift(feedback);
     localStorage.setItem('sonharte_depoimentos', JSON.stringify(feedbacks));
-    return feedback;
+  }
+
+  // SERVIÇOS E PREÇOS DE IMPRESSÃO
+  const DEFAULT_SERVICES = [
+    { id: "s1", titulo: "A4 Preto e Branco (Impressão)", descricao: "Papel Sulfite 75g", preco: 1.50 },
+    { id: "s2", titulo: "A4 Preto e Branco (Cópia / Xerox)", descricao: "Papel Sulfite 75g", preco: 0.40 },
+    { id: "s3", titulo: "A4 Colorido (Impressão)", descricao: "Papel Sulfite 75g", preco: 2.00 },
+    { id: "s4", titulo: "A4 Colorido (Cópia / Xerox)", descricao: "Papel Sulfite 75g", preco: 1.00 },
+    { id: "s5", titulo: "Meia A4", descricao: "Papel Sulfite 75g", preco: 5.00 },
+    { id: "s6", titulo: "Papel Fotográfico", descricao: "Impressão Colorida Premium", preco: 5.50 },
+    { id: "s7", titulo: "Papel 60 quilos", descricao: "Impressão de Alta Gramatura", preco: 5.00 },
+    { id: "s8", titulo: "Papel Adesivo", descricao: "Papel Adesivo Brilhante", preco: 6.00 },
+    { id: "s9", titulo: "Vinil Transparente", descricao: "Adesivo Vinil Resistente", preco: 8.00 },
+    { id: "s10", titulo: "Plastificação A4", descricao: "Polaseal Brilhante", preco: 6.00 },
+    { id: "s11", titulo: "Plastificação RG / CPF", descricao: "Polaseal Brilhante", preco: 4.00 },
+    { id: "s12", titulo: "Encadernação Espiral", descricao: "A cada 50 folhas (com Capa)", preco: 4.00 }
+  ];
+
+  async function getServices() {
+    const sb = getSupabaseClient();
+    if (sb) {
+      const { data, error } = await sb
+        .from('servicos')
+        .select('*')
+        .order('id', { ascending: true });
+      if (!error) return data;
+      console.warn('Erro ao ler serviços do Supabase, utilizando fallback de LocalStorage:', error);
+    }
+
+    // Fallback: LocalStorage
+    let local = localStorage.getItem('sonharte_servicos');
+    if (!local) {
+      localStorage.setItem('sonharte_servicos', JSON.stringify(DEFAULT_SERVICES));
+      return DEFAULT_SERVICES;
+    }
+    try {
+      let parsed = JSON.parse(local);
+      if (Array.isArray(parsed)) return parsed;
+      return DEFAULT_SERVICES;
+    } catch (e) {
+      return DEFAULT_SERVICES;
+    }
+  }
+
+  async function saveService(service) {
+    const sb = getSupabaseClient();
+    if (sb) {
+      const { data, error } = await sb
+        .from('servicos')
+        .upsert([service])
+        .select();
+      if (!error) return data[0];
+      throw new Error(error.message);
+    }
+
+    // Fallback: LocalStorage
+    let services = await getServices();
+    if (service.id) {
+      const idx = services.findIndex(s => s.id === service.id);
+      if (idx !== -1) {
+        services[idx] = service;
+      } else {
+        services.push(service);
+      }
+    } else {
+      service.id = 's_' + Date.now();
+      services.push(service);
+    }
+    localStorage.setItem('sonharte_servicos', JSON.stringify(services));
+    return service;
+  }
+
+  async function deleteService(id) {
+    const sb = getSupabaseClient();
+    if (sb) {
+      const { error } = await sb
+        .from('servicos')
+        .delete()
+        .eq('id', id);
+      if (!error) return true;
+      throw new Error(error.message);
+    }
+
+    // Fallback: LocalStorage
+    let services = await getServices();
+    services = services.filter(s => s.id !== id);
+    localStorage.setItem('sonharte_servicos', JSON.stringify(services));
+    return true;
   }
 
   // AUTENTICAÇÃO DO ADMIN
@@ -1010,14 +1097,7 @@
       return data.user;
     }
 
-    // Fallback: LocalStorage (Simulado)
-    if (email === 'adm@sonharte.com' && password === 'sonharteMy') {
-      const mockUser = { email: email, role: 'admin', id: 'mock_admin_uid' };
-      sessionStorage.setItem('sonharte_admin_user', JSON.stringify(mockUser));
-      return mockUser;
-    } else {
-      throw new Error('Credenciais offline incorretas');
-    }
+    throw new Error('Serviço de autenticação offline. Conecte-se ao Supabase para acessar o painel.');
   }
 
   function logout() {
@@ -1047,6 +1127,9 @@
     getFeedbacks,
     saveFeedback,
     deleteFeedback,
+    getServices,
+    saveService,
+    deleteService,
     login,
     logout,
     getCurrentUser

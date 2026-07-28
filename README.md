@@ -3,6 +3,7 @@
 ![Astro](https://img.shields.io/badge/Astro-5.0-FF5D01?style=for-the-badge&logo=astro&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.0-38BDF8?style=for-the-badge&logo=tailwindcss&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-Latest-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 ![Design System](https://img.shields.io/badge/Design-Neobrutalismo_Fofo-FFD9E4?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Publicado_🚀-success?style=for-the-badge)
 
@@ -11,7 +12,25 @@
 
 ---
 
-## 📸 Visão Geral
+### 🌐 Live Demo & Aplicação no Ar
+
+[![Live Demo](https://img.shields.io/badge/🚀_Acessar_Demonstração_ao_Vivo-https%3A%2F%2Fsonharte.vercel.app-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://sonharte.vercel.app)
+
+👉 **[Clique aqui para visitar o site oficial: https://sonharte.vercel.app](https://sonharte.vercel.app)**
+
+---
+
+## 📸 Demonstração Visual
+
+### 💻 Versão Desktop
+![Desktop Preview](./docs/desktop-preview.png)
+
+### 📱 Versão Mobile
+![Mobile Preview](./docs/mobile-preview.png)
+
+---
+
+## ℹ️ Visão Geral
 
 O projeto **Sonharte 1.0** foi concebido para oferecer uma experiência de compra rápida, intuitiva e encorajadora para clientes que buscam papelaria personalizada (toppers de bolo, adesivos, lembrancinhas e caixinhas especiais). O site possui adaptação dedicada tanto para **Desktop** quanto para **Dispositivos Móveis**, garantindo máxima fluidez visual e técnica.
 
@@ -33,6 +52,7 @@ O projeto **Sonharte 1.0** foi concebido para oferecer uma experiência de compr
 - **[Astro 5](https://astro.build/)** — Framework web moderno e ultra-rápido para entrega de performance superior.
 - **[Tailwind CSS v4](https://tailwindcss.com/)** — Estilização ágil com utilitários e variáveis customizadas do Design System.
 - **[Vite](https://vitejs.dev/)** — Bundler e ambiente de desenvolvimento ultrafast.
+- **[Vercel](https://vercel.com/)** — Plataforma global de hospedagem e deploy contínuo.
 - **JavaScript (ES Modules)** — Lógica de estado da sacola, modal, filtros e manipulação dinâmica.
 - **Antigravity IDE & Stitch MCP** — Desenvolvimento assistido por IA e criação/integração do Design System.
 
@@ -42,6 +62,7 @@ O projeto **Sonharte 1.0** foi concebido para oferecer uma experiência de compr
 
 ```text
 Sonhar 1.0/
+├── docs/                  # Screenshots e demonstrações visuais (Desktop & Mobile)
 ├── public/                # Imagens, ícones e recursos estáticos
 ├── src/
 │   ├── components/        # Componentes UI reutilizáveis (Desktop & Mobile)
@@ -90,4 +111,5 @@ Sonhar 1.0/
 ## 💖 Créditos & Agradecimentos
 
 - **Cliente / Marca**: **Sonharte Personalizados** — *Fundada por Myllena*
+- **Hospedagem**: **Vercel** ([sonharte.vercel.app](https://sonharte.vercel.app))
 - **Desenvolvimento & Design**: Desenvolvido com **Antigravity IDE** e **Stitch MCP**.
