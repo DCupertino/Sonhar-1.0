@@ -1,0 +1,93 @@
+---
+// Componente de Destaque de Serviços de Papelaria (Home Desktop)
+---
+
+<section class="px-gutter py-20 max-w-container-max mx-auto">
+  <div class="flex flex-col items-center text-center gap-3 mb-16">
+    <div class="inline-flex items-center gap-2 bg-primary-fixed text-on-primary-fixed px-4 py-1.5 cartoon-border rounded-full font-label-bold text-xs shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] rotate-[-1deg]">
+      <span class="material-symbols-outlined text-xs">print</span> Papelaria Rápida & Serviços
+    </div>
+    <h2 class="font-headline-lg text-headline-lg text-primary">Nossos Serviços de Impressão e Acabamento</h2>
+    <p class="font-body-md text-on-surface-variant max-w-[600px]">Tudo o que você precisa para dar vida, cor e durabilidade aos seus documentos, papéis e projetos pessoais.</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+    <!-- Card 1: Impressões e Xerox -->
+    <div class="group cartoon-border cartoon-shadow-primary rounded-2xl bg-white overflow-hidden hover-lift transition-all duration-300">
+      <div class="p-8 flex flex-col justify-between h-full bg-primary-fixed/10">
+        <div>
+          <div class="w-14 h-14 bg-primary text-white border-2 border-black rounded-xl flex items-center justify-center shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] mb-6 rotate-[-3deg]">
+            <span class="material-symbols-outlined text-3xl">print</span>
+          </div>
+          <h3 class="font-headline-md text-xl text-on-surface font-bold mb-4">Xerox e Impressões</h3>
+          <p class="font-body-md text-sm text-on-surface-variant leading-relaxed mb-6">Impressão A4 Preto e Branco ou Colorida em papel sulfite de alta qualidade. Ideal para a impressão rápida de apostilas, documentos, trabalhos e relatórios escolares.</p>
+        </div>
+        <div class="flex flex-col gap-4 border-t border-dashed border-on-surface/20 pt-6">
+          <div class="flex justify-between items-center">
+            <span class="font-label-bold text-xs text-on-surface-variant">Xerox A4 P&B</span>
+            <span class="font-headline-md text-sm text-primary font-bold">R$ 0,40 /pág</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="font-label-bold text-xs text-on-surface-variant">Impressão A4 Colorida</span>
+            <span class="font-headline-md text-sm text-primary font-bold">R$ 2,00 /pág</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Papéis Especiais e Adesivos -->
+    <div class="group cartoon-border cartoon-shadow rounded-2xl bg-white overflow-hidden hover-lift transition-all duration-300">
+      <div class="p-8 flex flex-col justify-between h-full bg-secondary-fixed/10">
+        <div>
+          <div class="w-14 h-14 bg-secondary text-on-secondary-fixed border-2 border-black rounded-xl flex items-center justify-center shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] mb-6 rotate-[3deg]">
+            <span class="material-symbols-outlined text-3xl">auto_awesome</span>
+          </div>
+          <h3 class="font-headline-md text-xl text-on-surface font-bold mb-4">Papéis Especiais</h3>
+          <p class="font-body-md text-sm text-on-surface-variant leading-relaxed mb-6">Impressões premium e de alta fidelidade visual em papel Fotográfico brilhante, Vinil Transparente, Papel Adesivo e papéis grossos de alta gramatura (60kg).</p>
+        </div>
+        <div class="flex flex-col gap-4 border-t border-dashed border-on-surface/20 pt-6">
+          <div class="flex justify-between items-center">
+            <span class="font-label-bold text-xs text-on-surface-variant">Papel Fotográfico Premium</span>
+            <span class="font-headline-md text-sm text-secondary font-bold">R$ 5,50 /fl</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="font-label-bold text-xs text-on-surface-variant">Vinil Transparente</span>
+            <span class="font-headline-md text-sm text-secondary font-bold">R$ 8,00 /fl</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: Plastificação e Encadernação -->
+    <div class="group cartoon-border cartoon-shadow-tertiary rounded-2xl bg-white overflow-hidden hover-lift transition-all duration-300">
+      <div class="p-8 flex flex-col justify-between h-full bg-tertiary-fixed/10">
+        <div>
+          <div class="w-14 h-14 bg-tertiary text-on-tertiary-fixed border-2 border-black rounded-xl flex items-center justify-center shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] mb-6 rotate-[-2deg]">
+            <span class="material-symbols-outlined text-3xl">book</span>
+          </div>
+          <h3 class="font-headline-md text-xl text-on-surface font-bold mb-4">Acabamentos Especiais</h3>
+          <p class="font-body-md text-sm text-on-surface-variant leading-relaxed mb-6">Proteção definitiva com Plastificação brilhante com polaseal de alta resistência para documentos (RG e CPF) ou folhas A4, e Encadernação Espiral com capa protetora.</p>
+        </div>
+        <div class="flex flex-col gap-4 border-t border-dashed border-on-surface/20 pt-6">
+          <div class="flex justify-between items-center">
+            <span class="font-label-bold text-xs text-on-surface-variant">Plastificação RG / CPF</span>
+            <span class="font-headline-md text-sm text-tertiary-fixed-dim font-bold">R$ 4,00 /un</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="font-label-bold text-xs text-on-surface-variant">Encadernação (Até 50 fls)</span>
+            <span class="font-headline-md text-sm text-tertiary-fixed-dim font-bold">R$ 4,00 /un</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-center">
+    <a 
+      href="/servicos" 
+      class="active-press inline-flex items-center gap-3 px-8 py-4 bg-primary text-white border-4 border-black rounded-2xl font-label-bold shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:bg-tertiary hover:text-black transition-all hover-lift text-sm"
+    >
+      Ver Tabela Completa de Preços <span class="material-symbols-outlined">chevron_right</span>
+    </a>
+  </div>
+</section>
