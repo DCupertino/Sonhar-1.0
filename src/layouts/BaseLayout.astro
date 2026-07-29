@@ -9,6 +9,8 @@ import CartDrawer from '../components/CartDrawer.astro';
 
 const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL || '';
 const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY || '';
+const canonicalURL = new URL(Astro.url.pathname, 'https://sonharte.vercel.app');
+const googleVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION || '';
 ---
 
 <!doctype html>
@@ -36,11 +38,14 @@ const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY || '';
       })();
     </script>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="robots" content="index, follow" />
+    {googleVerification && <meta name="google-site-verification" content={googleVerification} />}
     <meta name="description" content="Sonharte - Papelaria Criativa, Mimos Afetivos e Workshops Personalizados. Tornando seus momentos inesquecíveis! ✨" />
+    <link rel="canonical" href={canonicalURL.href} />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://sonharte.com.br/" />
+    <meta property="og:url" content={canonicalURL.href} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content="Sonharte - Papelaria Criativa, Mimos Afetivos e Workshops Personalizados. Tornando seus momentos inesquecíveis! ✨" />
     <meta property="og:image" content="/assets/logo_clean.png" />
