@@ -17,7 +17,7 @@
           window.location.href = newPath + window.location.search + window.location.hash;
         }
       })();
-    </script><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta name="description" content="Sonharte - Papelaria Criativa, Mimos Afetivos e Workshops Personalizados. Tornando seus momentos inesquecíveis! ✨"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://sonharte.com.br/"><meta property="og:title" content="Sonharte | Serviços"><meta property="og:description" content="Sonharte - Papelaria Criativa, Mimos Afetivos e Workshops Personalizados. Tornando seus momentos inesquecíveis! ✨"><meta property="og:image" content="/assets/logo_clean.png"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:title" content="Sonharte | Serviços"><meta property="twitter:description" content="Sonharte - Papelaria Criativa, Mimos Afetivos e Workshops Personalizados. Tornando seus momentos inesquecíveis! ✨"><meta property="twitter:image" content="/assets/logo_clean.png"><!-- Favicon --><link rel="icon" type="image/png" href="/assets/logo_clean.png"><link href="/assets/17edea699b9b27907616409003241ce2.css" rel="stylesheet"><link href="/assets/a39f5c6fcbb87b419667ec984d2e579a.css" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script><script>(function(){const supabaseUrl = "";
+    </script><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta name="robots" content="index, follow"><meta name="description" content="Sonharte - Papelaria Criativa, Mimos Afetivos e Workshops Personalizados. Tornando seus momentos inesquecíveis! ✨"><link rel="canonical" href="https://sonharte.vercel.app/mobile/servicos/"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://sonharte.vercel.app/mobile/servicos/"><meta property="og:title" content="Sonharte | Serviços"><meta property="og:description" content="Sonharte - Papelaria Criativa, Mimos Afetivos e Workshops Personalizados. Tornando seus momentos inesquecíveis! ✨"><meta property="og:image" content="/assets/logo_clean.png"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:title" content="Sonharte | Serviços"><meta property="twitter:description" content="Sonharte - Papelaria Criativa, Mimos Afetivos e Workshops Personalizados. Tornando seus momentos inesquecíveis! ✨"><meta property="twitter:image" content="/assets/logo_clean.png"><!-- Favicon --><link rel="icon" type="image/png" href="/assets/logo_clean.png"><link href="/assets/17edea699b9b27907616409003241ce2.css" rel="stylesheet"><link href="/assets/a39f5c6fcbb87b419667ec984d2e579a.css" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script><script>(function(){const supabaseUrl = "";
 const supabaseAnonKey = "";
 
       window.SUPABASE_URL = supabaseUrl;
@@ -337,9 +337,11 @@ close
 
     // Adicionar eventos aos botões recém-criados
     container.querySelectorAll('.btn-plus').forEach(btn => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         const id = btn.getAttribute('data-id');
-        const item = window.SonharteCart.get().find(i => i.id === id);
+        const item = window.SonharteCart.get().find(i => String(i.id) === String(id));
         if (item) {
           window.SonharteCart.add(item.id, item.titulo, item.preco, item.imagem);
         }
@@ -347,14 +349,18 @@ close
     });
 
     container.querySelectorAll('.btn-minus').forEach(btn => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         const id = btn.getAttribute('data-id');
         window.SonharteCart.decrease(id);
       });
     });
 
     container.querySelectorAll('.btn-remove').forEach(btn => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         const id = btn.getAttribute('data-id');
         window.SonharteCart.remove(id);
       });

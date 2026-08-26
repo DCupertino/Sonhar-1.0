@@ -123,9 +123,11 @@
 
     // Adicionar eventos aos botões recém-criados
     container.querySelectorAll('.btn-plus').forEach(btn => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         const id = btn.getAttribute('data-id');
-        const item = window.SonharteCart.get().find(i => i.id === id);
+        const item = window.SonharteCart.get().find(i => String(i.id) === String(id));
         if (item) {
           window.SonharteCart.add(item.id, item.titulo, item.preco, item.imagem);
         }
@@ -133,14 +135,18 @@
     });
 
     container.querySelectorAll('.btn-minus').forEach(btn => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         const id = btn.getAttribute('data-id');
         window.SonharteCart.decrease(id);
       });
     });
 
     container.querySelectorAll('.btn-remove').forEach(btn => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         const id = btn.getAttribute('data-id');
         window.SonharteCart.remove(id);
       });

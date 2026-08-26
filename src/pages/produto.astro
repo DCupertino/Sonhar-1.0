@@ -274,7 +274,7 @@ import FAB from '../components/desktop/FAB.astro';
       // Se for maior que 1, atualiza a quantidade total
       if (qty > 1) {
         const cart = window.SonharteCart.get();
-        const existing = cart.find(item => item.id === currentProduct.id);
+        const existing = cart.find(item => String(item.id) === String(currentProduct.id));
         if (existing) {
           window.SonharteCart.update(currentProduct.id, existing.quantidade - 1 + qty);
         }

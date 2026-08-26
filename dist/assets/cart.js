@@ -25,7 +25,7 @@ function saveCart(cart) {
 // Adiciona um item ao carrinho
 function addToCart(id, titulo, preco, imagem) {
   let cart = getCart();
-  const existingItemIndex = cart.findIndex(item => item.id === id);
+  const existingItemIndex = cart.findIndex(item => String(item.id) === String(id));
 
   if (existingItemIndex > -1) {
     cart[existingItemIndex].quantidade += 1;
@@ -33,7 +33,7 @@ function addToCart(id, titulo, preco, imagem) {
     cart.push({
       id: id,
       titulo: titulo,
-      preco: parseFloat(preco),
+      preco: parseFloat(preco) || 0,
       imagem: imagem,
       quantidade: 1
     });
@@ -44,19 +44,19 @@ function addToCart(id, titulo, preco, imagem) {
 // Remove um item do carrinho
 function removeFromCart(id) {
   let cart = getCart();
-  cart = cart.filter(item => item.id !== id);
+  cart = cart.filter(item => String(item.id) !== String(id));
   saveCart(cart);
 }
 
 // Decrementa a quantidade ou remove se for 0
 function decreaseQuantity(id) {
   let cart = getCart();
-  const existingItemIndex = cart.findIndex(item => item.id === id);
+  const existingItemIndex = cart.findIndex(item => String(item.id) === String(id));
 
   if (existingItemIndex > -1) {
     cart[existingItemIndex].quantidade -= 1;
     if (cart[existingItemIndex].quantidade <= 0) {
-      cart = cart.filter(item => item.id !== id);
+      cart = cart.filter(item => String(item.id) !== String(id));
     }
     saveCart(cart);
   }
@@ -65,12 +65,12 @@ function decreaseQuantity(id) {
 // Atualiza a quantidade diretamente
 function updateQuantity(id, quantidade) {
   let cart = getCart();
-  const existingItemIndex = cart.findIndex(item => item.id === id);
+  const existingItemIndex = cart.findIndex(item => String(item.id) === String(id));
 
   if (existingItemIndex > -1) {
-    cart[existingItemIndex].quantidade = parseInt(quantidade);
+    cart[existingItemIndex].quantidade = parseInt(quantidade) || 0;
     if (cart[existingItemIndex].quantidade <= 0) {
-      cart = cart.filter(item => item.id !== id);
+      cart = cart.filter(item => String(item.id) !== String(id));
     }
     saveCart(cart);
   }
@@ -84,13 +84,13 @@ function clearCart() {
 // Conta o total de itens (soma das quantidades)
 function getCartCount() {
   const cart = getCart();
-  return cart.reduce((total, item) => total + item.quantidade, 0);
+  return cart.reduce((total, item) => total + (item.quantidade || 0), 0);
 }
 
 // Calcula o valor total do carrinho
 function getCartTotal() {
   const cart = getCart();
-  return cart.reduce((total, item) => total + (item.preco * item.quantidade), 0);
+  return cart.reduce((total, item) => total + ((item.preco || 0) * (item.quantidade || 0)), 0);
 }
 
 // Gera o link de WhatsApp com o carrinho formatado
@@ -101,9 +101,9 @@ function generateWhatsAppLink(phone) {
   let message = `Olá, vim pelo site da Sonharte e gostaria de encomendar os seguintes produtos:\n\n`;
 
   cart.forEach(item => {
-    const subtotal = (item.preco * item.quantidade).toFixed(2);
+    const subtotal = ((item.preco || 0) * item.quantidade).toFixed(2);
     message += ` *${item.quantidade}x ${item.titulo}*\n`;
-    message += `   Preço unitário: R$ ${item.preco.toFixed(2)}\n`;
+    message += `   Preço unitário: R$ ${(item.preco || 0).toFixed(2)}\n`;
     message += `   Subtotal: R$ ${subtotal}\n\n`;
   });
 
