@@ -293,31 +293,37 @@ close
           <p class="text-sm mt-1">Navegue pelas abas e adicione seus mimos favoritos.</p>
         </div>
       `;
-      totalEl.textContent = 'R$ 0,00';
-      checkoutBtn.classList.add('pointer-events-none', 'opacity-50');
-      checkoutBtn.href = '#';
+      if (totalEl) totalEl.textContent = 'R$ 0,00';
+      if (checkoutBtn) {
+        checkoutBtn.classList.add('pointer-events-none', 'opacity-50');
+        checkoutBtn.href = '#';
+      }
       return;
     }
 
     // Renderizar itens
     let html = '';
     cart.forEach(item => {
+      const precoUnit = parseFloat(item.preco) || 0;
+      const qtd = parseInt(item.quantidade, 10) || 1;
+      const subtotal = (precoUnit * qtd).toFixed(2).replace('.', ',');
+
       html += `
         <div class="flex gap-4 p-3 bg-white border-2 border-on-background rounded-xl shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] items-center">
           <img src="${item.imagem}" alt="${item.titulo}" class="w-16 h-16 object-cover border-2 border-on-background rounded-lg shrink-0" />
           <div class="flex-grow min-w-0">
             <h4 class="font-label-bold text-sm truncate text-on-surface">${item.titulo}</h4>
             <div class="flex justify-between items-center mt-2">
-              <span class="font-bold text-primary text-sm">R$ ${(item.preco * item.quantidade).toFixed(2)}</span>
+              <span class="font-bold text-primary text-sm">R$ ${subtotal}</span>
               <!-- Controle de Qtd -->
               <div class="flex items-center border border-on-background rounded-lg overflow-hidden bg-surface-container-low shrink-0 scale-90">
-                <button class="px-2 py-1 hover:bg-surface-variant font-bold btn-minus" data-id="${item.id}">-</button>
-                <span class="px-3 py-1 bg-white text-xs font-label-bold border-x border-on-background min-w-[28px] text-center">${item.quantidade}</span>
-                <button class="px-2 py-1 hover:bg-surface-variant font-bold btn-plus" data-id="${item.id}">+</button>
+                <button type="button" class="px-2 py-1 hover:bg-surface-variant font-bold btn-minus cursor-pointer select-none" data-id="${item.id}" aria-label="Diminuir quantidade">-</button>
+                <span class="px-3 py-1 bg-white text-xs font-label-bold border-x border-on-background min-w-[28px] text-center select-none">${qtd}</span>
+                <button type="button" class="px-2 py-1 hover:bg-surface-variant font-bold btn-plus cursor-pointer select-none" data-id="${item.id}" aria-label="Aumentar quantidade">+</button>
               </div>
             </div>
           </div>
-          <button class="material-symbols-outlined text-error hover:scale-110 active:scale-95 transition-transform shrink-0 p-1 btn-remove" data-id="${item.id}">
+          <button type="button" class="material-symbols-outlined text-error hover:scale-110 active:scale-95 transition-transform shrink-0 p-1 btn-remove cursor-pointer" data-id="${item.id}" aria-label="Remover item">
             delete
           </button>
         </div>
@@ -325,72 +331,67 @@ close
     });
 
     container.innerHTML = html;
-    totalEl.textContent = `R$ ${window.SonharteCart.total().toFixed(2)}`;
-    checkoutBtn.classList.remove('pointer-events-none', 'opacity-50');
-    checkoutBtn.href = window.SonharteCart.link(WHATSAPP_PHONE);
+    if (totalEl) totalEl.textContent = `R$ ${window.SonharteCart.total().toFixed(2).replace('.', ',')}`;
+    if (checkoutBtn) {
+      checkoutBtn.classList.remove('pointer-events-none', 'opacity-50');
+      checkoutBtn.href = window.SonharteCart.link(WHATSAPP_PHONE);
+    }
+  }
 
-    // Adicionar eventos aos botões recém-criados
-    container.querySelectorAll('.btn-plus').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const id = btn.getAttribute('data-id');
-        const item = window.SonharteCart.get().find(i => String(i.id) === String(id));
+  window.renderCartItems = renderCartItems;
+
+  // Ouvinte global para atualizações no carrinho (sempre ativo)
+  window.addEventListener('cart-updated', renderCartItems);
+
+  // Delegação de cliques global unificada para o carrinho e botões de compra
+  document.addEventListener('click', (e) => {
+    // 1. Botão de Diminuir Quantidade (-)
+    const btnMinus = e.target.closest('.btn-minus');
+    if (btnMinus) {
+      e.preventDefault();
+      e.stopPropagation();
+      const id = btnMinus.getAttribute('data-id');
+      if (id && window.SonharteCart) {
+        window.SonharteCart.decrease(id);
+      }
+      return;
+    }
+
+    // 2. Botão de Aumentar Quantidade (+)
+    const btnPlus = e.target.closest('.btn-plus');
+    if (btnPlus) {
+      e.preventDefault();
+      e.stopPropagation();
+      const id = btnPlus.getAttribute('data-id');
+      if (id && window.SonharteCart) {
+        const item = window.SonharteCart.get().find(i => String(i.id).trim() === String(id).trim());
         if (item) {
           window.SonharteCart.add(item.id, item.titulo, item.preco, item.imagem);
         }
-      });
-    });
+      }
+      return;
+    }
 
-    container.querySelectorAll('.btn-minus').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const id = btn.getAttribute('data-id');
-        window.SonharteCart.decrease(id);
-      });
-    });
-
-    container.querySelectorAll('.btn-remove').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const id = btn.getAttribute('data-id');
-        window.SonharteCart.remove(id);
-      });
-    });
-  }
-
-  // Configuração inicial ao carregar a página
-  document.addEventListener('DOMContentLoaded', () => {
-    // Configurar botões de fechar e overlay
-    const closeBtn = document.getElementById('cart-close-btn');
-    const overlay = document.getElementById('cart-overlay');
-    if (closeBtn) closeBtn.addEventListener('click', toggleCartDrawer);
-    if (overlay) overlay.addEventListener('click', toggleCartDrawer);
-
-    // Capturar cliques nos botões de cabeçalho (Desktop e Mobile)
-    const desktopCartBtn = document.getElementById('desktop-cart-btn');
-    const mobileCartBtn = document.getElementById('mobile-cart-btn');
-    if (desktopCartBtn) desktopCartBtn.addEventListener('click', toggleCartDrawer);
-    if (mobileCartBtn) mobileCartBtn.addEventListener('click', toggleCartDrawer);
-
-    // Escutar atualizações do carrinho
-    window.addEventListener('cart-updated', renderCartItems);
-    
-    // Forçar primeira renderização
-    renderCartItems();
-
-    // Delegação de evento de clique global para qualquer botão ".add-to-cart-btn"
-    document.addEventListener('click', (e) => {
-      const btn = e.target.closest('.add-to-cart-btn');
-      if (!btn || !window.SonharteCart) return;
-
+    // 3. Botão de Remover Item (delete / lixeira)
+    const btnRemove = e.target.closest('.btn-remove');
+    if (btnRemove) {
       e.preventDefault();
-      const id = btn.getAttribute('data-id');
-      const titulo = btn.getAttribute('data-titulo');
-      const preco = btn.getAttribute('data-preco');
-      const imagem = btn.getAttribute('data-imagem');
+      e.stopPropagation();
+      const id = btnRemove.getAttribute('data-id');
+      if (id && window.SonharteCart) {
+        window.SonharteCart.remove(id);
+      }
+      return;
+    }
+
+    // 4. Botões Globais de Adicionar ao Carrinho (".add-to-cart-btn")
+    const addBtn = e.target.closest('.add-to-cart-btn');
+    if (addBtn && window.SonharteCart) {
+      e.preventDefault();
+      const id = addBtn.getAttribute('data-id');
+      const titulo = addBtn.getAttribute('data-titulo');
+      const preco = addBtn.getAttribute('data-preco');
+      const imagem = addBtn.getAttribute('data-imagem');
 
       if (id && titulo && preco && imagem) {
         window.SonharteCart.add(id, titulo, parseFloat(preco), imagem);
@@ -414,8 +415,29 @@ close
           toggleCartDrawer();
         }
       }
-    });
+    }
   });
+
+  // Função de inicialização
+  function initCartDrawer() {
+    const closeBtn = document.getElementById('cart-close-btn');
+    const overlay = document.getElementById('cart-overlay');
+    if (closeBtn) closeBtn.addEventListener('click', toggleCartDrawer);
+    if (overlay) overlay.addEventListener('click', toggleCartDrawer);
+
+    const desktopCartBtn = document.getElementById('desktop-cart-btn');
+    const mobileCartBtn = document.getElementById('mobile-cart-btn');
+    if (desktopCartBtn) desktopCartBtn.addEventListener('click', toggleCartDrawer);
+    if (mobileCartBtn) mobileCartBtn.addEventListener('click', toggleCartDrawer);
+
+    renderCartItems();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCartDrawer);
+  } else {
+    initCartDrawer();
+  }
 </script> <!-- Canvas para efeito lúdico do botão de coração --> <canvas id="brush-effect-canvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 999999; display: block;"></canvas> <script>
       (function() {
         const canvas = document.getElementById('brush-effect-canvas');

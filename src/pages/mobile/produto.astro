@@ -269,7 +269,7 @@ import Footer from '../../components/mobile/Footer.astro';
       // Se for maior que 1, atualiza a quantidade total
       if (qty > 1) {
         const cart = window.SonharteCart.get();
-        const existing = cart.find(item => String(item.id) === String(currentProduct.id));
+        const existing = cart.find(item => String(item.id).trim() === String(currentProduct.id).trim());
         if (existing) {
           window.SonharteCart.update(currentProduct.id, existing.quantidade - 1 + qty);
         }
