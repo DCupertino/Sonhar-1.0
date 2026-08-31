@@ -1,10 +1,22 @@
 // Sonharte - Sistema de Carrinho de Compras Global (Client-Side)
 
-// Carrega o carrinho do LocalStorage
+// Carrega o carrinho do LocalStorage com sanitização automática
 function getCart() {
   try {
-    const cart = localStorage.getItem('sonharte_cart');
-    return cart ? JSON.parse(cart) : [];
+    const raw = localStorage.getItem('sonharte_cart');
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+
+    return parsed
+      .filter(item => item && item.id !== undefined && item.id !== null && String(item.id).trim() !== '')
+      .map(item => ({
+        id: String(item.id).trim(),
+        titulo: String(item.titulo || 'Produto Sonharte'),
+        preco: parseFloat(item.preco) || 0,
+        imagem: String(item.imagem || '/assets/logo_clean.png'),
+        quantidade: Math.max(1, parseInt(item.quantidade, 10) || 1)
+      }));
   } catch (e) {
     console.error("Erro ao ler carrinho:", e);
     return [];
