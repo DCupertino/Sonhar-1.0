@@ -1,0 +1,41 @@
+name: Keep Supabase Alive
+
+on:
+  schedule:
+    # Executa todos os dias às 10:00 UTC (07:00 Horário de Brasília)
+    # Impede que o Supabase entre em modo de pausa por 7 dias de inatividade
+    - cron: '0 10 * * *'
+  workflow_dispatch: # Permite rodar manualmente a qualquer momento pela interface do GitHub
+
+jobs:
+  ping-supabase:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase REST API
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_ANON_KEY" ]; then
+            echo "::error::SUPABASE_URL ou SUPABASE_ANON_KEY não foram configurados em Settings > Secrets and variables > Actions."
+            exit 1
+          fi
+
+          # Remove barra final se houver
+          CLEAN_URL="${SUPABASE_URL%/}"
+
+          echo "Enviando requisição de atividade para o Supabase..."
+          HTTP_STATUS=$(curl -s -o response.txt -w "%{http_code}" -X GET "$CLEAN_URL/rest/v1/produtos?select=id&limit=1" \
+            -H "apikey: $SUPABASE_ANON_KEY" \
+            -H "Authorization: Bearer $SUPABASE_ANON_KEY")
+
+          echo "Código de resposta HTTP: $HTTP_STATUS"
+
+          if [ "$HTTP_STATUS" -ge 200 ] && [ "$HTTP_STATUS" -lt 400 ]; then
+            echo "✅ Sucesso! Banco de dados ativo e respondendo normalmente."
+          else
+            echo "⚠️ Resposta recebida: $HTTP_STATUS"
+            cat response.txt
+            echo ""
+            echo "Atenção: Se o banco já estiver pausado, você precisa clicar em 'Resume project' no painel do Supabase uma vez."
+          fi
