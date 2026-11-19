@@ -4,7 +4,7 @@ on:
   schedule:
     # Executa todos os dias às 10:00 UTC (07:00 Horário de Brasília)
     # Impede que o Supabase entre em modo de pausa por 7 dias de inatividade
-    - cron: '0 10 * * *'
+    - cron: '0 10 */4 * *'
   workflow_dispatch: # Permite rodar manualmente a qualquer momento pela interface do GitHub
 
 jobs:
